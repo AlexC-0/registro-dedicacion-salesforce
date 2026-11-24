@@ -1,0 +1,639 @@
+{
+  "phase": "3A",
+  "date": "2026-11-24",
+  "sourceBase": "3551770c424bd26a06864db3398e7ced04877e55",
+  "target": {
+    "alias": "p06-renovaciones-dev",
+    "sharedWith": "P06",
+    "edition": "Developer Edition",
+    "apiVersion": "65.0",
+    "identityVerified": true
+  },
+  "component": {
+    "name": "p07DedicacionSemanal",
+    "target": "lightning__AppPage",
+    "backendChanged": false,
+    "pagesCreatedOrActivated": false
+  },
+  "tooling": {
+    "node": "24.13.0",
+    "npm": "11.6.2",
+    "directDevDependency": {
+      "name": "@salesforce/sfdx-lwc-jest",
+      "version": "7.1.2",
+      "tagObserved": "winter26"
+    },
+    "jest": "29.7.0",
+    "lwcCompiler": "8.20.4",
+    "npmCiSucceeded": true,
+    "installedPackages": 419,
+    "notes": [
+      "Dependencias locales de desarrollo; sin biblioteca de interfaz ni cambios globales.",
+      "Avisos de obsolescencia transitivos conservados; no se ejecutó auditoría npm."
+    ]
+  },
+  "jest": {
+    "success": true,
+    "total": 48,
+    "passed": 48,
+    "failed": 0,
+    "suites": 2,
+    "coverage": {
+      "total": {
+        "lines": {
+          "total": 230,
+          "covered": 226,
+          "skipped": 0,
+          "pct": 98.26
+        },
+        "statements": {
+          "total": 424,
+          "covered": 394,
+          "skipped": 0,
+          "pct": 92.92
+        },
+        "functions": {
+          "total": 119,
+          "covered": 118,
+          "skipped": 0,
+          "pct": 99.15
+        },
+        "branches": {
+          "total": 266,
+          "covered": 245,
+          "skipped": 0,
+          "pct": 92.1
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": "Unknown"
+        }
+      },
+      "modelo.js": {
+        "lines": {
+          "total": 80,
+          "covered": 80,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 40,
+          "covered": 40,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 133,
+          "covered": 132,
+          "skipped": 0,
+          "pct": 99.24
+        },
+        "branches": {
+          "total": 96,
+          "covered": 95,
+          "skipped": 0,
+          "pct": 98.95
+        }
+      },
+      "p07DedicacionSemanal.js": {
+        "lines": {
+          "total": 150,
+          "covered": 146,
+          "skipped": 0,
+          "pct": 97.33
+        },
+        "functions": {
+          "total": 79,
+          "covered": 78,
+          "skipped": 0,
+          "pct": 98.73
+        },
+        "statements": {
+          "total": 291,
+          "covered": 262,
+          "skipped": 0,
+          "pct": 90.03
+        },
+        "branches": {
+          "total": 170,
+          "covered": 150,
+          "skipped": 0,
+          "pct": 88.23
+        }
+      }
+    },
+    "tests": [
+      {
+        "name": "carga siete días y solo filas persistidas; selector añade sin borrar",
+        "status": "passed"
+      },
+      {
+        "name": "semana que cruza año y respuesta inicial ajustada por hoy del servidor",
+        "status": "passed"
+      },
+      {
+        "name": "borrador conserva original, normaliza coma, revierte y elimina explícitamente",
+        "status": "passed"
+      },
+      {
+        "name": "texto inválido se conserva, totales no exactos y servidor no invocado",
+        "status": "passed"
+      },
+      {
+        "name": "totales incluyen líneas omitidas e histórico inactivo",
+        "status": "passed"
+      },
+      {
+        "name": "un guardado conjunto, revisión textual grande y bloqueo durante el envío",
+        "status": "passed"
+      },
+      {
+        "name": "error contextual a01000000000001AAA 2026-11-16 conserva borrador",
+        "status": "passed"
+      },
+      {
+        "name": "error contextual null 2026-11-16 conserva borrador",
+        "status": "passed"
+      },
+      {
+        "name": "error contextual null null conserva borrador",
+        "status": "passed"
+      },
+      {
+        "name": "conflicto REVISION_DESACTUALIZADA exige lectura y selección explícita",
+        "status": "passed"
+      },
+      {
+        "name": "conflicto CONFLICTO_CREACION exige lectura y selección explícita",
+        "status": "passed"
+      },
+      {
+        "name": "reaplicación respeta desactivación y retirada de permiso",
+        "status": "passed"
+      },
+      {
+        "name": "contención conserva y no reintenta automáticamente",
+        "status": "passed"
+      },
+      {
+        "name": "cambio de semana requiere decidir, cancelación conserva",
+        "status": "passed"
+      },
+      {
+        "name": "actualizar y descartar requieren decisión explícita",
+        "status": "passed"
+      },
+      {
+        "name": "lecturas fuera de orden no sustituyen la selección más reciente",
+        "status": "passed"
+      },
+      {
+        "name": "transporte perdido y valores actuales coincidentes no atribuyen confirmación",
+        "status": "passed"
+      },
+      {
+        "name": "reconciliación fallida mantiene incertidumbre y borrador",
+        "status": "passed"
+      },
+      {
+        "name": "respuesta inválida al guardar conserva borrador e incertidumbre: ",
+        "status": "passed"
+      },
+      {
+        "name": "respuesta inválida al guardar conserva borrador e incertidumbre: {",
+        "status": "passed"
+      },
+      {
+        "name": "respuesta inválida al guardar conserva borrador e incertidumbre: {\"ok\":true,\"estado\":{},\"errores\":[]}",
+        "status": "passed"
+      },
+      {
+        "name": "lectura inválida no muestra datos como confirmados",
+        "status": "passed"
+      },
+      {
+        "name": "sin permiso y fechas futuras no admiten edición",
+        "status": "passed"
+      },
+      {
+        "name": "21 proyectos se rechazan sin fragmentar ni perder cambios",
+        "status": "passed"
+      },
+      {
+        "name": "hoy del servidor corrige la semana inicial si el reloj difiere",
+        "status": "passed"
+      },
+      {
+        "name": "confirmación coherente pero sin los valores enviados mantiene incertidumbre",
+        "status": "passed"
+      },
+      {
+        "name": "error de lectura antiguo no sustituye una lectura nueva",
+        "status": "passed"
+      },
+      {
+        "name": "etiquetas y foco de error en DOM; diálogo cancelado vuelve al selector",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario calendario sin desplazamientos y semana en zona Salesforce",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario normaliza 0,25 sin redondear",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario normaliza 1.50 sin redondear",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario normaliza 24 sin redondear",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario normaliza  sin redondear",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario normaliza 0 sin redondear",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario rechaza 0,001",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario rechaza 0.10",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario rechaza 1,000",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario rechaza 1.000,25",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario rechaza -1",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario rechaza 24,25",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario rechaza 1e1",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario rechaza 01",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario rechaza 1,2.5",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario rechaza NaN",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario respuesta coherente y revisión superior al entero seguro",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario totales conservan omitidas e inactivas; inválidos no son exactos",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario envía solamente cambios explícitos y mantiene revisión textual",
+        "status": "passed"
+      },
+      {
+        "name": "Contrato y calendario límites completos sin particionar: 140 celdas, 20 proyectos, 60000 caracteres",
+        "status": "passed"
+      }
+    ],
+    "mocked": [
+      "Apex leerSemana y guardarSemana: promesas de texto JSON",
+      "@salesforce/i18n/timeZone",
+      "LightningConfirm.open",
+      "Componentes base Lightning: stubs de sfdx-lwc-jest"
+    ],
+    "history": [
+      {
+        "label": "jest-01",
+        "passed": 20,
+        "failed": 24,
+        "diagnostic": "Mock del diálogo sin exportación ES module y fixtures recogido como suite vacía."
+      },
+      {
+        "label": "jest-02",
+        "passed": 43,
+        "failed": 1,
+        "diagnostic": "Selector de prueba ambiguo: coincidía con checkbox de comparación en lugar de celda."
+      },
+      {
+        "label": "jest-03",
+        "passed": 44,
+        "failed": 0
+      },
+      {
+        "label": "jest-04",
+        "passed": 48,
+        "failed": 0
+      },
+      {
+        "label": "npm-ci-y-jest-final",
+        "passed": 48,
+        "failed": 0
+      },
+      {
+        "label": "jest-final-corrected",
+        "passed": 48,
+        "failed": 0,
+        "diagnostic": "Aviso de contención visible junto al contador; caso con mensaje genérico real del servicio."
+      }
+    ]
+  },
+  "validationHistory": [
+    {
+      "id": "0Afg700000L9TUDCA3",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": true,
+      "components": 1,
+      "componentErrors": 0,
+      "tests": 18,
+      "testFailures": 0,
+      "testClasses": [
+        "P07_DedicacionServiceTest"
+      ],
+      "coverage": []
+    },
+    {
+      "id": "0Afg700000L9eF4CAJ",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": true,
+      "components": 1,
+      "componentErrors": 0,
+      "tests": 18,
+      "testFailures": 0,
+      "testClasses": [
+        "P07_DedicacionServiceTest"
+      ],
+      "coverage": []
+    }
+  ],
+  "deploymentHistory": [
+    {
+      "id": "0Afg700000L9GMQCA3",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": false,
+      "components": 1,
+      "componentErrors": 0,
+      "tests": 18,
+      "testFailures": 0,
+      "testClasses": [
+        "P07_DedicacionServiceTest"
+      ],
+      "coverage": []
+    },
+    {
+      "id": "0Afg700000L94MtCAJ",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": false,
+      "components": 1,
+      "componentErrors": 0,
+      "tests": 18,
+      "testFailures": 0,
+      "testClasses": [
+        "P07_DedicacionServiceTest"
+      ],
+      "coverage": []
+    }
+  ],
+  "corrections": [
+    "Dar prioridad visible al aviso de contención o reaplicación junto al contador de pendientes. Corrección validada y desplegada de nuevo."
+  ],
+  "retrieval": {
+    "firstId": "09Sg700000bVksTEAS",
+    "finalId": "09Sg700000bVXdWEAW",
+    "status": "Succeeded",
+    "files": [
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/modelo.js",
+        "equal": true,
+        "normalization": "Salesforce omite el salto de línea final"
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.css",
+        "equal": true,
+        "normalization": "Salesforce omite el salto de línea final"
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.html",
+        "equal": true,
+        "normalization": "Salesforce omite el salto de línea final"
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js",
+        "equal": true,
+        "normalization": "Salesforce omite el salto de línea final"
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js-meta.xml",
+        "equal": true,
+        "normalization": "Salesforce omite el salto de línea final"
+      }
+    ],
+    "allMatch": true,
+    "testsExcluded": true
+  },
+  "sourceHashes": {
+    "force-app/main/default/lwc/p07DedicacionSemanal/modelo.js": "8b2241a9af6adb5c1f0acbfb431760adb1f1402598a84234e0fdc48a09d9f3d6",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.css": "f9b7dcc6684749c23506aa48d5a60b3f11cfecf3fb5349cf9ac98f2f92c2c44f",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.html": "b46bf7e3f662accd248b17ec25e58dd4c74fe115944b32396d29011e91eba178",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js": "dac10a01fc977eca22ca714b5d595478f2b29afdc8d343df8ea5b171f43c8f24",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js-meta.xml": "f58cff096bc8f9a7367c4a799a1e22ea3e3ce01fa93897f5d83eda1af1ead2c0",
+    "manifest/fase-3a.xml": "8319084e43caa3fd3803b03608ec5706a38da2c1c77d72b4a74af6671a740576"
+  },
+  "testSourceHashes": {
+    "force-app/main/default/lwc/p07DedicacionSemanal/modelo.js": "8b2241a9af6adb5c1f0acbfb431760adb1f1402598a84234e0fdc48a09d9f3d6",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.css": "f9b7dcc6684749c23506aa48d5a60b3f11cfecf3fb5349cf9ac98f2f92c2c44f",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.html": "b46bf7e3f662accd248b17ec25e58dd4c74fe115944b32396d29011e91eba178",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js": "dac10a01fc977eca22ca714b5d595478f2b29afdc8d343df8ea5b171f43c8f24",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js-meta.xml": "f58cff096bc8f9a7367c4a799a1e22ea3e3ce01fa93897f5d83eda1af1ead2c0",
+    "manifest/fase-3a.xml": "8319084e43caa3fd3803b03608ec5706a38da2c1c77d72b4a74af6671a740576",
+    "force-app/main/default/lwc/p07DedicacionSemanal/__tests__/fixtures.js": "58d706e1a15fbee4f7a2b6768607874f7b1cccf7a14556b490f6c5b891302037",
+    "force-app/main/default/lwc/p07DedicacionSemanal/__tests__/modelo.test.js": "053279b29702313981d5660d8ec99085afc15d6148856e500ae6f30374f527ad",
+    "force-app/main/default/lwc/p07DedicacionSemanal/__tests__/p07DedicacionSemanal.test.js": "377426cfe2ba210d400a8062147ad9758de512957a1ab2e4c4337d7bdece4514",
+    "package.json": "b6455bfc57a079b8659d925b31daef87e1a1f4a8f7f768b9121ce327bbee4fd9",
+    "package-lock.json": "4e0b5b355468ca365358b50e6a264d4a4727eaed6398daa4808dbf89dfba9060",
+    "jest.config.js": "d563fac1d9e4daf9f576f67990ec608ad91e18b92224be186942fa67436a7047"
+  },
+  "persistentState": {
+    "target": "p06-renovaciones-dev",
+    "identityMatches": true,
+    "edition": "Developer Edition",
+    "groups": [
+      {
+        "DeveloperName": "P07_CoordinacionAmbito",
+        "DoesIncludeBosses": false
+      },
+      {
+        "DeveloperName": "P07_MiembrosAmbito",
+        "DoesIncludeBosses": false
+      },
+      {
+        "DeveloperName": "P07_Participantes",
+        "DoesIncludeBosses": false
+      }
+    ],
+    "members": 0,
+    "assignments": 0,
+    "permissions": [
+      "P07_CoordinacionLectura",
+      "P07_GuardadoPropio",
+      "P07_MiembroLectura",
+      "P07_ServicioLectura"
+    ],
+    "licenses": [
+      {
+        "Name": "Salesforce",
+        "TotalLicenses": 4,
+        "UsedLicenses": 4
+      },
+      {
+        "Name": "Salesforce Platform",
+        "TotalLicenses": 6,
+        "UsedLicenses": 0
+      }
+    ],
+    "counts": {
+      "ProyectoDedicacion__c": 0,
+      "SemanaDedicacion__c": 0,
+      "DedicacionDiaria__c": 0
+    }
+  },
+  "p06Preservation": {
+    "counts": {
+      "Account": 11,
+      "IncidenciaRenovacion__c": 7,
+      "EjecucionRenovacion__c": 20,
+      "ContratoComercial__c": 198,
+      "SeguimientoRenovacion__c": 196
+    },
+    "totalRecords": 432,
+    "manualShares": 4,
+    "comparisons": [
+      {
+        "name": "Account",
+        "unchanged": true,
+        "beforeHash": "be5c57ce2400654a887ecca38f9803e4f027241d7aabc4619fbc857b9d5b67f6",
+        "afterHash": "be5c57ce2400654a887ecca38f9803e4f027241d7aabc4619fbc857b9d5b67f6"
+      },
+      {
+        "name": "IncidenciaRenovacion__c",
+        "unchanged": true,
+        "beforeHash": "8ae6490e4844c4cc3f027f0dcf34102a77b66827b5aa0f1e03b5e17fd99d8422",
+        "afterHash": "8ae6490e4844c4cc3f027f0dcf34102a77b66827b5aa0f1e03b5e17fd99d8422"
+      },
+      {
+        "name": "EjecucionRenovacion__c",
+        "unchanged": true,
+        "beforeHash": "92b7925c3f2b9711aa7c8e6905f3030ccec9680290d6ee03ed7f3da71125527f",
+        "afterHash": "92b7925c3f2b9711aa7c8e6905f3030ccec9680290d6ee03ed7f3da71125527f"
+      },
+      {
+        "name": "ContratoComercial__c",
+        "unchanged": true,
+        "beforeHash": "216375dd84733f08a22df913636bbe056beb2c4565a685125389d849c0f8b479",
+        "afterHash": "216375dd84733f08a22df913636bbe056beb2c4565a685125389d849c0f8b479"
+      },
+      {
+        "name": "SeguimientoRenovacion__c",
+        "unchanged": true,
+        "beforeHash": "f86b760feb4de682ee1060930a59f68b57ca9352b6f7ebecc9d2e65db3d800ed",
+        "afterHash": "f86b760feb4de682ee1060930a59f68b57ca9352b6f7ebecc9d2e65db3d800ed"
+      },
+      {
+        "name": "manualShares",
+        "unchanged": true,
+        "beforeHash": "ed8123672c7fc698e1dfbcf509b562f4d50f3dbdc1d47e8802829f36a5872f65",
+        "afterHash": "ed8123672c7fc698e1dfbcf509b562f4d50f3dbdc1d47e8802829f36a5872f65"
+      },
+      {
+        "name": "p06Groups",
+        "unchanged": true,
+        "beforeHash": "4a63a19c4b75ad50aa7bafbd53dcbf0806a788efb53f58a5ac7b0647fb247471",
+        "afterHash": "4a63a19c4b75ad50aa7bafbd53dcbf0806a788efb53f58a5ac7b0647fb247471"
+      },
+      {
+        "name": "p06Members",
+        "unchanged": true,
+        "beforeHash": "c5911b1e198fbe555c1be95117885e355cde426b84f048571786a8e10b160079",
+        "afterHash": "c5911b1e198fbe555c1be95117885e355cde426b84f048571786a8e10b160079"
+      },
+      {
+        "name": "p06Assignments",
+        "unchanged": true,
+        "beforeHash": "6bf7999cb95d4213e4530a0cd1987c97184ab2e6b44f216b7d2848e9f54523c4",
+        "afterHash": "6bf7999cb95d4213e4530a0cd1987c97184ab2e6b44f216b7d2848e9f54523c4"
+      },
+      {
+        "name": "users",
+        "unchanged": true,
+        "beforeHash": "f1b03696a1ae582aa58c8c063715040be615de03a0b392bea87267254ec1c68b",
+        "afterHash": "f1b03696a1ae582aa58c8c063715040be615de03a0b392bea87267254ec1c68b"
+      },
+      {
+        "name": "objectsMetadata",
+        "unchanged": true,
+        "beforeHash": "d21056414a9b565703a680036f7fa17827d9b27d7e0b81a31371a651caf700e0",
+        "afterHash": "d21056414a9b565703a680036f7fa17827d9b27d7e0b81a31371a651caf700e0"
+      },
+      {
+        "name": "permissionsMetadata",
+        "unchanged": true,
+        "beforeHash": "7b793f885a42d7472d0d127afa462e71f40f291f99616e7dca7029b8fc431e3b",
+        "afterHash": "7b793f885a42d7472d0d127afa462e71f40f291f99616e7dca7029b8fc431e3b"
+      },
+      {
+        "name": "apexInventory",
+        "unchanged": true,
+        "beforeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "afterHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    ],
+    "scope": "Cuatro objetos de negocio: campos devueltos por describe; Account: Id/SystemModstamp; comparticiones manuales de contrato; grupos, pertenencias, asignaciones P06; perfiles, roles y estado activo de usuarios; definiciones de objetos y permisos P06; inventario Apex P06. No es una auditoría general."
+  },
+  "limits": [
+    "Sin sesiones funcionales ni datos persistentes P07.",
+    "Jest no demuestra seguridad, transacción, controles base reales ni accesibilidad completa.",
+    "Conflictos, pérdidas de transporte y respuestas fuera de orden simulados; sin concurrencia real.",
+    "No se crean ni activan páginas. Incorporación posterior en página de aplicación P07 según INSTALACION.md.",
+    "Informe y demostración integrada pendientes; V1 no cerrada."
+  ],
+  "localReview": {
+    "files": 21,
+    "xml": 2,
+    "json": 3,
+    "localLinks": 42,
+    "utf8": true,
+    "diffCheckPassed": true,
+    "editorialFindings": [],
+    "scope": "Archivos afectados; no auditoría exhaustiva del equipo o dependencias."
+  }
+}

@@ -1,0 +1,81 @@
+<template>
+    <lightning-card title="Mi dedicación semanal" icon-name="standard:timesheet">
+        <div class="slds-p-around_medium" aria-busy={ocupado}>
+            <div class="barra slds-m-bottom_medium">
+                <lightning-button data-id="anterior" label="Semana anterior" onclick={anterior} disabled={navegacionBloqueada}></lightning-button>
+                <lightning-input data-id="semana" type="date" label="Fecha de la semana" value={semana} onchange={elegirSemana} disabled={navegacionBloqueada}></lightning-input>
+                <lightning-button data-id="siguiente" label="Semana siguiente" onclick={siguiente} disabled={navegacionBloqueada}></lightning-button>
+                <lightning-button data-id="actualizar" label="Actualizar" onclick={actualizar} disabled={navegacionBloqueada}></lightning-button>
+            </div>
+            <h2 class="slds-text-heading_small slds-m-bottom_small">{tituloSemana}</h2>
+            <p data-id="estado" tabindex="-1" role="status" aria-live="polite" class="slds-m-bottom_small">{resumenEstado}</p>
+            <template lwc:if={ocupado}><p class="slds-text-color_weak">Operación en curso. Espera a que termine.</p></template>
+            <template lwc:if={hayErrores}>
+                <section data-id="errores" tabindex="-1" role="alert" aria-label="Errores que requieren revisión" class="errores slds-m-vertical_small">
+                    <p><strong>Revisa estos datos. Los cambios pendientes se conservan.</strong></p>
+                    <ul class="slds-list_dotted"><template for:each={erroresVisibles} for:item="error"><li key={error.key}>{error.texto}</li></template></ul>
+                </section>
+            </template>
+            <template lwc:if={recuperacion}>
+                <section data-id="recuperacion" tabindex="-1" aria-label="Recuperar cambios pendientes" class="recuperacion slds-m-vertical_medium">
+                    <h3 class="slds-text-heading_small">Revisar antes de continuar</h3>
+                    <p>El borrador original sigue conservado. Consulta los valores actuales para decidir qué cambios mantener.</p>
+                    <lightning-button data-id="consultar" label="Consultar estado actual" onclick={consultarActual} disabled={ocupado}></lightning-button>
+                    <template lwc:if={actual}>
+                        <div data-id="comparacion" tabindex="-1" class="slds-m-top_medium">
+                            <template lwc:if={todosCoinciden}><p role="status">Los valores solicitados ya aparecen guardados. Esto no confirma qué petición los guardó.</p></template>
+                            <p>Selecciona únicamente los cambios que quieras reaplicar. Los demás se descartarán al incorporar la selección. Esta acción no guarda.</p>
+                            <ul class="slds-list_vertical slds-has-dividers_bottom-space">
+                                <template for:each={comparaciones} for:item="cambio">
+                                    <li key={cambio.key} class="slds-item">
+                                        <lightning-input data-id="seleccion" data-key={cambio.key} type="checkbox" label={cambio.etiqueta} checked={cambio.marcada} disabled={cambio.deshabilitada} onchange={seleccionarCambio}></lightning-input>
+                                        <p>Antes: {cambio.antes} · Tu cambio: {cambio.solicitado} · Ahora: {cambio.ahora}</p><p>{cambio.motivo}</p>
+                                    </li>
+                                </template>
+                            </ul>
+                            <div class="barra slds-m-top_small">
+                                <lightning-button data-id="reaplicar" label="Incorporar selección al borrador" onclick={reaplicar} disabled={reaplicarBloqueado}></lightning-button>
+                                <lightning-button data-id="aceptar" label="Usar estado actual y descartar borrador" onclick={aceptarActual} disabled={ocupado}></lightning-button>
+                            </div>
+                        </div>
+                    </template>
+                </section>
+            </template>
+            <template lwc:if={hayEstado}>
+                <template lwc:if={sinPermiso}><p class="slds-m-vertical_small">Puedes consultar esta semana, pero no tienes permiso para guardar cambios.</p></template>
+                <lightning-combobox data-id="proyecto" label="Incorporar un proyecto activo" placeholder="Selecciona un proyecto" options={opciones} onchange={incorporar} disabled={selectorBloqueado}></lightning-combobox>
+                <p class="slds-text-body_small slds-m-vertical_small">Horas en incrementos de 0,25. Vacía una celda o introduce 0 para eliminar su dedicación al guardar. Solo se pueden quitar filas vacías sin cambios.</p>
+                <template lwc:if={sinFilas}><p data-id="vacio" class="slds-m-vertical_medium">No hay dedicación registrada en esta semana. Incorpora un proyecto para comenzar.</p></template>
+                <div class="cuadricula slds-m-vertical_medium" tabindex="0" role="region" aria-label="Dedicación por proyecto y día; desplazamiento horizontal disponible">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <caption class="slds-p-around_small">{tituloTotales}. Importes en horas.</caption>
+                        <thead><tr><th scope="col">Proyecto</th><template for:each={dias} for:item="dia"><th key={dia.fecha} scope="col">{dia.etiqueta}</th></template><th scope="col">Total proyecto</th><th scope="col">Fila vacía</th></tr></thead>
+                        <tbody>
+                            <template for:each={filas} for:item="fila">
+                                <tr key={fila.id}>
+                                    <th scope="row"><span>{fila.nombre}</span><template lwc:if={fila.inactivo}><p class="slds-text-body_small">Inactivo · solo lectura</p></template></th>
+                                    <template for:each={fila.celdas} for:item="celda">
+                                        <td key={celda.key}>
+                                            <lightning-input data-id="celda" data-key={celda.key} type="text" label={celda.etiqueta} variant="label-hidden" value={celda.valor} disabled={celda.deshabilitada} onchange={editar}></lightning-input>
+                                            <template lwc:if={celda.modificada}><span class="slds-text-body_small">Pendiente</span></template>
+                                            <template lwc:if={celda.error}><p class="slds-text-color_error error-celda">{celda.error}</p></template>
+                                        </td>
+                                    </template>
+                                    <td>{fila.total}</td><td><lightning-button data-id={fila.id} label="Quitar fila" title={fila.quitarEtiqueta} onclick={quitar} disabled={fila.quitarBloqueado}></lightning-button></td>
+                                </tr>
+                            </template>
+                        </tbody>
+                        <tfoot><tr><th scope="row">Total diario</th><template for:each={dias} for:item="dia"><td key={dia.fecha}><span>{dia.total}</span><template lwc:if={dia.error}><p class="slds-text-color_error error-celda">{dia.error}</p></template></td></template><td data-id="total">{totalPropuesto}</td><td></td></tr></tfoot>
+                    </table>
+                </div>
+                <p>Total semanal confirmado: <strong>{totalConfirmado}</strong>.</p>
+                <template lwc:if={pendiente}><p>El borrador todavía no está guardado. Sus totales son provisionales; si hay cantidades inválidas no pueden calcularse con exactitud.</p></template>
+                <div class="barra slds-m-top_medium">
+                    <lightning-button data-id="guardar" variant="brand" label="Guardar cambios" onclick={guardar} disabled={guardarBloqueado}></lightning-button>
+                    <lightning-button data-id="descartar" label="Descartar cambios" onclick={descartar} disabled={descartarBloqueado}></lightning-button>
+                </div>
+                <p class="slds-text-body_small slds-text-color_weak slds-m-top_small">Los cambios sin guardar se conservan mientras esta vista permanece abierta. Cerrar o recargar el navegador puede perderlos.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -60,3 +60,22 @@ Los resultados finales, cobertura de código y huellas se conservan en [STATUS.m
 | AC-24 | Se conserva el ajuste instalado de fase 1B, sin volver a modificarlo | Jerarquía, retirada de miembros y sesiones ordinarias |
 
 Las aserciones de CRUD, FLS y permisos personalizados son explícitas y se complementan con USER_MODE; runAs no se presenta como comprobación suficiente por sí solo. Ningún criterio de concurrencia real se cierra con llamadas consecutivas. Los límites de lectura y el protocolo quedan documentados para la fase LWC.
+
+## Cobertura de fase 3A
+
+Las pruebas Jest de p07DedicacionSemanal y modelo.js usan respuestas Apex simuladas como texto JSON y stubs explícitos de componentes base y diálogo. Su ejecución comprueba comportamiento del cliente, no permisos, persistencia ni concurrencia en Salesforce. Resultados y huellas en [STATUS.md](STATUS.md) y [FASE-3A.json](evidencias/FASE-3A.json).
+
+| Criterios | Comprobación local de frontend | Límite pendiente |
+|---|---|---|
+| AC-01, AC-04 | Siete días, cruce de año, calendario, zona Salesforce simulada, corrección por hoy del servidor y días futuros bloqueados | Zona y reloj reales de cada sesión |
+| AC-02, AC-03 | Coma/punto, cuartos exactos, rechazo sin redondear, suma diaria con omitidas e inactivas | Recorrido integrado con Apex y controles base reales |
+| AC-05, AC-06, AC-17 | Vacío explícito, vuelta al original, histórico inactivo visible y solo lectura | Persistencia y resumen reales ya tienen evidencia Apex; falta sesión funcional |
+| AC-10, AC-11, AC-21 | Error resuelto con ok=false conserva borrador; conflictos, selección y reaplicación explícita; doble envío impedido | Conflicto entre sesiones reales |
+| AC-19 | Cambio de semana, actualización y descarte requieren decisión; cancelar conserva | Interacción real del diálogo y navegación fuera del componente |
+| AC-20 | Tabla semántica, etiquetas por celda, región desplazable y foco de error comprobados en DOM | Teclado, lector de pantalla, contraste y controles reales |
+| AC-22 | Transporte perdido, coincidencia posterior sin atribuir causalidad y reconciliación fallida | Pérdida de respuesta real después de confirmar en servidor |
+| AC-23 | Respuestas y errores de lectura fuera de orden no reemplazan la selección vigente | Lectura/escritura concurrentes del backend |
+| AC-25 | Totales por fila, día y semana del estado propuesto; totales indeterminados si hay texto inválido | Comparación integrada con resumen e informe reales |
+| Límites del contrato | 140 celdas, veinte proyectos, 60.000 caracteres y revisión superior al entero seguro; sin fragmentar peticiones | Uso ordinario con catálogo y datos ficticios |
+
+AC-07, AC-08, AC-09, AC-12 a AC-16, AC-18 y AC-24 no reciben nuevas pruebas de seguridad, transacción o informe por ejecutar Jest. Se mantiene la evidencia Apex anterior y sus límites. Ningún criterio completo de V1 se cierra únicamente con esta entrega de frontend.

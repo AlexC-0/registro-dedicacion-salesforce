@@ -133,3 +133,44 @@ En una ejecución posterior utilizar otra carpeta nueva. Comparar código y XML 
 El contraste posterior confirmó cero registros P07, grupos sin miembros, cuatro Permission Sets sin asignaciones y licencias sin cambios. Los usuarios y datos de SeeAllData=false no persistieron. El inventario acotado P06 no presenta diferencias. Detalles, fallos y límites en [STATUS.md](STATUS.md) y [FASE-2A.json](evidencias/FASE-2A.json).
 
 Esta actualización acredita servicio y pruebas aisladas, no habilitación de funciones ordinarias. La asignación de usuarios, catálogo funcional, sesiones, LWC e informe corresponde a fases posteriores; no cargar dedicaciones mediante claves manuales.
+
+## Cliente LWC de fase 3A
+
+El esquema, servicio y permisos de las fases anteriores son prerrequisitos ya instalados. El manifiesto [fase-3a.xml](../manifest/fase-3a.xml) incluye únicamente LightningComponentBundle:p07DedicacionSemanal. No contiene Apex, perfiles, permisos, asignaciones, datos, páginas ni activaciones.
+
+### Dependencias y comprobación local
+
+Node 24.13.0 y npm 11.6.2 fueron las versiones ejecutadas. El proyecto declara Node >=22. La dependencia directa de desarrollo @salesforce/sfdx-lwc-jest se fija a 7.1.2, etiqueta winter26 consultada para la base API 65.0. Incluye Jest 29.7.0 y compilador LWC 8.20.4; Jest admite Node >=18. El lockfile fija el árbol transitivo. No hay dependencias de interfaz ni herramientas globales nuevas.
+
+~~~powershell
+npm ci
+npm run test:unit
+npm run test:unit:coverage
+~~~
+
+Se ejecutó npm ci con --no-audit --no-fund y después la batería con cobertura. Los archivos de pruebas se seleccionan mediante **/__tests__/**/*.test.js; fixtures.js aporta datos ficticios y no se ejecuta como suite. node_modules y coverage están excluidos de Git; __tests__ queda excluido del despliegue por .forceignore.
+
+La instalación emitió avisos de obsolescencia de dependencias transitivas, conservados en el recibo local. La compatibilidad descrita corresponde a instalación y pruebas satisfactorias en las versiones indicadas, no a una auditoría completa de dependencias. [Instalación oficial](https://developer.salesforce.com/docs/platform/lwc/guide/unit-testing-using-jest-installation.html) y [versionado del ejecutor](https://github.com/salesforce/sfdx-lwc-jest).
+
+### Validación y despliegue acotados
+
+Verificar identidad y ausencia de colisión del bundle antes de escribir. Si existe en otra instalación, recuperar y revisar sus diferencias. En esta fase se usó el siguiente procedimiento, conservando huellas del bundle y manifiesto:
+
+~~~powershell
+sf project deploy start --manifest manifest/fase-3a.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level RunSpecifiedTests --tests P07_DedicacionServiceTest --dry-run --async --json
+sf project deploy report --job-id ID_VALIDACION --target-org p06-renovaciones-dev --json
+sf project deploy start --manifest manifest/fase-3a.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level RunSpecifiedTests --tests P07_DedicacionServiceTest --async --json
+sf project deploy report --job-id ID_DESPLIEGUE --target-org p06-renovaciones-dev --json
+~~~
+
+Desplegar solo tras validación final satisfactoria y comprobación de identidad y fuentes iguales. Las pruebas Apex seleccionadas son las dieciocho existentes de P07; no se ejecuta la batería P06. La respuesta asíncrona inicial no acredita finalización. Recuperar después el manifiesto en una carpeta temporal nueva, fuera de force-app, y contrastar los cinco archivos del bundle. Resultados concretos en [STATUS.md](STATUS.md).
+
+### Incorporación a una página P07
+
+El componente se expone como «P07 Dedicación semanal» para páginas de aplicación Lightning. [Configuración de targets](https://developer.salesforce.com/docs/platform/lwc/guide/reference-configuration-tags.html). Para la posterior demostración funcional:
+
+1. En Lightning App Builder, crear o editar exclusivamente una página de aplicación P07.
+2. Incorporar P07 Dedicación semanal y guardar esa página.
+3. Configurar su acceso específico para la aplicación y funciones P07 autorizadas en la fase de demostración. No sustituir páginas P06 ni establecerla como predeterminada de toda la organización.
+
+Esta fase no crea ni activa una página, no añade usuarios, no asigna permisos al administrador ni carga datos. Las funciones necesitan lectura efectiva, permiso de operación y acceso al catálogo según [ACCESO.md](ACCESO.md). La demostración real, sesiones, teclado y accesibilidad quedan pendientes; Jest utiliza stubs de Apex, controles base, zona horaria y diálogo.

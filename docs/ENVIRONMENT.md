@@ -26,7 +26,7 @@ Un paquete fuente `force-app`, namespace vacío y API 65.0, comprobada en el des
 
 API 65.0 es una versión publicada de Winter '26, documentada por [Salesforce](https://developer.salesforce.com/blogs/2025/09/take-a-deep-dive-into-metadata-api-deployments). Se utiliza como base explícita de configuración, sin necesidad identificada de APIs posteriores para los metadatos declarativos de fase 1A. La fase 1B comprobó respuesta de API 65.0, validación remota e instalación del paquete. Esa aceptación no equivale a una prueba funcional.
 
-No hay package.json, dependencias ni lockfile porque todavía no hay código JavaScript ni herramientas de pruebas incorporadas al proyecto. Al añadirlas se fijarán conjuntamente versiones compatibles con el runtime y el lockfile correspondiente.
+Ese era el estado inicial, anterior al LWC. Fase 3A incorpora package.json, package-lock.json y Jest local, con las versiones y comprobaciones descritas al final de este documento.
 
 ## Salesforce: destino compartido verificado
 
@@ -64,3 +64,11 @@ Los detalles operativos, auxiliares y diagnósticos de la conexión temporal del
 El 24/11/2026 se volvió a contrastar la identidad del destino compartido y OrganizationType=Developer Edition antes de validar y desplegar, con API 65.0 explícita. Se utilizó la autenticación técnica existente y la CLI instalada, sin cambios globales ni dependencias nuevas. El paquete Apex de ocho miembros fue aceptado con RunSpecifiedTests y 18 pruebas P07 satisfactorias.
 
 El contraste final mantiene Salesforce 4/4 usadas y Salesforce Platform 0/6 usadas; cuatro Permission Sets P07 sin asignaciones y tres grupos sin miembros. Los seis usuarios Platform, permisos y datos creados por las pruebas son aislados y no persisten. No se habilitaron identidades funcionales ni sesiones nuevas. La comprobación técnica no sustituye el futuro recorrido por función. Véanse [STATUS.md](STATUS.md) y la [evidencia de fase 2A](evidencias/FASE-2A.json).
+
+## Herramientas locales de fase 3A
+
+Node 24.13.0 y npm 11.6.2 comprobados sin actualización global. @salesforce/sfdx-lwc-jest 7.1.2 se fija como dependencia directa de desarrollo; la etiqueta winter26 se contrastó en el registro npm y se seleccionó para la base API 65.0. El paquete incorpora Jest 29.7.0 y @lwc/compiler 8.20.4. El ejecutor no publica engines propio; Jest declara ^14.15.0 || ^16.10.0 || >=18.0.0. La instalación y las pruebas con Node 24.13.0 acreditan la combinación utilizada.
+
+npm install generó el lockfile y npm ci reconstruyó correctamente el árbol local. Los 419 paquetes instalados incluyen dependencias transitivas; no son dependencias de ejecución de la interfaz. Se conservaron avisos de obsolescencia del árbol, sin actualizaciones globales ni modificaciones transitivas improvisadas. Comandos reproducibles en [INSTALACION.md](INSTALACION.md).
+
+Jest simula Apex como promesas de texto JSON, @salesforce/i18n/timeZone, LightningConfirm y los componentes base mediante los stubs del paquete. La compilación remota del bundle se registra separadamente; no se presupone que los stubs reproduzcan todo el comportamiento del navegador de Salesforce.

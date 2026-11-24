@@ -2,7 +2,68 @@
 
 Fecha: 24/11/2026.
 
-## Fase 2A: servicio y protección de guardado completados
+## Fase 3A: cuadrícula LWC y pruebas del componente completadas
+
+Base revisada: 3551770c424bd26a06864db3398e7ced04877e55, main, remoto del repositorio registro-dedicacion-salesforce y árbol inicialmente limpio. Identidad del destino contrastada con el registro privado: Developer Edition compartida con P06, alias p06-renovaciones-dev, API 65.0. Se conserva el backend instalado; el manifiesto de esta fase contiene un único LightningComponentBundle.
+
+### Comportamiento implementado
+
+p07DedicacionSemanal incorpora selección de semana, siete días, selector de proyectos activos, filas persistidas e histórico inactivo, totales por fila/día/semana, borrador separado, guardado conjunto y errores contextualizados. La revisión se mantiene como texto, incluso por encima del entero seguro de JavaScript. Las cantidades con coma se normalizan solo si son válidas; no se redondea ni se presentan totales exactos con valores inválidos.
+
+Una respuesta resuelta con ok=false conserva los cambios. Conflictos y resultados desconocidos exigen consultar el estado actual y decidir explícitamente qué descartar o reaplicar. La comparación no selecciona cambios por defecto, respeta la editabilidad actual y no guarda automáticamente. Las respuestas antiguas no sustituyen una selección más reciente. La coincidencia de valores tras una pérdida de respuesta no se presenta como confirmación causal de aquella petición.
+
+Los controles se bloquean durante el guardado y no se fragmenta una petición que supere los límites. Cambiar de semana, actualizar o descartar con pendientes requiere confirmación. El componente expone tabla semántica, etiquetas por celda, región desplazable y focos de error/recuperación. Contrato, decisiones y límites en [ARQUITECTURA.md](ARQUITECTURA.md).
+
+### Herramientas y pruebas locales
+
+Dependencia directa de desarrollo fijada: @salesforce/sfdx-lwc-jest 7.1.2, etiqueta winter26 consultada; Jest 29.7.0 y compilador LWC 8.20.4. package-lock.json conserva el árbol. npm install y la reconstrucción posterior con npm ci terminaron correctamente con Node 24.13.0 y npm 11.6.2, sin cambios globales. Se conservaron avisos de obsolescencia transitivos; no se atribuye una auditoría de dependencias a esas operaciones.
+
+Comandos reproducibles: npm ci, npm run test:unit y npm run test:unit:coverage. La ejecución final con cobertura supera 48/48 pruebas en dos suites, sin snapshots. Apex se simula como promesas de texto JSON; también se simulan zona horaria, LightningConfirm y componentes base Lightning.
+
+| Cobertura Jest | Líneas | Ramas |
+|---|---:|---:|
+| modelo.js | 80/80; 100 % | 95/96; 98,95 % |
+| p07DedicacionSemanal.js | 146/150; 97,33 % | 150/170; 88,23 % |
+| Total JavaScript | 226/230; 98,26 % | 245/266; 92,10 % |
+
+La cobertura no incluye el comportamiento real de componentes base ni equivale a cobertura funcional completa. La matriz [ACEPTACION.md](ACEPTACION.md) relaciona las pruebas con los criterios, conservando los pendientes de integración.
+
+Se conservan los diagnósticos iniciales: mock de confirmación sin exportación ES module y archivo fixtures recogido como suite; después, un selector de prueba ambiguo entre celda y checkbox. Se corrigió la configuración y el selector, sin rebajar las aserciones. Las 44 pruebas siguientes pasaron; cuatro comprobaciones adicionales cubrieron corrección por fecha del servidor, confirmación inesperada, error de lectura fuera de orden y foco/etiquetas. Las 48 pasaron también tras npm ci.
+
+### Validación y despliegue
+
+| Operación | Identificador | Resultado final |
+|---|---|---|
+| Validación inicial del bundle | 0Afg700000L9TUDCA3 | Succeeded, success=true, checkOnly=true; 1 componente y 18 pruebas Apex |
+| Primer despliegue | 0Afg700000L9GMQCA3 | Succeeded, success=true, checkOnly=false; 1 componente y 18 pruebas Apex |
+| Recuperación previa a corrección | 09Sg700000bVksTEAS | Succeeded; cinco archivos coincidentes con el primer paquete |
+| Validación de corrección | 0Afg700000L9eF4CAJ | Succeeded, success=true, checkOnly=true; 1 componente y 18 pruebas Apex |
+| Despliegue final | 0Afg700000L94MtCAJ | Succeeded, success=true, checkOnly=false; 1 componente y 18 pruebas Apex |
+| Recuperación final | 09Sg700000bVXdWEAW | Succeeded; cinco archivos coincidentes con las fuentes finales |
+
+La revisión final detectó que el contador de pendientes ocultaba el aviso de contención y el mensaje de reaplicación. Se corrigió la prioridad visible, se adaptó la prueba al mensaje genérico real de Apex y se repitieron las 48 pruebas, la validación y el despliegue. La versión previa instalada se contrastó antes de sustituirla. Ambos paquetes y sus recibos se conservan; la segunda pareja de trabajos corresponde al resultado vigente.
+
+RunSpecifiedTests seleccionó solo P07_DedicacionServiceTest: 18/18 pruebas remotas, sin fallos. Los recibos de este manifiesto LWC no aportan una medición nueva de cobertura Apex; la medición de fase 2A se conserva como antecedente. No se modificó Apex ni se ejecutó la batería P06.
+
+La respuesta inicial Queued no se contabilizó como finalización. Las seis huellas del bundle y manifiesto coinciden con las fuentes finales comprobadas. Los cinco archivos recuperados solo omiten el salto de línea final. No se desplegaron tests, fixtures, dependencias, páginas, perfiles o permisos.
+
+### Revisión editorial y local
+
+Revisados los 21 archivos afectados: componente, modelo, pruebas, fixtures, manifiesto, configuración y lockfile, evidencia e instrucciones y documentación. Dos XML y tres JSON legibles, 42 enlaces locales existentes, UTF-8 y espaciado correctos; git diff --check sin incidencias. Sin atribuciones automáticas ni patrones de secretos detectados en ese alcance. Las fuentes de aplicación y pruebas conservan sus huellas comprobadas. No se presenta esta revisión como auditoría exhaustiva de dependencias o del equipo.
+
+### Conservación y límites
+
+El componente está disponible para páginas de aplicación Lightning; no se creó ni activó una página ni se sustituyó ninguna de P06. [INSTALACION.md](INSTALACION.md) indica cómo incorporarlo a una página P07 en la posterior demostración.
+
+P07 mantiene cero proyectos, semanas y detalles persistentes; tres grupos vacíos y cuatro Permission Sets sin asignaciones. Licencias sin cambios: Salesforce 4/4 usadas y Salesforce Platform 0/6 usadas. No se crearon identidades funcionales ni se asignaron permisos al administrador.
+
+P06 conserva 432 registros y cuatro comparticiones manuales de contrato, sin diferencias en el inventario acotado: campos devueltos por describe de cuatro objetos de negocio; Account Id/SystemModstamp; definiciones de objetos y permisos P06; grupos, pertenencias y asignaciones; perfiles, roles y estado activo de usuarios; inventario Apex P06. No es una auditoría general ni una repetición de sus demostraciones.
+
+[Evidencia sanitizada de fase 3A](evidencias/FASE-3A.json): pruebas, cobertura, historial de correcciones, trabajos remotos, huellas, contraste y conservación. Recibos completos y diagnósticos permanecen en rutas privadas excluidas de Git. Las evidencias anteriores siguen intactas.
+
+Fase 3A completada dentro del alcance de componente, pruebas locales, validación y despliegue. No se han realizado sesiones funcionales, comprobación real de controles base, teclado o lector de pantalla, pérdida de respuesta real ni concurrencia entre usuarios. No se cierra V1. El siguiente paso es la demostración integrada con identidades y datos ficticios P07, permisos mínimos y página específica; el informe corresponde a su fase posterior.
+
+## Antecedente: fase 2A, servicio y protección de guardado completados
 
 Base publicada: 816b8d13e83b08686e5ce747a17d17e5eff8fc51, rama main, remoto de registro-dedicacion-salesforce y árbol inicialmente limpio. Destino verificado mediante registro privado y consulta de Organization: Developer Edition compartida con P06, alias p06-renovaciones-dev, API 65.0. No se crearon organizaciones, autenticaciones ni identidades funcionales nuevas.
 

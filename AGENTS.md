@@ -4,7 +4,7 @@
 
 Proyecto independiente de demostración con datos ficticios. Consultar README.md, docs/PROJECT_BRIEF.md, docs/STATUS.md y docs/ENVIRONMENT.md antes de trabajar; consultar docs/MODELO_DATOS.md y docs/ACCESO.md antes de modificar modelo o permisos.
 
-Conservar cambios existentes y comprobar raíz, rama, remotos y estado Git antes de editar. No utilizar repositorios, datos ni configuraciones de otros proyectos como material de implementación. El destino de fase 2A es la Developer Edition compartida con P06, alias p06-renovaciones-dev. Se autorizan el servicio Apex, los controles de persistencia, permisos sin asignaciones persistentes y pruebas aisladas de P07; no reinstalar el esquema de fase 1B. Conservar los componentes, registros, permisos y asignaciones de P06.
+Conservar cambios existentes y comprobar raíz, rama, remotos y estado Git antes de editar. No utilizar repositorios, datos ni configuraciones de otros proyectos como material de implementación. El destino de fase 3A es la Developer Edition compartida con P06, alias p06-renovaciones-dev. Se autoriza la cuadrícula LWC propia, borrador, recuperación y pruebas Jest con dependencias locales fijadas. Validar y desplegar únicamente el componente; conservar el contrato Apex y no reinstalar fases anteriores. Conservar los componentes, registros, permisos y asignaciones de P06.
 
 ## Antecedente: estado de fase 1B
 
@@ -15,6 +15,12 @@ Instalación técnica completada en el destino compartido: esquema contrastado, 
 Implementar lectura y guardado propios con autorización, claves canónicas, revisión, bloqueo y rollback. Proteger DML directo y operaciones alternativas mediante controles de dominio. Validar y desplegar un manifiesto P07 acotado con pruebas Apex SeeAllData=false y destino explícito. No ejecutar la batería P06 ni crear usuarios o datos funcionales persistentes. Mantener pendientes interfaz LWC, informe, sesiones ordinarias y concurrencia real no demostrada.
 
 Fase 2A completada: validación 0Afg700000L9ei5CAB y despliegue 0Afg700000L9H7ECAV satisfactorios; 18 pruebas aisladas, servicio 276/282 líneas y triggers 100 %. Doce archivos recuperados y contrastados. Conservar los errores previos y la evidencia de docs/evidencias/FASE-2A.json. Grupos vacíos, cuatro permisos sin asignar y cero registros P07; P06 sin diferencias en el inventario acotado. No iniciar LWC, sesiones ordinarias o nuevos ensayos por inercia.
+
+## Resultado y alcance de fase 3A
+
+Implementar el cliente sobre las llamadas imperativas existentes. Conservar revisión como texto, guardado único, borrador ante errores y decisiones explícitas ante conflictos o incertidumbre. Verificar respuestas fuera de orden y límites del conjunto. No crear datos o identidades funcionales persistentes, asignar permisos, activar páginas globales ni ejecutar pruebas P06. Documentar por separado mocks, validación remota y límites de demostración real.
+
+Fase 3A completada: p07DedicacionSemanal, 48 pruebas Jest, validación 0Afg700000L9eF4CAJ y despliegue 0Afg700000L94MtCAJ satisfactorios con 18 pruebas Apex P07. Cinco archivos recuperados y contrastados. Conservar la versión previa, corrección y evidencias de docs/evidencias/FASE-3A.json. Sin datos persistentes, asignaciones ni páginas activadas; P06 conservado en el inventario acotado. Sesiones funcionales, informe y concurrencia real requieren la siguiente fase autorizada.
 
 ## Desarrollo
 

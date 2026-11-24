@@ -1,0 +1,17 @@
+{
+  "name": "registro-dedicacion-salesforce",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pruebas del registro semanal de dedicación",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "npm run test:unit",
+    "test:unit": "sfdx-lwc-jest -- --runInBand",
+    "test:unit:coverage": "sfdx-lwc-jest --coverage -- --runInBand"
+  },
+  "devDependencies": {
+    "@salesforce/sfdx-lwc-jest": "7.1.2"
+  }
+}

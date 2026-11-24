@@ -4,11 +4,11 @@
 
 El modelo declarativo instalado en fase 1B se conserva. La fase 2A añade P07_DedicacionService, los triggers P07_SemanaGuard y P07_DedicacionGuard, dos permisos personalizados, dos Permission Sets sin asignaciones y P07_DedicacionServiceTest. El manifiesto [fase-2a.xml](../manifest/fase-2a.xml) contiene únicamente esos ocho miembros; no reinstala objetos, reglas, grupos ni los permisos anteriores.
 
-Quedan pendientes la cuadrícula LWC, su borrador y pruebas Jest, el informe operativo y las sesiones funcionales. No hay Flow, Batch, programación, integraciones ni dependencias nuevas.
+Fase 3A incorpora p07DedicacionSemanal, su borrador y pruebas Jest. Quedan pendientes el informe y las sesiones funcionales. No hay Flow, Batch, programación ni integraciones. La única dependencia directa nueva es de desarrollo para las pruebas locales.
 
 ## Contrato del servicio
 
-Dos métodos estáticos @AuraEnabled devuelven texto JSON. Se invocarán de forma imperativa; leerSemana no es cacheable porque obtiene un bloqueo transaccional. Se evita usar clases internas de Apex como parámetros o respuestas del futuro LWC. [Tipos admitidos por LWC](https://developer.salesforce.com/docs/platform/lwc/guide/apex-expose-method.html).
+Dos métodos estáticos @AuraEnabled devuelven texto JSON. El LWC los invoca de forma imperativa; leerSemana no es cacheable porque obtiene un bloqueo transaccional. Se evita usar clases internas de Apex como parámetros o respuestas del LWC. [Tipos admitidos por LWC](https://developer.salesforce.com/docs/platform/lwc/guide/apex-expose-method.html).
 
 - leerSemana(String inicioSemana): lunes ISO AAAA-MM-DD. Identifica siempre al usuario conectado.
 - guardarSemana(String peticionJson): objeto JSON con exactamente semana, revisionEsperada y cambios. Cada cambio contiene exactamente proyectoId, fecha y horas. No se admiten usuario, propietario, clave persistida, revisión nueva ni otros campos.
@@ -25,7 +25,7 @@ Ejemplo ilustrativo; PROYECTO_ID debe sustituirse por un identificador accesible
 }
 ~~~
 
-Las horas son texto decimal con punto, sin signo, exponente, coma ni ceros iniciales; hasta dos decimales y múltiplos exactos de 0.25, entre 0 y 24. Se rechaza la precisión inválida antes de DML y sin redondear. Un número JSON, por ejemplo 1.25 sin comillas, se rechaza. La interfaz futura deberá convertir la presentación local al contrato; el servidor sigue validando la entrada original.
+Las horas son texto decimal con punto, sin signo, exponente, coma ni ceros iniciales; hasta dos decimales y múltiplos exactos de 0.25, entre 0 y 24. Se rechaza la precisión inválida antes de DML y sin redondear. Un número JSON, por ejemplo 1.25 sin comillas, se rechaza. La interfaz convierte coma decimal válida al contrato con punto; el servidor sigue validando la entrada original.
 
 Una celda omitida se conserva. Cero, null o texto vacío/blanco solicitan eliminar una celda editable. Una petición no puede repetir proyecto y fecha, aunque utilice distintas representaciones de un mismo Id. Cada guardado admite 140 cambios y 20 proyectos distintos como máximo; son límites de petición, no del total de proyectos históricos de una semana. El texto completo no supera 60.000 caracteres.
 
@@ -113,8 +113,38 @@ Un punto privado @TestVisible solo provoca fallos cuando Test.isRunningTest() es
 
 La prueba de alta observa 60 minutos después de crear cabecera y detalle, provoca el fallo y comprueba que ambos desaparecen. La prueba mixta parte de 90 minutos y revisión 1; elimina, modifica y crea líneas, observa 135 minutos y revisión 2, provoca el fallo y comprueba las líneas originales, 90 minutos y revisión 1. Un guardado posterior con revisión 1 vuelve a funcionar. El resultado remoto y la cobertura constan en [STATUS.md](STATUS.md).
 
-## Borrador y resultado desconocido pendientes
+## Borrador y resultado desconocido
 
-El futuro LWC conservará por separado valores confirmados y cambios pendientes. Error o conflicto no sustituirán el borrador ni mostrarán éxito. Cambiar de semana exigirá resolver los cambios pendientes. Una pérdida de comunicación puede ocurrir después de confirmar en servidor: el cliente deberá mostrar incertidumbre y reconciliar mediante lectura, sin reenviar sobre una revisión nueva automáticamente.
+Una pérdida de comunicación puede ocurrir después de confirmar en servidor. El cliente conserva los cambios y exige reconciliación sin reenvío automático. Fase 3A implementa el contrato siguiente y lo prueba con dependencias simuladas; las sesiones integradas y la concurrencia real siguen pendientes en [ACEPTACION.md](ACEPTACION.md).
 
-No se ha implementado ni probado todavía esa interfaz, la pérdida de respuesta, la accesibilidad o el informe. Las pruebas Apex aisladas y secuenciales no sustituyen sesiones ordinarias ni concurrencia real. La relación con AC-01 a AC-25 figura en [ACEPTACION.md](ACEPTACION.md).
+## Cuadrícula y estado de fase 3A
+
+p07DedicacionSemanal es un único bundle expuesto en lightning__AppPage, API 65.0. El módulo local modelo.js contiene calendario, análisis de cantidades, validación de respuestas, totales y petición; no es una biblioteca externa. El componente utiliza componentes base Lightning, tabla semántica y SLDS. No añade una vista de coordinación.
+
+La carga muestra todas las filas con dedicación persistida, incluido el histórico inactivo. El catálogo activo accesible se ofrece en un selector; no se convierte en cientos de filas vacías. Quitar fila solo retira una fila vacía sin registros ni cambios. Eliminar dedicación exige vaciar celdas o introducir cero y guardar el conjunto.
+
+Se separan confirmado, borrador y estado de petición. El borrador guarda texto por proyecto/fecha y nunca modifica el estado confirmado. Volver al valor original retira el cambio; la omisión conserva el dato y el vacío se envía como eliminación explícita. Coma o punto decimal se admiten únicamente en formatos no ambiguos y cuartos de hora exactos. El texto inválido se conserva para corregirlo.
+
+Los totales por fila, día y semana incorporan las líneas omitidas e inactivas. Se etiquetan como provisionales cuando hay cambios; una cantidad inválida hace indeterminado el total de su fila, día y semana, en lugar de presentar una cifra exacta. La validación local comprueba editabilidad, límite diario y límites del conjunto de 140 celdas, veinte proyectos y 60.000 caracteres. No divide el guardado en varias transacciones.
+
+La semana inicial usa @salesforce/i18n/timeZone y el reloj del cliente convertido a esa zona. La primera respuesta corrige la semana si hoy del servidor difiere. Después, hoy y las banderas de edición devueltas por Apex determinan los días editables. Las fechas ISO se descomponen como calendario; la aritmética y presentación fijan UTC sobre componentes numéricos, sin interpretar una fecha civil como un instante en la zona del navegador. [Zona horaria del usuario](https://developer.salesforce.com/docs/platform/lwc/guide/create-i18n.html).
+
+## Peticiones y recuperación del cliente
+
+Guardar genera una única llamada imperativa con semana, revisionEsperada textual y cambios explícitos. Mientras está en vuelo se bloquean edición, navegación, descarte y doble envío. La respuesta debe ser texto JSON con un sobre válido. También se contrastan semana, revisión textual, fechas, catálogo sin duplicados, líneas y totales coherentes. Una confirmación debe cambiar la revisión e incluir los valores enviados; de lo contrario se considera resultado desconocido y se conserva el borrador.
+
+Un contador de peticiones invalida respuestas de lecturas anteriores y respuestas posteriores a desconectar el componente. La navegación sin cambios puede iniciar otra lectura mientras la anterior sigue pendiente. Solo la respuesta vigente puede adoptar estado o mostrar errores. Las lecturas fallidas no se presentan como una semana vacía confirmada.
+
+Los errores del servidor se muestran por celda, día o conjunto, con contexto de proyecto y fecha cuando existe. ok=false conserva el borrador aunque la promesa se haya resuelto. CONTENCION informa del fallo y permite un nuevo intento manual, sin reintentos automáticos.
+
+REVISION_DESACTUALIZADA y CONFLICTO_CREACION bloquean otro guardado hasta consultar el estado actual. La comparación muestra valor anterior, cambio solicitado y valor actual para cada celda del borrador original. Ninguna casilla está seleccionada por defecto. Incorporar selección al borrador adopta la revisión actual y conserva solo las celdas elegidas que siguen editables; no guarda automáticamente ni modifica celdas ajenas al borrador original. Proyectos desactivados, permisos retirados o fechas no editables impiden reaplicar esas celdas. Los cambios no seleccionados se descartan mediante esa acción explícita, advertida junto al control.
+
+Un rechazo de transporte o una respuesta de guardado inválida se trata como resultado desconocido. Se exige lectura de reconciliación antes de permitir otro guardado. Si falla esa lectura, persisten incertidumbre y borrador. Si los valores solicitados ya están presentes, se informa de esa coincidencia sin atribuirla a una petición concreta. Adoptar el estado actual y descartar el borrador exige confirmación.
+
+Cambiar de semana, actualizar o descartar con cambios pendientes abre LightningConfirm. Cancelar conserva los valores y devuelve el foco al selector. No se utiliza almacenamiento persistente del navegador: cerrar o recargar puede perder el borrador, como indica la interfaz.
+
+## Accesibilidad y límites de verificación
+
+La tabla tiene caption y encabezados de fila/columna. Cada entrada identifica proyecto y fecha; los controles base admiten teclado. La región horizontal es enfocable. Estado y errores se anuncian con status/alert y texto, sin depender exclusivamente del color. El foco pasa al resumen ante errores y a la comparación al recuperar datos; el diálogo base gestiona su interacción modal.
+
+Jest comprueba estructura, etiquetas y decisiones de foco en DOM simulado. Los componentes base, Apex, zona horaria y confirmación están simulados. No se atribuye accesibilidad completa, interacción real de esos controles, seguridad efectiva ni transacciones a estas pruebas. La demostración con identidades funcionales, teclado, lector de pantalla, tamaños de ventana y servicio real queda para la siguiente entrega.
