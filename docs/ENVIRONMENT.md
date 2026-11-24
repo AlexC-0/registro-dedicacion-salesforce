@@ -72,3 +72,20 @@ Node 24.13.0 y npm 11.6.2 comprobados sin actualización global. @salesforce/sfd
 npm install generó el lockfile y npm ci reconstruyó correctamente el árbol local. Los 419 paquetes instalados incluyen dependencias transitivas; no son dependencias de ejecución de la interfaz. Se conservaron avisos de obsolescencia del árbol, sin actualizaciones globales ni modificaciones transitivas improvisadas. Comandos reproducibles en [INSTALACION.md](INSTALACION.md).
 
 Jest simula Apex como promesas de texto JSON, @salesforce/i18n/timeZone, LightningConfirm y los componentes base mediante los stubs del paquete. La compilación remota del bundle se registra separadamente; no se presupone que los stubs reproduzcan todo el comportamiento del navegador de Salesforce.
+
+## Entorno final de fase 3B
+
+Mismo destino compartido, cuenta técnica y API 65.0, nuevamente contrastados. No se actualizaron herramientas globales. El navegador se utilizó sobre la sesión existente y se identificó cada sesión funcional. La conexión temporal se detuvo al terminar; sus detalles y diagnósticos no forman parte de los requisitos de la aplicación.
+
+| Licencia | Total | Usadas al terminar | Libres |
+|---|---:|---:|---:|
+| Salesforce | 4 | 4 | 0 |
+| Salesforce Platform | 6 | 3 | 3 |
+
+Las tres identidades nuevas utilizan un perfil propio sin privilegios administrativos, roles ni licencia Content. La primera creación atómica fue revertida por el límite de Content; la creación corregida desactiva expresamente esa licencia adicional. No hubo notificaciones o cambios de contraseña.
+
+Aplicación, página, pestañas, layouts y vistas P07 instalados. Tres proyectos, tres cabeceras y cuatro líneas activas; tres líneas de ensayo eliminadas permanecen en la papelera. Grupos y permisos funcionales configurados según [ACCESO.md](ACCESO.md).
+
+Login As terminó desactivado; el resto de SecuritySettings coincide con la referencia inicial. La cuenta técnica recuperó su sesión y no conserva la concesión temporal de catálogo. Esta preparación no proporciona credenciales para acceso autónomo a los usuarios ficticios.
+
+La compilación y el despliegue de los trece metadatos finalizaron con NoTestRun y cero pruebas Apex nuevas. No se modificó código; los resultados automatizados anteriores conservan su fecha y alcance. Las sesiones reales y sus límites se documentan separadamente en [STATUS.md](STATUS.md).

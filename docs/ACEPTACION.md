@@ -79,3 +79,27 @@ Las pruebas Jest de p07DedicacionSemanal y modelo.js usan respuestas Apex simula
 | Límites del contrato | 140 celdas, veinte proyectos, 60.000 caracteres y revisión superior al entero seguro; sin fragmentar peticiones | Uso ordinario con catálogo y datos ficticios |
 
 AC-07, AC-08, AC-09, AC-12 a AC-16, AC-18 y AC-24 no reciben nuevas pruebas de seguridad, transacción o informe por ejecutar Jest. Se mantiene la evidencia Apex anterior y sus límites. Ningún criterio completo de V1 se cierra únicamente con esta entrega de frontend.
+
+## Evidencia funcional de fase 3B
+
+Sesiones reales de A, B y coordinación mediante Login As, contrastadas con sus identidades privadas. No se empleó la cuenta administrativa para simular permisos funcionales.
+
+| Criterios | Evidencia nueva | Límite conservado |
+|---|---|---|
+| AC-01, AC-02, AC-04 | Semana real del 23 al 29; coma decimal, minutos exactos, rechazo de 0,3 y días futuros deshabilitados | Otros husos, cambio de día y cruces temporales no ensayados aquí |
+| AC-03, AC-11, AC-19 | Exceso diario rechazado con borrador; cancelación de los tres diálogos y descarte explícito | No se atribuye nueva prueba de carga ni pérdida de transporte |
+| AC-05, AC-17 | Cero/vacío eliminan; omitidas conservadas; semana vacía con cabecera y revisión 2 | Sin purga ni restauración manual de registros |
+| AC-06, AC-25 | Histórico desactivado después de dos guardados válidos, visible y bloqueado; total 105 contrastado con líneas y resumen | No se demuestra desactivación simultánea con un guardado |
+| AC-08, AC-10, AC-21 | Sin claves activas duplicadas; pantalla antigua rechazada; selección inicial vacía, reaplicación explícita y una petición al doble envío | No acredita AC-07 de carrera de creación ni colisión simultánea |
+| AC-09 | Petición con una celda válida y otra inválida rechazada sin cambios, antes de DML | El rollback después de escrituras sigue acreditado solo por Apex histórico |
+| AC-12, AC-13, AC-14 | A y B guardan lo propio y no abren registros conocidos del otro; coordinación lee A y no B | No equivale a cobertura de todas las superficies de la plataforma |
+| AC-15, AC-18 | Edición estándar denegada incluso sobre semana propia; coordinación también denegada por servicio | API externa no habilitada ni ensayada; no se ampliaron permisos |
+| AC-24 | Retirada del grupo, recálculo, pérdida de acceso real y restauración comprobados | Superior jerárquico sin pertenencia no ensayado |
+| AC-20 | Etiquetas, controles y diálogos reales; foco visible y paso con Tab; desbordamiento y desplazamiento programático | Navegación integral, flechas/rueda y lector de pantalla no acreditados |
+| AC-16, AC-22, AC-23 | Sin evidencia nueva de informe, pérdida de respuesta tras commit o lectura/escritura simultáneas | Se mantienen pendientes |
+
+El escenario de dos pantallas corresponde al mismo usuario y a guardados sucesivos con revisión antigua. La consulta de coordinación y las denegaciones se contrastaron también por URL directa, además de la lista con las dos semanas de A. Los resultados técnicos y funcionales se complementan; no se intercambian.
+
+Para completar la revisión manual de accesibilidad: abrir una sesión funcional legítima, recorrer fecha, selector, celdas, errores y diálogos usando solo teclado; reducir la anchura, enfocar la región de cuadrícula y verificar acceso a columnas finales y totales mediante desplazamiento horizontal. Comprobar cancelación, retorno de foco y lectura de etiquetas y errores con lector de pantalla. Registrar resultados observados, sin dar por superadas las interacciones que la automatización no acreditó.
+
+La fase no cierra V1. El informe operativo corresponde a la entrega posterior; los límites anteriores no se consideran aceptados por omisión. Véanse [STATUS.md](STATUS.md) y [FASE-3B.json](evidencias/FASE-3B.json).

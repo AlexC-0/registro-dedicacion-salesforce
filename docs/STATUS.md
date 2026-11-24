@@ -2,7 +2,97 @@
 
 Fecha: 24/11/2026.
 
-## Fase 3A: cuadrícula LWC y pruebas del componente completadas
+## Fase 3B: habilitación y demostración funcional ejecutadas
+
+Base revisada: 20a9be9e9847d36732acc092e09afae2bbcd483b, rama main y remoto registro-dedicacion-salesforce. Se conservaron los avances locales de preparación. Destino y cuenta técnica contrastados con el registro privado: Developer Edition compartida con P06, alias p06-renovaciones-dev y API 65.0.
+
+### Configuración final
+
+Aplicación P07_Dedicacion, página con el LWC existente, cuatro pestañas, tres layouts, tres vistas P07_Accesibles y perfil P07_AccesoMinimo. El manifiesto [fase-3b.xml](../manifest/fase-3b.xml) contiene trece componentes; no reinstala objetos, campos, reglas, Apex ni LWC.
+
+Tres identidades ficticias nuevas con licencia Salesforce Platform: A, B y coordinación. Seis asignaciones explícitas de Permission Sets y cinco pertenencias: los tres en participantes, solo A en miembros del ámbito y solo coordinación en el grupo receptor. Las asignaciones internas del perfil se distinguen de esos seis permisos explícitos. El perfil no concede CRUD sobre objetos ni privilegios administrativos o API; los permisos de lectura y operación proceden de los conjuntos P07 existentes.
+
+Se consumen tres de las seis licencias Platform. Salesforce mantiene cuatro de cuatro usadas. Los usuarios nuevos no tienen rol, licencia adicional de Content ni permisos generales de escritura. No se enviaron notificaciones ni se establecieron o restablecieron contraseñas.
+
+### Validación, despliegue y contraste
+
+| Operación | Identificador | Resultado final |
+|---|---|---|
+| Primera validación | 0Afg700000L9ahjCAB | Failed, checkOnly=true; nombre de proyecto Readonly y Chatter no desactivable |
+| Segunda validación | 0Afg700000LA8Y5CAL | Failed, checkOnly=true; ActivitiesAccess exigido por la licencia |
+| Validación de habilitación | 0Afg700000LA8rSCAT | Succeeded; 10/10 componentes |
+| Despliegue de habilitación | 0Afg700000LA9qjCAD | Succeeded; 10/10 componentes |
+| Recuperación inicial | 09Sg700000bWJWrEAO | Succeeded; diez archivos |
+| Validación final de navegación | 0Afg700000LAPh1CAH | Succeeded, success=true, checkOnly=true; 13/13 |
+| Despliegue final | 0Afg700000L9NhGCAV | Succeeded, success=true, checkOnly=false; 13/13 |
+| Recuperación final | 09Sg700000bWXjVEAW | Succeeded; trece archivos contrastados |
+
+NoTestRun se utilizó exclusivamente para estos metadatos de interfaz y perfil. Cero pruebas Apex ejecutadas en estos trabajos. No se modificó código ni se repitieron Jest o Apex: 48 pruebas Jest y 18 Apex siguen siendo evidencia histórica de fase 3A, no ejecuciones nuevas.
+
+Las catorce huellas de fuentes y manifiesto coinciden con el paquete final validado. El contraste acepta únicamente normalizaciones identificadas: campos obligatorios convertidos por Salesforce a Required, claves obligatorias añadidas a los layouts, sección de enlaces y minilayout predeterminados, y omisiones de permisos desactivados o aplicaciones fuera del manifiesto. Los campos obligatorios de un layout no conceden CRUD. La lectura completa del perfil y las sesiones confirman ausencia de edición ordinaria.
+
+Antes de operar se recuperaron y contrastaron 48 archivos existentes: 31 declarativos, doce de backend y cinco del LWC. El backend y el bundle coinciden con las fuentes; en el esquema se revisaron los valores predeterminados y omisiones de serialización. No se sobrescribieron esas fuentes.
+
+### Correcciones y preparación de datos
+
+Se corrigió el comportamiento del campo Name en el layout de proyecto y se conservaron ChatterInternalUser y ActivitiesAccess, exigidos por la licencia. FlowUFLRequired permanece como restricción de licencia, no como concesión de ejecución de flujos. La creación inicial de usuarios falló por el límite de licencia Content y Salesforce revirtió los tres registros; al declarar UserPermissionsSFContentUser=false se crearon correctamente.
+
+El recorrido de coordinación mostró que solo existía «Vistos recientemente», sin columnas suficientes. Se añadieron vistas de registros accesibles, compartidas exclusivamente con P07_Participantes, y se retiró el botón estándar de aprobación de los tres layouts. La vista final de coordinación muestra las dos semanas de A, incluida la vacía, y excluye B. La ruta directa de edición continúa denegada.
+
+La cuenta técnica carecía de FLS sobre Activo__c. La lectura REST y el intento de preparación por Apex anónimo fueron rechazados antes de crear datos. El catálogo se administró con un Permission Set temporal limitado al objeto de proyecto y ese campo; asignación y componente fueron retirados y su ausencia se verificó. Se repitió ese acceso acotado para desactivar el proyecto histórico después de sus guardados legítimos. No se añadieron clases ni endpoints.
+
+Catálogo final: tres proyectos ficticios con códigos P07_3B_DESARROLLO, P07_3B_REVISION y P07_3B_HISTORICO; los dos primeros activos y el tercero inactivo. Todas las semanas y líneas se crearon por el servicio desde sesiones funcionales, sin DML manual de claves, revisión o identidad.
+
+### Resultados funcionales
+
+| Recorrido real | Resultado observado |
+|---|---|
+| A: guardado conjunto y coma decimal | Cuatro celdas en un guardado; 240 minutos persistidos, revisión 1; valores recuperados tras recarga |
+| A: cero, vacío y omisión | Eliminadas las dos celdas de desarrollo; las omitidas permanecen; dos líneas y 45 minutos, revisión 3 |
+| Validación visual | 0,3 y exceso agregado de 24 horas rechazados; sin éxito y con borrador conservado |
+| Decisiones de borrador | Cancelar cambio de semana, actualización y descarte conserva 24; aceptar descarte recupera 0,25 |
+| Servicio bajo A | Rechazo VALIDACION sin cambios persistidos para petición inválida, incluida otra con un cambio válido y otro inválido |
+| Dos pantallas de A | Revisión antigua rechazada; borrador conservado; consulta actual y dos opciones inicialmente desmarcadas |
+| Reaplicación y doble envío | Seleccionado solo el histórico del martes; el valor 1 de revisión del lunes se conserva; una sola petición al pulsar dos veces, revisión 5 |
+| Semana vacía | Semana anterior: alta de 15 minutos y borrado de la última línea; cabecera conservada, revisión 2 y total 0 |
+| Histórico y futuro | Dos líneas históricas visibles y deshabilitadas tras desactivar el proyecto; días 25 a 29 bloqueados en la semana observada |
+| B | Alta de 45 minutos y modificación a 60, revisión 2; no abre semana ni detalle de A |
+| A frente a B | No abre la semana ni el detalle conocidos de B |
+| Coordinación | Lee semana y detalle de A; no abre los de B; edición estándar denegada y servicio devuelve ACCESO_DENEGADO |
+| Retirada y restauración | Al retirar A del grupo, recálculo observado y denegación real de semana y detalle; al restaurarlo, vuelve la lectura sin edición |
+| Navegación estándar | Lista de coordinación con dos semanas de A, totales 105 y 0, revisiones 5 y 2; vistas de catálogo y detalle disponibles, sin alta directa |
+
+Las denegaciones de lectura por URL se contrastan con la existencia del registro y UserRecordAccess: la pantalla genérica de registro no disponible no se interpreta por sí sola como diagnóstico de permisos. En el inventario de siete registros de semana/detalle, A lee cinco, B dos y coordinación cinco; ninguno tiene edición directa.
+
+### Datos finales y conservación
+
+| Función | Semana | Líneas activas | Minutos | Revisión |
+|---|---|---:|---:|---:|
+| A | 23/11/2026 | 3 | 105 | 5 |
+| A | 16/11/2026 | 0 | 0 | 2 |
+| B | 23/11/2026 | 1 | 60 | 2 |
+
+Tres proyectos, tres semanas y cuatro líneas activas. Las tres líneas eliminadas durante los recorridos siguen en la papelera; no se purgaron. No hay duplicados de claves en las líneas activas ni cabecera de coordinación. Los rechazos posteriores conservan revisiones y minutos. Las pantallas de detalle y lista contrastan el resumen semanal con las líneas.
+
+P06 conserva 432 registros de negocio y cuatro comparticiones manuales, sin diferencias en el inventario acotado de datos, definiciones, grupos, asignaciones y usuarios preexistentes. Los tres usuarios P07 nuevos se separan expresamente del inventario anterior. El contraste adicional de nueve entradas Apex ajenas a P07, incluidas las clases de renovaciones sin prefijo P06, tampoco presenta diferencias. Esta comprobación no es una auditoría general de la organización.
+
+Login As se habilitó temporalmente para estas sesiones y terminó en false. SecuritySettings coincide íntegramente con la referencia inicial. La sesión final vuelve a la cuenta técnica; las concesiones temporales de catálogo no existen. Los identificadores de usuarios, registros, recibos completos y diagnósticos de operación permanecen privados y excluidos de Git.
+
+### Revisión local y editorial
+
+Revisados los 23 archivos afectados: catorce XML válidos, un JSON legible y 55 enlaces locales existentes. git diff --check sin incidencias tras corregir saltos finales. Sin atribuciones automáticas ni patrones de secretos detectados en este alcance. Las fuentes conservan las huellas contrastadas; no se presenta esta revisión como auditoría exhaustiva de seguridad.
+
+### Límites y continuidad
+
+Las pruebas acreditan una pantalla desactualizada, no inserción simultánea, carga o concurrencia real de transacciones. El rechazo inválido se produjo antes de escribir; el rollback después de DML conserva únicamente la evidencia Apex anterior. No se simula aquí pérdida real de respuesta después de confirmar.
+
+Comprobación básica de etiquetas, controles, diálogos reales, foco visible y paso con Tab. El contenedor presenta desbordamiento y admite desplazamiento programático con lectura de sus totales. El desplazamiento mediante flechas o rueda no quedó acreditado por la automatización; tampoco lector de pantalla, contraste completo, navegación integral por teclado o auditoría de accesibilidad. La revisión manual pendiente está delimitada en [ACEPTACION.md](ACEPTACION.md).
+
+API no habilitada en las funciones; no se concedió para ensayar otra ruta. Se comprobaron URLs estándar de lectura/edición y el servicio expuesto en la sesión, no una batería externa de API autenticada. No se ejecutaron jerarquía con un superior, instalación limpia ni informe operativo. La habilitación y los recorridos de negocio están ejecutados; la accesibilidad mantiene cobertura parcial y V1 permanece abierta.
+
+[Evidencia sanitizada de fase 3B](evidencias/FASE-3B.json). Se conservan las evidencias previas, los fallos relevantes y la distinción entre preparación, compilación remota, despliegue y uso funcional.
+
+## Antecedente: fase 3A, cuadrícula LWC y pruebas del componente completadas
 
 Base revisada: 3551770c424bd26a06864db3398e7ced04877e55, main, remoto del repositorio registro-dedicacion-salesforce y árbol inicialmente limpio. Identidad del destino contrastada con el registro privado: Developer Edition compartida con P06, alias p06-renovaciones-dev, API 65.0. Se conserva el backend instalado; el manifiesto de esta fase contiene un único LightningComponentBundle.
 

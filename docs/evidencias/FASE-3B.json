@@ -1,0 +1,400 @@
+{
+  "fase": "3B",
+  "fecha": "2026-11-24",
+  "base": "20a9be9e9847d36732acc092e09afae2bbcd483b",
+  "estado": "Habilitación y recorridos de negocio ejecutados; accesibilidad parcial; V1 abierta",
+  "destino": {
+    "alias": "p06-renovaciones-dev",
+    "edicion": "Developer Edition",
+    "api": "65.0",
+    "compartidoConP06": true,
+    "identidadYCuentaContrastadas": true
+  },
+  "preparacion": {
+    "perfil": "P07_AccesoMinimo",
+    "usuariosNuevos": 3,
+    "asignacionesExplicitas": 6,
+    "pertenencias": 5,
+    "rolesAsignados": 0,
+    "notificaciones": false,
+    "contraseñasGeneradasORestablecidas": false,
+    "licencias": {
+      "Salesforce": {
+        "total": 4,
+        "usadas": 4
+      },
+      "SalesforcePlatform": {
+        "total": 6,
+        "usadas": 3
+      }
+    },
+    "catalogo": {
+      "total": 3,
+      "activos": 2,
+      "inactivos": 1
+    }
+  },
+  "historialRemoto": [
+    {
+      "operacion": "validation-01-report",
+      "id": "0Afg700000L9ahjCAB",
+      "done": true,
+      "status": "Failed",
+      "success": false,
+      "checkOnly": true,
+      "componentes": 10,
+      "componentesCorrectos": 8,
+      "errores": 2,
+      "pruebasEjecutadas": 0
+    },
+    {
+      "operacion": "validation-02-report",
+      "id": "0Afg700000LA8Y5CAL",
+      "done": true,
+      "status": "Failed",
+      "success": false,
+      "checkOnly": true,
+      "componentes": 10,
+      "componentesCorrectos": 9,
+      "errores": 1,
+      "pruebasEjecutadas": 0
+    },
+    {
+      "operacion": "validation-03-report",
+      "id": "0Afg700000LA8rSCAT",
+      "done": true,
+      "status": "Succeeded",
+      "success": true,
+      "checkOnly": true,
+      "componentes": 10,
+      "componentesCorrectos": 10,
+      "errores": 0,
+      "pruebasEjecutadas": 0
+    },
+    {
+      "operacion": "deploy-01-report",
+      "id": "0Afg700000LA9qjCAD",
+      "done": true,
+      "status": "Succeeded",
+      "success": true,
+      "checkOnly": false,
+      "componentes": 10,
+      "componentesCorrectos": 10,
+      "errores": 0,
+      "pruebasEjecutadas": 0
+    },
+    {
+      "operacion": "validation-04-report",
+      "id": "0Afg700000LAPh1CAH",
+      "done": true,
+      "status": "Succeeded",
+      "success": true,
+      "checkOnly": true,
+      "componentes": 13,
+      "componentesCorrectos": 13,
+      "errores": 0,
+      "pruebasEjecutadas": 0
+    },
+    {
+      "operacion": "deploy-02-report",
+      "id": "0Afg700000L9NhGCAV",
+      "done": true,
+      "status": "Succeeded",
+      "success": true,
+      "checkOnly": false,
+      "componentes": 13,
+      "componentesCorrectos": 13,
+      "errores": 0,
+      "pruebasEjecutadas": 0
+    }
+  ],
+  "validacionFinal": {
+    "id": "0Afg700000LAPh1CAH",
+    "done": true,
+    "status": "Succeeded",
+    "success": true,
+    "checkOnly": true,
+    "componentes": 13,
+    "componentesCorrectos": 13,
+    "errores": 0,
+    "pruebasEjecutadas": 0
+  },
+  "despliegueFinal": {
+    "id": "0Afg700000L9NhGCAV",
+    "done": true,
+    "status": "Succeeded",
+    "success": true,
+    "checkOnly": false,
+    "componentes": 13,
+    "componentesCorrectos": 13,
+    "errores": 0,
+    "pruebasEjecutadas": 0
+  },
+  "recuperacionFinal": {
+    "id": "09Sg700000bWXjVEAW",
+    "status": "Succeeded",
+    "success": true,
+    "archivos": 13
+  },
+  "contraste": {
+    "fuentesPrevias": 48,
+    "archivosFinales": 13,
+    "huellasSinCambios": true,
+    "normalizaciones": [
+      "Semana__c: Readonly declarado; Required normalizado por Salesforce",
+      "Proyecto__c: Readonly declarado; Required normalizado por Salesforce",
+      "Fecha__c: Readonly declarado; Required normalizado por Salesforce",
+      "Minutos__c: Readonly declarado; Required normalizado por Salesforce",
+      "Codigo__c: Readonly declarado; Required normalizado por Salesforce",
+      "Inicio__c: Readonly declarado; Required normalizado por Salesforce",
+      "Revision__c: Readonly declarado; Required normalizado por Salesforce"
+    ],
+    "otrasNormalizaciones": [
+      "Claves obligatorias y sección de enlaces añadidas a layouts",
+      "Minilayout predeterminado",
+      "Aplicaciones fuera del manifiesto y permisos desactivados omitidos en recuperación"
+    ],
+    "perfilEfectivoComprobado": true
+  },
+  "huellas": {
+    "manifest/fase-3b.xml": "4b014f940cf8bad42db8e5ab6df5cb3dbbd46debba204d8a5843b3e18039d32d",
+    "force-app/main/default/applications/P07_Dedicacion.app-meta.xml": "7098a792ccfaa602c120f2643f87d50a83482be5c1f51ca75f72949a51665e6c",
+    "force-app/main/default/flexipages/P07_Dedicacion.flexipage-meta.xml": "021458219345c79ed1ada7f505c57aed4702038baafa57c6153ca54d3c0d8de3",
+    "force-app/main/default/layouts/DedicacionDiaria__c-P07_Dedicacion.layout-meta.xml": "fd50916ff797eea88e06017e2eaca9c6435aca733bd7da961d1d0af11e2b1e54",
+    "force-app/main/default/layouts/ProyectoDedicacion__c-P07_Proyecto.layout-meta.xml": "5d94bff8637511d5c2dfe324e84a69d6bd8dbca829182ccbd2b93d13372d44ba",
+    "force-app/main/default/layouts/SemanaDedicacion__c-P07_Semana.layout-meta.xml": "f8168cae27b7d4a84e9f679db4eb475a15d5058e59f091593b723d8a8c1c81a7",
+    "force-app/main/default/profiles/P07_AccesoMinimo.profile-meta.xml": "19f6d98bc8ee443f50512e54896dae047873ec408dd018ecd946e25cde125669",
+    "force-app/main/default/tabs/DedicacionDiaria__c.tab-meta.xml": "f6cef6ffbd2b6b8150afc01874b889d3f861c930dfd0d42333f5fc04c9077c6a",
+    "force-app/main/default/tabs/P07_Dedicacion.tab-meta.xml": "c23b0e7564332bd0739e0751cb7decb75a8ed8b2e5ca3078bf5c089f65155427",
+    "force-app/main/default/tabs/ProyectoDedicacion__c.tab-meta.xml": "f6cef6ffbd2b6b8150afc01874b889d3f861c930dfd0d42333f5fc04c9077c6a",
+    "force-app/main/default/tabs/SemanaDedicacion__c.tab-meta.xml": "f6cef6ffbd2b6b8150afc01874b889d3f861c930dfd0d42333f5fc04c9077c6a",
+    "force-app/main/default/objects/ProyectoDedicacion__c/listViews/P07_Accesibles.listView-meta.xml": "d8505175e8f4d267e5854e58f9fa298b4143b1bb6a0d7816309cb252ca074cc4",
+    "force-app/main/default/objects/SemanaDedicacion__c/listViews/P07_Accesibles.listView-meta.xml": "cd72d63d89c6b72bcc3b87c268f980d539f9fb298543f50946713a571c840ee5",
+    "force-app/main/default/objects/DedicacionDiaria__c/listViews/P07_Accesibles.listView-meta.xml": "ffa085f1490f82c81368c56c569aeada68077c15d3c46c3e425332f2475222a2"
+  },
+  "correcciones": [
+    "Name del proyecto no puede ser Readonly en el layout",
+    "ChatterInternalUser y ActivitiesAccess exigidos por licencia",
+    "Alta atómica revertida por Content; reintento sin licencia adicional",
+    "Vistas P07 accesibles con columnas de consulta",
+    "Botón estándar Submit excluido de layouts"
+  ],
+  "pruebasAutomatizadas": {
+    "ejecutadasEn3B": false,
+    "motivo": "Sin cambios de código; compilación de metadatos NoTestRun",
+    "antecedentes": {
+      "fase": "3A",
+      "jest": 48,
+      "apex": 18
+    }
+  },
+  "escenarios": [
+    {
+      "id": "F3B-01",
+      "identidad": "A",
+      "inicial": "Semana sin registros",
+      "accion": "Cuatro celdas con coma decimal en un guardado y recarga",
+      "observado": "240 minutos, revisión 1 y cuatro líneas persistidas",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-02",
+      "identidad": "A",
+      "inicial": "Cuatro líneas",
+      "accion": "Cero y vacío; omitir las otras celdas",
+      "observado": "Dos líneas omitidas conservadas, 45 minutos y revisión 3",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-03",
+      "identidad": "A",
+      "inicial": "Semana confirmada",
+      "accion": "Cantidad 0,3 y exceso agregado de 24 horas",
+      "observado": "Mensajes contextualizados, borrador conservado y sin éxito",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-04",
+      "identidad": "A",
+      "inicial": "Borrador no válido",
+      "accion": "Cancelar cambio de semana, actualización y descarte; después aceptar descarte",
+      "observado": "Cancelaciones conservan 24; descarte explícito recupera 0,25",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-05",
+      "identidad": "A",
+      "inicial": "Estado persistido conocido",
+      "accion": "Petición inválida al servicio bajo sesión ordinaria, incluida mezcla válida/inválida",
+      "observado": "VALIDACION y estado persistido sin cambios; rechazo antes de DML",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-06",
+      "identidad": "A en dos pantallas",
+      "inicial": "Misma semana y revisión 3",
+      "accion": "Guardar en la primera y enviar el borrador antiguo en la segunda",
+      "observado": "Rechazo de revisión, borrador conservado y consulta de estado actual",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-07",
+      "identidad": "A",
+      "inicial": "Comparación con dos cambios sin seleccionar",
+      "accion": "Seleccionar solo histórico del martes, incorporar y guardar con doble pulsación",
+      "observado": "Una petición; conserva revisión del lunes en 1 hora, total 105 y revisión 5",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-08",
+      "identidad": "A",
+      "inicial": "Semana anterior inicialmente vacía",
+      "accion": "Alta de una línea y borrado de la última",
+      "observado": "Cabecera conservada, revisión 2 y total 0",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-09",
+      "identidad": "A",
+      "inicial": "Histórico guardado legítimamente",
+      "accion": "Desactivar el proyecto y actualizar",
+      "observado": "Dos líneas históricas visibles, deshabilitadas e incluidas en total 105",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-10",
+      "identidad": "A",
+      "inicial": "Semana real 23 a 29 de noviembre",
+      "accion": "Inspeccionar días futuros y etiquetas",
+      "observado": "Días 25 a 29 deshabilitados, etiquetas por proyecto y fecha",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-11",
+      "identidad": "B",
+      "inicial": "Semana propia vacía",
+      "accion": "Guardar 0,75 y modificar a 1",
+      "observado": "60 minutos finales, revisión 2",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-12",
+      "identidad": "A y B",
+      "inicial": "Registros conocidos del otro miembro",
+      "accion": "Abrir URL de semana y detalle ajenos",
+      "observado": "Registro no disponible; UserRecordAccess sin lectura confirma el diagnóstico",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-13",
+      "identidad": "Coordinación",
+      "inicial": "A dentro y B fuera del ámbito",
+      "accion": "URLs conocidas de semanas y detalles",
+      "observado": "Lectura de A y denegación de B",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-14",
+      "identidad": "Coordinación y A",
+      "inicial": "Registro propio o del ámbito legible",
+      "accion": "Ruta estándar de edición; servicio de guardado bajo coordinación",
+      "observado": "Edición estándar denegada; servicio devuelve ACCESO_DENEGADO a coordinación",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-15",
+      "identidad": "Coordinación",
+      "inicial": "Lectura de A disponible",
+      "accion": "Retirar A del grupo, observar recálculo y repetir URLs",
+      "observado": "Pierde acceso a semana y detalle",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-16",
+      "identidad": "Coordinación",
+      "inicial": "A retirado temporalmente",
+      "accion": "Restaurar pertenencia, observar recálculo y repetir URLs",
+      "observado": "Recupera lectura sin edición; cinco pertenencias finales",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-17",
+      "identidad": "Coordinación y A",
+      "inicial": "Navegación corregida desplegada",
+      "accion": "Consultar vistas P07 y layout final",
+      "observado": "Coordinación ve dos semanas A; catálogo indica tres elementos; sin alta ni aprobación",
+      "resultado": "Comprobado"
+    },
+    {
+      "id": "F3B-18",
+      "identidad": "A y coordinación",
+      "inicial": "Controles reales",
+      "accion": "Foco, Tab, diálogos, etiquetas y región desplazable",
+      "observado": "Foco visible y paso básico con Tab; desplazamiento programático 332,8 píxeles en ancho 819",
+      "resultado": "Parcial: flechas, rueda, recorrido integral y lector de pantalla no acreditados"
+    }
+  ],
+  "datosFinales": {
+    "proyectos": 3,
+    "semanas": [
+      {
+        "funcion": "B",
+        "lunes": "2026-11-23",
+        "revision": "2",
+        "lineas": 1,
+        "minutos": 60
+      },
+      {
+        "funcion": "A",
+        "lunes": "2026-11-23",
+        "revision": "5",
+        "lineas": 3,
+        "minutos": 105
+      },
+      {
+        "funcion": "A",
+        "lunes": "2026-11-16",
+        "revision": "2",
+        "lineas": 0,
+        "minutos": 0
+      }
+    ],
+    "lineasActivas": 4,
+    "lineasEliminadasEnPapelera": 3,
+    "clavesActivasUnicas": true,
+    "cabecerasCoordinacion": 0
+  },
+  "conservacion": {
+    "p06Registros": 432,
+    "p06ComparticionesManuales": 4,
+    "diferenciasInventario": [],
+    "usuariosPreviosSinCambios": true,
+    "usuariosNuevosSeparados": 3,
+    "entradasApexAjenasContrastadas": 9,
+    "apexAjenoSinCambios": true,
+    "securitySettingsRestaurado": true,
+    "loginAsFinal": false,
+    "permisosTemporalesRestantes": 0,
+    "sesionTecnicaRecuperada": true
+  },
+  "limites": [
+    "Sin cierre V1 ni informe operativo",
+    "Sin carrera real de inserción, carga o lectura/escritura simultánea",
+    "Sin pérdida real de respuesta posterior a commit",
+    "Rollback posterior a DML solo como evidencia Apex histórica",
+    "API externa no habilitada ni ensayada con las funciones",
+    "Sin prueba nueva de superior jerárquico o instalación limpia",
+    "Accesibilidad parcial: sin acreditación de flechas/rueda, recorrido integral o lector de pantalla"
+  ],
+  "editorial": {
+    "atribucionesAutomaticas": false,
+    "identificadoresDeUsuariosYRegistros": "Solo en recibos privados",
+    "secretos": "No incluidos",
+    "archivosRevisados": 23,
+    "xmlValidos": 14,
+    "jsonLegibles": 1,
+    "enlacesLocalesExistentes": 55,
+    "gitDiffCheck": "Sin incidencias",
+    "limite": "Revisión acotada de archivos afectados; no auditoría exhaustiva"
+  }
+}

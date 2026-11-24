@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Registro semanal propio y consulta estándar de las semanas accesibles.</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>true</isNavPersonalizationDisabled>
+    <label>P07 Dedicación</label>
+    <navType>Standard</navType>
+    <tabs>P07_Dedicacion</tabs>
+    <tabs>SemanaDedicacion__c</tabs>
+    <tabs>DedicacionDiaria__c</tabs>
+    <tabs>ProyectoDedicacion__c</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>

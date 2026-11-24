@@ -4,7 +4,7 @@
 
 Proyecto independiente de demostración con datos ficticios. Consultar README.md, docs/PROJECT_BRIEF.md, docs/STATUS.md y docs/ENVIRONMENT.md antes de trabajar; consultar docs/MODELO_DATOS.md y docs/ACCESO.md antes de modificar modelo o permisos.
 
-Conservar cambios existentes y comprobar raíz, rama, remotos y estado Git antes de editar. No utilizar repositorios, datos ni configuraciones de otros proyectos como material de implementación. El destino de fase 3A es la Developer Edition compartida con P06, alias p06-renovaciones-dev. Se autoriza la cuadrícula LWC propia, borrador, recuperación y pruebas Jest con dependencias locales fijadas. Validar y desplegar únicamente el componente; conservar el contrato Apex y no reinstalar fases anteriores. Conservar los componentes, registros, permisos y asignaciones de P06.
+Conservar cambios existentes y comprobar raíz, rama, remotos y estado Git antes de editar. No utilizar repositorios, datos ni configuraciones de otros proyectos como material de implementación. El destino de fase 3B es la Developer Edition compartida con P06, alias p06-renovaciones-dev. Se autoriza habilitar tres identidades ficticias P07 de privilegios mínimos, sus permisos y grupos, página y catálogo propios y recorridos funcionales. Conservar el contrato y corregir solo defectos acreditados; no reinstalar fases anteriores. Conservar los componentes, registros, permisos y asignaciones de P06.
 
 ## Antecedente: estado de fase 1B
 
@@ -21,6 +21,10 @@ Fase 2A completada: validación 0Afg700000L9ei5CAB y despliegue 0Afg700000L9H7EC
 Implementar el cliente sobre las llamadas imperativas existentes. Conservar revisión como texto, guardado único, borrador ante errores y decisiones explícitas ante conflictos o incertidumbre. Verificar respuestas fuera de orden y límites del conjunto. No crear datos o identidades funcionales persistentes, asignar permisos, activar páginas globales ni ejecutar pruebas P06. Documentar por separado mocks, validación remota y límites de demostración real.
 
 Fase 3A completada: p07DedicacionSemanal, 48 pruebas Jest, validación 0Afg700000L9eF4CAJ y despliegue 0Afg700000L94MtCAJ satisfactorios con 18 pruebas Apex P07. Cinco archivos recuperados y contrastados. Conservar la versión previa, corrección y evidencias de docs/evidencias/FASE-3A.json. Sin datos persistentes, asignaciones ni páginas activadas; P06 conservado en el inventario acotado. Sesiones funcionales, informe y concurrencia real requieren la siguiente fase autorizada.
+
+## Alcance de fase 3B
+
+Miembro A dentro del ámbito, miembro B fuera y coordinación con lectura de A. Utilizar licencias disponibles y perfil propio si resulta necesario; no modificar perfiles compartidos ni políticas globales. No enviar correos, invitaciones o restablecimientos. Las dedicaciones se crean mediante el flujo autorizado, sin claves manuales. Registrar sesiones efectivas, persistencia, pantalla desactualizada, denegaciones y retirada/restauración del ámbito; distinguirlas de pruebas aisladas. Conservar todos los datos y evidencias, sin cerrar V1 ni iniciar el informe.
 
 ## Desarrollo
 
@@ -41,3 +45,9 @@ Distinguir revisión estática, conversión local, compilación en Salesforce, d
 Castellano técnico, directo y neutral. Documentar comportamiento, decisiones, comprobaciones y limitaciones. No incluir relatos de conversaciones, atribuciones de elaboración, autorreferencias, firmas ni coautorías automáticas. Conservar licencias y créditos legales de terceros. No copiar encargos operativos al repositorio.
 
 Los títulos de commit propuestos siguen el formato `tipo: descripción`, sin ámbitos entre paréntesis.
+
+## Resultado vigente de fase 3B
+
+Aplicación y navegación P07 habilitadas, tres identidades funcionales y catálogo ficticio conservados. Validación final 0Afg700000LAPh1CAH y despliegue 0Afg700000L9NhGCAV: 13/13 componentes, NoTestRun; Apex y LWC sin cambios. Guardado propio, revisión antigua, denegaciones y retirada/restauración del ámbito comprobados en sesiones reales. Conservar tres proyectos, tres semanas, cuatro líneas activas y tres eliminadas en papelera; detalles y límites en docs/STATUS.md y docs/evidencias/FASE-3B.json.
+
+Login As restaurado a false, sesión técnica recuperada y permisos temporales de catálogo retirados. No reactivar accesos temporales, repetir ensayos o modificar datos por inercia. P06 conserva 432 registros y cuatro comparticiones manuales en el contraste acotado. V1 abierta; accesibilidad parcial, informe y otros escenarios pendientes no constituyen una autorización automática para ejecutarlos.

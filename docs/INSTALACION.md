@@ -174,3 +174,31 @@ El componente se expone como «P07 Dedicación semanal» para páginas de aplica
 3. Configurar su acceso específico para la aplicación y funciones P07 autorizadas en la fase de demostración. No sustituir páginas P06 ni establecerla como predeterminada de toda la organización.
 
 Esta fase no crea ni activa una página, no añade usuarios, no asigna permisos al administrador ni carga datos. Las funciones necesitan lectura efectiva, permiso de operación y acceso al catálogo según [ACCESO.md](ACCESO.md). La demostración real, sesiones, teclado y accesibilidad quedan pendientes; Jest utiliza stubs de Apex, controles base, zona horaria y diálogo.
+
+## Habilitación funcional de fase 3B
+
+El modelo, backend y LWC son prerrequisitos ya instalados. [fase-3b.xml](../manifest/fase-3b.xml) selecciona trece componentes: aplicación, página, cuatro pestañas, tres layouts, tres vistas y perfil propio. No incluye usuarios, asignaciones, pertenencias, catálogo ni dedicaciones.
+
+Comprobar identidad, licencias Platform, componentes existentes y colisiones. Si P07_AccesoMinimo no existe, crear un Profile vacío mediante la API de registros con Name=P07_AccesoMinimo y el UserLicenseId de Salesforce Platform consultado en ese destino; verificar cero permisos de objetos y ausencia de permisos amplios antes de desplegar su configuración. Si existe, inspeccionarlo antes de reutilizarlo. No clonar un perfil estándar amplio. [Referencia Profile](https://developer.salesforce.com/docs/platform/object-reference/references/standard-objects/object-profile.html).
+
+~~~powershell
+sf project deploy start --manifest manifest/fase-3b.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level NoTestRun --dry-run --async --json
+sf project deploy report --job-id ID_VALIDACION --target-org p06-renovaciones-dev --json
+sf project deploy start --manifest manifest/fase-3b.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level NoTestRun --async --json
+sf project deploy report --job-id ID_DESPLIEGUE --target-org p06-renovaciones-dev --json
+sf project retrieve start --manifest manifest/fase-3b.xml --target-org p06-renovaciones-dev --api-version 65.0 --output-dir tmp/contraste-fase-3b-NUEVO --wait 1 --json
+~~~
+
+NoTestRun corresponde aquí a metadatos sin cambios de código. Una corrección de Apex o LWC exige las pruebas pertinentes. Exigir resultados finales satisfactorios y huellas iguales antes de desplegar. Recuperar en carpeta separada y documentar las normalizaciones de Salesforce en layouts y perfiles.
+
+El perfil debe mostrar únicamente la aplicación P07, sus cuatro pestañas y los layouts previstos. La lectura se sostiene en CRUD/FLS y compartición, no en Readonly del layout: Salesforce normaliza campos obligatorios a Required. Las vistas P07_Accesibles se comparten con P07_Participantes y muestran solo registros ya accesibles para la sesión. No establecen una página global. [ListView](https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-listview.html).
+
+Preparar o reutilizar únicamente identidades ficticias P07 verificadas, con perfil propio, sin rol ni concesiones amplias, locale es_ES, idioma español y zona Europe/Madrid. La creación mediante API debe desactivar notificaciones y UserPermissionsSFContentUser; no generar contraseñas ni enviar invitaciones. Comprobar capacidad y resultado completo. Usar nombres de usuario únicos y direcciones ficticias en un dominio reservado no utilizable.
+
+Aplicar [ACCESO.md](ACCESO.md): dos permisos explícitos por identidad, tres participantes, A como único titular del ámbito y coordinación como único receptor. Comprobar permisos efectivos y sesiones reales. Login As necesita acceso legítimo y política compatible; la política usada temporalmente terminó desactivada. No reactivarla automáticamente al repetir estos comandos. [Políticas de acceso](https://help.salesforce.com/s/articleView?id=sf.admin_loginrestrict.htm&language=en_US&type=5).
+
+Crear un catálogo ficticio pequeño con códigos únicos. Su administración necesita acceso al objeto y FLS de Activo__c; cualquier concesión temporal debe ser acotada, retirada y contrastada. Introducir dedicaciones exclusivamente desde el flujo de la aplicación. Desactivar el proyecto histórico después de confirmar sus líneas; nunca fabricar cabeceras, claves o revisiones.
+
+Entrar en P07 Dedicación y utilizar Mi dedicación o seleccionar P07 Semanas accesibles, P07 Dedicaciones accesibles y P07 Proyectos accesibles en las pestañas estándar. Coordinación consulta el ámbito en estas vistas; la cuadrícula sigue siendo propia. Probar también URLs conocidas, edición denegada y retirada/restauración de A, esperando el recálculo.
+
+Los datos de esta ejecución se conservan. No repetir altas, borrados o cambios de grupo como limpieza automática. Los límites y la revisión manual de [ACEPTACION.md](ACEPTACION.md) no sustituyen los resultados obtenidos en [STATUS.md](STATUS.md).

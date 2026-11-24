@@ -86,3 +86,29 @@ Instalación y contraste técnicos completados. Los tres grupos existen con cero
 El perfil técnico existente no tiene concesiones FLS sobre Activo__c, Usuario__c y TotalMinutos__c. Su REST describe muestra nueve campos personalizados; Metadata API confirma los doce. No se asignaron permisos P07 al operador para alterar ese resultado. La presencia de las definiciones y concesiones no sustituye una sesión funcional.
 
 La regla de catálogo conserva Activo verdadero O falso y acceso Read. En este destino, los criterios de casilla exigieron los literales Verdadero/Falso; true/false y True/False fueron rechazados. No cambió el alcance de la regla. Los resultados, conservación de P06 y límites constan en [STATUS.md](STATUS.md).
+
+## Configuración y comprobación de fase 3B
+
+Estado vigente: tres identidades ficticias exclusivas P07 activas. La configuración vacía descrita en las fases anteriores es histórica.
+
+| Función | Perfil | Permisos explícitos | Grupos |
+|---|---|---|---|
+| A | P07_AccesoMinimo | P07_MiembroLectura, P07_GuardadoPropio | P07_Participantes, P07_MiembrosAmbito |
+| B | P07_AccesoMinimo | P07_MiembroLectura, P07_GuardadoPropio | P07_Participantes |
+| Coordinación | P07_AccesoMinimo | P07_CoordinacionLectura, P07_ServicioLectura | P07_Participantes, P07_CoordinacionAmbito |
+
+El perfil propio se creó mediante la API de Profile para partir sin permisos de objetos; no se clonó un perfil amplio. La inspección efectiva confirma cero ObjectPermissions en el perfil y ausencia de API Enabled, View All Data, Modify All Data, Author Apex, Manage Users y View Setup. Los únicos permisos de sistema activos observados son ChatterInternalUser, ActivitiesAccess, FlowUFLRequired, ViewHelpLink y LightningExperienceUser. Los dos primeros son exigidos por la licencia; FlowUFLRequired exige la licencia funcional correspondiente para Flow. No se añadieron permisos de Flow al perfil.
+
+Solo P07_Dedicacion es visible en este perfil y es su aplicación predeterminada. Sus cuatro pestañas, tres layouts y tres vistas P07_Accesibles permiten consultar sin añadir escritura ordinaria. Las vistas se comparten con P07_Participantes; filterScope=Everything significa todos los registros que el solicitante ya puede leer, no acceso global. No hay página predeterminada para toda la organización.
+
+La identidad de sesión determina la propiedad que utiliza el servicio. Los permisos autorizan lectura u operación; la compartición determina qué registros ajenos pueden leerse. El guardado propio controlado no concede Edit al objeto. Por eso A y B guardan por el servicio, pero no editan por la ruta estándar ni leen registros del otro. Coordinación lee A por el grupo receptor, no puede editarlo y no accede a B.
+
+Se comprobaron sesiones reales Login As, identificador efectivo, URLs directas de semana y detalle y denegación explícita de edición. El servicio devuelve ACCESO_DENEGADO a coordinación. UserRecordAccess complementa estas sesiones: cinco registros legibles para A y coordinación, dos para B, cero editables en el inventario de siete registros. No sustituye la evidencia funcional.
+
+La retirada temporal de A produjo pérdida de lectura tras el recálculo, comprobada también por URL en coordinación. La pertenencia se restauró y se volvió a comprobar lectura sin edición. Estado final: cinco pertenencias y seis asignaciones explícitas, además de las asignaciones internas del perfil.
+
+El mecanismo Login As requirió una habilitación temporal de la política. Finalizó desactivada y SecuritySettings coincide con el estado previo. Para una demostración posterior hace falta acceso legítimo a las identidades; la cuenta técnica abierta no constituye una sesión de miembro y no autoriza reactivar esa política automáticamente. No se generaron contraseñas ni se enviaron correos.
+
+La preparación y desactivación del catálogo requirieron FLS temporal sobre Activo__c para la cuenta técnica. Se utilizó P07_CatalogoTemporal, con acceso limitado al catálogo, y se retiraron asignación y componente después de cada operación. No forma parte del paquete de aplicación ni de los permisos funcionales.
+
+Las claves obligatorias y algunos campos pueden aparecer como Required en el layout recuperado por normalización de Salesforce; ese atributo no otorga Create o Edit. Los accesos efectivos siguen siendo de lectura y el botón de aprobación está excluido. Resultados y límites en [STATUS.md](STATUS.md).

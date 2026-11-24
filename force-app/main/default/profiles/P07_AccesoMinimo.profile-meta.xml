@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities><application>P07_Dedicacion</application><default>true</default><visible>true</visible></applicationVisibilities>
+    <applicationVisibilities><application>standard__Platform</application><default>false</default><visible>false</visible></applicationVisibilities>
+    <custom>true</custom>
+    <layoutAssignments><layout>ProyectoDedicacion__c-P07_Proyecto</layout></layoutAssignments>
+    <layoutAssignments><layout>SemanaDedicacion__c-P07_Semana</layout></layoutAssignments>
+    <layoutAssignments><layout>DedicacionDiaria__c-P07_Dedicacion</layout></layoutAssignments>
+    <tabVisibilities><tab>P07_Dedicacion</tab><visibility>DefaultOn</visibility></tabVisibilities>
+    <tabVisibilities><tab>SemanaDedicacion__c</tab><visibility>DefaultOn</visibility></tabVisibilities>
+    <tabVisibilities><tab>DedicacionDiaria__c</tab><visibility>DefaultOn</visibility></tabVisibilities>
+    <tabVisibilities><tab>ProyectoDedicacion__c</tab><visibility>DefaultOn</visibility></tabVisibilities>
+    <userLicense>Salesforce Platform</userLicense>
+    <userPermissions><enabled>false</enabled><name>ApiEnabled</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>ApexRestServices</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>AuthorApex</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>CustomizeApplication</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>ManageUsers</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>ModifyAllData</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>ViewAllData</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>ViewSetup</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>RunReports</name></userPermissions>
+    <userPermissions><enabled>true</enabled><name>ActivitiesAccess</name></userPermissions>
+    <userPermissions><enabled>true</enabled><name>ChatterInternalUser</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>EmailSingle</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>EmailMass</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>EmailTemplateManagement</name></userPermissions>
+    <userPermissions><enabled>false</enabled><name>EmailAdministration</name></userPermissions>
+    <userPermissions><enabled>true</enabled><name>LightningExperienceUser</name></userPermissions>
+    <userPermissions><enabled>true</enabled><name>ViewHelpLink</name></userPermissions>
+</Profile>
