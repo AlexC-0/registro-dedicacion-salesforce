@@ -4,7 +4,7 @@ Aplicación de demostración para registrar dedicación propia por proyecto y d�
 
 ## Estado
 
-Fase 1A publicada: tres objetos, doce campos, nueve validaciones, total semanal y acceso de solo lectura. Fase 1B preparada localmente el 24/11/2026, pendiente de identificar y autenticar una organización exclusiva de P07. La [guía de instalación](docs/INSTALACION.md) define el procedimiento; [STATUS.md](docs/STATUS.md) distingue lo ejecutado de lo pendiente. No hay validación remota, despliegue ni comprobación funcional. El servicio de guardado y la cuadrícula LWC siguen pendientes.
+Fase 1B técnica completada: esquema de tres objetos y doce campos validado, desplegado y contrastado en una Developer Edition compartida con P06. Jerarquía desactivada y verificada en proyecto y semana; grupos vacíos y permisos sin asignar. P06 conservado dentro del alcance contrastado. [STATUS.md](docs/STATUS.md) recoge resultados y límites; [INSTALACION.md](docs/INSTALACION.md), el procedimiento. Todos los criterios funcionales siguen pendientes, al igual que el servicio de guardado y la cuadrícula LWC.
 
 ## Alcance V1
 
@@ -22,18 +22,18 @@ No incluye nóminas, facturación, control horario con validez laboral, aprobaci
 |---|---|
 | `force-app/main/default` | Modelo declarativo, grupos, permisos de lectura y reglas de compartición |
 | `manifest/fase-1a.xml` | Selección explícita del modelo y acceso de fase 1A |
-| `sfdx-project.json` | Proyecto DX; API 65.0 provisional |
+| `sfdx-project.json` | Proyecto DX; API 65.0 |
 | `docs/PROJECT_BRIEF.md` | Objetivos, reglas y límites |
 | `docs/MODELO_DATOS.md` | Modelo exacto y separación de restricciones declarativas y de servidor |
 | `docs/ARQUITECTURA.md` | Guardado, concurrencia y decisiones de implementación |
 | `docs/ACCESO.md` | Matriz de acceso e identidades de prueba |
 | `docs/ACEPTACION.md` | Criterios y evidencia pendiente |
-| `docs/ENVIRONMENT.md` | Herramientas observadas y destino pendiente |
+| `docs/ENVIRONMENT.md` | Herramientas y destino compartido verificado |
 | `docs/STATUS.md` | Estado y siguientes entregas |
 | `docs/INSTALACION.md` | Destino, validación remota, instalación y jerarquía |
 
 ## Preparación
 
-El repositorio es independiente de los proyectos anteriores. No contiene credenciales, alias de destino, usuarios ni datos importados de otras organizaciones.
+El repositorio es independiente y el destino de desarrollo se comparte con P06. Las operaciones usan un alias explícito cuya identidad se verifica con un registro privado. El repositorio no contiene credenciales, usuarios reales ni datos importados de otras organizaciones.
 
-La base no necesita paquetes npm. Las dependencias de pruebas LWC se seleccionarán y fijarán junto con su lockfile al implementar la interfaz. La versión API se contrastará con el destino P07 antes del primer despliegue; su presencia en la configuración no acredita compatibilidad remota.
+La base no necesita paquetes npm. Las dependencias de pruebas LWC se seleccionarán y fijarán junto con su lockfile al implementar la interfaz. API 65.0 y los metadatos declarativos se contrastaron en fase 1B; la aplicación completa y sus dependencias futuras requieren sus propias comprobaciones.

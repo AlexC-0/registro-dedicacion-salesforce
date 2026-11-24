@@ -1,6 +1,6 @@
 # Modelo declarativo
 
-Fase 1A: tres objetos, doce campos personalizados y nueve reglas de validación definidos localmente en API 65.0. Pendientes de compilación y comprobación en Salesforce. No se han creado registros.
+Fase 1A define tres objetos, doce campos personalizados y nueve reglas de validación en API 65.0. En fase 1B se validaron, desplegaron y contrastaron sus definiciones; no se han creado registros P07 ni probado su comportamiento funcional.
 
 ## Objetos y nombres
 
@@ -31,7 +31,7 @@ Los tres objetos permiten informes y no habilitan actividades ni historial de ca
 
 Cada campo incluye etiqueta, descripción y ayuda. OwnerId es estándar en proyecto y semana; el detalle hereda propiedad de la semana. No se crean campos adicionales de propietario o usuario en las líneas.
 
-Usuario__c se mantiene como lookup no obligatorio en su definición y se exige mediante regla en cada guardado. Así se evita imponer al lookup a User una política de eliminación propia de un objeto de negocio. Su FLS sí se declara en los permisos. La combinación definitiva necesita compilación remota.
+Usuario__c se mantiene como lookup no obligatorio en su definición y se exige mediante regla en cada guardado. Así se evita imponer al lookup a User una política de eliminación propia de un objeto de negocio. Su FLS sí se declara en los permisos. La combinación fue aceptada por Salesforce y contrastada mediante recuperación en fase 1B; su comportamiento al guardar sigue pendiente.
 
 El resumen no declara precisión ni escala independientes: su tipo y operación se apoyan en el campo numérico resumido. No se añade un campo de horas persistidas; su presentación futura será minutos / 60, sin alterar la unidad almacenada.
 
@@ -49,7 +49,7 @@ El resumen no declara precisión ni escala independientes: su tipo y operación 
 | Dedicación | MinutosValidos | Minutos no positivos, mayores de 1.440 o no múltiplos de 15 |
 | Dedicación | IdentidadInmutable | Cambio de proyecto, fecha o clave después del alta |
 
-La relación master-detail añade la prohibición de reparentado. Los campos únicos rechazan valores duplicados exactos. Estas reglas se han escrito en metadatos; su aceptación por Salesforce y sus resultados funcionales siguen pendientes.
+La relación master-detail añade la prohibición de reparentado. Los campos únicos rechazan valores duplicados exactos. Las nueve reglas activas fueron aceptadas por Salesforce y sus definiciones coinciden con las fuentes. Sus resultados funcionales siguen pendientes.
 
 ## Claves y límites del esquema
 

@@ -7,12 +7,12 @@
         <criteriaItems>
             <field>Activo__c</field>
             <operation>equals</operation>
-            <value>true</value>
+            <value>Verdadero</value>
         </criteriaItems>
         <criteriaItems>
             <field>Activo__c</field>
             <operation>equals</operation>
-            <value>false</value>
+            <value>Falso</value>
         </criteriaItems>
         <description>Comparte proyectos activos e inactivos en lectura con participantes autorizados.</description>
         <label>P07 Catálogo para participantes</label>

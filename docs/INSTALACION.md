@@ -1,42 +1,42 @@
-# Preparación e instalación del esquema
+# Validación e instalación del esquema
 
 ## Estado del procedimiento
 
-Preparación de fase 1B sobre 8b408a3978e83cc7d48c5df5ae62bbcec9e95dce, API 65.0. Los comandos remotos de este documento no se han ejecutado: falta identificar y autenticar una organización exclusiva de P07. Los resultados reales se registran en [STATUS.md](STATUS.md).
+Fase 1B técnica completada el 24/11/2026 en la Developer Edition compartida con P06, utilizando API 65.0 y destino explícito p06-renovaciones-dev. Se partió de 50354b06ffd6c9d11fb8ec1afebb10b49df47214 y se corrigieron localmente dos literales de la regla de catálogo. [STATUS.md](STATUS.md) y la [evidencia de fase 1B](evidencias/FASE-1B.json) registran los trabajos terminados, los rechazos previos y las huellas exactas del paquete aceptado.
 
-El paquete seleccionado por [fase-1a.xml](../manifest/fase-1a.xml) contiene tres objetos con doce campos y nueve validaciones, tres grupos, dos permisos de lectura y dos reglas de compartición. No contiene Apex, LWC, datos, asignaciones ni componentes destructivos.
+El paquete seleccionado por [fase-1a.xml](../manifest/fase-1a.xml) contiene tres objetos con doce campos y nueve validaciones, tres grupos, dos permisos de lectura y dos reglas de compartición. No contiene Apex, LWC, datos, asignaciones ni componentes destructivos. El despliegue y el ajuste de jerarquía ya están realizados; estos comandos documentan el procedimiento y no implican que deba repetirse.
 
-## Alta y autenticación
+## Destino y autenticación
 
-La opción prevista es una Developer Edition nueva y exclusiva. El [alta oficial](https://developer.salesforce.com/signup) requiere datos personales, aceptación de condiciones y activación de la cuenta. Estos pasos deben completarse directamente en Salesforce; no se almacenan contraseñas, tokens o enlaces de activación en el proyecto. [Guía oficial de Developer Edition](https://developer.salesforce.com/docs/platform/api-rest/guide/quickstart-dev-org.html).
+El destino de esta instalación es compartido con P06. La autorización se limita al paquete P07 y a la jerarquía de proyecto y semana; se conservan los componentes, datos, usuarios y asignaciones anteriores. El alias operativo conserva su nombre p06-renovaciones-dev: no representa una organización independiente ni implica cambiar de repositorio.
 
-Después del alta, comprobar en el navegador que la sesión corresponde a la organización nueva de P07. No basta con que la sesión de Salesforce ya esté abierta. Para autorizar la CLI sin establecer destino predeterminado:
+Se comprobó que la autenticación técnica existente respondía y coincidía con la organización y la sesión de navegador previstas. No fue necesario iniciar otra autorización. Si falta autenticación en otro equipo, completar el acceso exclusivamente en el navegador y contrastar después la identidad con el registro privado del destino:
 
 ~~~powershell
-sf org login web --alias p07-dedicacion-dev --instance-url https://login.salesforce.com --browser chrome
+sf org login web --alias p06-renovaciones-dev --instance-url https://login.salesforce.com --browser chrome
 ~~~
 
-El alias es una propuesta local y todavía no está creado. Se omiten --set-default y --set-default-dev-hub. Introducir credenciales y completar las verificaciones de cuenta exclusivamente en el navegador. No utilizar una sesión de otro proyecto ni publicar la salida de autenticación. [Referencia de autenticación](https://developer.salesforce.com/docs/platform/salesforce-cli-reference/guide/cli_reference_org_login_web.html).
+Este comando de autenticación no se ejecutó en la fase 1B completada. Se omiten --set-default y --set-default-dev-hub. No publicar credenciales, tokens, recibos de autenticación ni enlaces reutilizables. [Referencia oficial](https://developer.salesforce.com/docs/platform/salesforce-cli-reference/guide/cli_reference_org_login_web.html).
 
 ## Verificación previa del destino
 
 Antes de validar o desplegar:
 
-1. Contrastar el identificador de organización y la identidad técnica autenticada con la cuenta dedicada identificada para P07. Conservar el vínculo en .private/, excluido de Git. Un alias nuevo no convierte una organización anterior en un destino nuevo.
-2. Comprobar OrganizationType y edición de desarrollo. IsSandbox=false por sí solo no identifica producción ni demuestra exclusividad.
-3. Confirmar respuesta de API 65.0 y permisos efectivos de la cuenta técnica para API, metadatos y compartición. No ampliar permisos de funciones ordinarias para instalar.
-4. Consultar licencias totales y usadas y comprobar que permiten objetos personalizados, Apex, LWC e informes. Evaluar por separado la viabilidad de miembro, coordinación y una identidad fuera del ámbito; no crear usuarios ni asignarlos durante esta fase.
-5. Inspeccionar la existencia de los diez miembros del manifiesto. Si ya hay componentes P07, recuperar sus definiciones en una ruta temporal separada y comparar antes de escribir. No sobrescribir diferencias remotas sin comprenderlas.
-6. Capturar HEAD, cambios locales y huellas SHA-256 de las fuentes y del manifiesto. Una corrección no publicada requiere huellas nuevas y una nueva validación; no se atribuye el resultado al commit inicial.
+1. Contrastar el identificador de organización y la cuenta técnica con el registro privado del destino compartido. Un alias por sí solo no acredita identidad.
+2. Comprobar OrganizationType=Developer Edition. IsSandbox=false no basta para identificar el tipo de entorno.
+3. Confirmar respuesta de API 65.0 y permisos efectivos para API, metadatos y compartición. Utilizar los privilegios técnicos existentes; no ampliar permisos de funciones ordinarias.
+4. Consultar licencias totales y usadas. La fase 1B observó cuatro licencias Salesforce ocupadas y seis Platform libres. Las tres identidades funcionales previstas requieren configuración y comprobación posteriores; no crearlas ni asignarlas durante esta instalación.
+5. Inspeccionar los diez miembros del manifiesto. Antes del despliegue inicial no existían componentes P07. En operaciones posteriores, recuperar y comparar primero cualquier componente existente; no sobrescribir diferencias remotas no comprendidas.
+6. Capturar referencia de fuentes, cambios pendientes y huellas SHA-256. Una corrección requiere nuevas huellas y otra validación. Conservar una referencia de los componentes, registros y asignaciones P06 que permita contrastar su conservación al terminar.
 
-Los detalles identificativos y recibos completos permanecen en .private/ o tmp/, ambos excluidos. Las evidencias públicas se limitan a resultados sanitizados. No se consultan organizaciones anteriores para comprobar si pueden reutilizarse.
+Los recibos completos e inventarios identificativos permanecen en .private/ o tmp/, ambos excluidos de Git. Las evidencias públicas contienen resultados sanitizados. No se modifica la configuración global de herramientas ni se consulta otro destino por defecto.
 
 ## Validación remota sin persistencia
 
-La ayuda de la CLI instalada confirma --dry-run para validar sin guardar el despliegue y NoTestRun para entornos de desarrollo. Se utiliza project deploy start, con destino y API explícitos:
+Se utilizó project deploy start con --dry-run para validar sin persistir, NoTestRun y destino/API explícitos:
 
 ~~~powershell
-sf project deploy start --manifest manifest/fase-1a.xml --target-org p07-dedicacion-dev --api-version 65.0 --test-level NoTestRun --dry-run --async --json
+sf project deploy start --manifest manifest/fase-1a.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level NoTestRun --dry-run --async --json
 ~~~
 
 Este comando es una validación remota, no una conversión local. NoTestRun significa que no se ejecutan pruebas Apex; no acredita cobertura. La ausencia de clases en el paquete no permite inventar pruebas ejecutadas.
@@ -44,19 +44,23 @@ Este comando es una validación remota, no una conversión local. NoTestRun sign
 La respuesta inicial asíncrona no demuestra éxito. Consultar el trabajo identificado hasta que termine; sustituir ID_VALIDACION por el identificador devuelto y conservar el mismo destino:
 
 ~~~powershell
-sf project deploy report --job-id ID_VALIDACION --target-org p07-dedicacion-dev --json
+sf project deploy report --job-id ID_VALIDACION --target-org p06-renovaciones-dev --json
 ~~~
 
 La ayuda instalada de project deploy report no admite --api-version; no se añade ese flag al seguimiento. La operación inicial sí fija API 65.0 y el informe se solicita para su identificador exacto, con destino explícito.
 
 Exigir estado final Succeeded, success=true, checkOnly=true y ausencia de errores de componentes. No utilizar --ignore-errors, --ignore-warnings o --ignore-conflicts. Ante un rechazo, conservar el error, corregir únicamente el componente afectado y repetir las comprobaciones y la validación necesarias. [Referencia de despliegue y dry-run](https://developer.salesforce.com/docs/platform/salesforce-cli-reference/guide/cli_reference_project_deploy_start.html).
 
+### Literales de criterios de casilla
+
+La regla P07_CatalogoParticipantes compara Activo__c con Verdadero y Falso, usando 1 OR 2. En el destino y con la cuenta técnica verificados, Salesforce rechazó true/false y True/False y exigió esos literales localizados. Se corrigieron únicamente los dos valores y se repitió la validación completa; no se modificó el idioma del usuario ni la lógica de acceso. En otro contexto de idioma deberá comprobarse la aceptación mediante validación remota antes de desplegar.
+
 ## Despliegue inicial
 
 Solo después de identidad confirmada, conflictos resueltos y validación satisfactoria. Volver a contrastar la identidad y las huellas del paquete validado. Si cambian las fuentes o el destino, repetir la validación.
 
 ~~~powershell
-sf project deploy start --manifest manifest/fase-1a.xml --target-org p07-dedicacion-dev --api-version 65.0 --test-level NoTestRun --async --json
+sf project deploy start --manifest manifest/fase-1a.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level NoTestRun --async --json
 ~~~
 
 Esta operación sí persiste los metadatos. Registrar el recibo separado del de validación y consultar su identificador con project deploy report, especificando otra vez el destino explícito. Exigir estado final Succeeded, success=true, checkOnly=false y ausencia de errores; una respuesta inicial o un estado parcial no completan la instalación.
@@ -80,7 +84,7 @@ No crear semanas ni dedicaciones para ensayar el esquema con claves manuales. La
 
 ## Ajuste de jerarquía en Setup
 
-Después de instalar, en la organización P07 confirmada:
+El ajuste quedó aplicado y verificado en fase 1B. Para una instalación que aún lo requiera, comprobar primero la identidad del destino compartido y limitar los cambios a las dos filas P07:
 
 1. Abrir Setup, buscar Sharing Settings y entrar en la configuración de compartición.
 2. En Organization-Wide Defaults, pulsar Edit.
@@ -88,7 +92,7 @@ Después de instalar, en la organización P07 confirmada:
 4. Desmarcar Grant Access Using Hierarchies para ambos objetos. No modificar las filas de otros objetos. El detalle permanece Controlled by Parent.
 5. Guardar y esperar a que termine cualquier recálculo. Volver a abrir la configuración y comprobar que ambas opciones continúan desmarcadas.
 
-Conservar evidencia sanitizada de la lectura posterior. Si no se dispone del acceso necesario a Setup, registrar el ajuste y su verificación como pendientes. doesIncludeBosses=false en los grupos no sustituye esta configuración. [Procedimiento oficial](https://help.salesforce.com/s/articleView?id=sf.admin_sharing.htm&language=en_US&type=5).
+Comparar el formulario antes y después para descartar cambios en otras filas. La ejecución de fase 1B contrastó 375 controles y confirmó únicamente las dos casillas previstas, con lectura posterior tras reabrir la edición. Conservar evidencia sanitizada de esa lectura. Si no se dispone del acceso necesario a Setup, registrar el ajuste y su verificación como pendientes. doesIncludeBosses=false en los grupos no sustituye esta configuración. [Procedimiento oficial](https://help.salesforce.com/s/articleView?id=sf.admin_sharing.htm&language=en_US&type=5).
 
 Los grupos permanecen vacíos y los permisos sin asignaciones. El ajuste de jerarquía tampoco sustituye las futuras pruebas con identidades funcionales.
 

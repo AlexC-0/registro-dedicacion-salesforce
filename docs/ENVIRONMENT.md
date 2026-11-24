@@ -22,19 +22,28 @@ No hay JAVA_HOME ni JDK_HOME en la terminal inspeccionada, ni ajuste java.home d
 
 ## Proyecto DX
 
-Un paquete fuente `force-app`, namespace vacío y API 65.0 provisional. No se configura usuario, alias, Dev Hub ni organización predeterminada.
+Un paquete fuente `force-app`, namespace vacío y API 65.0, comprobada en el destino compartido. No se configura usuario, alias, Dev Hub ni organización predeterminada.
 
-API 65.0 es una versión publicada de Winter '26, documentada por [Salesforce](https://developer.salesforce.com/blogs/2025/09/take-a-deep-dive-into-metadata-api-deployments). Se utiliza como base explícita de configuración, sin necesidad identificada de APIs posteriores para los metadatos declarativos de fase 1A. Antes de desplegar se comprobará la versión admitida por el destino; no se atribuye compatibilidad remota a esta selección.
+API 65.0 es una versión publicada de Winter '26, documentada por [Salesforce](https://developer.salesforce.com/blogs/2025/09/take-a-deep-dive-into-metadata-api-deployments). Se utiliza como base explícita de configuración, sin necesidad identificada de APIs posteriores para los metadatos declarativos de fase 1A. La fase 1B comprobó respuesta de API 65.0, validación remota e instalación del paquete. Esa aceptación no equivale a una prueba funcional.
 
 No hay package.json, dependencias ni lockfile porque todavía no hay código JavaScript ni herramientas de pruebas incorporadas al proyecto. Al añadirlas se fijarán conjuntamente versiones compatibles con el runtime y el lockfile correspondiente.
 
-## Salesforce
+## Salesforce: destino compartido verificado
 
-No se ha identificado ni autenticado una organización P07. La inspección de nombres de alias locales solo encontró destinos de proyectos anteriores, excluidos para este proyecto. No se contactó con esas organizaciones ni se reutilizaron sus datos o configuraciones.
+Developer Edition compartida con P06, identificada mediante el alias p06-renovaciones-dev, contraste con el registro local de autenticación y consulta remota de Organization. La cuenta técnica y el identificador de organización se conservan en privado. La sesión de navegador corresponde al mismo dominio verificado. No se creó otra organización ni se modificó el destino predeterminado.
 
-Se recomienda una Developer Edition dedicada, condicionada a verificar licencias y capacidades. No hay Dev Hub autorizado acreditado para scratch orgs; ese mecanismo requiere [un Dev Hub](https://developer.salesforce.com/docs/platform/sfdx-dev/guide/sfdx-setup-enable-devhub.html). No se crea una definición scratch que presuponga su disponibilidad.
+API 65.0 responde y acepta el paquete P07 corregido. La cuenta técnica tiene API Enabled, Modify Metadata, Customize Application, Manage Sharing, View Setup, Author Apex y Run Reports; sus privilegios administrativos ya existían. No se concedieron permisos de instalación a identidades funcionales.
 
-Pendientes: identidad y exclusividad del destino, edición, API, licencias, usuarios, permisos efectivos y configuración de jerarquía. El mecanismo de ámbito ya está definido mediante grupos y reglas en [ACCESO.md](ACCESO.md); sus pertenencias y verificación permanecen pendientes. La verificación debe realizarse en el destino P07 identificado, sin exponer credenciales ni reutilizar identidades de otros trabajos.
+| Licencia relevante | Total | Usadas | Libres |
+|---|---:|---:|---:|
+| Salesforce | 4 | 4 | 0 |
+| Salesforce Platform | 6 | 0 | 6 |
+
+La licencia Platform admite aplicaciones y objetos personalizados e informes según la [documentación oficial](https://help.salesforce.com/s/articleView?id=platform.users_license_types_available.htm&language=en_US&type=5). Se localizó un perfil Platform con API e informes habilitados. La disponibilidad permite prever tres identidades diferenciadas; su configuración mínima, acceso a las futuras clases/LWC y comportamiento efectivo deben comprobarse en la fase correspondiente. No se crearon usuarios ni asignaciones y no se alteraron las identidades de P06.
+
+La consulta de límites indicó DataStorageMB: máximo 5 y restante 5; FileStorageMB: máximo 20 y restante 20; API diaria: máximo 15.000 y restante 14.929 en ese instante. Son cuotas reportadas por Salesforce, con su granularidad de medida, y no una prueba de rendimiento ni almacenamiento vacío.
+
+Los tres objetos P07 no contienen registros. Los grupos están vacíos y los permisos sin asignar. El requisito de jerarquía está aplicado y verificado para proyecto y semana; véase [ACCESO.md](ACCESO.md). Se contrastó la conservación del estado P06 antes y después dentro del alcance de [STATUS.md](STATUS.md).
 
 ## Conversión local de fase 1A
 
@@ -42,14 +51,10 @@ Se utilizó la CLI ya instalada mediante su entrada Node, sin instalar paquetes.
 
 El convertidor aplica sus filtros también al destino. Las carpetas ocultas dieron paquetes incompletos; se usa tmp/ sin punto inicial. Los resultados y límites constan en [STATUS.md](STATUS.md). No hubo conexión a Salesforce ni cambios de configuración global.
 
-## Preparación de fase 1B
+## Antecedente de preparación y operación
 
-El 24/11/2026 se revisó la información local del destino: no aparece una organización P07 identificada ni autenticada. Se consultaron únicamente nombres de alias y configuración pertinente, sin contactar destinos de proyectos anteriores. La Developer Edition nueva y exclusiva sigue siendo la opción recomendada; el alta y activación de cuenta no se han realizado desde este procedimiento.
+La preparación inicial se realizó sin destino P07 identificado y contemplaba una Developer Edition exclusiva. El alcance vigente utiliza la organización de desarrollo compartida con P06, con escrituras limitadas a P07 y conservación contrastada de los componentes y registros anteriores. La autenticación existente fue suficiente; no se repitió el inicio de sesión ni se cambió su alias.
 
-La ayuda de la CLI instalada confirma org login web con alias sin --set-default y project deploy start con --dry-run, --test-level NoTestRun, --target-org y --api-version. Los comandos de ayuda emitieron avisos auxiliares de acceso denegado al consultar procesos, pero devolvieron su contenido. No se modificó la instalación para eliminarlos. La ayuda de project deploy report no incluye --api-version; el procedimiento conserva ese parámetro en la operación inicial y consulta el identificador exacto con destino explícito.
+La ayuda instalada confirmó dry-run, NoTestRun, destino y API explícitos. project deploy report no admite --api-version: se fijó 65.0 al iniciar cada trabajo y se consultó su identificador exacto con --target-org. Las respuestas finales y los intentos fallidos se conservan separados.
 
-API 65.0, permisos técnicos, edición, licencias y capacidad de las tres identidades funcionales siguen sin comprobación remota. La guía [INSTALACION.md](INSTALACION.md) concreta las verificaciones y el procedimiento; prepararlo no equivale a ejecutarlo.
-
-El destino mostrado en el navegador se contrastó únicamente con los registros locales y coincidió con una organización anterior, por lo que quedó excluido. No se publican sus identificadores ni direcciones. La conexión Playwright configurada con MCP 0.0.69 agotó el tiempo de espera. La extensión ya estaba instalada en el perfil habitual de Chrome, versión 0.6.0. Se inició un puente temporal exclusivo de la sesión P07 con MCP 0.0.86, disponible en la caché local, enlazado únicamente a loopback. No se actualizaron paquetes ni se cambió la configuración global.
-
-El puente temporal respondió correctamente: creación de una pestaña propia, evaluación sobre la página vacía y navegación al alta oficial. Los auxiliares, la sesión de conexión y los registros están en .private/, excluidos de Git. El alta y la autenticación Salesforce siguen pendientes; la conectividad del navegador no las sustituye.
+Los detalles operativos, auxiliares y diagnósticos de la conexión temporal del navegador permanecen en notas privadas excluidas de Git. No son dependencias de la aplicación ni requisitos de instalación. No se instalaron herramientas ni se cambió su configuración global.

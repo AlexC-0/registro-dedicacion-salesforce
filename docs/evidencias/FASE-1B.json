@@ -1,0 +1,333 @@
+{
+  "date": "2026-11-24",
+  "phase": "1B",
+  "technicalPhaseComplete": true,
+  "functionalAcceptanceComplete": false,
+  "sourceReference": "50354b06ffd6c9d11fb8ec1afebb10b49df47214",
+  "localMetadataCorrection": {
+    "file": "force-app/main/default/sharingRules/ProyectoDedicacion__c.sharingRules-meta.xml",
+    "before": [
+      "true",
+      "false"
+    ],
+    "rejectedIntermediate": [
+      "True",
+      "False"
+    ],
+    "accepted": [
+      "Verdadero",
+      "Falso"
+    ],
+    "semantics": "Activo verdadero O falso; Read para P07_Participantes"
+  },
+  "sourceFiles": [
+    {
+      "path": "force-app/main/default/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "force-app/main/default/groups/P07_CoordinacionAmbito.group-meta.xml",
+      "sha256": "738b82c68ef12693794ac83e72f98306242168e22feb93d0c0ee04809088adab"
+    },
+    {
+      "path": "force-app/main/default/groups/P07_MiembrosAmbito.group-meta.xml",
+      "sha256": "6d5bd741ae3eae31b120e2bbe45a4f12f15426121e040dfce963494e9c390988"
+    },
+    {
+      "path": "force-app/main/default/groups/P07_Participantes.group-meta.xml",
+      "sha256": "75bcb660a53923c3e701eb1ee9dbca4d3cc0e447f9e3598c8374e094a744235b"
+    },
+    {
+      "path": "force-app/main/default/objects/DedicacionDiaria__c/DedicacionDiaria__c.object-meta.xml",
+      "sha256": "ea561b13a80bef3e938eaa3fb987278d75f47ec395c680e2e3238229a121fb41"
+    },
+    {
+      "path": "force-app/main/default/objects/DedicacionDiaria__c/fields/Clave__c.field-meta.xml",
+      "sha256": "2e8c2ecdceda76c809c9487db33593ff8b86ebb87dc27688dd17e321428ed3da"
+    },
+    {
+      "path": "force-app/main/default/objects/DedicacionDiaria__c/fields/Fecha__c.field-meta.xml",
+      "sha256": "54d9fe8e7b7bdbfc6ce93b7b5add005be0fd7352d50a4d495a49811041926eeb"
+    },
+    {
+      "path": "force-app/main/default/objects/DedicacionDiaria__c/fields/Minutos__c.field-meta.xml",
+      "sha256": "90a297d41ce8428681ad529543511fa2dff49e9c628742278df502f8371798c0"
+    },
+    {
+      "path": "force-app/main/default/objects/DedicacionDiaria__c/fields/Proyecto__c.field-meta.xml",
+      "sha256": "53d8dfa1de2df8bf0ff6f58532fb74ad222095672f0a349dd40f88cc6da4dd36"
+    },
+    {
+      "path": "force-app/main/default/objects/DedicacionDiaria__c/fields/Semana__c.field-meta.xml",
+      "sha256": "3d8f215faec4f4367f2b71e30bfb23e2ee6c8723049191cc92e3478dec8d118e"
+    },
+    {
+      "path": "force-app/main/default/objects/DedicacionDiaria__c/validationRules/FechaEnSemana.validationRule-meta.xml",
+      "sha256": "488970f6b208b18a58d370cadc5d70c899286dffe699f74bfee8bb145844128f"
+    },
+    {
+      "path": "force-app/main/default/objects/DedicacionDiaria__c/validationRules/IdentidadInmutable.validationRule-meta.xml",
+      "sha256": "cb31a5626528210d592d81a80b0166b3f338fd3da8ca72d2a1a7445cfd9da3ce"
+    },
+    {
+      "path": "force-app/main/default/objects/DedicacionDiaria__c/validationRules/MinutosValidos.validationRule-meta.xml",
+      "sha256": "318edd65f13a5d7a34ec581be2dc4982823a0ef6c7d316701c000ad99e8c212c"
+    },
+    {
+      "path": "force-app/main/default/objects/ProyectoDedicacion__c/ProyectoDedicacion__c.object-meta.xml",
+      "sha256": "6aa7481dfbca200c122b416c89393181fe996851087b9f845e877d960f8daa19"
+    },
+    {
+      "path": "force-app/main/default/objects/ProyectoDedicacion__c/fields/Activo__c.field-meta.xml",
+      "sha256": "02d1bdaee4a19c5393a11772a9086588e5d4cf4c7cf5fb6c958687b8b3587e0d"
+    },
+    {
+      "path": "force-app/main/default/objects/ProyectoDedicacion__c/fields/Codigo__c.field-meta.xml",
+      "sha256": "43b7fce770f85767160937e1cdb17671d34bab121fb713626a6ab762f716550c"
+    },
+    {
+      "path": "force-app/main/default/objects/ProyectoDedicacion__c/validationRules/CodigoNoVacio.validationRule-meta.xml",
+      "sha256": "8d7b146b2193c808e69845a8dd26c50362fe4f5a80613ea3126e6209871aaaa4"
+    },
+    {
+      "path": "force-app/main/default/objects/SemanaDedicacion__c/SemanaDedicacion__c.object-meta.xml",
+      "sha256": "9b1e20a380e8305ba439781bef0d1fa9382e5c424dc3790499dcb1719878e98b"
+    },
+    {
+      "path": "force-app/main/default/objects/SemanaDedicacion__c/fields/Clave__c.field-meta.xml",
+      "sha256": "eebebb9e08cd62e5e9918258c9c679c4b6e46dd90261af453c1a6856f684b4cc"
+    },
+    {
+      "path": "force-app/main/default/objects/SemanaDedicacion__c/fields/Inicio__c.field-meta.xml",
+      "sha256": "326a0a82d047fe3466f5b8beac24feaec546d663d1c051e8667116452aff7ced"
+    },
+    {
+      "path": "force-app/main/default/objects/SemanaDedicacion__c/fields/Revision__c.field-meta.xml",
+      "sha256": "0624eef0ec4104f2a7164f8d0ca2fbd735e6e78796e0c2a7abd4c08b1346bdca"
+    },
+    {
+      "path": "force-app/main/default/objects/SemanaDedicacion__c/fields/TotalMinutos__c.field-meta.xml",
+      "sha256": "b0b80e477e622f6d660e9c55b14ccf582d916df72a00d0acea825647fa8b684c"
+    },
+    {
+      "path": "force-app/main/default/objects/SemanaDedicacion__c/fields/Usuario__c.field-meta.xml",
+      "sha256": "7d14699d31213f5bf73d0f0327090ca4da2b22366705d240a913627c39c55b46"
+    },
+    {
+      "path": "force-app/main/default/objects/SemanaDedicacion__c/validationRules/IdentidadInmutable.validationRule-meta.xml",
+      "sha256": "ea8b02b94958bde0f9d7b4f11ce10ff7ff8668e6d349facdd89c9ebc25014d04"
+    },
+    {
+      "path": "force-app/main/default/objects/SemanaDedicacion__c/validationRules/InicioEnLunes.validationRule-meta.xml",
+      "sha256": "9c07bca20d7af18c3b5f67c9d81261b895ceac8224aa7d72db513ffe1e461b65"
+    },
+    {
+      "path": "force-app/main/default/objects/SemanaDedicacion__c/validationRules/PropietarioCoherente.validationRule-meta.xml",
+      "sha256": "f376a953780e08e27b8450c8db797a469642f4abfc90f4cbf76584af997ae2f4"
+    },
+    {
+      "path": "force-app/main/default/objects/SemanaDedicacion__c/validationRules/RevisionNoNegativa.validationRule-meta.xml",
+      "sha256": "214a6b92a7418df4bf92686b5dbe77f8a136383b57a56e3f92b7af134dea1422"
+    },
+    {
+      "path": "force-app/main/default/objects/SemanaDedicacion__c/validationRules/UsuarioObligatorio.validationRule-meta.xml",
+      "sha256": "0c54bc714208bbced9449c8483a754270a334b5fad9f9d331c17e07548b2691f"
+    },
+    {
+      "path": "force-app/main/default/permissionsets/P07_CoordinacionLectura.permissionset-meta.xml",
+      "sha256": "95809a58404cf968a5c60c2adefd16a9248f7dff63408b2f87bd176f029dfd37"
+    },
+    {
+      "path": "force-app/main/default/permissionsets/P07_MiembroLectura.permissionset-meta.xml",
+      "sha256": "ae9842acbc74ab807373e71b2923ad2f27187faa05ff506533df2f2f3dc26bcf"
+    },
+    {
+      "path": "force-app/main/default/sharingRules/ProyectoDedicacion__c.sharingRules-meta.xml",
+      "sha256": "cbfc1d924f05fca27caa6d8ae3c0281a7a2ce2c27af3423399827d797e86f54f"
+    },
+    {
+      "path": "force-app/main/default/sharingRules/SemanaDedicacion__c.sharingRules-meta.xml",
+      "sha256": "80a364469b04cd76de67e5b4a059f588baefd1d22d2e15126f203933d13b49e9"
+    },
+    {
+      "path": "manifest/fase-1a.xml",
+      "sha256": "41dfc58ba949dcb67d245f31d4ea46220188123df2d1902894fc387c46a6da31"
+    },
+    {
+      "path": "sfdx-project.json",
+      "sha256": "02431336e2be22cea7e6af0bba2491a790d84ef97c60f9f44476f60ad88f0de0"
+    }
+  ],
+  "sourceFilesDigest": "22ed0b8650c9f74ce66bae058fc3373d8869c74ef9616ab42e1d38f97ebf003e",
+  "target": {
+    "alias": "p06-renovaciones-dev",
+    "sharedWith": "P06",
+    "edition": "Developer Edition",
+    "apiVersion": "65.0",
+    "identityVerified": true
+  },
+  "executions": [
+    {
+      "operation": "validation-1-report",
+      "id": "0Afg700000L9NyzCAF",
+      "status": "Failed",
+      "done": true,
+      "success": false,
+      "checkOnly": true,
+      "componentsTotal": 33,
+      "componentErrors": 1,
+      "testsCompleted": 0,
+      "errors": [
+        {
+          "component": "ProyectoDedicacion__c.P07_CatalogoParticipantes",
+          "type": "SharingCriteriaRule",
+          "message": "Utilice \"Verdadero\" o \"Falso\""
+        }
+      ]
+    },
+    {
+      "operation": "validation-2-report",
+      "id": "0Afg700000L9OlNCAV",
+      "status": "Failed",
+      "done": true,
+      "success": false,
+      "checkOnly": true,
+      "componentsTotal": 33,
+      "componentErrors": 1,
+      "testsCompleted": 0,
+      "errors": [
+        {
+          "component": "ProyectoDedicacion__c.P07_CatalogoParticipantes",
+          "type": "SharingCriteriaRule",
+          "message": "Utilice \"Verdadero\" o \"Falso\""
+        }
+      ]
+    },
+    {
+      "operation": "validation-3-report",
+      "id": "0Afg700000L9P7xCAF",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": true,
+      "componentsTotal": 33,
+      "componentErrors": 0,
+      "testsCompleted": 0,
+      "errors": []
+    },
+    {
+      "operation": "deployment-report",
+      "id": "0Afg700000L9Hf4CAF",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": false,
+      "componentsTotal": 33,
+      "componentErrors": 0,
+      "testsCompleted": 0,
+      "errors": []
+    }
+  ],
+  "retrieval": {
+    "id": "09Sg700000bVBwMEAW",
+    "status": "Succeeded",
+    "sourceXmlFiles": 31,
+    "retrievedXmlFiles": 31,
+    "unexpectedDifferences": 0,
+    "normalizations": [
+      {
+        "file": "groups/P07_CoordinacionAmbito.group-meta.xml",
+        "normalization": "fullName omitido en XML recuperado; DeveloperName confirmado por API"
+      },
+      {
+        "file": "groups/P07_MiembrosAmbito.group-meta.xml",
+        "normalization": "fullName omitido en XML recuperado; DeveloperName confirmado por API"
+      },
+      {
+        "file": "groups/P07_Participantes.group-meta.xml",
+        "normalization": "fullName omitido en XML recuperado; DeveloperName confirmado por API"
+      }
+    ],
+    "sourceHashesStillMatchValidatedPackage": true
+  },
+  "installedChecks": {
+    "groupsThree": true,
+    "groupsNoHierarchy": true,
+    "groupsEmpty": true,
+    "permissionSetsTwo": true,
+    "permissionsUnassigned": true,
+    "noGlobalAccess": true,
+    "objectAccessReadOnly": true,
+    "explicitFlsReadOnly": true,
+    "customFieldsTwelve": true,
+    "noData": true
+  },
+  "recordCounts": {
+    "ProyectoDedicacion__c": 0,
+    "SemanaDedicacion__c": 0,
+    "DedicacionDiaria__c": 0
+  },
+  "hierarchy": {
+    "ProyectoDedicacion__c": false,
+    "SemanaDedicacion__c": false,
+    "reopenedAndVerified": true,
+    "formControlsCompared": 375,
+    "onlyExpectedTwoControlsChanged": true
+  },
+  "licenses": {
+    "Salesforce": {
+      "total": 4,
+      "used": 4,
+      "available": 0
+    },
+    "SalesforcePlatform": {
+      "total": 6,
+      "used": 0,
+      "available": 6
+    },
+    "functionalIdentitiesCreated": 0,
+    "functionalIdentitiesTested": 0
+  },
+  "preservation": {
+    "before": {
+      "Account": 11,
+      "IncidenciaRenovacion__c": 7,
+      "EjecucionRenovacion__c": 20,
+      "ContratoComercial__c": 198,
+      "SeguimientoRenovacion__c": 196
+    },
+    "after": {
+      "Account": 11,
+      "IncidenciaRenovacion__c": 7,
+      "EjecucionRenovacion__c": 20,
+      "ContratoComercial__c": 198,
+      "SeguimientoRenovacion__c": 196
+    },
+    "existingBusinessRecords": 432,
+    "manualContractSharesBefore": 4,
+    "manualContractSharesAfter": 4,
+    "unchanged": true,
+    "comparedSections": [
+      "Account",
+      "IncidenciaRenovacion__c",
+      "EjecucionRenovacion__c",
+      "ContratoComercial__c",
+      "SeguimientoRenovacion__c",
+      "manualShares",
+      "p06Groups",
+      "p06Members",
+      "p06Assignments",
+      "users",
+      "objectsMetadata",
+      "permissionsMetadata",
+      "apexInventory"
+    ],
+    "accountComparison": "Id y SystemModstamp; resto de objetos de negocio: campos devueltos por describe"
+  },
+  "limitsOfVerification": [
+    "NoTestRun: ninguna prueba Apex ejecutada",
+    "Sin pruebas funcionales, datos P07 ni asignaciones",
+    "REST describe del operador muestra nueve campos personalizados; los doce se contrastaron con Metadata API",
+    "La capacidad de tres identidades diferenciadas se prevé con licencias Platform libres; configuración y sesiones pendientes"
+  ]
+}

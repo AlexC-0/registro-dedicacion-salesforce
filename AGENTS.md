@@ -4,7 +4,11 @@
 
 Proyecto independiente de demostración con datos ficticios. Consultar README.md, docs/PROJECT_BRIEF.md, docs/STATUS.md y docs/ENVIRONMENT.md antes de trabajar; consultar docs/MODELO_DATOS.md y docs/ACCESO.md antes de modificar modelo o permisos.
 
-Conservar cambios existentes y comprobar raíz, rama, remotos y estado Git antes de editar. No utilizar repositorios, organizaciones, datos ni configuraciones de otros proyectos como destino o material de implementación.
+Conservar cambios existentes y comprobar raíz, rama, remotos y estado Git antes de editar. No utilizar repositorios, datos ni configuraciones de otros proyectos como material de implementación. El destino de fase 1B es la Developer Edition compartida con P06; las escrituras quedan limitadas a componentes P07 y al ajuste de jerarquía de sus dos objetos. Conservar los componentes, registros, permisos y asignaciones de P06.
+
+## Estado de fase 1B
+
+Instalación técnica completada en el destino compartido: esquema contrastado, jerarquía de proyecto y semana desactivada y verificada, grupos vacíos, permisos sin asignar y cero registros P07. Conservar los resultados y errores de docs/evidencias/FASE-1B.json. Los criterios funcionales, el servicio Apex y la cuadrícula LWC siguen pendientes; no repetir la instalación ni iniciar nuevas fases por inercia.
 
 ## Desarrollo
 
@@ -16,7 +20,7 @@ No añadir Flow, Batch Apex, integraciones, programación ni dependencias sin un
 
 ## Entorno y comprobaciones
 
-Toda operación remota debe utilizar un destino expresamente identificado para P07 y especificarlo en el comando. Un alias por sí solo no acredita la identidad ni la exclusividad de una organización. No modificar herramientas globales ni reutilizar usuarios de otros trabajos.
+Toda operación remota debe utilizar un destino expresamente identificado para P07 y especificarlo en el comando. Un alias por sí solo no acredita la identidad de una organización. El destino compartido debe contrastarse con el registro privado antes de escribir. Se utiliza la autenticación de la cuenta técnica existente; no reutilizar identidades funcionales ni modificar sus asignaciones. No modificar herramientas globales.
 
 Distinguir revisión estática, conversión local, compilación en Salesforce, despliegue, pruebas Apex, pruebas LWC y comprobación funcional. Registrar resultados realmente obtenidos y conservar fallos relevantes sin presentarlos como éxitos. No publicar secretos, tokens, archivos de autenticación ni enlaces reutilizables de acceso.
 

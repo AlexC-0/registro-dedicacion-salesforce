@@ -2,31 +2,45 @@
 
 Fecha: 24/11/2026.
 
-## Fase 1B: preparación y destino pendiente
+## Fase 1B: instalación técnica completada
 
-Inspección del 24/11/2026 sobre 8b408a3978e83cc7d48c5df5ae62bbcec9e95dce. HEAD y la referencia local origin/main coinciden; rama main, remoto de P07 y árbol limpio al comenzar. No se cambió de referencia ni se repitió la inspección general de herramientas.
+Destino verificado: Developer Edition compartida con P06, alias operativo p06-renovaciones-dev y API 65.0. Se reutilizó la autenticación técnica existente, sin cambiar el destino predeterminado ni crear usuarios. Los identificadores de organización y cuenta permanecen en el registro privado. Las escrituras se limitaron al paquete P07 y a la jerarquía de sus objetos de proyecto y semana.
 
-No se localizó un destino P07 expresamente identificado en documentación, configuración o alias locales. No se consultaron organizaciones anteriores. El bloqueo es el alta o identificación de una Developer Edition exclusiva y la intervención de cuenta necesaria para autenticarla; no es una carencia del modelo local.
+Referencia publicada: 50354b06ffd6c9d11fb8ec1afebb10b49df47214, rama main y remoto de registro-dedicacion-salesforce. Se conservaron los cambios documentales existentes. La aceptación del paquete corresponde a esa base más la corrección local de los literales de la regla del catálogo; no se atribuye al commit sin corregir. Las huellas de las fuentes se conservaron antes de validar y se comprobaron antes y después del despliegue.
 
-La sesión de navegador propuesta posteriormente coincide con un destino de un proyecto anterior según el registro local de autenticación; se descartó sin consultarlo remotamente. La primera conexión Playwright agotó el tiempo de espera. Se resolvió para esta sesión con un puente temporal P07 en loopback, usando Playwright MCP 0.0.86 ya disponible localmente y la extensión existente de Chrome. Se comprobaron creación y control de una pestaña vacía y navegación al formulario oficial de alta. No se modificó la configuración global ni se instalaron herramientas. No se rellenó ni envió el formulario ni se aceptaron condiciones; abrir la página no acredita la creación de una organización.
+| Operación | Identificador | Resultado final |
+|---|---|---|
+| Validación inicial | 0Afg700000L9NyzCAF | Failed, checkOnly=true; un error en P07_CatalogoParticipantes |
+| Segunda validación | 0Afg700000L9OlNCAV | Failed, checkOnly=true; mismo rechazo con True/False |
+| Validación corregida | 0Afg700000L9P7xCAF | Succeeded, success=true, checkOnly=true; 33 componentes, cero errores |
+| Despliegue | 0Afg700000L9Hf4CAF | Succeeded, success=true, checkOnly=false; 33 componentes, cero errores |
+| Recuperación de definiciones | 09Sg700000bVBwMEAW | Succeeded; 31 XML recuperados en una ruta temporal separada |
 
-| Área | Resultado actual |
-|---|---|
-| Destino e identidad | Pendientes; no se ha iniciado autenticación |
-| API y permisos técnicos | API 65.0 configurada; compatibilidad remota no comprobada |
-| Licencias e identidades funcionales | No consultadas; disponibilidad no acreditada |
-| Validación remota | No ejecutada; sin recibo ni errores de Salesforce observados |
-| Despliegue | No ejecutado; condicionado a destino confirmado y validación satisfactoria |
-| Jerarquía y acceso instalado | No aplicados ni inspeccionados remotamente |
-| Preparación local | 32 XML legibles, JSON y manifiesto revisados; exclusión de rutas privadas comprobada |
-| CLI | Ayuda instalada de autenticación y despliegue consultada; dry-run y NoTestRun disponibles para el procedimiento previsto |
-| Navegador | Puente temporal P07 operativo; pestaña independiente y formulario oficial abiertos mediante Playwright, sin consultar la organización anterior |
+Las respuestas iniciales Queued no se contabilizan como resultados finales. Las tres validaciones se ejecutaron con dry-run. Antes de desplegar se comprobó que no habían persistido componentes P07 y que las fuentes coincidían con las de la validación satisfactoria. NoTestRun: cero pruebas Apex; el paquete no contiene clases ni LWC.
 
-Se preparó [INSTALACION.md](INSTALACION.md) con autenticación sin destino predeterminado, verificación de identidad y capacidad, validación sin persistencia, despliegue condicionado, contraste de componentes y ajuste de jerarquía. Los comandos remotos de esa guía son procedimientos pendientes, no operaciones realizadas.
+### Corrección concreta
 
-No hay cambios de metadatos respecto de la referencia revisada. Las modificaciones de esta preparación son documentales. No se han creado usuarios, datos, asignaciones, grupos remotos ni organizaciones; no se han instalado herramientas.
+Salesforce rechazó los valores true/false de SharingCriteriaRule con el mensaje «Utilice "Verdadero" o "Falso"». El cambio a True/False también fue rechazado. Los literales Verdadero/Falso fueron aceptados con la cuenta técnica del destino. Solo se modificaron esos dos valores en ProyectoDedicacion__c.sharingRules-meta.xml; se mantuvieron Activo__c, equals, el filtro 1 OR 2, el grupo y el acceso Read. La regla incluye activos e inactivos y no amplía su alcance funcional.
 
-El siguiente paso imprescindible es disponer de la cuenta de la organización exclusiva y completar su autenticación local. Después se podrá verificar identidad, edición, API, permisos, licencias y ausencia de conflictos antes de validar y desplegar. La matriz funcional mantiene todos sus criterios pendientes.
+### Contraste instalado
+
+Se contrastaron tres objetos, doce campos, nueve validaciones activas, el resumen semanal, tres grupos, dos Permission Sets y dos reglas de compartición. Los 31 XML fuente conservan sus definiciones en la recuperación. Salesforce omite fullName dentro del XML recuperado de los tres grupos; el nombre de archivo y DeveloperName consultado por API coinciden. No hay diferencias inesperadas.
+
+Proyecto y semana mantienen Private interno y externo; detalle mantiene ControlledByParent. Grant Access Using Hierarchies se desactivó para proyecto y semana y se verificó reabriendo el formulario. De 375 controles comparados solo cambiaron esas dos casillas. Los tres grupos mantienen doesIncludeBosses=false y cero miembros; los dos permisos mantienen lectura, sin escritura ni privilegios amplios, y cero asignaciones. Los tres objetos P07 contienen cero registros.
+
+REST describe muestra al operador nueve campos personalizados. Su perfil no tiene concesiones FLS sobre los tres campos opcionales nuevos; no se ampliaron permisos para corregir el inventario. Los doce campos se verificaron mediante Metadata API y las seis concesiones FLS de los dos Permission Sets se comprobaron por API. Esta diferencia no se presenta como un defecto del paquete ni como prueba de acceso funcional.
+
+### Capacidad y conservación del destino compartido
+
+La cuenta técnica conserva permisos efectivos de API, modificación de metadatos, personalización y gestión de compartición. Las cuatro licencias Salesforce están ocupadas; hay seis Salesforce Platform libres y un perfil Platform disponible con API e informes. Existe capacidad de licencias prevista para tres identidades funcionales diferenciadas, pendientes de creación, configuración y pruebas. No se liberaron licencias ni se reutilizaron identidades funcionales de P06.
+
+La referencia previa y el contraste final conservan 432 registros: 11 Account, 198 contratos, 196 seguimientos, 20 ejecuciones y 7 incidencias. Permanecen las cuatro comparticiones manuales de contratos inventariadas al comenzar. No hay diferencias en los campos contrastados de los cuatro objetos de negocio, los identificadores y SystemModstamp de Account, las definiciones de los cuatro objetos personalizados, los Permission Sets P06, grupos, pertenencias, asignaciones, las asignaciones de perfil y rol y el estado activo de los usuarios ni el inventario Apex. Este alcance no constituye una auditoría de toda la configuración de la organización.
+
+### Evidencias y siguientes fases
+
+[Evidencia sanitizada de fase 1B](evidencias/FASE-1B.json): resultados finales, errores, huellas, contraste, jerarquía, capacidad y conservación. Los recibos completos, inventarios identificativos y diagnósticos del navegador permanecen en rutas privadas excluidas de Git. [INSTALACION.md](INSTALACION.md) describe el procedimiento reproducible y sus límites.
+
+La fase 1B técnica está completada. Todos los criterios funcionales AC-01 a AC-25 siguen pendientes: no se han probado guardado, atomicidad, concurrencia, agregación por DML ni seguridad efectiva con sesiones ordinarias. El siguiente desarrollo previsto es el servicio Apex y la protección de escrituras; la cuadrícula LWC corresponde a una fase posterior.
 
 ## Antecedente: fase 1A, modelo declarativo y acceso de lectura
 
@@ -42,7 +56,7 @@ Al comenzar esta fase, HEAD y la referencia local origin/main coincidían en fdd
 
 Existía una modificación local en .forceignore que añadía exclusiones para jsconfig.json y .eslintrc.json. Se conservó íntegra. El estado histórico sin commits corresponde únicamente a la creación inicial de la base; no describe el punto de partida de esta fase.
 
-## Comprobaciones locales
+## Comprobaciones locales de fase 1A
 
 | Comprobación | Resultado y límite |
 |---|---|
@@ -65,7 +79,7 @@ La inspección del convertidor instalado mostró que StandardWriter aplica Force
 
 Durante la preparación se corrigió también la pérdida de acentos causada por la codificación de una tubería de terminal. La revisión posterior confirma textos UTF-8 correctos; el paquete final se generó después de esa corrección.
 
-## Comprobaciones no ejecutadas
+## Comprobaciones no ejecutadas en fase 1A
 
 No hubo autenticación, consulta a organizaciones, compilación de Salesforce, despliegue, carga de registros ni sesiones funcionales. No hay Apex o LWC que justifique pruebas Apex o Jest en esta entrega. No se instalaron dependencias ni se modificaron herramientas globales.
 

@@ -4,7 +4,7 @@
 
 Se define un único ámbito explícito de coordinación para V1 mediante grupos públicos y una regla de propietario. La pertenencia al grupo de titulares determina el ámbito; no se infiere a partir del proyecto ni se crea un objeto de equipos.
 
-| Componente | Configuración local |
+| Componente | Configuración instalada |
 |---|---|
 | ProyectoDedicacion__c | Private interno y externo |
 | SemanaDedicacion__c | Private interno y externo |
@@ -31,19 +31,19 @@ La regla del catálogo incluye activos e inactivos de cualquier propietario para
 | Transferir cabeceras o restaurar registros | No habilitado | No habilitado |
 | Administrar catálogo | No concedido | No concedido |
 
-Se preparan P07_MiembroLectura y P07_CoordinacionLectura. Ambos conceden únicamente Read sobre los tres objetos, sin Create, Edit, Delete, View All Records, Modify All Records ni View All Fields. No añaden permisos de sistema, acceso Apex, perfiles, usuarios o asignaciones. Sus concesiones actuales son iguales; la diferencia funcional la aportan propiedad y grupos, y la separación permite evolucionar la escritura del miembro sin concederla a coordinación.
+Están instalados P07_MiembroLectura y P07_CoordinacionLectura, sin asignaciones. Ambos conceden únicamente Read sobre los tres objetos, sin Create, Edit, Delete, View All Records, Modify All Records ni View All Fields. No añaden permisos de sistema, acceso Apex, perfiles, usuarios o asignaciones. Sus concesiones actuales son iguales; la diferencia funcional la aportan propiedad y grupos, y la separación permite evolucionar la escritura del miembro sin concederla a coordinación.
 
 FLS explícita de lectura y sin edición: Proyecto.Activo__c, Semana.Usuario__c y Semana.TotalMinutos__c. No se serializan permisos de campos universalmente obligatorios ni de la relación master-detail; Salesforce no admite desplegar FLS de campos obligatorios desde API 30.0. Los campos estándar de nombre e identidad siguen las capacidades del objeto. [Referencia PermissionSet](https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-permissionset.html).
 
 Los Permission Sets son aditivos: los valores false no revocan permisos que procedan de un perfil u otra asignación. Antes de asignarlos se comprobará el acceso efectivo de identidades con perfil mínimo y sin otras concesiones amplias.
 
-## Jerarquía: requisito de instalación pendiente
+## Jerarquía: ajuste instalado y verificado
 
 Private no desactiva por sí solo el acceso ascendente de los propietarios. doesIncludeBosses=false limita la propagación de la compartición de cada grupo, pero no sustituye el ajuste del objeto.
 
-Antes de habilitar participantes en el destino se deberá desactivar y verificar Grant Access Using Hierarchies para SemanaDedicacion__c y ProyectoDedicacion__c desde Sharing Settings. El detalle heredará el resultado de la cabecera. La definición CustomObject consultada no expone un atributo equivalente que se haya incorporado a este paquete; no se inventa una propiedad XML ni se presenta la ausencia de acceso jerárquico como ya aplicada.
+En fase 1B se desactivó Grant Access Using Hierarchies para SemanaDedicacion__c y ProyectoDedicacion__c desde Sharing Settings. Se guardó y reabrió el formulario: ambas casillas permanecen desmarcadas. La comparación de 375 controles confirma que solo cambiaron las dos casillas previstas. Los accesos internos y externos de ambos objetos siguen en Private; el detalle conserva ControlledByParent.
 
-Este es un requisito concreto de la futura instalación, no una operación realizada en fase 1A. Hasta completarlo y comprobar el acceso efectivo no puede considerarse validada la exclusividad del ámbito. Se probará también una identidad situada por encima del titular en la jerarquía, sin pertenencia al ámbito. [Configuración oficial](https://help.salesforce.com/s/articleView?id=sf.admin_sharing.htm&language=en_US&type=5), [CustomObject](https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-customobject.html) y [Group](https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-group.html).
+Este ajuste se aplica en Setup y no está representado por un atributo inventado en los XML. El procedimiento reproducible figura en [INSTALACION.md](INSTALACION.md). Continúan pendientes las pruebas de acceso efectivo, incluida una identidad superior en jerarquía sin pertenencia al ámbito y la retirada de miembros de grupos. [Configuración oficial](https://help.salesforce.com/s/articleView?id=sf.admin_sharing.htm&language=en_US&type=5).
 
 ## Evolución de la escritura
 
@@ -53,10 +53,14 @@ Se mantendrán denegados el borrado de cabeceras, transferencias y restauracione
 
 ## Verificación futura
 
-Comprobar identidad y exclusividad de la organización, edición, API, licencias e identidades diferenciadas para miembro, coordinación y persona fuera del ámbito. No se dan por disponibles ni se liberan licencias de otros proyectos.
+El destino compartido, la edición, API y licencias se comprobaron en fase 1B. Hay seis licencias Platform libres; se prevén identidades diferenciadas para miembro, coordinación y persona fuera del ámbito. Su creación, permisos mínimos y sesiones siguen pendientes. No se liberan licencias ni se reutilizan identidades funcionales de P06.
 
 En el destino se contrastarán perfil, Permission Sets, pertenencias, jerarquía, comparticiones y sesiones ordinarias. Una cuenta administrativa o una consulta técnica de acceso no sustituye las pruebas por función. No se han creado ni asignado usuarios en esta fase.
 
 ## Estado de fase 1B
 
-Sin destino identificado: no se han inspeccionado ni modificado permisos, grupos, asignaciones o jerarquía en Salesforce. El procedimiento exacto de Setup y su lectura posterior están preparados en [INSTALACION.md](INSTALACION.md). Las definiciones locales de fase 1A permanecen sin cambios; no se consideran instaladas ni verificadas funcionalmente.
+Instalación y contraste técnicos completados. Los tres grupos existen con cero miembros y doesIncludeBosses=false. Los dos Permission Sets conceden Read sobre los tres objetos y tres permisos FLS de lectura cada uno, sin escritura ni privilegios amplios; no tienen asignaciones. No hay registros P07.
+
+El perfil técnico existente no tiene concesiones FLS sobre Activo__c, Usuario__c y TotalMinutos__c. Su REST describe muestra nueve campos personalizados; Metadata API confirma los doce. No se asignaron permisos P07 al operador para alterar ese resultado. La presencia de las definiciones y concesiones no sustituye una sesión funcional.
+
+La regla de catálogo conserva Activo verdadero O falso y acceso Read. En este destino, los criterios de casilla exigieron los literales Verdadero/Falso; true/false y True/False fueron rechazados. No cambió el alcance de la regla. Los resultados, conservación de P06 y límites constan en [STATUS.md](STATUS.md).

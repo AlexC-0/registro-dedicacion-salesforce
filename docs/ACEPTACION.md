@@ -1,6 +1,6 @@
 # Criterios de aceptación V1
 
-Todos los criterios funcionales siguen pendientes. Fase 1A aporta metadatos y comprobaciones locales; la preparación de fase 1B incorpora el procedimiento de instalación, todavía sin destino confirmado ni operaciones remotas. Ninguna de estas evidencias acredita comportamiento funcional en Salesforce.
+Todos los criterios funcionales siguen pendientes. Fase 1A aporta el esquema; fase 1B acredita validación, despliegue, contraste de definiciones y ajuste de jerarquía en el destino compartido con P06. No se crearon registros ni identidades funcionales y no se realizaron sesiones ordinarias. La aceptación de metadatos y el ajuste de configuración no acreditan comportamiento funcional.
 
 | ID | Escenario | Resultado exigido |
 |---|---|---|
@@ -30,7 +30,7 @@ Todos los criterios funcionales siguen pendientes. Fase 1A aporta metadatos y co
 | AC-24 | Jerarquía y ámbito | Una identidad superior en jerarquía sin pertenencia no obtiene acceso; comprobar también retirada del grupo y ausencia de permisos amplios |
 | AC-25 | Total semanal | Crear, modificar y eliminar líneas recalcula el resumen, incluyendo histórico inactivo; no confundir el total semanal con el máximo diario |
 
-Estos escenarios están previstos y no se han ejecutado en fase 1A.
+Estos escenarios están previstos y no se han ejecutado en las fases 1A y 1B.
 
 ## Evidencia requerida
 
