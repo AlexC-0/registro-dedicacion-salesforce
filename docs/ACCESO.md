@@ -19,7 +19,7 @@ Los tres grupos tienen doesIncludeBosses=false. No contienen usuarios, roles ni 
 
 La regla del catálogo incluye activos e inactivos de cualquier propietario para conservar su lectura histórica. La regla semanal no comparte entre miembros: solo con coordinación. Un miembro fuera del ámbito podrá pertenecer a P07_Participantes para consultar el catálogo sin que sus semanas entren en el ámbito.
 
-## Matriz provisional
+## Matriz de acceso
 
 | Recurso o acción | Miembro | Coordinación |
 |---|---|---|
@@ -27,7 +27,8 @@ La regla del catálogo incluye activos e inactivos de cualquier propietario para
 | Semana y líneas propias | Lectura por propiedad | Lectura de las propias si existen |
 | Semanas y líneas del ámbito | Sin concesión adicional | Lectura por la regla del ámbito |
 | Dedicación ajena fuera del ámbito | Sin concesión | Sin concesión |
-| Crear, editar o eliminar en los tres objetos | No concedido | No concedido |
+| DML directo sobre los tres objetos | No concedido | No concedido |
+| Guardar semana propia por el servicio | Con P07_GuardadoPropio y lectura efectiva | No concedido con P07_ServicioLectura |
 | Transferir cabeceras o restaurar registros | No habilitado | No habilitado |
 | Administrar catálogo | No concedido | No concedido |
 
@@ -45,17 +46,38 @@ En fase 1B se desactivó Grant Access Using Hierarchies para SemanaDedicacion__c
 
 Este ajuste se aplica en Setup y no está representado por un atributo inventado en los XML. El procedimiento reproducible figura en [INSTALACION.md](INSTALACION.md). Continúan pendientes las pruebas de acceso efectivo, incluida una identidad superior en jerarquía sin pertenencia al ámbito y la retirada de miembros de grupos. [Configuración oficial](https://help.salesforce.com/s/articleView?id=sf.admin_sharing.htm&language=en_US&type=5).
 
-## Evolución de la escritura
+## Servicio y escritura de fase 2A
 
-Estos permisos no son los finales de V1. El futuro servicio comprobará solicitante, objetos, campos y registros, y aplicará el protocolo de revisión. Solo se ampliarán las concesiones necesarias cuando las rutas habilitadas cuenten con protección de invariantes y pruebas negativas. Coordinación conservará lectura de dedicación ajena; no se añadirán privilegios administrativos ni acceso general de edición.
+Los permisos anteriores permanecen intactos y sin asignaciones. Se añaden dos Permission Sets, también sin asignaciones:
 
-Se mantendrán denegados el borrado de cabeceras, transferencias y restauraciones ordinarias. La operación de eliminar una celda deberá pasar por el guardado protegido y no habilitar una ruta directa que eluda revisión o atomicidad.
+| Permission Set | Clase y permisos personalizados | Combinación prevista |
+|---|---|---|
+| P07_GuardadoPropio | P07_DedicacionService; P07_Consultar y P07_GuardarPropia | P07_MiembroLectura y acceso al catálogo |
+| P07_ServicioLectura | P07_DedicacionService y P07_Consultar | P07_CoordinacionLectura y compartición pertinente |
+
+Ninguno añade CRUD, FLS de edición, permisos de sistema o acceso general a registros. La clase exige los permisos personalizados, Read de los tres objetos y lectura de todos los campos utilizados. Las consultas son USER_MODE y la clase with sharing. El servicio solo acepta la semana del solicitante; coordinación consultará el ámbito mediante las superficies de lectura previstas, todavía pendientes de implementación funcional.
+
+El DML interno SYSTEM_MODE es una capacidad acotada del servicio para materializar cambios propios calculados y autorizados. No se exige Create/Edit/Delete ordinario porque habilitaría rutas que no forman parte del contrato; tampoco se presenta ese DML como ejecución en modo usuario. Los triggers comprueban contexto privado, operación, identidad y valores previstos, incluidos los cambios legítimos del resumen. No existe bypass público. El protocolo se detalla en [ARQUITECTURA.md](ARQUITECTURA.md).
+
+Se deniegan el borrado de cabeceras y su cascada, transferencias, reparentado, restauraciones y escritura directa. Eliminar una celda requiere el guardado protegido. La coordinación de solo lectura no obtiene permiso de guardado por tener acceso a la clase.
+
+## Evidencia aislada de seguridad en fase 2A
+
+P07_DedicacionServiceTest crea seis usuarios de prueba con perfil Salesforce Platform, permisos y proyectos aislados; todo se revierte automáticamente al terminar cada prueba. No crea identidades funcionales persistentes ni modifica asignaciones existentes.
+
+Se comprueban por separado permisos efectivos de esquema, permiso de operación y acceso a registros. El miembro tiene Read pero carece de Create/Edit/Delete ordinarios y consigue guardar por el servicio. Otra identidad tiene P07_Consultar pero carece de CRUD; otra tiene Read de objetos sin FLS de Activo__c; una tercera tiene lectura sin permiso de operación. Las tres reciben ACCESO_DENEGADO. No se usa runAs por sí solo como prueba de CRUD/FLS.
+
+Dos miembros conservan semanas propias distintas y no pueden consultar la semana o detalles ajenos mediante USER_MODE. Un proyecto privado ajeno no puede usarse al guardar. Coordinación recibe en el test una compartición Manual Read de una semana, puede consultarla en USER_MODE y sigue sin poder guardar por el servicio. Esta compartición aislada no demuestra la regla de grupos en sesiones ordinarias.
+
+Se prueban intentos de DML directo en SYSTEM_MODE para confirmar que los triggers mantienen las defensas incluso sin la barrera de CRUD. Incluyen altas masivas, cambios de identidad, minutos o revisión, transferencia, reparentado, eliminación y restauración de un detalle. La restauración de cabecera está denegada en código, pero no se ha preparado una cabecera borrada eludiendo el bloqueo para ejecutar esa rama.
+
+Estas pruebas no acreditan sesiones comerciales, pertenencias reales, acceso por API autenticada como cada función, jerarquía ni retirada de grupos. Esos recorridos permanecen pendientes en [ACEPTACION.md](ACEPTACION.md).
 
 ## Verificación futura
 
 El destino compartido, la edición, API y licencias se comprobaron en fase 1B. Hay seis licencias Platform libres; se prevén identidades diferenciadas para miembro, coordinación y persona fuera del ámbito. Su creación, permisos mínimos y sesiones siguen pendientes. No se liberan licencias ni se reutilizan identidades funcionales de P06.
 
-En el destino se contrastarán perfil, Permission Sets, pertenencias, jerarquía, comparticiones y sesiones ordinarias. Una cuenta administrativa o una consulta técnica de acceso no sustituye las pruebas por función. No se han creado ni asignado usuarios en esta fase.
+En el destino se contrastarán perfil, Permission Sets, pertenencias, jerarquía, comparticiones y sesiones ordinarias. Una cuenta administrativa o una consulta técnica de acceso no sustituye las pruebas por función. No se han creado identidades funcionales persistentes ni asignado permisos fuera de los tests aislados.
 
 ## Estado de fase 1B
 

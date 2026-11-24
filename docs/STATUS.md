@@ -2,7 +2,67 @@
 
 Fecha: 24/11/2026.
 
-## Fase 1B: instalación técnica completada
+## Fase 2A: servicio y protección de guardado completados
+
+Base publicada: 816b8d13e83b08686e5ce747a17d17e5eff8fc51, rama main, remoto de registro-dedicacion-salesforce y árbol inicialmente limpio. Destino verificado mediante registro privado y consulta de Organization: Developer Edition compartida con P06, alias p06-renovaciones-dev, API 65.0. No se crearon organizaciones, autenticaciones ni identidades funcionales nuevas.
+
+### Implementación
+
+P07_DedicacionService consulta y guarda exclusivamente la semana propia. Valida el contrato estricto, identidad, permisos, fechas, precisión, proyectos activos, revisión y suma diaria del estado final; conserva las celdas omitidas y las cabeceras vacías. Los triggers de semana y detalle restringen las escrituras al contexto privado del servicio y protegen identidad, revisión, borrado, cascada, transferencia, reparentado y restauración. El resumen admite los cambios legítimos del guardado.
+
+Se añaden P07_Consultar y P07_GuardarPropia y los Permission Sets P07_ServicioLectura y P07_GuardadoPropio, sin CRUD de escritura ni asignaciones. El modelo, grupos, reglas y permisos anteriores no forman parte del manifiesto nuevo. Contrato y transacciones en [ARQUITECTURA.md](ARQUITECTURA.md); seguridad en [ACCESO.md](ACCESO.md).
+
+### Resultados remotos finales
+
+| Operación | Identificador | Resultado |
+|---|---|---|
+| Validación inicial | 0Afg700000L9cm2CAB | Failed, checkOnly=true; errores de compilación, cero pruebas ejecutadas |
+| Validación corregida | 0Afg700000L9SLzCAN | Succeeded, checkOnly=true; 8/8 componentes y 16/16 pruebas |
+| Validación final con comprobaciones adicionales | 0Afg700000L9ei5CAB | Succeeded, checkOnly=true; 8/8 componentes y 18/18 pruebas |
+| Despliegue | 0Afg700000L9H7ECAV | Succeeded, success=true, checkOnly=false; 8/8 componentes y 18/18 pruebas |
+| Recuperación | 09Sg700000bUiO7EAK | Succeeded; 12 archivos contrastados |
+
+Se corrigieron tres causas de compilación: la excepción interna debe terminar en Exception; System.JSON evita la colisión con un parámetro json; getDmlStatusCode devuelve texto y la clasificación recibe ese tipo. Los rechazos derivados de clases no compiladas en triggers y permisos desaparecieron con esas correcciones. Los recibos fallidos se conservan.
+
+Las dos comprobaciones añadidas tras la primera validación satisfactoria cubren reparentado, acceso ajeno USER_MODE, altas directas masivas, límite de veinte proyectos y editabilidad de fechas futuras. Se volvió a validar el paquete completo. Las trece huellas de fuentes y manifiesto coinciden antes y después del despliegue; no se modificó el paquete validado.
+
+RunSpecifiedTests ejecutó únicamente P07_DedicacionServiceTest. La respuesta inicial Queued no se contabilizó como resultado final. Cobertura real de validación final y despliegue:
+
+| Componente | Líneas cubiertas / totales | Cobertura |
+|---|---:|---:|
+| P07_DedicacionService | 276 / 282 | 97,87 % |
+| P07_SemanaGuard | 1 / 1 | 100 % |
+| P07_DedicacionGuard | 1 / 1 | 100 % |
+
+Sin fallos de pruebas ni avisos de cobertura. Las seis líneas no cubiertas corresponden al tratamiento de excepciones DML/query reales; la clasificación de sus códigos se comprueba separadamente y no acredita una colisión real. La cobertura de líneas no se presenta como cobertura completa de ramas o concurrencia.
+
+### Atomicidad y acceso comprobados
+
+La prueba de alta observa dos escrituras y un resumen de 60 minutos antes de provocar el fallo: después del rollback no quedan cabecera ni detalles. La prueba mixta observa cuatro etapas DML, 135 minutos y revisión 2; el rollback recupera las dos líneas originales, 90 minutos y revisión 1. Un guardado posterior con la revisión original funciona. El punto de fallo es privado, solo operativo en tests y no deshabilita las defensas.
+
+Las pruebas contrastan CRUD y FLS explícitamente, permisos personalizados y acceso a registros con USER_MODE bajo identidades aisladas. El miembro puede guardar por el servicio sin CRUD de escritura ordinario; faltas de CRUD, FLS o permiso de operación se rechazan. Coordinación con compartición Read aislada no puede guardar. Los intentos directos se prueban además en SYSTEM_MODE para acreditar las defensas de los triggers.
+
+### Contraste y conservación
+
+Los doce archivos recuperados coinciden con las fuentes por contenido: Salesforce omite el salto de línea final de los cuatro archivos de código y añade isLicensed=false en los dos permisos personalizados. Estas normalizaciones se registran expresamente; no se cambiaron las fuentes tras validar.
+
+P07 conserva cero proyectos, semanas y detalles persistentes. Los tres grupos siguen vacíos y con DoesIncludeBosses=false. Los cuatro Permission Sets P07 permanecen sin asignaciones. Siguen ocupadas las cuatro licencias Salesforce y libres las seis Salesforce Platform. Los seis usuarios de pruebas y sus asignaciones no persisten. No se modificó ni repitió el ajuste de jerarquía ya verificado en fase 1B.
+
+P06 conserva los 432 registros inventariados: 11 Account, 198 contratos, 196 seguimientos, 20 ejecuciones y 7 incidencias, además de las cuatro comparticiones manuales de contrato. No hay diferencias en los campos contrastados de los cuatro objetos de negocio; Id/SystemModstamp de Account; definiciones de objetos y Permission Sets P06; grupos, pertenencias y asignaciones P06; perfiles, roles y estado activo de usuarios; inventario Apex P06. No se ejecutaron pruebas P06 ni sus demostraciones. Es una comprobación acotada, no una auditoría de toda la organización.
+
+### Revisión local y editorial
+
+Revisados los 24 archivos afectados: código, metadatos, manifiesto, evidencia JSON e instrucciones y documentación. XML y JSON legibles, enlaces locales existentes, UTF-8 correcto y git diff --check sin incidencias. Revisión de atribuciones, coautorías y patrones de secretos sin hallazgos en ese alcance; no es una auditoría exhaustiva del equipo. Las fuentes del paquete mantienen las huellas validadas y desplegadas.
+
+### Evidencias y límites
+
+[Evidencia sanitizada de fase 2A](evidencias/FASE-2A.json): trabajos finales, errores anteriores, pruebas, cobertura, huellas, recuperación y conservación. Recibos completos y datos identificativos permanecen en rutas privadas excluidas de Git. Las evidencias de fases anteriores se conservan.
+
+Fase 2A completada dentro del alcance de servicio y pruebas aisladas. No se ha probado concurrencia real, carrera de creación, espera de bloqueo, sesiones ordinarias, retirada de grupos ni cambios de zona horaria o medianoche. La restauración real de detalle se rechaza; la restauración de cabecera está denegada en código pero no se fabricó una cabecera borrada eludiendo su defensa.
+
+La [matriz de aceptación](ACEPTACION.md) distingue esta evidencia de las comprobaciones pendientes. V1 no está cerrada. El siguiente paso es la cuadrícula LWC y sus pruebas de borrador, conversión local, errores, conflicto y resultado desconocido, manteniendo el contrato implementado. Informe y sesiones por función requieren su fase correspondiente.
+
+## Antecedente: fase 1B, instalación técnica completada
 
 Destino verificado: Developer Edition compartida con P06, alias operativo p06-renovaciones-dev y API 65.0. Se reutilizó la autenticación técnica existente, sin cambiar el destino predeterminado ni crear usuarios. Los identificadores de organización y cuenta permanecen en el registro privado. Las escrituras se limitaron al paquete P07 y a la jerarquía de sus objetos de proyecto y semana.
 

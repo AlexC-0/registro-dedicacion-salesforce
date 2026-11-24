@@ -1,55 +1,120 @@
 # Arquitectura y guardado
 
-## Componentes previstos
+## Componentes implementados
 
-- LWC para selección de semana, cuadrícula, borrador y presentación de errores.
-- Servicio Apex de lectura y guardado, con autorización y validación en servidor.
-- Modelo declarativo con claves únicas, relaciones y restricciones locales.
-- Protección de invariantes en las rutas de escritura habilitadas.
-- Consulta de coordinación e informe operativo respetando acceso a registros y campos.
+El modelo declarativo instalado en fase 1B se conserva. La fase 2A añade P07_DedicacionService, los triggers P07_SemanaGuard y P07_DedicacionGuard, dos permisos personalizados, dos Permission Sets sin asignaciones y P07_DedicacionServiceTest. El manifiesto [fase-2a.xml](../manifest/fase-2a.xml) contiene únicamente esos ocho miembros; no reinstala objetos, reglas, grupos ni los permisos anteriores.
 
-Fase 1A incorpora el modelo declarativo y la base de acceso de solo lectura. El servicio Apex, la protección integral de escrituras, el LWC y el informe aún no están implementados. No se añaden Flow, Batch Apex, programación ni servicios externos.
+Quedan pendientes la cuadrícula LWC, su borrador y pruebas Jest, el informe operativo y las sesiones funcionales. No hay Flow, Batch, programación, integraciones ni dependencias nuevas.
 
-## Contrato de escritura
+## Contrato del servicio
 
-El cliente envía la semana seleccionada, revisión esperada y cambios explícitos de celdas. No envía una revisión nueva ni decide usuario, propietario o claves persistidas. Una celda omitida se conserva; una celda modificada a cero o vacío solicita eliminación.
+Dos métodos estáticos @AuraEnabled devuelven texto JSON. Se invocarán de forma imperativa; leerSemana no es cacheable porque obtiene un bloqueo transaccional. Se evita usar clases internas de Apex como parámetros o respuestas del futuro LWC. [Tipos admitidos por LWC](https://developer.salesforce.com/docs/platform/lwc/guide/apex-expose-method.html).
 
-El servidor debe realizar, en una única transacción:
+- leerSemana(String inicioSemana): lunes ISO AAAA-MM-DD. Identifica siempre al usuario conectado.
+- guardarSemana(String peticionJson): objeto JSON con exactamente semana, revisionEsperada y cambios. Cada cambio contiene exactamente proyectoId, fecha y horas. No se admiten usuario, propietario, clave persistida, revisión nueva ni otros campos.
 
-1. Identificar al solicitante y comprobar permisos y semana.
-2. Localizar la cabecera; resolver de forma controlada una creación simultánea apoyándose en su clave única.
-3. Bloquear la cabecera existente y comparar la revisión esperada con la persistida.
-4. Releer datos y proyectos necesarios para construir el estado final de la semana.
-5. Validar propiedad, acceso, proyecto activo, fechas, incrementos, identidades y suma diaria.
-6. Aplicar altas, cambios y bajas con semántica de todo o nada; incrementar la revisión una vez si hay un cambio persistido.
-7. Devolver el estado canónico confirmado y la revisión resultante.
+Ejemplo ilustrativo; PROYECTO_ID debe sustituirse por un identificador accesible del catálogo:
 
-Un bloqueo de fila no protege por sí solo una cabecera todavía inexistente. La creación simultánea necesita una respuesta de conflicto controlada sin perder el borrador ni duplicar semanas.
+~~~json
+{
+  "semana": "2026-11-16",
+  "revisionEsperada": "0",
+  "cambios": [
+    { "proyectoId": "PROYECTO_ID", "fecha": "2026-11-16", "horas": "1.25" }
+  ]
+}
+~~~
 
-No se realizarán reintentos automáticos que apliquen cambios sobre otra revisión. Un guardado sin cambios no necesita incrementar la revisión, pero tampoco elude autorización ni la comprobación de revisión.
+Las horas son texto decimal con punto, sin signo, exponente, coma ni ceros iniciales; hasta dos decimales y múltiplos exactos de 0.25, entre 0 y 24. Se rechaza la precisión inválida antes de DML y sin redondear. Un número JSON, por ejemplo 1.25 sin comillas, se rechaza. La interfaz futura deberá convertir la presentación local al contrato; el servidor sigue validando la entrada original.
 
-## Rutas alternativas
+Una celda omitida se conserva. Cero, null o texto vacío/blanco solicitan eliminar una celda editable. Una petición no puede repetir proyecto y fecha, aunque utilice distintas representaciones de un mismo Id. Cada guardado admite 140 cambios y 20 proyectos distintos como máximo; son límites de petición, no del total de proyectos históricos de una semana. El texto completo no supera 60.000 caracteres.
 
-Validar solo el método llamado por el LWC no satisface el alcance. Al implementar habrá que inventariar las rutas habilitadas, impedir las que eludan el protocolo de guardado y proteger las invariantes persistentes también frente a DML por API u otras superficies accesibles.
+La revisión es texto decimal entero no negativo, sin ceros iniciales, de hasta 18 dígitos. Así no depende de la precisión numérica de JavaScript. Una semana inexistente requiere revisión esperada "0". Una petición sin cambios efectivos comprueba permisos y revisión, pero no crea cabecera ni incrementa revisión.
 
-La revisión se debe actualizar ante toda modificación autorizada de dedicación. No se permitirá su edición arbitraria. Las operaciones de borrar, restaurar, reparentar o transferir deben evaluarse expresamente; una ruta no necesaria puede quedar denegada en V1.
+Respuesta satisfactoria:
 
-La activación de proyectos y su edición concurrente con un guardado necesitan un orden de bloqueos consistente. No se afirmará cobertura de concurrencia a partir de ejecuciones consecutivas.
+~~~json
+{
+  "ok": true,
+  "estado": {
+    "semana": "2026-11-16",
+    "hoy": "2026-11-24",
+    "revision": "1",
+    "existe": true,
+    "puedeGuardar": true,
+    "proyectos": [],
+    "entradas": [],
+    "dias": [],
+    "totalMinutos": 75
+  },
+  "errores": []
+}
+~~~
 
-## Borrador y errores
+Las listas vacías del ejemplo abrevian la estructura: proyectos contiene id, nombre, codigo, activo y editable; entradas contiene proyectoId, fecha, minutos y editable; dias devuelve siete elementos con fecha, minutos y editable. La edición de una celda requiere permiso de guardado, proyecto activo y fecha no futura. Una semana sin cabecera devuelve existe=false, revision="0", entradas vacías y totales cero, sin crear registros.
 
-El LWC conserva por separado valores confirmados y cambios pendientes. Una respuesta fallida no sustituye el borrador ni muestra el guardado como correcto. Los errores distinguen validación, acceso, revisión desactualizada y fallo técnico sin revelar información de registros ajenos.
+El catálogo incluye los proyectos activos accesibles y los inactivos referenciados por esa semana. Si falta acceso a un proyecto histórico necesario, se rechaza la lectura completa sin revelar sus datos. El límite defensivo es de 1.000 proyectos devueltos y 700 líneas por semana; al superarlo se devuelve error, nunca un estado truncado. El máximo de líneas no vacías permitido por siete días de 1.440 minutos y cuartos de hora es 672.
 
-Al cambiar de semana con modificaciones pendientes debe ofrecerse conservar la selección actual o descartar explícitamente el borrador. Un conflicto permite revisar el estado vigente antes de volver a aplicar cambios; no fusiona datos silenciosamente.
+Respuesta de error:
 
-## Lectura coherente y resultado desconocido
+~~~json
+{
+  "ok": false,
+  "estado": null,
+  "errores": [{
+    "codigo": "REVISION_DESACTUALIZADA",
+    "mensaje": "La semana ha cambiado. Recarga antes de guardar.",
+    "proyectoId": null,
+    "fecha": null
+  }]
+}
+~~~
 
-La futura lectura devolverá revisión y datos de una misma instantánea lógica. Consultar la revisión antes de leer las líneas sin protección podría mezclar versiones; se deberá garantizar coherencia mediante una estrategia transaccional y comprobarla con cambios concurrentes.
+Se devuelve el primer error detectado. Los códigos son VALIDACION, ACCESO_DENEGADO, REVISION_DESACTUALIZADA, CONFLICTO_CREACION, CONTENCION y FALLO_TECNICO. Proyecto y fecha se asocian cuando se conocen; el exceso agregado se asocia al día. Los errores de plataforma no exponen mensajes internos, consultas, trazas ni datos ajenos. Fallos de límites no capturables abortan la transacción por plataforma; no se promete un sobre JSON para toda interrupción posible.
 
-Una pérdida de comunicación tras enviar el guardado no demuestra rollback: el servidor podría haber confirmado. El cliente conservará el borrador y marcará el resultado como desconocido hasta reconciliarlo mediante una lectura coherente. No reenviará automáticamente cambios sobre una revisión nueva.
+## Autorización y escritura acotada
 
-La repetición de una petición no debe crear duplicados ni incrementar otra vez la revisión por aplicar de nuevo la misma modificación. Una revisión anterior puede producir un conflicto controlado; no se promete recuperar una respuesta idéntica sin un mecanismo implementado para ello.
+La clase declara with sharing. Se exige P07_Consultar y, al guardar, P07_GuardarPropia. Se comprueba Read del objeto y FLS de todos los campos consultados; las consultas usan explícitamente AccessLevel.USER_MODE. La cabecera se selecciona por clave canónica, Usuario__c y OwnerId del solicitante, incluso si este puede leer semanas compartidas.
 
-## Pruebas previstas
+Los Permission Sets existentes conservan solo lectura. Los nuevos permisos habilitan la clase y las operaciones, sin Create, Edit, Delete ni permisos de edición de campos. El DML interno utiliza SYSTEM_MODE deliberadamente para escribir el estado calculado de la semana propia. No recibe sObjects arbitrarios ni acepta identidades del cliente. Esta capacidad queda limitada por la autorización previa, los registros leídos en modo usuario y el contexto privado de los triggers. Se documentan las concesiones y pruebas negativas en [ACCESO.md](ACCESO.md).
 
-Pruebas Apex para invariantes y transacciones; Jest para borrador, conversiones, errores y conflictos; recorridos funcionales con identidades ordinarias y prueba negativa fuera del ámbito. La compilación de Salesforce, las pruebas unitarias y la evidencia funcional se registrarán por separado.
+La administración del catálogo permanece fuera del servicio. No se incorporan funciones para crear o editar proyectos.
+
+## Transacción y concurrencia
+
+1. Capturar Date.today() del solicitante una vez, validar forma, lunes, fechas y precisión.
+2. Crear savepoint. Buscar y bloquear la cabecera propia existente con FOR UPDATE; releerla bajo ese bloqueo y comparar revisión. La lectura de semana usa el mismo bloqueo.
+3. Leer todas sus líneas. Bloquear los proyectos modificados uno a uno, ordenados por Id; FOR UPDATE no admite ORDER BY. El límite de veinte proyectos mantiene acotadas las consultas. La cabecera existente se bloquea antes de los proyectos.
+4. Construir el estado final, incluyendo celdas omitidas e histórico inactivo. Rechazar todo cambio dirigido a un proyecto inactivo, también cero o un valor idéntico. Verificar fechas e identidades y sumar hasta 1.440 minutos por día.
+5. Si existen cambios efectivos y falta cabecera, crear la propia con identidad canónica y revisión cero. Aplicar bajas, modificaciones y altas; incrementar una sola vez la revisión. Releer y comprobar que el resumen almacenado coincide con las líneas antes de responder.
+6. Ante un error capturable, rollback hasta el savepoint. Limpiar el contexto privado y liberar el savepoint al salir. No hay reintentos automáticos ni éxitos parciales.
+
+La clave única impide dos cabeceras para usuario/lunes y dos líneas para semana/proyecto/fecha. El bloqueo no protege una fila inexistente: una carrera de creación se resuelve por esa unicidad y devuelve CONFLICTO_CREACION o CONTENCION si la plataforma informa tales condiciones, sin reintento ciego. La clasificación se prueba con códigos simulados; no se ha provocado una carrera real.
+
+La revisión detecta peticiones basadas en una versión anterior. Repetir una petición confirmada con su revisión original produce conflicto sin otra modificación. El bloqueo serializa el trabajo sobre la cabecera existente e impide mezclar revisión, líneas y resumen entre guardados que respetan este protocolo. Una lectura que no encuentra cabecera puede devolver el estado vacío anterior a una creación concurrente.
+
+Los proyectos modificados permanecen bloqueados para que una desactivación no se interponga entre su comprobación y el DML. La lectura del catálogo es una consulta separada; no se promete una instantánea global de toda la organización. Automatizaciones futuras que escriban estos objetos deberán revisar el orden de bloqueos. No se han ejecutado transacciones paralelas, una carrera de creación, una espera real de bloqueo ni cambios simultáneos del catálogo.
+
+## Protección de rutas alternativas
+
+Los triggers solo admiten las operaciones y valores previstos por el contexto privado del servicio. No existe un flag público ni un permiso de bypass. Sus métodos públicos de entrada comprueban Trigger.isExecuting y no habilitan el contexto.
+
+- Cabecera: alta propia canónica; incremento de revisión previsto; actualización de resumen causada por los detalles del guardado. La identidad y el nombre permanecen inmutables.
+- Detalles: altas, cambios de minutos y bajas exactamente previstas. Se conservan semana, proyecto, fecha, clave y nombre.
+- DML directo de alta, edición o eliminación: denegado, también desde SYSTEM_MODE.
+- Transferencia, reparentado, borrado de cabecera y su cascada: denegados. La relación conserva además su prohibición de reparentado.
+- Restauraciones: denegadas mediante after undelete. Se prueba la restauración real de un detalle eliminado por el servicio; no se fabrica una cabecera borrada eludiendo la defensa para ensayar su restauración.
+
+No hay ruta legítima para cambiar identidades o borrar cabeceras. Eliminar la última celda conserva la cabecera y su revisión. Los triggers permiten los cambios de resumen legítimos sin habilitar edición arbitraria de revisión o identidad.
+
+## Prueba de rollback
+
+Un punto privado @TestVisible solo provoca fallos cuando Test.isRunningTest() es verdadero; no desactiva controles. Observa el resumen y la revisión después de DML y lanza un error dentro del savepoint.
+
+La prueba de alta observa 60 minutos después de crear cabecera y detalle, provoca el fallo y comprueba que ambos desaparecen. La prueba mixta parte de 90 minutos y revisión 1; elimina, modifica y crea líneas, observa 135 minutos y revisión 2, provoca el fallo y comprueba las líneas originales, 90 minutos y revisión 1. Un guardado posterior con revisión 1 vuelve a funcionar. El resultado remoto y la cobertura constan en [STATUS.md](STATUS.md).
+
+## Borrador y resultado desconocido pendientes
+
+El futuro LWC conservará por separado valores confirmados y cambios pendientes. Error o conflicto no sustituirán el borrador ni mostrarán éxito. Cambiar de semana exigirá resolver los cambios pendientes. Una pérdida de comunicación puede ocurrir después de confirmar en servidor: el cliente deberá mostrar incertidumbre y reconciliar mediante lectura, sin reenviar sobre una revisión nueva automáticamente.
+
+No se ha implementado ni probado todavía esa interfaz, la pérdida de respuesta, la accesibilidad o el informe. Las pruebas Apex aisladas y secuenciales no sustituyen sesiones ordinarias ni concurrencia real. La relación con AC-01 a AC-25 figura en [ACEPTACION.md](ACEPTACION.md).

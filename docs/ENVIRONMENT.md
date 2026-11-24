@@ -58,3 +58,9 @@ La preparación inicial se realizó sin destino P07 identificado y contemplaba u
 La ayuda instalada confirmó dry-run, NoTestRun, destino y API explícitos. project deploy report no admite --api-version: se fijó 65.0 al iniciar cada trabajo y se consultó su identificador exacto con --target-org. Las respuestas finales y los intentos fallidos se conservan separados.
 
 Los detalles operativos, auxiliares y diagnósticos de la conexión temporal del navegador permanecen en notas privadas excluidas de Git. No son dependencias de la aplicación ni requisitos de instalación. No se instalaron herramientas ni se cambió su configuración global.
+
+## Comprobación de fase 2A
+
+El 24/11/2026 se volvió a contrastar la identidad del destino compartido y OrganizationType=Developer Edition antes de validar y desplegar, con API 65.0 explícita. Se utilizó la autenticación técnica existente y la CLI instalada, sin cambios globales ni dependencias nuevas. El paquete Apex de ocho miembros fue aceptado con RunSpecifiedTests y 18 pruebas P07 satisfactorias.
+
+El contraste final mantiene Salesforce 4/4 usadas y Salesforce Platform 0/6 usadas; cuatro Permission Sets P07 sin asignaciones y tres grupos sin miembros. Los seis usuarios Platform, permisos y datos creados por las pruebas son aislados y no persisten. No se habilitaron identidades funcionales ni sesiones nuevas. La comprobación técnica no sustituye el futuro recorrido por función. Véanse [STATUS.md](STATUS.md) y la [evidencia de fase 2A](evidencias/FASE-2A.json).

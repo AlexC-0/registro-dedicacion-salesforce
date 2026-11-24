@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses><apexClass>P07_DedicacionService</apexClass><enabled>true</enabled></classAccesses>
+    <customPermissions><enabled>true</enabled><name>P07_Consultar</name></customPermissions>
+    <customPermissions><enabled>true</enabled><name>P07_GuardarPropia</name></customPermissions>
+    <description>Combinar con el permiso de lectura de la función. No habilita escritura directa sobre objetos o campos.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>P07 Guardado semanal propio</label>
+</PermissionSet>

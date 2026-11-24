@@ -1,4 +1,4 @@
-# Validación e instalación del esquema
+# Validación e instalación
 
 ## Estado del procedimiento
 
@@ -98,4 +98,38 @@ Los grupos permanecen vacíos y los permisos sin asignaciones. El ajuste de jera
 
 ## Continuidad
 
-Al terminar, documentar por separado validación, despliegue, contraste, jerarquía y capacidad de identidades. Mantener pendientes los criterios funcionales hasta disponer de sus pruebas. El siguiente desarrollo previsto es el servicio Apex de lectura y guardado con protección de todas las rutas de escritura.
+Al terminar, documentar por separado validación, despliegue, contraste, jerarquía y capacidad de identidades. Mantener pendientes los criterios funcionales hasta disponer de sus pruebas. El servicio y las protecciones se incorporaron posteriormente mediante el procedimiento de fase 2A siguiente.
+
+## Actualización de fase 2A ejecutada
+
+La base 816b8d13e83b08686e5ce747a17d17e5eff8fc51 ya tenía instalado el esquema. El manifiesto [fase-2a.xml](../manifest/fase-2a.xml) selecciona ocho miembros: servicio, clase de pruebas, dos triggers, dos permisos personalizados y dos Permission Sets de acceso a las operaciones. No reinstala el esquema, cambia jerarquía o asigna permisos.
+
+Se verificó la identidad contra el registro privado y se comprobó que ninguno de los ocho nombres nuevos existía en el destino. Ante componentes existentes en una instalación posterior, recuperar y comprender sus diferencias antes de sobrescribirlos. Los grupos y permisos de lectura de fase 1B son prerrequisitos; las pruebas aisladas requieren un perfil Salesforce Platform mínimo, sin acceso previo a los objetos personalizados. No se amplían privilegios para hacer pasar las pruebas.
+
+Validación ejecutada con pruebas específicas:
+
+~~~powershell
+sf project deploy start --manifest manifest/fase-2a.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level RunSpecifiedTests --tests P07_DedicacionServiceTest --dry-run --async --json
+sf project deploy report --job-id ID_VALIDACION --target-org p06-renovaciones-dev --json
+~~~
+
+Exigir Succeeded, success=true, checkOnly=true, cero errores y resultados de pruebas y cobertura aceptados. Conservar recibos fallidos; cualquier corrección de fuentes exige repetir la validación. Después de contrastar otra vez identidad y huellas del paquete:
+
+~~~powershell
+sf project deploy start --manifest manifest/fase-2a.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level RunSpecifiedTests --tests P07_DedicacionServiceTest --async --json
+sf project deploy report --job-id ID_DESPLIEGUE --target-org p06-renovaciones-dev --json
+~~~
+
+El resultado final debe tener checkOnly=false y pruebas satisfactorias. No se utiliza NoTestRun ni se ejecuta la batería P06. La respuesta inicial Queued no completa ninguna operación. La validación final 0Afg700000L9ei5CAB y el despliegue 0Afg700000L9H7ECAV finalizaron correctamente con 18 pruebas; el servicio cubre 276/282 líneas y ambos triggers 1/1.
+
+La recuperación se realizó en una carpeta temporal separada:
+
+~~~powershell
+sf project retrieve start --manifest manifest/fase-2a.xml --target-org p06-renovaciones-dev --api-version 65.0 --output-dir tmp/fase-2a-retrieve-20261124 --wait 1 --json
+~~~
+
+En una ejecución posterior utilizar otra carpeta nueva. Comparar código y XML sin reemplazar las fuentes. Se contrastaron doce archivos: Salesforce omite el salto de línea final del código y explicita isLicensed=false en CustomPermission. No aparecieron diferencias funcionales. Las trece huellas del manifiesto y fuentes coinciden con la validación final.
+
+El contraste posterior confirmó cero registros P07, grupos sin miembros, cuatro Permission Sets sin asignaciones y licencias sin cambios. Los usuarios y datos de SeeAllData=false no persistieron. El inventario acotado P06 no presenta diferencias. Detalles, fallos y límites en [STATUS.md](STATUS.md) y [FASE-2A.json](evidencias/FASE-2A.json).
+
+Esta actualización acredita servicio y pruebas aisladas, no habilitación de funciones ordinarias. La asignación de usuarios, catálogo funcional, sesiones, LWC e informe corresponde a fases posteriores; no cargar dedicaciones mediante claves manuales.

@@ -4,11 +4,17 @@
 
 Proyecto independiente de demostración con datos ficticios. Consultar README.md, docs/PROJECT_BRIEF.md, docs/STATUS.md y docs/ENVIRONMENT.md antes de trabajar; consultar docs/MODELO_DATOS.md y docs/ACCESO.md antes de modificar modelo o permisos.
 
-Conservar cambios existentes y comprobar raíz, rama, remotos y estado Git antes de editar. No utilizar repositorios, datos ni configuraciones de otros proyectos como material de implementación. El destino de fase 1B es la Developer Edition compartida con P06; las escrituras quedan limitadas a componentes P07 y al ajuste de jerarquía de sus dos objetos. Conservar los componentes, registros, permisos y asignaciones de P06.
+Conservar cambios existentes y comprobar raíz, rama, remotos y estado Git antes de editar. No utilizar repositorios, datos ni configuraciones de otros proyectos como material de implementación. El destino de fase 2A es la Developer Edition compartida con P06, alias p06-renovaciones-dev. Se autorizan el servicio Apex, los controles de persistencia, permisos sin asignaciones persistentes y pruebas aisladas de P07; no reinstalar el esquema de fase 1B. Conservar los componentes, registros, permisos y asignaciones de P06.
 
-## Estado de fase 1B
+## Antecedente: estado de fase 1B
 
 Instalación técnica completada en el destino compartido: esquema contrastado, jerarquía de proyecto y semana desactivada y verificada, grupos vacíos, permisos sin asignar y cero registros P07. Conservar los resultados y errores de docs/evidencias/FASE-1B.json. Los criterios funcionales, el servicio Apex y la cuadrícula LWC siguen pendientes; no repetir la instalación ni iniciar nuevas fases por inercia.
+
+## Resultado y alcance de fase 2A
+
+Implementar lectura y guardado propios con autorización, claves canónicas, revisión, bloqueo y rollback. Proteger DML directo y operaciones alternativas mediante controles de dominio. Validar y desplegar un manifiesto P07 acotado con pruebas Apex SeeAllData=false y destino explícito. No ejecutar la batería P06 ni crear usuarios o datos funcionales persistentes. Mantener pendientes interfaz LWC, informe, sesiones ordinarias y concurrencia real no demostrada.
+
+Fase 2A completada: validación 0Afg700000L9ei5CAB y despliegue 0Afg700000L9H7ECAV satisfactorios; 18 pruebas aisladas, servicio 276/282 líneas y triggers 100 %. Doce archivos recuperados y contrastados. Conservar los errores previos y la evidencia de docs/evidencias/FASE-2A.json. Grupos vacíos, cuatro permisos sin asignar y cero registros P07; P06 sin diferencias en el inventario acotado. No iniciar LWC, sesiones ordinarias o nuevos ensayos por inercia.
 
 ## Desarrollo
 

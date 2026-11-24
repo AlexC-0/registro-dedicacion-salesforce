@@ -1,6 +1,6 @@
 # Criterios de aceptación V1
 
-Todos los criterios funcionales siguen pendientes. Fase 1A aporta el esquema; fase 1B acredita validación, despliegue, contraste de definiciones y ajuste de jerarquía en el destino compartido con P06. No se crearon registros ni identidades funcionales y no se realizaron sesiones ordinarias. La aceptación de metadatos y el ajuste de configuración no acreditan comportamiento funcional.
+Fase 1A aporta el esquema y fase 1B acredita su instalación y el ajuste de jerarquía. La fase 2A añade evidencia Apex aislada del servicio y sus defensas. Los criterios completos de V1 siguen sujetos a los recorridos de interfaz, sesiones ordinarias y concurrencia que correspondan; no se equipara una prueba de servidor con aceptación funcional completa.
 
 | ID | Escenario | Resultado exigido |
 |---|---|---|
@@ -30,10 +30,33 @@ Todos los criterios funcionales siguen pendientes. Fase 1A aporta el esquema; fa
 | AC-24 | Jerarquía y ámbito | Una identidad superior en jerarquía sin pertenencia no obtiene acceso; comprobar también retirada del grupo y ausencia de permisos amplios |
 | AC-25 | Total semanal | Crear, modificar y eliminar líneas recalcula el resumen, incluyendo histórico inactivo; no confundir el total semanal con el máximo diario |
 
-Estos escenarios están previstos y no se han ejecutado en las fases 1A y 1B.
+Estos escenarios no se ejecutaron en las fases 1A y 1B. La evidencia nueva de fase 2A se delimita a continuación.
 
 ## Evidencia requerida
 
 Registrar fecha, versión de fuentes, entorno, identidad funcional, procedimiento, resultado y limitaciones. Conservar resultados fallidos relevantes y evitar secretos o datos reales.
 
 Separar inspección estática, compilación, pruebas Apex, pruebas Jest y sesiones funcionales. Una repetición secuencial no demuestra concurrencia y una sesión administrativa no demuestra los permisos de miembro o coordinación.
+
+## Cobertura de fase 2A
+
+Los resultados finales, cobertura de código y huellas se conservan en [STATUS.md](STATUS.md) y [FASE-2A.json](evidencias/FASE-2A.json). Pruebas SeeAllData=false de P07_DedicacionServiceTest; datos y usuarios aislados, sin sesiones funcionales ni transacciones paralelas.
+
+| Criterios | Evidencia de servidor | Pendiente o límite |
+|---|---|---|
+| AC-01, AC-04 | fechasYDuplicados y limiteProyectosYLecturaFutura: lunes, fuera de semana, cruce de año, futuro y editabilidad | Presentación local, interfaz, medianoche y otras zonas horarias |
+| AC-02 | rechazoPrecisionAntesDml y cicloCanonicoYNoop: 0.25, precisión, formato y conversión sin redondeo | Conversión de entrada localizada en LWC |
+| AC-03, AC-06 | limiteAgregadoYOmitidas e historicoInactivo: 1.440, exceso con celdas omitidas, histórico visible y no modificable | Interfaz y desactivación simultánea real |
+| AC-05, AC-17 | cicloCanonicoYNoop: cero/vacío/null, omisión, cabecera vacía y continuidad | Presentación y borrador |
+| AC-07, AC-08 | cicloCanonicoYNoop, fechasYDuplicados, aislamientoPorIdentidad: claves canónicas y duplicados de petición | Carrera real de creación; clasificación de errores de colisión simulada |
+| AC-09 | rollbackAltaTrasDml y rollbackMixtoIncluyeRevision: escrituras observadas antes del fallo y restauración exacta | Sin concurrencia real ni pérdida de comunicación |
+| AC-10, AC-21 | revisionYRepeticion: revisión antigua y repetición rechazadas sin cambios adicionales | Conflicto entre pantallas reales |
+| AC-12, AC-14 | aislamientoPorIdentidad, reparentadoYAccesoAjeno, contratoEstricto: propiedad derivada, sin acceso ajeno USER_MODE ni suplantación | API con cada sesión, LWC e informe |
+| AC-13 | coordinacionSoloLectura: compartición aislada Read, consulta y denegación de guardado | Regla real de ámbito, grupos y sesiones |
+| AC-15, AC-18 | defensaCabeceraDirecta, defensaDetalleDirectoYRestauracion, reparentadoYAccesoAjeno y seguridadCrudFlsPermiso | Restauración de cabecera solo revisada en código; no se elude su bloqueo de borrado para fabricar un fixture |
+| AC-23 | Lectura bajo bloqueo implementada; cicloCanonicoYNoop contrasta revisión, líneas y total secuenciales | Lectura y escritura realmente concurrentes |
+| AC-25 | cicloCanonicoYNoop, limiteAgregadoYOmitidas, historicoInactivo y rollbackMixtoIncluyeRevision | Informe e interfaz; el máximo es diario, no semanal |
+| AC-11, AC-16, AC-19, AC-20, AC-22 | Sin ejecución en fase 2A | Borrador, informe, cambio de semana, accesibilidad y resultado desconocido |
+| AC-24 | Se conserva el ajuste instalado de fase 1B, sin volver a modificarlo | Jerarquía, retirada de miembros y sesiones ordinarias |
+
+Las aserciones de CRUD, FLS y permisos personalizados son explícitas y se complementan con USER_MODE; runAs no se presenta como comprobación suficiente por sí solo. Ningún criterio de concurrencia real se cierra con llamadas consecutivas. Los límites de lectura y el protocolo quedan documentados para la fase LWC.

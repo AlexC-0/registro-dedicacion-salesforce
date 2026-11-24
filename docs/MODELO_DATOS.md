@@ -1,6 +1,6 @@
 # Modelo declarativo
 
-Fase 1A define tres objetos, doce campos personalizados y nueve reglas de validación en API 65.0. En fase 1B se validaron, desplegaron y contrastaron sus definiciones; no se han creado registros P07 ni probado su comportamiento funcional.
+Fase 1A define tres objetos, doce campos personalizados y nueve reglas de validación en API 65.0. En fase 1B se validaron, desplegaron y contrastaron sus definiciones. Fase 2A comprueba el guardado y sus defensas mediante datos Apex aislados, sin registros funcionales persistentes ni sesiones ordinarias.
 
 ## Objetos y nombres
 
@@ -31,7 +31,7 @@ Los tres objetos permiten informes y no habilitan actividades ni historial de ca
 
 Cada campo incluye etiqueta, descripción y ayuda. OwnerId es estándar en proyecto y semana; el detalle hereda propiedad de la semana. No se crean campos adicionales de propietario o usuario en las líneas.
 
-Usuario__c se mantiene como lookup no obligatorio en su definición y se exige mediante regla en cada guardado. Así se evita imponer al lookup a User una política de eliminación propia de un objeto de negocio. Su FLS sí se declara en los permisos. La combinación fue aceptada por Salesforce y contrastada mediante recuperación en fase 1B; su comportamiento al guardar sigue pendiente.
+Usuario__c se mantiene como lookup no obligatorio en su definición y se exige mediante regla en cada guardado. Así se evita imponer al lookup a User una política de eliminación propia de un objeto de negocio. Su FLS sí se declara en los permisos. La combinación fue aceptada por Salesforce y contrastada mediante recuperación en fase 1B; su uso al guardar se comprueba en las pruebas aisladas de fase 2A.
 
 El resumen no declara precisión ni escala independientes: su tipo y operación se apoyan en el campo numérico resumido. No se añade un campo de horas persistidas; su presentación futura será minutos / 60, sin alterar la unidad almacenada.
 
@@ -49,18 +49,18 @@ El resumen no declara precisión ni escala independientes: su tipo y operación 
 | Dedicación | MinutosValidos | Minutos no positivos, mayores de 1.440 o no múltiplos de 15 |
 | Dedicación | IdentidadInmutable | Cambio de proyecto, fecha o clave después del alta |
 
-La relación master-detail añade la prohibición de reparentado. Los campos únicos rechazan valores duplicados exactos. Las nueve reglas activas fueron aceptadas por Salesforce y sus definiciones coinciden con las fuentes. Sus resultados funcionales siguen pendientes.
+La relación master-detail añade la prohibición de reparentado. Los campos únicos rechazan valores duplicados exactos. Las nueve reglas activas fueron aceptadas por Salesforce y sus definiciones coinciden con las fuentes. La fase 2A prueba el guardado y las rutas denegadas con estas reglas activas; no atribuye cada rechazo a una regla declarativa aislada.
 
 ## Claves y límites del esquema
 
 - Semana: Id de usuario de 18 caracteres + separador vertical + lunes ISO de diez caracteres: 29 caracteres.
 - Dedicación: Id de semana de 18 caracteres + separador + Id de proyecto de 18 caracteres + separador + fecha ISO: 48 caracteres.
 
-No hay generador canónico ni validación integral de correspondencia entre clave e identidad. Una cadena arbitraria puede satisfacer longitud y unicidad sin representar correctamente la identidad. No se introduce una carga manual o ruta provisional para suplir el generador.
+El esquema por sí solo no genera ni acredita la correspondencia de estas claves. En fase 2A, P07_DedicacionService las genera y los triggers restringen altas e identidades al estado previsto por el servicio. Se rechazan las rutas directas; no existe una carga manual de dedicación.
 
 La igualdad propietario/usuario y la inmutabilidad son defensas parciales. No verifican que el solicitante esté autorizado a actuar para esa persona. La revisión no negativa tampoco acredita incremento correcto, revisión esperada ni concurrencia.
 
-Number con escala cero define almacenamiento, no valida el dato original: una fracción podría llegar redondeada a una regla. El futuro servidor deberá rechazar la entrada inválida antes del DML. Tampoco basta el límite por línea: dos líneas de 900 minutos superarían el máximo diario aunque cada una fuese válida individualmente.
+Number con escala cero define almacenamiento, no valida el dato original: una fracción podría llegar redondeada a una regla. El servicio de fase 2A rechaza la entrada inválida antes del DML y convierte cuartos de hora exactos a minutos. Tampoco basta el límite por línea: dos líneas de 900 minutos superarían el máximo diario aunque cada una fuese válida individualmente.
 
 ## Total semanal
 
@@ -68,11 +68,13 @@ TotalMinutos__c suma DedicacionDiaria__c.Minutos__c a través de DedicacionDiari
 
 El total semanal no aplica el máximo diario agregado ni controla la revisión. El futuro informe podrá utilizarlo al nivel de cabecera; si combina varias líneas por semana, no deberá sumar el mismo total repetido en cada fila. Los totales por día y proyecto se obtendrán de las líneas.
 
-## Pendiente del servidor
+## Protección de servidor incorporada en fase 2A
 
-Límite diario agregado; validación de la entrada original; generación y correspondencia canónica; autorización por identidad; incremento y comparación de revisión; guardado atómico; concurrencia; protección de proyectos inactivos; fecha actual del solicitante y rechazo de dedicación futura; borrado, restauración y demás rutas de escritura.
+El servicio aplica límite diario agregado, validación de la entrada original, generación canónica, autorización por identidad y acceso, revisión esperada e incremento único, transacción con rollback, protección del histórico inactivo y rechazo de fechas futuras según Date.today() del solicitante. Los triggers deniegan las rutas alternativas y permiten el resumen legítimo dentro del guardado.
 
-No se usa TODAY() como sustituto de la referencia temporal que deberá capturar y comprobar el servicio. Las semanas vacías se conservarán para no reiniciar su revisión. La eliminación en cascada sigue siendo una capacidad de plataforma que debe restringirse y probarse; los permisos ordinarios de esta fase no conceden eliminación.
+Las semanas vacías conservan cabecera y revisión. La eliminación de cabecera y su cascada se rechazan. Las pruebas aisladas comprueban altas, modificaciones, eliminaciones, resumen con histórico inactivo y reversión después de escrituras. No se modifican campos, relaciones, reglas ni accesos declarativos de fase 1B.
+
+El bloqueo de cabecera y proyectos y las claves únicas constituyen la estrategia de concurrencia; las pruebas secuenciales de revisión y la clasificación simulada de colisiones no demuestran simultaneidad real. Contrato, límites y rutas: [ARQUITECTURA.md](ARQUITECTURA.md). Resultados: [STATUS.md](STATUS.md).
 
 ## Referencias técnicas
 

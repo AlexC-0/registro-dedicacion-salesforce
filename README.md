@@ -4,7 +4,7 @@ Aplicación de demostración para registrar dedicación propia por proyecto y d�
 
 ## Estado
 
-Fase 1B técnica completada: esquema de tres objetos y doce campos validado, desplegado y contrastado en una Developer Edition compartida con P06. Jerarquía desactivada y verificada en proyecto y semana; grupos vacíos y permisos sin asignar. P06 conservado dentro del alcance contrastado. [STATUS.md](docs/STATUS.md) recoge resultados y límites; [INSTALACION.md](docs/INSTALACION.md), el procedimiento. Todos los criterios funcionales siguen pendientes, al igual que el servicio de guardado y la cuadrícula LWC.
+Fase 2A completada: servicio Apex de lectura y guardado propio, protección de escrituras y 18 pruebas aisladas superadas. Paquete validado, desplegado y contrastado en la Developer Edition compartida con P06; cobertura del servicio 97,87 %. P06 conservado dentro del alcance revisado. Grupos vacíos, permisos sin asignar y cero datos persistentes P07. [STATUS.md](docs/STATUS.md) recoge resultados y límites. LWC, informe, sesiones ordinarias y concurrencia real permanecen pendientes; V1 no está cerrada.
 
 ## Alcance V1
 
@@ -20,8 +20,9 @@ No incluye nóminas, facturación, control horario con validez laboral, aprobaci
 
 | Ruta | Contenido |
 |---|---|
-| `force-app/main/default` | Modelo declarativo, grupos, permisos de lectura y reglas de compartición |
+| `force-app/main/default` | Modelo, acceso, servicio Apex, triggers y pruebas aisladas |
 | `manifest/fase-1a.xml` | Selección explícita del modelo y acceso de fase 1A |
+| `manifest/fase-2a.xml` | Servicio, triggers, permisos de operación y pruebas de fase 2A |
 | `sfdx-project.json` | Proyecto DX; API 65.0 |
 | `docs/PROJECT_BRIEF.md` | Objetivos, reglas y límites |
 | `docs/MODELO_DATOS.md` | Modelo exacto y separación de restricciones declarativas y de servidor |

@@ -1,0 +1,503 @@
+{
+  "phase": "2A",
+  "date": "2026-11-24",
+  "sourceBase": "816b8d13e83b08686e5ce747a17d17e5eff8fc51",
+  "target": {
+    "alias": "p06-renovaciones-dev",
+    "sharedWith": "P06",
+    "edition": "Developer Edition",
+    "apiVersion": "65.0",
+    "identityVerified": true
+  },
+  "validationHistory": [
+    {
+      "id": "0Afg700000L9cm2CAB",
+      "status": "Failed",
+      "done": true,
+      "success": false,
+      "checkOnly": true,
+      "components": 2,
+      "totalComponents": 11,
+      "tests": 0,
+      "testFailures": 0,
+      "componentErrors": [
+        {
+          "component": "P07_DedicacionService",
+          "line": 16,
+          "problem": "Classes extending Exception must have a name ending in Exception: P07_DedicacionService.Fallo"
+        },
+        {
+          "component": "P07_DedicacionService",
+          "line": 165,
+          "problem": "Method does not exist or incorrect signature: void deserializeUntyped(String) from the type String"
+        },
+        {
+          "component": "P07_DedicacionService",
+          "line": 341,
+          "problem": "Constructor not defined: [P07_DedicacionService.Fallo].<Constructor>(String)"
+        },
+        {
+          "component": "P07_DedicacionService",
+          "line": 359,
+          "problem": "Method does not exist or incorrect signature: void codigoDml(String) from the type P07_DedicacionService"
+        },
+        {
+          "component": "P07_DedicacionServiceTest",
+          "line": 45,
+          "problem": "Method does not exist or incorrect signature: void deserializeUntyped(String) from the type String"
+        },
+        {
+          "component": "P07_DedicacionGuard",
+          "line": 2,
+          "problem": "Variable does not exist: P07_DedicacionService"
+        },
+        {
+          "component": "P07_SemanaGuard",
+          "line": 2,
+          "problem": "Variable does not exist: P07_DedicacionService"
+        },
+        {
+          "component": "P07_GuardadoPropio",
+          "problem": "In field: apexClass - no ApexClass named P07_DedicacionService found"
+        },
+        {
+          "component": "P07_ServicioLectura",
+          "problem": "In field: apexClass - no ApexClass named P07_DedicacionService found"
+        }
+      ],
+      "coverage": [],
+      "coverageWarnings": [],
+      "testMethods": []
+    },
+    {
+      "id": "0Afg700000L9SLzCAN",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": true,
+      "components": 8,
+      "totalComponents": 8,
+      "tests": 16,
+      "testFailures": 0,
+      "componentErrors": [],
+      "coverage": [
+        {
+          "name": "P07_DedicacionService",
+          "covered": 276,
+          "total": 282,
+          "percentage": 97.87,
+          "uncoveredLines": [
+            357,
+            358,
+            359,
+            360,
+            361,
+            362
+          ]
+        },
+        {
+          "name": "P07_SemanaGuard",
+          "covered": 1,
+          "total": 1,
+          "percentage": 100,
+          "uncoveredLines": []
+        },
+        {
+          "name": "P07_DedicacionGuard",
+          "covered": 1,
+          "total": 1,
+          "percentage": 100,
+          "uncoveredLines": []
+        }
+      ],
+      "coverageWarnings": [],
+      "testMethods": [
+        "aislamientoPorIdentidad",
+        "cicloCanonicoYNoop",
+        "clasificacionDeColisionesSimulada",
+        "contratoEstricto",
+        "coordinacionSoloLectura",
+        "defensaCabeceraDirecta",
+        "defensaDetalleDirectoYRestauracion",
+        "fechasYDuplicados",
+        "historicoInactivo",
+        "lecturaSinCreacion",
+        "limiteAgregadoYOmitidas",
+        "rechazoPrecisionAntesDml",
+        "revisionYRepeticion",
+        "rollbackAltaTrasDml",
+        "rollbackMixtoIncluyeRevision",
+        "seguridadCrudFlsPermiso"
+      ]
+    },
+    {
+      "id": "0Afg700000L9ei5CAB",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": true,
+      "components": 8,
+      "totalComponents": 8,
+      "tests": 18,
+      "testFailures": 0,
+      "componentErrors": [],
+      "coverage": [
+        {
+          "name": "P07_DedicacionGuard",
+          "covered": 1,
+          "total": 1,
+          "percentage": 100,
+          "uncoveredLines": []
+        },
+        {
+          "name": "P07_SemanaGuard",
+          "covered": 1,
+          "total": 1,
+          "percentage": 100,
+          "uncoveredLines": []
+        },
+        {
+          "name": "P07_DedicacionService",
+          "covered": 276,
+          "total": 282,
+          "percentage": 97.87,
+          "uncoveredLines": [
+            357,
+            358,
+            359,
+            360,
+            361,
+            362
+          ]
+        }
+      ],
+      "coverageWarnings": [],
+      "testMethods": [
+        "aislamientoPorIdentidad",
+        "cicloCanonicoYNoop",
+        "clasificacionDeColisionesSimulada",
+        "contratoEstricto",
+        "coordinacionSoloLectura",
+        "defensaCabeceraDirecta",
+        "defensaDetalleDirectoYRestauracion",
+        "fechasYDuplicados",
+        "historicoInactivo",
+        "lecturaSinCreacion",
+        "limiteAgregadoYOmitidas",
+        "limiteProyectosYLecturaFutura",
+        "rechazoPrecisionAntesDml",
+        "reparentadoYAccesoAjeno",
+        "revisionYRepeticion",
+        "rollbackAltaTrasDml",
+        "rollbackMixtoIncluyeRevision",
+        "seguridadCrudFlsPermiso"
+      ]
+    }
+  ],
+  "deployment": {
+    "id": "0Afg700000L9H7ECAV",
+    "status": "Succeeded",
+    "done": true,
+    "success": true,
+    "checkOnly": false,
+    "components": 8,
+    "totalComponents": 8,
+    "tests": 18,
+    "testFailures": 0,
+    "componentErrors": [],
+    "coverage": [
+      {
+        "name": "P07_DedicacionService",
+        "covered": 276,
+        "total": 282,
+        "percentage": 97.87,
+        "uncoveredLines": [
+          357,
+          358,
+          359,
+          360,
+          361,
+          362
+        ]
+      },
+      {
+        "name": "P07_SemanaGuard",
+        "covered": 1,
+        "total": 1,
+        "percentage": 100,
+        "uncoveredLines": []
+      },
+      {
+        "name": "P07_DedicacionGuard",
+        "covered": 1,
+        "total": 1,
+        "percentage": 100,
+        "uncoveredLines": []
+      }
+    ],
+    "coverageWarnings": [],
+    "testMethods": [
+      "aislamientoPorIdentidad",
+      "cicloCanonicoYNoop",
+      "clasificacionDeColisionesSimulada",
+      "contratoEstricto",
+      "coordinacionSoloLectura",
+      "defensaCabeceraDirecta",
+      "defensaDetalleDirectoYRestauracion",
+      "fechasYDuplicados",
+      "historicoInactivo",
+      "lecturaSinCreacion",
+      "limiteAgregadoYOmitidas",
+      "limiteProyectosYLecturaFutura",
+      "rechazoPrecisionAntesDml",
+      "reparentadoYAccesoAjeno",
+      "revisionYRepeticion",
+      "rollbackAltaTrasDml",
+      "rollbackMixtoIncluyeRevision",
+      "seguridadCrudFlsPermiso"
+    ]
+  },
+  "sourceHashes": {
+    "force-app/main/default/classes/P07_DedicacionService.cls": "e9edb148f771a0016c115852d1c17b698327ec62950a836cf7dc0708e81a6640",
+    "force-app/main/default/classes/P07_DedicacionService.cls-meta.xml": "356db61093648679fc9b3a801e41d51c94fa51e993380eac65b0bb076a20b6b0",
+    "force-app/main/default/classes/P07_DedicacionServiceTest.cls": "54050c960d244075dbc6265d7891e58a68f329b0e623cdad782e2c932ba38724",
+    "force-app/main/default/classes/P07_DedicacionServiceTest.cls-meta.xml": "356db61093648679fc9b3a801e41d51c94fa51e993380eac65b0bb076a20b6b0",
+    "force-app/main/default/triggers/P07_DedicacionGuard.trigger": "9373ad897a4c82137b5fee59f8c4c52845c8e46794a219daa1b689b21c5c3e46",
+    "force-app/main/default/triggers/P07_DedicacionGuard.trigger-meta.xml": "adf36b535e9f1311b8362b5c35b9f62f0eee3e7511296d1e14bbf5a637255132",
+    "force-app/main/default/triggers/P07_SemanaGuard.trigger": "5b8fb8b4dcc73298a7356d75ff16ec87ee2a7c6d683cf34c3570a1bf846850c3",
+    "force-app/main/default/triggers/P07_SemanaGuard.trigger-meta.xml": "adf36b535e9f1311b8362b5c35b9f62f0eee3e7511296d1e14bbf5a637255132",
+    "force-app/main/default/customPermissions/P07_Consultar.customPermission-meta.xml": "c592e844823a7be035af4e4f9a3cf6f3f6e1e454c6b1cc7b731bd2aa854d9bb5",
+    "force-app/main/default/customPermissions/P07_GuardarPropia.customPermission-meta.xml": "5c890e502c338ae55c5939997ae6a1e8c87a3b0dca427dbe2a2630f01c05ea95",
+    "force-app/main/default/permissionsets/P07_GuardadoPropio.permissionset-meta.xml": "d38d23359901657abce9771895829d61d5f3092235e21e7bdf7104411dec1868",
+    "force-app/main/default/permissionsets/P07_ServicioLectura.permissionset-meta.xml": "04c7d4dc0692386c05937889178d30d72d3c6a0137cff34a19107f9127b1a3d1",
+    "manifest/fase-2a.xml": "f34cf286ba5ea3653f081a1a7ef2e23366319aa62a350bbe86c232f0ee4020aa"
+  },
+  "retrieval": {
+    "id": "09Sg700000bUiO7EAK",
+    "status": "Succeeded",
+    "allMatch": true,
+    "checks": [
+      {
+        "file": "force-app/main/default/classes/P07_DedicacionService.cls",
+        "equal": true,
+        "normalization": "Salesforce omite el salto de línea final del código"
+      },
+      {
+        "file": "force-app/main/default/classes/P07_DedicacionService.cls-meta.xml",
+        "equal": true,
+        "normalization": null
+      },
+      {
+        "file": "force-app/main/default/classes/P07_DedicacionServiceTest.cls",
+        "equal": true,
+        "normalization": "Salesforce omite el salto de línea final del código"
+      },
+      {
+        "file": "force-app/main/default/classes/P07_DedicacionServiceTest.cls-meta.xml",
+        "equal": true,
+        "normalization": null
+      },
+      {
+        "file": "force-app/main/default/triggers/P07_DedicacionGuard.trigger",
+        "equal": true,
+        "normalization": "Salesforce omite el salto de línea final del código"
+      },
+      {
+        "file": "force-app/main/default/triggers/P07_DedicacionGuard.trigger-meta.xml",
+        "equal": true,
+        "normalization": null
+      },
+      {
+        "file": "force-app/main/default/triggers/P07_SemanaGuard.trigger",
+        "equal": true,
+        "normalization": "Salesforce omite el salto de línea final del código"
+      },
+      {
+        "file": "force-app/main/default/triggers/P07_SemanaGuard.trigger-meta.xml",
+        "equal": true,
+        "normalization": null
+      },
+      {
+        "file": "force-app/main/default/customPermissions/P07_Consultar.customPermission-meta.xml",
+        "equal": true,
+        "normalization": "isLicensed=false, valor predeterminado devuelto por Salesforce"
+      },
+      {
+        "file": "force-app/main/default/customPermissions/P07_GuardarPropia.customPermission-meta.xml",
+        "equal": true,
+        "normalization": "isLicensed=false, valor predeterminado devuelto por Salesforce"
+      },
+      {
+        "file": "force-app/main/default/permissionsets/P07_GuardadoPropio.permissionset-meta.xml",
+        "equal": true,
+        "normalization": null
+      },
+      {
+        "file": "force-app/main/default/permissionsets/P07_ServicioLectura.permissionset-meta.xml",
+        "equal": true,
+        "normalization": null
+      }
+    ]
+  },
+  "persistentState": {
+    "target": "p06-renovaciones-dev",
+    "identityMatches": true,
+    "edition": "Developer Edition",
+    "groups": [
+      {
+        "DeveloperName": "P07_CoordinacionAmbito",
+        "DoesIncludeBosses": false
+      },
+      {
+        "DeveloperName": "P07_MiembrosAmbito",
+        "DoesIncludeBosses": false
+      },
+      {
+        "DeveloperName": "P07_Participantes",
+        "DoesIncludeBosses": false
+      }
+    ],
+    "members": 0,
+    "assignments": 0,
+    "permissions": [
+      "P07_CoordinacionLectura",
+      "P07_GuardadoPropio",
+      "P07_MiembroLectura",
+      "P07_ServicioLectura"
+    ],
+    "licenses": [
+      {
+        "Name": "Salesforce",
+        "TotalLicenses": 4,
+        "UsedLicenses": 4
+      },
+      {
+        "Name": "Salesforce Platform",
+        "TotalLicenses": 6,
+        "UsedLicenses": 0
+      }
+    ],
+    "counts": {
+      "ProyectoDedicacion__c": 0,
+      "SemanaDedicacion__c": 0,
+      "DedicacionDiaria__c": 0
+    }
+  },
+  "p06Preservation": {
+    "counts": {
+      "Account": 11,
+      "IncidenciaRenovacion__c": 7,
+      "EjecucionRenovacion__c": 20,
+      "ContratoComercial__c": 198,
+      "SeguimientoRenovacion__c": 196
+    },
+    "totalRecords": 432,
+    "manualShares": 4,
+    "comparisons": [
+      {
+        "name": "Account",
+        "unchanged": true,
+        "beforeHash": "be5c57ce2400654a887ecca38f9803e4f027241d7aabc4619fbc857b9d5b67f6",
+        "afterHash": "be5c57ce2400654a887ecca38f9803e4f027241d7aabc4619fbc857b9d5b67f6"
+      },
+      {
+        "name": "IncidenciaRenovacion__c",
+        "unchanged": true,
+        "beforeHash": "8ae6490e4844c4cc3f027f0dcf34102a77b66827b5aa0f1e03b5e17fd99d8422",
+        "afterHash": "8ae6490e4844c4cc3f027f0dcf34102a77b66827b5aa0f1e03b5e17fd99d8422"
+      },
+      {
+        "name": "EjecucionRenovacion__c",
+        "unchanged": true,
+        "beforeHash": "92b7925c3f2b9711aa7c8e6905f3030ccec9680290d6ee03ed7f3da71125527f",
+        "afterHash": "92b7925c3f2b9711aa7c8e6905f3030ccec9680290d6ee03ed7f3da71125527f"
+      },
+      {
+        "name": "ContratoComercial__c",
+        "unchanged": true,
+        "beforeHash": "216375dd84733f08a22df913636bbe056beb2c4565a685125389d849c0f8b479",
+        "afterHash": "216375dd84733f08a22df913636bbe056beb2c4565a685125389d849c0f8b479"
+      },
+      {
+        "name": "SeguimientoRenovacion__c",
+        "unchanged": true,
+        "beforeHash": "f86b760feb4de682ee1060930a59f68b57ca9352b6f7ebecc9d2e65db3d800ed",
+        "afterHash": "f86b760feb4de682ee1060930a59f68b57ca9352b6f7ebecc9d2e65db3d800ed"
+      },
+      {
+        "name": "manualShares",
+        "unchanged": true,
+        "beforeHash": "ed8123672c7fc698e1dfbcf509b562f4d50f3dbdc1d47e8802829f36a5872f65",
+        "afterHash": "ed8123672c7fc698e1dfbcf509b562f4d50f3dbdc1d47e8802829f36a5872f65"
+      },
+      {
+        "name": "p06Groups",
+        "unchanged": true,
+        "beforeHash": "4a63a19c4b75ad50aa7bafbd53dcbf0806a788efb53f58a5ac7b0647fb247471",
+        "afterHash": "4a63a19c4b75ad50aa7bafbd53dcbf0806a788efb53f58a5ac7b0647fb247471"
+      },
+      {
+        "name": "p06Members",
+        "unchanged": true,
+        "beforeHash": "c5911b1e198fbe555c1be95117885e355cde426b84f048571786a8e10b160079",
+        "afterHash": "c5911b1e198fbe555c1be95117885e355cde426b84f048571786a8e10b160079"
+      },
+      {
+        "name": "p06Assignments",
+        "unchanged": true,
+        "beforeHash": "6bf7999cb95d4213e4530a0cd1987c97184ab2e6b44f216b7d2848e9f54523c4",
+        "afterHash": "6bf7999cb95d4213e4530a0cd1987c97184ab2e6b44f216b7d2848e9f54523c4"
+      },
+      {
+        "name": "users",
+        "unchanged": true,
+        "beforeHash": "f1b03696a1ae582aa58c8c063715040be615de03a0b392bea87267254ec1c68b",
+        "afterHash": "f1b03696a1ae582aa58c8c063715040be615de03a0b392bea87267254ec1c68b"
+      },
+      {
+        "name": "objectsMetadata",
+        "unchanged": true,
+        "beforeHash": "d21056414a9b565703a680036f7fa17827d9b27d7e0b81a31371a651caf700e0",
+        "afterHash": "d21056414a9b565703a680036f7fa17827d9b27d7e0b81a31371a651caf700e0"
+      },
+      {
+        "name": "permissionsMetadata",
+        "unchanged": true,
+        "beforeHash": "7b793f885a42d7472d0d127afa462e71f40f291f99616e7dca7029b8fc431e3b",
+        "afterHash": "7b793f885a42d7472d0d127afa462e71f40f291f99616e7dca7029b8fc431e3b"
+      },
+      {
+        "name": "apexInventory",
+        "unchanged": true,
+        "beforeHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "afterHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    ],
+    "scope": "Campos devueltos por describe de cuatro objetos de negocio; Account Id/SystemModstamp; comparticiones manuales de contrato; grupos, pertenencias, asignaciones P06; perfiles, roles y estado activo de usuarios; definiciones de cuatro objetos y permisos P06; inventario Apex P06. No es una auditoría general."
+  },
+  "rollbackEvidence": {
+    "newWeek": {
+      "writesObserved": 2,
+      "totalBeforeFailure": 60,
+      "headersAfterRollback": 0,
+      "linesAfterRollback": 0
+    },
+    "existingWeek": {
+      "writesObserved": 4,
+      "totalBeforeFailure": 135,
+      "revisionBeforeFailure": 2,
+      "totalAfterRollback": 90,
+      "revisionAfterRollback": 1,
+      "originalLinesRestored": true,
+      "retryWithOriginalRevisionSucceeded": true
+    }
+  },
+  "limits": [
+    "Pruebas Apex SeeAllData=false; usuarios y datos aislados, sin sesiones ordinarias.",
+    "Sin carrera real de creación, espera de bloqueo ni lectura/escritura paralelas.",
+    "Clasificación de DUPLICATE_VALUE y UNABLE_TO_LOCK_ROW simulada mediante códigos.",
+    "Restauración real de detalle rechazada; restauración de cabecera revisada en código sin fabricar un borrado prohibido.",
+    "LWC, Jest, informe, grupos funcionales, jerarquía con sesiones y pérdida de respuesta pendientes.",
+    "No se ejecutó la batería P06 ni se repitieron sus demostraciones."
+  ]
+}
