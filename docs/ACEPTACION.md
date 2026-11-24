@@ -1,6 +1,6 @@
 # Criterios de aceptación V1
 
-Todos los criterios funcionales siguen pendientes. Fase 1A aporta metadatos y comprobaciones locales; no acredita su comportamiento en Salesforce.
+Todos los criterios funcionales siguen pendientes. Fase 1A aporta metadatos y comprobaciones locales; la preparación de fase 1B incorpora el procedimiento de instalación, todavía sin destino confirmado ni operaciones remotas. Ninguna de estas evidencias acredita comportamiento funcional en Salesforce.
 
 | ID | Escenario | Resultado exigido |
 |---|---|---|

@@ -56,3 +56,7 @@ Se mantendrán denegados el borrado de cabeceras, transferencias y restauracione
 Comprobar identidad y exclusividad de la organización, edición, API, licencias e identidades diferenciadas para miembro, coordinación y persona fuera del ámbito. No se dan por disponibles ni se liberan licencias de otros proyectos.
 
 En el destino se contrastarán perfil, Permission Sets, pertenencias, jerarquía, comparticiones y sesiones ordinarias. Una cuenta administrativa o una consulta técnica de acceso no sustituye las pruebas por función. No se han creado ni asignado usuarios en esta fase.
+
+## Estado de fase 1B
+
+Sin destino identificado: no se han inspeccionado ni modificado permisos, grupos, asignaciones o jerarquía en Salesforce. El procedimiento exacto de Setup y su lectura posterior están preparados en [INSTALACION.md](INSTALACION.md). Las definiciones locales de fase 1A permanecen sin cambios; no se consideran instaladas ni verificadas funcionalmente.

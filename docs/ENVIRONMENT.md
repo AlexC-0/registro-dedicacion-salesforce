@@ -41,3 +41,15 @@ Pendientes: identidad y exclusividad del destino, edición, API, licencias, usua
 Se utilizó la CLI ya instalada mediante su entrada Node, sin instalar paquetes. Comando equivalente: `sf project convert source --manifest manifest/fase-1a.xml --output-dir tmp/fase-1a-mdapi-20261124 --json`. La salida quedó excluida de Git y se comprobó su inventario, no solo el código de salida.
 
 El convertidor aplica sus filtros también al destino. Las carpetas ocultas dieron paquetes incompletos; se usa tmp/ sin punto inicial. Los resultados y límites constan en [STATUS.md](STATUS.md). No hubo conexión a Salesforce ni cambios de configuración global.
+
+## Preparación de fase 1B
+
+El 24/11/2026 se revisó la información local del destino: no aparece una organización P07 identificada ni autenticada. Se consultaron únicamente nombres de alias y configuración pertinente, sin contactar destinos de proyectos anteriores. La Developer Edition nueva y exclusiva sigue siendo la opción recomendada; el alta y activación de cuenta no se han realizado desde este procedimiento.
+
+La ayuda de la CLI instalada confirma org login web con alias sin --set-default y project deploy start con --dry-run, --test-level NoTestRun, --target-org y --api-version. Los comandos de ayuda emitieron avisos auxiliares de acceso denegado al consultar procesos, pero devolvieron su contenido. No se modificó la instalación para eliminarlos. La ayuda de project deploy report no incluye --api-version; el procedimiento conserva ese parámetro en la operación inicial y consulta el identificador exacto con destino explícito.
+
+API 65.0, permisos técnicos, edición, licencias y capacidad de las tres identidades funcionales siguen sin comprobación remota. La guía [INSTALACION.md](INSTALACION.md) concreta las verificaciones y el procedimiento; prepararlo no equivale a ejecutarlo.
+
+El destino mostrado en el navegador se contrastó únicamente con los registros locales y coincidió con una organización anterior, por lo que quedó excluido. No se publican sus identificadores ni direcciones. La conexión Playwright configurada con MCP 0.0.69 agotó el tiempo de espera. La extensión ya estaba instalada en el perfil habitual de Chrome, versión 0.6.0. Se inició un puente temporal exclusivo de la sesión P07 con MCP 0.0.86, disponible en la caché local, enlazado únicamente a loopback. No se actualizaron paquetes ni se cambió la configuración global.
+
+El puente temporal respondió correctamente: creación de una pestaña propia, evaluación sobre la página vacía y navegación al alta oficial. Los auxiliares, la sesión de conexión y los registros están en .private/, excluidos de Git. El alta y la autenticación Salesforce siguen pendientes; la conectividad del navegador no las sustituye.

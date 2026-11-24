@@ -4,7 +4,7 @@ Aplicación de demostración para registrar dedicación propia por proyecto y d�
 
 ## Estado
 
-Fase 1A preparada localmente el 24/11/2026: tres objetos, doce campos, nueve validaciones, total semanal y base de acceso de solo lectura mediante grupos y reglas estándar. La base inicial ya está publicada; el estado de las comprobaciones de esta entrega figura en [STATUS.md](docs/STATUS.md). No hay organización P07 vinculada, compilación remota, despliegue ni validación funcional. El servicio de guardado y la cuadrícula LWC siguen pendientes.
+Fase 1A publicada: tres objetos, doce campos, nueve validaciones, total semanal y acceso de solo lectura. Fase 1B preparada localmente el 24/11/2026, pendiente de identificar y autenticar una organización exclusiva de P07. La [guía de instalación](docs/INSTALACION.md) define el procedimiento; [STATUS.md](docs/STATUS.md) distingue lo ejecutado de lo pendiente. No hay validación remota, despliegue ni comprobación funcional. El servicio de guardado y la cuadrícula LWC siguen pendientes.
 
 ## Alcance V1
 
@@ -30,6 +30,7 @@ No incluye nóminas, facturación, control horario con validez laboral, aprobaci
 | `docs/ACEPTACION.md` | Criterios y evidencia pendiente |
 | `docs/ENVIRONMENT.md` | Herramientas observadas y destino pendiente |
 | `docs/STATUS.md` | Estado y siguientes entregas |
+| `docs/INSTALACION.md` | Destino, validación remota, instalación y jerarquía |
 
 ## Preparación
 
