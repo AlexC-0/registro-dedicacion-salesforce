@@ -1,0 +1,11 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+  "name": "registro-dedicacion-salesforce",
+  "namespace": "",
+  "sourceApiVersion": "65.0"
+}

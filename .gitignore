@@ -1,0 +1,32 @@
+# Estado local y autenticación
+.sf/
+.sfdx/
+.local/
+.private/
+.env
+.env.*
+!.env.example
+**/*authFile*.json
+**/*auth-url*
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Dependencias y resultados generados
+node_modules/
+coverage/
+.jest-cache/
+.npm/
+dist/
+build/
+.tmp/
+tmp/
+*.log
+npm-debug.log*
+
+# Estado de herramientas y sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,16 @@
+.git/**
+.sf/**
+.sfdx/**
+.local/**
+.private/**
+.vscode/**
+docs/**
+node_modules/**
+coverage/**
+**/.gitkeep
+**/__tests__/**
+**/*.test.js
+**/*.spec.js
+**/*.md
+.env
+.env.*
