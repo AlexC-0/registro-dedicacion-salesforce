@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IdentidadInmutable</fullName>
+    <active>true</active>
+    <description>Protege las referencias de identidad; la semana ya impide reparentado mediante master-detail.</description>
+    <errorConditionFormula>AND(NOT(ISNEW()), OR(ISCHANGED(Proyecto__c), ISCHANGED(Fecha__c), ISCHANGED(Clave__c)))</errorConditionFormula>
+    <errorMessage>No se puede cambiar el proyecto, la fecha ni la clave de una dedicación existente.</errorMessage>
+</ValidationRule>

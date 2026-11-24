@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Minutos__c</fullName>
+    <description>Duración persistida positiva, múltiplo de 15 y como máximo 1.440 por línea.</description>
+    <inlineHelpText>La validación del dato original y del total diario se completará en servidor.</inlineHelpText>
+    <label>Minutos</label>
+    <precision>4</precision>
+    <required>true</required>
+    <scale>0</scale>
+    <type>Number</type>
+</CustomField>

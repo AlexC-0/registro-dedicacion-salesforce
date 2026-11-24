@@ -1,6 +1,6 @@
 # Criterios de aceptación V1
 
-Todos los criterios están pendientes. La base local no acredita funcionamiento de la aplicación.
+Todos los criterios funcionales siguen pendientes. Fase 1A aporta metadatos y comprobaciones locales; no acredita su comportamiento en Salesforce.
 
 | ID | Escenario | Resultado exigido |
 |---|---|---|
@@ -12,7 +12,7 @@ Todos los criterios están pendientes. La base local no acredita funcionamiento 
 | AC-06 | Proyecto inactivo | Histórico visible y no editable, incluida la eliminación |
 | AC-07 | Cabecera única | Una semana por usuario y lunes, también ante creación simultánea |
 | AC-08 | Línea única | Una línea por semana, proyecto y fecha, con clave canónica protegida |
-| AC-09 | Atomicidad | Un error rechaza el conjunto sin cambios parciales |
+| AC-09 | Atomicidad | Provocar un fallo después de al menos una escritura dentro del guardado; comprobar rollback de altas, cambios, bajas, resumen y revisión, sin cambios parciales |
 | AC-10 | Revisión | Una pantalla antigua no sobrescribe cambios posteriores |
 | AC-11 | Borrador | Errores y conflictos conservan cambios locales y no muestran éxito |
 | AC-12 | Propiedad | Un miembro no modifica dedicación ajena ni suplanta usuario |
@@ -24,6 +24,13 @@ Todos los criterios están pendientes. La base local no acredita funcionamiento 
 | AC-18 | Seguridad del esquema | Claves, revisión, usuario, fechas de identidad y propiedad protegidos |
 | AC-19 | Cambio de semana | No se pierde el borrador sin una decisión explícita |
 | AC-20 | Accesibilidad | Cuadrícula operable con teclado, etiquetas y errores comprensibles |
+| AC-21 | Repetición de petición | Reenviar una petición ya confirmada no duplica registros ni reaplica cambios; conflicto o resultado reconciliado sin incremento adicional de revisión |
+| AC-22 | Resultado desconocido | Simular pérdida de respuesta tras confirmar en servidor; conservar borrador, mostrar incertidumbre y reconciliar sin sobrescritura ni reenvío ciego |
+| AC-23 | Lectura coherente | Con un guardado concurrente, revisión, líneas y total devueltos corresponden al mismo estado confirmado |
+| AC-24 | Jerarquía y ámbito | Una identidad superior en jerarquía sin pertenencia no obtiene acceso; comprobar también retirada del grupo y ausencia de permisos amplios |
+| AC-25 | Total semanal | Crear, modificar y eliminar líneas recalcula el resumen, incluyendo histórico inactivo; no confundir el total semanal con el máximo diario |
+
+Estos escenarios están previstos y no se han ejecutado en fase 1A.
 
 ## Evidencia requerida
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalMinutos__c</fullName>
+    <description>Suma de todas las líneas de la semana, incluido el histórico de proyectos inactivos.</description>
+    <inlineHelpText>Total calculado de minutos; no sustituye el límite agregado por día.</inlineHelpText>
+    <label>Total semanal de minutos</label>
+    <summarizedField>DedicacionDiaria__c.Minutos__c</summarizedField>
+    <summaryForeignKey>DedicacionDiaria__c.Semana__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <type>Summary</type>
+</CustomField>

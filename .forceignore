@@ -14,3 +14,5 @@ coverage/**
 **/*.md
 .env
 .env.*
+**/jsconfig.json
+**/.eslintrc.json

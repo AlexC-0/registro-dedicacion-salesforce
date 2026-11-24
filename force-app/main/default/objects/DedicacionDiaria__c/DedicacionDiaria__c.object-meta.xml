@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Minutos por proyecto y fecha. Hereda acceso y propiedad de la semana.</description>
+    <enableActivities>false</enableActivities>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <label>Dedicación diaria</label>
+    <nameField>
+        <displayFormat>DED-{000000}</displayFormat>
+        <label>Número de dedicación</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Dedicaciones diarias</pluralLabel>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

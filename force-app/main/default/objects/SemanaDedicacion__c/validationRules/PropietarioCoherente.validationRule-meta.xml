@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PropietarioCoherente</fullName>
+    <active>true</active>
+    <description>Comprueba igualdad de identidades; no autoriza al solicitante ni genera claves.</description>
+    <errorConditionFormula>AND(NOT(ISBLANK(Usuario__c)), CASESAFEID(OwnerId) &lt;&gt; CASESAFEID(Usuario__c))</errorConditionFormula>
+    <errorDisplayField>Usuario__c</errorDisplayField>
+    <errorMessage>El propietario de la semana debe coincidir con su usuario titular.</errorMessage>
+</ValidationRule>

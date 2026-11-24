@@ -24,4 +24,4 @@ Distinguir revisión estática, conversión local, compilación en Salesforce, d
 
 Castellano técnico, directo y neutral. Documentar comportamiento, decisiones, comprobaciones y limitaciones. No incluir relatos de conversaciones, atribuciones de elaboración, autorreferencias, firmas ni coautorías automáticas. Conservar licencias y créditos legales de terceros. No copiar encargos operativos al repositorio.
 
-Los títulos de commit propuestos siguen el formato `tipo: descripción`, sin ámbitos entre paréntesis. La preparación de archivos no implica autorización para staging, commits, push o publicación remota.
+Los títulos de commit propuestos siguen el formato `tipo: descripción`, sin ámbitos entre paréntesis.

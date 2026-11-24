@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IdentidadInmutable</fullName>
+    <active>true</active>
+    <description>Conserva la identidad persistida. La creación canónica y la autorización corresponden al futuro servidor.</description>
+    <errorConditionFormula>AND(NOT(ISNEW()), OR(ISCHANGED(Usuario__c), ISCHANGED(Inicio__c), ISCHANGED(Clave__c), ISCHANGED(OwnerId)))</errorConditionFormula>
+    <errorMessage>No se puede cambiar el usuario, el inicio, la clave ni el propietario de una semana existente.</errorMessage>
+</ValidationRule>

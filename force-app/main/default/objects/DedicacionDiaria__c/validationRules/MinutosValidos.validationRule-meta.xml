@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MinutosValidos</fullName>
+    <active>true</active>
+    <description>Valida el valor persistido por línea. No valida la entrada original ni la suma diaria entre proyectos.</description>
+    <errorConditionFormula>OR(Minutos__c &lt;= 0, Minutos__c &gt; 1440, MOD(Minutos__c, 15) &lt;&gt; 0)</errorConditionFormula>
+    <errorDisplayField>Minutos__c</errorDisplayField>
+    <errorMessage>Los minutos deben ser positivos, múltiplos de 15 y no superar 1.440 por línea.</errorMessage>
+</ValidationRule>

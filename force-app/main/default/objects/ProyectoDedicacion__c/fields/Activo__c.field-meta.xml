@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Activo__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Indica si el proyecto admite dedicación nueva o cambios mediante el futuro servicio.</description>
+    <inlineHelpText>Desactivar conserva la dedicación histórica. La protección completa de escritura se implementará en servidor.</inlineHelpText>
+    <label>Activo</label>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CodigoNoVacio</fullName>
+    <active>true</active>
+    <description>Complementa la obligatoriedad del campo para rechazar códigos compuestos solo por espacios.</description>
+    <errorConditionFormula>LEN(TRIM(Codigo__c)) = 0</errorConditionFormula>
+    <errorDisplayField>Codigo__c</errorDisplayField>
+    <errorMessage>El código del proyecto no puede estar vacío ni contener solo espacios.</errorMessage>
+</ValidationRule>

@@ -4,7 +4,7 @@ Aplicación de demostración para registrar dedicación propia por proyecto y d�
 
 ## Estado
 
-Base local creada el 24/11/2026: proyecto Salesforce DX, estructura de fuentes y documentación técnica inicial. La aplicación todavía no está implementada y no hay organización Salesforce vinculada. No se han realizado compilaciones, despliegues ni pruebas funcionales.
+Fase 1A preparada localmente el 24/11/2026: tres objetos, doce campos, nueve validaciones, total semanal y base de acceso de solo lectura mediante grupos y reglas estándar. La base inicial ya está publicada; el estado de las comprobaciones de esta entrega figura en [STATUS.md](docs/STATUS.md). No hay organización P07 vinculada, compilación remota, despliegue ni validación funcional. El servicio de guardado y la cuadrícula LWC siguen pendientes.
 
 ## Alcance V1
 
@@ -20,10 +20,11 @@ No incluye nóminas, facturación, control horario con validez laboral, aprobaci
 
 | Ruta | Contenido |
 |---|---|
-| `force-app/main/default` | Directorio de fuentes, todavía sin componentes |
+| `force-app/main/default` | Modelo declarativo, grupos, permisos de lectura y reglas de compartición |
+| `manifest/fase-1a.xml` | Selección explícita del modelo y acceso de fase 1A |
 | `sfdx-project.json` | Proyecto DX; API 65.0 provisional |
 | `docs/PROJECT_BRIEF.md` | Objetivos, reglas y límites |
-| `docs/MODELO_DATOS.md` | Diseño inicial de entidades e invariantes |
+| `docs/MODELO_DATOS.md` | Modelo exacto y separación de restricciones declarativas y de servidor |
 | `docs/ARQUITECTURA.md` | Guardado, concurrencia y decisiones de implementación |
 | `docs/ACCESO.md` | Matriz de acceso e identidades de prueba |
 | `docs/ACEPTACION.md` | Criterios y evidencia pendiente |

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>P07_LecturaAmbito</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Comparte semanas de titulares del ámbito exclusivamente en lectura con su coordinación.</description>
+        <label>P07 Lectura del ámbito</label>
+        <sharedFrom>
+            <group>P07_MiembrosAmbito</group>
+        </sharedFrom>
+        <sharedTo>
+            <group>P07_CoordinacionAmbito</group>
+        </sharedTo>
+    </sharingOwnerRules>
+</SharingRules>

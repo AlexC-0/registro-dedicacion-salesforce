@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>P07_MiembrosAmbito</fullName>
+    <description>Titulares cuyas semanas integran el único ámbito de coordinación de V1. Sin miembros incluidos.</description>
+    <doesIncludeBosses>false</doesIncludeBosses>
+    <name>P07 Miembros del ámbito</name>
+</Group>

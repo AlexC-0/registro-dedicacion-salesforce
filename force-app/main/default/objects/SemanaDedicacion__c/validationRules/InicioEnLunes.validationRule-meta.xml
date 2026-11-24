@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InicioEnLunes</fullName>
+    <active>true</active>
+    <description>WEEKDAY utiliza 2 para el lunes.</description>
+    <errorConditionFormula>WEEKDAY(Inicio__c) &lt;&gt; 2</errorConditionFormula>
+    <errorDisplayField>Inicio__c</errorDisplayField>
+    <errorMessage>La fecha de inicio de la semana debe ser lunes.</errorMessage>
+</ValidationRule>

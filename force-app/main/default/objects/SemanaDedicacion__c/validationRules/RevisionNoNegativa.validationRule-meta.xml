@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RevisionNoNegativa</fullName>
+    <active>true</active>
+    <description>Restricción del valor almacenado; no implementa el incremento ni el control de concurrencia.</description>
+    <errorConditionFormula>Revision__c &lt; 0</errorConditionFormula>
+    <errorDisplayField>Revision__c</errorDisplayField>
+    <errorMessage>La revisión semanal no puede ser negativa.</errorMessage>
+</ValidationRule>

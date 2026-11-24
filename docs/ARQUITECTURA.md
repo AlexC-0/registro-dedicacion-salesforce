@@ -8,7 +8,7 @@
 - Protección de invariantes en las rutas de escritura habilitadas.
 - Consulta de coordinación e informe operativo respetando acceso a registros y campos.
 
-No hay componentes implementados en esta entrega. No se añaden Flow, Batch Apex, programación ni servicios externos.
+Fase 1A incorpora el modelo declarativo y la base de acceso de solo lectura. El servicio Apex, la protección integral de escrituras, el LWC y el informe aún no están implementados. No se añaden Flow, Batch Apex, programación ni servicios externos.
 
 ## Contrato de escritura
 
@@ -41,6 +41,14 @@ La activación de proyectos y su edición concurrente con un guardado necesitan 
 El LWC conserva por separado valores confirmados y cambios pendientes. Una respuesta fallida no sustituye el borrador ni muestra el guardado como correcto. Los errores distinguen validación, acceso, revisión desactualizada y fallo técnico sin revelar información de registros ajenos.
 
 Al cambiar de semana con modificaciones pendientes debe ofrecerse conservar la selección actual o descartar explícitamente el borrador. Un conflicto permite revisar el estado vigente antes de volver a aplicar cambios; no fusiona datos silenciosamente.
+
+## Lectura coherente y resultado desconocido
+
+La futura lectura devolverá revisión y datos de una misma instantánea lógica. Consultar la revisión antes de leer las líneas sin protección podría mezclar versiones; se deberá garantizar coherencia mediante una estrategia transaccional y comprobarla con cambios concurrentes.
+
+Una pérdida de comunicación tras enviar el guardado no demuestra rollback: el servidor podría haber confirmado. El cliente conservará el borrador y marcará el resultado como desconocido hasta reconciliarlo mediante una lectura coherente. No reenviará automáticamente cambios sobre una revisión nueva.
+
+La repetición de una petición no debe crear duplicados ni incrementar otra vez la revisión por aplicar de nuevo la misma modificación. Una revisión anterior puede producir un conflicto controlado; no se promete recuperar una respuesta idéntica sin un mecanismo implementado para ello.
 
 ## Pruebas previstas
 

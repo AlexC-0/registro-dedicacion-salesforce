@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fecha__c</fullName>
+    <description>Día de dedicación comprendido entre el lunes y el domingo de la cabecera.</description>
+    <inlineHelpText>Fecha de calendario. El control de fechas futuras se incorporará al servidor.</inlineHelpText>
+    <label>Fecha</label>
+    <required>true</required>
+    <type>Date</type>
+</CustomField>

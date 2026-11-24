@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Usuario__c</fullName>
+    <description>Persona titular de la semana. La obligatoriedad se exige mediante validación.</description>
+    <inlineHelpText>Usuario al que corresponde la dedicación; debe coincidir con el propietario.</inlineHelpText>
+    <label>Usuario</label>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Semanas de dedicación P07</relationshipLabel>
+    <relationshipName>SemanasDedicacionP07</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

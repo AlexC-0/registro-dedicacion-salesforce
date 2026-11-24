@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inicio__c</fullName>
+    <description>Primer día de la semana, expresado como fecha de calendario.</description>
+    <inlineHelpText>Debe ser lunes. La semana termina seis días después.</inlineHelpText>
+    <label>Lunes de inicio</label>
+    <required>true</required>
+    <type>Date</type>
+</CustomField>

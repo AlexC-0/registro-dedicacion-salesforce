@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Semana__c</fullName>
+    <description>Cabecera obligatoria que determina propiedad y acceso. No permite reparentado.</description>
+    <inlineHelpText>La línea pertenece de forma permanente a esta semana.</inlineHelpText>
+    <label>Semana</label>
+    <referenceTo>SemanaDedicacion__c</referenceTo>
+    <relationshipLabel>Dedicaciones diarias</relationshipLabel>
+    <relationshipName>Dedicaciones</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

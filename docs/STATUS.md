@@ -2,37 +2,57 @@
 
 Fecha: 24/11/2026.
 
-## Base local
+## Fase 1A: modelo declarativo y acceso de lectura
 
-Preparada la estructura independiente de P07 con configuración Salesforce DX, exclusiones de estado local, convenciones de archivos y documentación de alcance, modelo, guardado, acceso y aceptación.
+Metadatos locales preparados: tres objetos, doce campos personalizados, nueve validaciones, tres grupos públicos, dos Permission Sets de lectura y dos reglas de compartición. El manifiesto [fase-1a.xml](../manifest/fase-1a.xml) selecciona diez miembros de nivel superior; incluye los campos y validaciones de los objetos.
 
-El directorio fuente no contiene componentes. La aplicación no está implementada; no hay organización vinculada ni datos, usuarios o metadatos creados en Salesforce. No se han ejecutado pruebas Apex, Jest, compilaciones remotas ni despliegues.
+El modelo incorpora el total semanal mediante resumen de todas las líneas. Conserva claves únicas, fechas de lunes a domingo, límites por línea, coherencia parcial de identidad, restricción de eliminación de proyectos y ausencia de reparentado. El [modelo exacto](MODELO_DATOS.md) distingue estas defensas de las invariantes pendientes de servidor.
 
-## Inspección inicial
+Los permisos no habilitan escritura ordinaria. La [solución de acceso](ACCESO.md) concreta un ámbito por propietarios y grupos, catálogo de lectura para participantes y un requisito de instalación pendiente: desactivar y verificar la jerarquía de los objetos antes de habilitar participantes. No se han asignado usuarios ni permisos.
 
-La inspección local determinó ausencia de la carpeta propuesta en el directorio de repositorios. Las herramientas y límites observados constan en [ENVIRONMENT.md](ENVIRONMENT.md). El proyecto anterior se mantuvo intacto y no se utilizó como plantilla de implementación.
+## Continuidad de la base publicada
 
-## Comprobaciones de la base
+Al comenzar esta fase, HEAD y la referencia local origin/main coincidían en fdd1f9e10d20b88c20598c5e367c34b1a3d72936, en rama main y con remoto del proyecto registro-dedicacion-salesforce. No se forzó ninguna referencia ni se consultó el remoto para actualizarla.
 
-- Configuración JSON legible, nombre del proyecto correcto y un único paquete fuente predeterminado existente.
-- Quince archivos inspeccionados: UTF-8 sin BOM, finales LF, salto final y ausencia de espacios al final de línea.
-- Enlaces Markdown locales resueltos; revisión editorial y búsqueda acotada de patrones de secretos sin incidencias. No constituye una auditoría exhaustiva de secretos.
-- Exclusiones Git comprobadas para autenticación, estado privado, variables de entorno, dependencias y cobertura, sin crear esos archivos.
-- Repositorio local inicializado en main, sin commits, archivos en staging ni remotos. Archivos de la base pendientes de incorporar al historial.
+Existía una modificación local en .forceignore que añadía exclusiones para jsconfig.json y .eslintrc.json. Se conservó íntegra. El estado histórico sin commits corresponde únicamente a la creación inicial de la base; no describe el punto de partida de esta fase.
 
-Estas comprobaciones son locales y estáticas; no acreditan conversión de metadatos, compilación de Salesforce ni funcionamiento de la aplicación.
+## Comprobaciones locales
 
-## Entregas siguientes
+| Comprobación | Resultado y límite |
+|---|---|
+| XML y JSON | 32 XML fuente/manifiesto bien formados, con namespace Metadata API; configuración DX legible y API 65.0 coherente con el manifiesto |
+| Inventario y referencias | Tres objetos, doce campos, nueve validaciones; relaciones, resumen, campos de fórmulas y de error, grupos y diez miembros del manifiesto resueltos |
+| Acceso estático | Dos permisos de solo lectura; sin FLS sobre campos universalmente obligatorios; dos reglas Read y tres grupos sin propagación jerárquica de grupo |
+| Fórmulas | Referencias y paréntesis revisados; funciones contrastadas con documentación oficial. No se ejecutó el motor de fórmulas de Salesforce |
+| Conversión final | CLI: status 0, sin avisos; once archivos Metadata API completos en tmp/fase-1a-mdapi-20261124, excluidos de Git |
+| Integridad del paquete | XML convertido legible; inventario completo y contenido de los doce campos y nueve validaciones conservado respecto a las fuentes |
+| Formato y documentación | Enlaces locales, UTF-8, acentos, finales de línea y diferencias revisados; el formato previo de .forceignore se conservó |
+| Revisión editorial | Archivos propios actuales, metadatos e instrucciones revisados; sin atribuciones automáticas ni patrones de credenciales detectados en el alcance revisado |
 
-1. Implementar modelo, claves, validaciones y protección de invariantes con diseño de acceso explícito.
-2. Incorporar servicio Apex de lectura y guardado atómico, revisión y pruebas automatizadas.
-3. Incorporar cuadrícula LWC, borrador, errores, accesibilidad y pruebas Jest.
-4. Preparar consulta de coordinación e informe operativo.
-5. Validar y desplegar en el destino dedicado; comprobar funciones con identidades ordinarias y escenarios negativos.
-6. Consolidar evidencias y contrastar los criterios de aceptación antes de declarar una V1 terminada.
+Se revisaron 47 archivos propios actuales, incluidos los 32 XML nuevos. La búsqueda de patrones de secretos es acotada y no constituye una auditoría exhaustiva.
 
-Las tareas locales pueden avanzar sin organización. Las comprobaciones remotas necesitan identificar el destino P07 y acreditar su capacidad. El runtime Java compatible debe comprobarse antes de atribuir funcionamiento al servicio de lenguaje Apex del editor.
+### Incidencia de conversión resuelta
 
-## Límites
+Dos intentos en .local/fase-1a-mdapi-20261124 y .tmp/fase-1a-mdapi-20261124 devolvieron status 0, pero solo escribieron package.xml. La comprobación de inventario los rechazó como paquetes incompletos. No se contabilizan como conversiones satisfactorias.
 
-No hay aceptación funcional ni resultados de concurrencia, seguridad o rendimiento. El diseño transaccional y la matriz de permisos son especificaciones pendientes de implementación y prueba. Las versiones de herramientas no sustituyen la verificación del proyecto completo.
+La inspección del convertidor instalado mostró que StandardWriter aplica ForceIgnore al destino y que el filtro predeterminado **/.* omite carpetas ocultas. La conversión final utilizó tmp/, ya excluido por .gitignore y sin prefijo de carpeta oculta. Los dos resultados incompletos y el paquete final permanecen separados en directorios temporales excluidos; no se incorporan al repositorio.
+
+Durante la preparación se corrigió también la pérdida de acentos causada por la codificación de una tubería de terminal. La revisión posterior confirma textos UTF-8 correctos; el paquete final se generó después de esa corrección.
+
+## Comprobaciones no ejecutadas
+
+No hubo autenticación, consulta a organizaciones, compilación de Salesforce, despliegue, carga de registros ni sesiones funcionales. No hay Apex o LWC que justifique pruebas Apex o Jest en esta entrega. No se instalaron dependencias ni se modificaron herramientas globales.
+
+La conversión comprueba ensamblado de formato y conservación de contenido; no valida restricciones de plataforma, expresiones de fórmula ni seguridad efectiva. La API, las relaciones, las fórmulas, el resumen y los permisos necesitan aceptación y pruebas en un destino P07 identificado.
+
+## Siguiente paso
+
+Identificar el destino exclusivo P07 y preparar una fase de compilación y verificación del modelo y acceso. Antes de asignar funciones, comprobar edición, API, licencias, identidades, ajuste de jerarquía y pertenencias. No cargar dedicaciones mediante rutas provisionales que suplanten el protocolo pendiente.
+
+Después se implementarán el servicio de lectura y guardado, las protecciones de escritura y sus pruebas; posteriormente, la cuadrícula LWC y el informe. El [contrato de arquitectura](ARQUITECTURA.md) y los [criterios AC-01 a AC-25](ACEPTACION.md) recogen rollback posterior a escritura, repetición de peticiones, resultado desconocido y lectura coherente como escenarios previstos, no ejecutados.
+
+## Antecedentes conservados
+
+La inspección inicial constató la ausencia de carpeta P07 y revisó las herramientas sin modificar organizaciones. Después se creó la base independiente con quince archivos: configuración DX, exclusiones, convenciones y documentación. En aquel momento el repositorio estaba recién inicializado, sin commits ni remoto; la base publicada posterior queda identificada arriba.
+
+Las comprobaciones de aquella base cubrieron JSON, estructura, enlaces, formato y exclusiones. Los inventarios de herramientas de [ENVIRONMENT.md](ENVIRONMENT.md) corresponden a esa inspección y no se presentan como una revisión general repetida en fase 1A.

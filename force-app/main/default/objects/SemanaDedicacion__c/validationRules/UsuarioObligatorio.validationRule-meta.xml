@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UsuarioObligatorio</fullName>
+    <active>true</active>
+    <description>Exige usuario en cada guardado sin imponer obligatoriedad universal al lookup estándar.</description>
+    <errorConditionFormula>ISBLANK(Usuario__c)</errorConditionFormula>
+    <errorDisplayField>Usuario__c</errorDisplayField>
+    <errorMessage>La semana debe tener un usuario titular.</errorMessage>
+</ValidationRule>

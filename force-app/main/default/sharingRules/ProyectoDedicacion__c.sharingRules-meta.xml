@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>P07_CatalogoParticipantes</fullName>
+        <accessLevel>Read</accessLevel>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Activo__c</field>
+            <operation>equals</operation>
+            <value>true</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Activo__c</field>
+            <operation>equals</operation>
+            <value>false</value>
+        </criteriaItems>
+        <description>Comparte proyectos activos e inactivos en lectura con participantes autorizados.</description>
+        <label>P07 Catálogo para participantes</label>
+        <sharedTo>
+            <group>P07_Participantes</group>
+        </sharedTo>
+    </sharingCriteriaRules>
+</SharingRules>

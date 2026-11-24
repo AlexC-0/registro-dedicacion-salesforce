@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proyecto__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Proyecto obligatorio. Se impide borrar proyectos con dedicaciones relacionadas.</description>
+    <inlineHelpText>Referencia al proyecto; el histórico inactivo permanece visible.</inlineHelpText>
+    <label>Proyecto</label>
+    <referenceTo>ProyectoDedicacion__c</referenceTo>
+    <relationshipLabel>Dedicaciones diarias</relationshipLabel>
+    <relationshipName>Dedicaciones</relationshipName>
+    <required>true</required>
+    <type>Lookup</type>
+</CustomField>

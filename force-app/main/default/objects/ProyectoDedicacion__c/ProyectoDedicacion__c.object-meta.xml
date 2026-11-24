@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Catálogo de proyectos ficticios. La desactivación conserva el histórico de dedicación.</description>
+    <enableActivities>false</enableActivities>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <externalSharingModel>Private</externalSharingModel>
+    <label>Proyecto de dedicación</label>
+    <nameField>
+        <label>Nombre del proyecto</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Proyectos de dedicación</pluralLabel>
+    <sharingModel>Private</sharingModel>
+</CustomObject>

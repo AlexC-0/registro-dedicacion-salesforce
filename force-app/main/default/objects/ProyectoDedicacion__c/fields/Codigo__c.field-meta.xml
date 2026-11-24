@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Codigo__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>Identificador único del proyecto, sin distinguir mayúsculas y minúsculas.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Código obligatorio de hasta 40 caracteres. No puede contener solo espacios.</inlineHelpText>
+    <label>Código</label>
+    <length>40</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>
