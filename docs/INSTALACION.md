@@ -202,3 +202,29 @@ Crear un catálogo ficticio pequeño con códigos únicos. Su administración ne
 Entrar en P07 Dedicación y utilizar Mi dedicación o seleccionar P07 Semanas accesibles, P07 Dedicaciones accesibles y P07 Proyectos accesibles en las pestañas estándar. Coordinación consulta el ámbito en estas vistas; la cuadrícula sigue siendo propia. Probar también URLs conocidas, edición denegada y retirada/restauración de A, esperando el recálculo.
 
 Los datos de esta ejecución se conservan. No repetir altas, borrados o cambios de grupo como limpieza automática. Los límites y la revisión manual de [ACEPTACION.md](ACEPTACION.md) no sustituyen los resultados obtenidos en [STATUS.md](STATUS.md).
+
+## Instalación incremental de fase 4
+
+El 25/11/2026 se instaló [fase-4.xml](../manifest/fase-4.xml) sobre la habilitación de fase 3B. Requiere los objetos con informes habilitados, sus relaciones, los grupos y las tres identidades P07 existentes. No reinstala el esquema, perfil, página, Apex ni LWC.
+
+El manifiesto contiene P07_Dedicacion como aplicación y carpeta, el informe P07_Dedicacion/DedicacionSemanal y P07_InformesLectura. El tipo estándar de semanas con dedicaciones y proyecto se verificó mediante Analytics API 65.0; no hay ReportType personalizado. La carpeta se incluye como miembro de Report en el manifiesto.
+
+Tras contrastar identidad, diferencias remotas, cambios locales y huellas, validar:
+
+~~~powershell
+sf project deploy start --manifest manifest/fase-4.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level NoTestRun --dry-run --wait 1 --json
+~~~
+
+Esperar el resultado final con el identificador devuelto si el trabajo sigue activo. Solo con Succeeded, success=true y checkOnly=true, desplegar las mismas fuentes:
+
+~~~powershell
+sf project deploy start --manifest manifest/fase-4.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level NoTestRun --wait 1 --json
+~~~
+
+Exigir Succeeded, success=true y checkOnly=false. Recuperar en un directorio separado y contrastar las cuatro definiciones sin sobrescribir las fuentes. La recuperación ejecutada terminó con 09Sg700000bh8jOEAQ; las normalizaciones admitidas están en [STATUS.md](STATUS.md).
+
+La validación exigió dos correcciones concretas: Metadata API utiliza FK_$ProyectoDedicacion__c.Codigo__c para esa columna relacionada, y los campos agrupados no se repiten en columns. Se conservaron ambos rechazos antes de la validación satisfactoria.
+
+La asignación del nuevo permiso no forma parte del despliegue de metadatos. Tras comprobar su contenido, se asignó P07_InformesLectura exclusivamente a las tres identidades existentes: habilita RunReports y la pestaña Informes. Verificar View para P07_Participantes en la carpeta, ausencia de permisos amplios o escritura, conservación de grupos y nueve asignaciones explícitas totales. No asignar por nombre ambiguo ni crear usuarios adicionales.
+
+La comprobación técnica de filtros, detalle y sumas terminó correctamente. Para aceptación funcional se requieren sesiones legítimas de A, B y coordinación; este procedimiento no habilita políticas globales de acceso ni modifica autenticación. El aislamiento frente a informes públicos ajenos y el recorrido de teclado continúan pendientes. Diseño, uso y resultados en [INFORME.md](INFORME.md).

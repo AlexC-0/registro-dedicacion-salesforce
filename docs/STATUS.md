@@ -1,8 +1,62 @@
 # Estado del proyecto
 
-Fecha: 24/11/2026.
+Fecha: 25/11/2026.
 
-## Fase 3B: habilitación y demostración funcional ejecutadas
+## Fase 4: informe instalado; comprobación funcional pendiente
+
+Base revisada: 00d731463fca5567a4ea01cbaebb23895c1e5d11, rama main y remoto del repositorio registro-dedicacion-salesforce. Se conserva el archivo local previo force-app/main/default/lwc/jsconfig.json. Destino y cuenta técnica contrastados con el registro privado: Developer Edition compartida con P06, alias p06-renovaciones-dev, API 65.0.
+
+### Preparación y diseño
+
+El inventario inicial contiene 25 carpetas y 31 informes. No existían la carpeta ni el informe P07. El tipo estándar de semanas con dedicaciones y proyecto permite el diseño completo; no se añadió ReportType personalizado. [INFORME.md](INFORME.md) detalla ubicación, filtros, sumas y límites.
+
+El manifiesto [fase-4.xml](../manifest/fase-4.xml) selecciona cuatro componentes: informe, carpeta, Permission Set y aplicación. La aplicación añade la pestaña Informes. El informe agrupa por lunes, propietario de la semana y proyecto; muestra detalle diario y suma los minutos de las líneas. No suma el resumen de cabecera ni excluye proyectos inactivos. Una semana sin líneas no genera detalle.
+
+P07_InformesLectura habilita RunReports y la pestaña; se asignó exclusivamente a las tres identidades P07 existentes. Son nueve asignaciones explícitas en total. La carpeta concede View a P07_Participantes. El perfil, los permisos de objetos, grupos y pertenencias anteriores se conservan; no se añadieron privilegios de edición, API o acceso global.
+
+### Validación, despliegue y recuperación
+
+| Operación | Identificador | Resultado final |
+|---|---|---|
+| Validación inicial | 0Afg700000LGyfGCAT | Failed, checkOnly=true; referencia del código de proyecto no válida en Metadata API |
+| Segunda validación | 0Afg700000LHeD4CAL | Failed, checkOnly=true; campos agrupados duplicados en las columnas |
+| Validación corregida | 0Afg700000LHNsACAX | Succeeded, success=true, checkOnly=true; 4/4 |
+| Despliegue | 0Afg700000LHgI5CAL | Succeeded, success=true, checkOnly=false; 4/4 |
+| Recuperación | 09Sg700000bh8jOEAQ | Succeeded; cuatro archivos contrastados |
+
+Se corrigió la referencia de columna relacionada a FK_$ProyectoDedicacion__c.Codigo__c y se retiraron de las columnas los tres campos ya presentes en las agrupaciones. No se cambió el contrato de datos.
+
+Las cinco huellas de fuentes y manifiesto coinciden antes y después del despliegue. El contraste semántico acepta únicamente los valores predeterminados recuperados: Day en agrupaciones no temporales, parámetro co=1, dos opciones de navegación false y nombre canónico standard-report. No hay diferencias inesperadas.
+
+NoTestRun: cero pruebas Apex nuevas. No se modificaron Apex, LWC o modelo ni se repitieron Jest y Apex históricos. La validación remota, la recuperación y la ejecución técnica del informe se documentan como comprobaciones distintas.
+
+### Resultados obtenidos
+
+Las cabeceras y líneas coinciden con la referencia anterior: A, semana 23/11, tres líneas y 105 minutos, revisión 5; A, semana 16/11, cero líneas, revisión 2; B, semana 23/11, una línea y 60 minutos, revisión 2.
+
+Tres ejecuciones técnicas del informe: semana 23/11 → cuatro filas y 165 minutos; semana 16/11 → cero filas y cero minutos; ambas semanas → cuatro filas y 165 minutos. Todas indican allData=true. Subtotales: A histórico 45 y revisión 60; B desarrollo 60. La interfaz real bajo la cuenta técnica muestra los mismos valores y las dos líneas históricas.
+
+La consulta técnica UserRecordAccess conserva A=5, B=2 y coordinación=5 registros legibles entre las siete cabeceras/líneas activas; cero editables. Los Permission Sets y el perfil mantienen lectura exclusivamente de los tres objetos P07. RunReports es el único privilegio habilitado entre las capacidades de informes y acceso amplio revisadas.
+
+### Acceso funcional y límites
+
+La sesión de navegador verificada es técnica y Miembro A no ofrece acceso delegado. No se habilitó Login As ni se cambiaron contraseñas o autenticación. Las ejecuciones del informe como A, B y coordinación y el recorrido de teclado no se han realizado. [INFORME.md](INFORME.md) identifica el acceso necesario y el procedimiento pendiente.
+
+RunReports es una capacidad general. Hay cinco informes públicos de ejemplo de orquestación preexistentes; su visibilidad efectiva tras la concesión sigue sin comprobación funcional. La carpeta P06, sus destinatarios y los permisos de sus objetos se conservaron, y las tres identidades P07 solo tienen pertenencias a grupos P07. No se afirma aislamiento completo de informes por una inspección técnica.
+
+La suma del informe concuerda con las líneas actuales y con los resúmenes históricos de fase 3B. La conciliación nueva entre informe, resumen y cuadrícula para cada identidad está pendiente; no se ampliaron los permisos técnicos para sustituir esas sesiones.
+
+### Conservación y estado final
+
+P07 conserva tres proyectos, tres semanas, cuatro líneas activas y tres eliminadas. Los campos inventariados, incluidos SystemModstamp, no cambian durante la fase. No se guardaron borradores ni se cargaron dedicaciones.
+
+P06 conserva los 432 registros de negocio, cuatro comparticiones manuales, grupos, pertenencias, asignaciones, definiciones de objetos y Permission Sets del inventario; tampoco cambian los usuarios preexistentes. El contraste adicional conserva su carpeta, informe y nueve entradas no P07 del inventario Apex. SecuritySettings coincide íntegramente con la referencia previa; Login As=false.
+
+Licencias: Salesforce 4/4 y Salesforce Platform 3/6. No se crearon identidades. V1 sigue abierta. AC-16, AC-20 y la conciliación integrada de AC-25 mantienen pendientes; los escenarios previos de concurrencia, resultado desconocido y jerarquía no reciben nueva evidencia ni aceptación.
+
+[Evidencia sanitizada de fase 4](evidencias/FASE-4.json). Se conservan los recibos fallidos y satisfactorios en el registro privado. El informe está instalado; la fase no se declara completada mientras falten las comprobaciones funcionales indicadas.
+
+## Antecedente: fase 3B, habilitación y demostración funcional ejecutadas
 
 Base revisada: 20a9be9e9847d36732acc092e09afae2bbcd483b, rama main y remoto registro-dedicacion-salesforce. Se conservaron los avances locales de preparación. Destino y cuenta técnica contrastados con el registro privado: Developer Edition compartida con P06, alias p06-renovaciones-dev y API 65.0.
 

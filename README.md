@@ -4,7 +4,7 @@ Aplicación de demostración para registrar dedicación propia por proyecto y d�
 
 ## Estado
 
-Fase 3B ejecutada: aplicación y navegación P07, tres identidades ficticias con permisos mínimos, catálogo y demostración real de guardado, revisión antigua y ámbito de coordinación. Trece componentes validados, desplegados y contrastados; código Apex y LWC sin cambios. P06 conservado en el inventario acotado y accesos temporales retirados. [STATUS.md](docs/STATUS.md) recoge resultados y límites. La accesibilidad mantiene cobertura parcial; informe y otros escenarios pendientes, sin cierre de V1.
+Fase 4: informe operativo instalado con tipo estándar, carpeta de consulta y permiso mínimo para las tres identidades P07. Validación, despliegue y contraste de cuatro componentes completados; sumas y filtros comprobados con la cuenta técnica. La ejecución como A, B y coordinación y el recorrido de teclado siguen pendientes de acceso funcional legítimo. Apex, LWC, modelo y datos conservados. [STATUS.md](docs/STATUS.md) recoge resultados; [INFORME.md](docs/INFORME.md), uso y límites. V1 permanece abierta.
 
 ## Alcance V1
 
@@ -25,6 +25,7 @@ No incluye nóminas, facturación, control horario con validez laboral, aprobaci
 | `manifest/fase-2a.xml` | Servicio, triggers, permisos de operación y pruebas de fase 2A |
 | `manifest/fase-3a.xml` | Bundle LWC, sin reinstalar el backend |
 | `manifest/fase-3b.xml` | Aplicación, página, pestañas, layouts, vistas y perfil P07 |
+| `manifest/fase-4.xml` | Informe, carpeta, permiso de ejecución y navegación |
 | `package.json`, `package-lock.json`, `jest.config.js` | Dependencias locales fijadas y pruebas Jest |
 | `sfdx-project.json` | Proyecto DX; API 65.0 |
 | `docs/PROJECT_BRIEF.md` | Objetivos, reglas y límites |

@@ -10,5 +10,6 @@
     <tabs>SemanaDedicacion__c</tabs>
     <tabs>DedicacionDiaria__c</tabs>
     <tabs>ProyectoDedicacion__c</tabs>
+    <tabs>standard-report</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

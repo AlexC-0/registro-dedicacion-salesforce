@@ -103,3 +103,21 @@ El escenario de dos pantallas corresponde al mismo usuario y a guardados sucesiv
 Para completar la revisión manual de accesibilidad: abrir una sesión funcional legítima, recorrer fecha, selector, celdas, errores y diálogos usando solo teclado; reducir la anchura, enfocar la región de cuadrícula y verificar acceso a columnas finales y totales mediante desplazamiento horizontal. Comprobar cancelación, retorno de foco y lectura de etiquetas y errores con lector de pantalla. Registrar resultados observados, sin dar por superadas las interacciones que la automatización no acreditó.
 
 La fase no cierra V1. El informe operativo corresponde a la entrega posterior; los límites anteriores no se consideran aceptados por omisión. Véanse [STATUS.md](STATUS.md) y [FASE-3B.json](evidencias/FASE-3B.json).
+
+## Evidencia técnica y pendientes de fase 4
+
+Informe, carpeta, permiso y navegación validados, desplegados y recuperados el 25/11/2026. Cuatro componentes, NoTestRun, cero pruebas Apex nuevas. Apex, LWC y modelo no cambiaron; no se repitió Jest.
+
+| Criterio | Evidencia obtenida en fase 4 | Pendiente |
+|---|---|---|
+| AC-16 | Informe estándar ejecutado con cuenta técnica: cuatro líneas, 165 minutos; subtotales A=105 y B=60; filtros de semana vacía y rango correctos | Ejecución real como A, B y coordinación; carpeta, aislamiento y ausencia de edición |
+| AC-06, AC-17 | Dos líneas históricas incluidas, 45 minutos; la semana vacía no genera filas y conserva su cabecera con revisión 2 | No hay nueva sesión funcional ni nueva lectura técnica del campo opcional Activo__c |
+| AC-14 | RunReports mínimo, carpeta View y consulta UserRecordAccess conservada | Denegaciones en el informe y visibilidad efectiva de informes públicos ajenos después de conceder RunReports |
+| AC-20 | Sin nueva comprobación de teclado: la sesión disponible es técnica y no hay acceso delegado a A | Recorrido funcional de selectores, celdas, acciones, diálogos, errores, retorno del foco y columnas finales a anchura reducida |
+| AC-25 | Sumas del informe y líneas actuales coincidentes; referencia histórica de resúmenes conservada | Conciliación nueva de informe, resumen y cuadrícula bajo la misma identidad y semana |
+
+Los 105, 60 y 105 minutos esperados para A, B y coordinación son referencias de la futura comprobación por función; no son resultados de ejecuciones del informe en esas sesiones. La revisión visual realizada corresponde únicamente a la cuenta técnica.
+
+El procedimiento pendiente de teclado y la conservación de borradores y datos están delimitados en [INFORME.md](INFORME.md). No se marca AC-20 como completado. El acceso global Login As y la autenticación permanecen sin cambios.
+
+V1 sigue abierta. La instalación del informe no cierra AC-16 ni los límites anteriores de concurrencia real, resultado desconocido, lectura/escritura simultánea y jerarquía. [FASE-4.json](evidencias/FASE-4.json) separa instalación, consultas técnicas, revisión visual técnica y pruebas funcionales pendientes.

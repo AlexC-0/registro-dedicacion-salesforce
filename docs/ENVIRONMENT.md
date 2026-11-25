@@ -89,3 +89,13 @@ Aplicación, página, pestañas, layouts y vistas P07 instalados. Tres proyectos
 Login As terminó desactivado; el resto de SecuritySettings coincide con la referencia inicial. La cuenta técnica recuperó su sesión y no conserva la concesión temporal de catálogo. Esta preparación no proporciona credenciales para acceso autónomo a los usuarios ficticios.
 
 La compilación y el despliegue de los trece metadatos finalizaron con NoTestRun y cero pruebas Apex nuevas. No se modificó código; los resultados automatizados anteriores conservan su fecha y alcance. Las sesiones reales y sus límites se documentan separadamente en [STATUS.md](STATUS.md).
+
+## Entorno de fase 4
+
+Comprobación del 25/11/2026: mismo destino Developer Edition compartido, alias explícito p06-renovaciones-dev, API 65.0 y cuenta técnica contrastada con el registro privado. Salesforce CLI 2.158.7, Node 24.13.0, npm 11.6.2 y Git 2.56.1.windows.1. No se actualizaron herramientas globales.
+
+La conexión de navegador se restableció sobre Chrome preparado y se verificó la identidad técnica. Esa sesión permite revisar la presentación del informe; no sustituye el acceso funcional a las identidades P07. Los detalles y diagnósticos de la conexión permanecen en notas privadas y no son requisitos de instalación de la aplicación.
+
+Se mantienen Salesforce 4/4 y Salesforce Platform 3/6. No se crearon usuarios ni se cambiaron perfiles o autenticación. RunReports procede del Permission Set P07 nuevo, asignado a las tres funciones. SecuritySettings coincide con la referencia previa y Login As=false.
+
+El estado de datos y las limitaciones de comprobación funcional se recogen en [STATUS.md](STATUS.md) e [INFORME.md](INFORME.md).

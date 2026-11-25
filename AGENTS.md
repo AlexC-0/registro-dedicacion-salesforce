@@ -46,8 +46,16 @@ Castellano técnico, directo y neutral. Documentar comportamiento, decisiones, c
 
 Los títulos de commit propuestos siguen el formato `tipo: descripción`, sin ámbitos entre paréntesis.
 
-## Resultado vigente de fase 3B
+## Resultado de fase 3B
 
 Aplicación y navegación P07 habilitadas, tres identidades funcionales y catálogo ficticio conservados. Validación final 0Afg700000LAPh1CAH y despliegue 0Afg700000L9NhGCAV: 13/13 componentes, NoTestRun; Apex y LWC sin cambios. Guardado propio, revisión antigua, denegaciones y retirada/restauración del ámbito comprobados en sesiones reales. Conservar tres proyectos, tres semanas, cuatro líneas activas y tres eliminadas en papelera; detalles y límites en docs/STATUS.md y docs/evidencias/FASE-3B.json.
 
 Login As restaurado a false, sesión técnica recuperada y permisos temporales de catálogo retirados. No reactivar accesos temporales, repetir ensayos o modificar datos por inercia. P06 conserva 432 registros y cuatro comparticiones manuales en el contraste acotado. V1 abierta; accesibilidad parcial, informe y otros escenarios pendientes no constituyen una autorización automática para ejecutarlos.
+
+## Resultado vigente de fase 4
+
+Informe operativo instalado el 25/11/2026 sobre 00d731463fca5567a4ea01cbaebb23895c1e5d11. Validación 0Afg700000LHNsACAX y despliegue 0Afg700000LHgI5CAL: cuatro componentes, NoTestRun. Tipo estándar, carpeta P07 con View, Permission Set P07_InformesLectura y pestaña Informes; tres asignaciones nuevas y nueve explícitas totales. Apex, LWC y modelo sin cambios.
+
+Las ejecuciones técnicas del informe concilian 165 minutos, con A=105 y B=60, y cero líneas para la semana vacía. No se ejecutó el informe como A, B o coordinación ni se completó teclado: la sesión disponible es técnica y no hay acceso delegado a A. Conservar AC-16, AC-20 y la conciliación integrada pendientes; RunReports no garantiza por sí solo aislamiento frente a informes públicos ajenos. Véanse docs/INFORME.md y docs/evidencias/FASE-4.json.
+
+Conservar las tres semanas, cuatro líneas activas y tres eliminadas, así como los 432 registros P06 y cuatro comparticiones manuales inventariadas. SecuritySettings sin diferencias y Login As=false; no reactivar accesos temporales ni alterar autenticación por continuidad de trabajos. V1 abierta, sin aceptación implícita de los límites anteriores.

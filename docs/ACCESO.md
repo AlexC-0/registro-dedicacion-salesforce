@@ -112,3 +112,17 @@ El mecanismo Login As requirió una habilitación temporal de la política. Fina
 La preparación y desactivación del catálogo requirieron FLS temporal sobre Activo__c para la cuenta técnica. Se utilizó P07_CatalogoTemporal, con acceso limitado al catálogo, y se retiraron asignación y componente después de cada operación. No forma parte del paquete de aplicación ni de los permisos funcionales.
 
 Las claves obligatorias y algunos campos pueden aparecer como Required en el layout recuperado por normalización de Salesforce; ese atributo no otorga Create o Edit. Los accesos efectivos siguen siendo de lectura y el botón de aprobación está excluido. Resultados y límites en [STATUS.md](STATUS.md).
+
+## Estado de acceso de fase 4
+
+El 25/11/2026 se añadió P07_InformesLectura a A, B y coordinación: tres asignaciones nuevas y nueve explícitas en total. El perfil y los seis permisos asignados previamente no se modificaron. Este conjunto solo habilita RunReports y la pestaña Informes; no concede permisos de objetos, campos, clases, API, exportación, suscripciones o administración de informes.
+
+P07_Dedicacion comparte su carpeta de informes con P07_Participantes mediante View. La aplicación añade la quinta pestaña, Informes. No hay filtros fijos por identidad: el informe utiliza todos los registros accesibles y las reglas anteriores siguen determinando el ámbito. Conceder acceso a la carpeta no amplía la visibilidad de registros.
+
+Se inspeccionaron las asignaciones efectivas, incluyendo el conjunto interno del perfil. Entre los privilegios revisados solo RunReports está habilitado; no hay CreateCustomizeReports, ManageReportsInPubFolders, ViewReportsInPublicFolders, CreateReportFolders, API, ViewAllData o ModifyAllData. Las concesiones de objetos siguen limitadas a Read en los tres objetos P07, sin escritura ni View All/Modify All. UserRecordAccess conserva cinco registros legibles para A y coordinación, dos para B y cero editables en los siete registros inventariados.
+
+Las pertenencias efectivas calculadas son exclusivamente P07: participantes para los tres, miembros del ámbito para A y coordinación del ámbito para coordinación. La carpeta de informes P06 conserva View para sus tres grupos anteriores, sin incorporación de las identidades P07.
+
+RunReports es general y el inventario previo contiene cinco informes de ejemplo en Informes públicos. No se han ampliado permisos de objetos ajenos ni cambiado sus carpetas; la visibilidad real de esos informes tras la concesión sigue pendiente de sesiones ordinarias. La cuenta técnica no acredita ese aislamiento.
+
+La sesión disponible es técnica, la ficha de A no ofrece acceso delegado y Login As=false permanece sin cambios. No se modificó autenticación. La ejecución del informe como A, B y coordinación requiere acceso legítimo a esas identidades. Véanse [INFORME.md](INFORME.md) y [FASE-4.json](evidencias/FASE-4.json).

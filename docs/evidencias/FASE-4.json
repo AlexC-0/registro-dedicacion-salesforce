@@ -1,0 +1,327 @@
+{
+  "phase": "4",
+  "date": "2026-11-25",
+  "base": "00d731463fca5567a4ea01cbaebb23895c1e5d11",
+  "status": "Instalación y contraste técnico terminados; comprobación funcional pendiente",
+  "target": {
+    "alias": "p06-renovaciones-dev",
+    "edition": "Developer Edition",
+    "apiVersion": "65.0",
+    "sharedWith": "P06",
+    "identityVerified": true,
+    "browserIdentity": "Cuenta técnica verificada"
+  },
+  "preparation": {
+    "existingFolders": 25,
+    "existingReports": 31,
+    "standardReportType": "CustomEntityCustomEntity$SemanaDedicacion__c$DedicacionDiaria__c@DedicacionDiaria__c.Proyecto__c",
+    "customReportTypeAdded": false,
+    "previousUntrackedFilePreserved": true
+  },
+  "operations": [
+    {
+      "operation": "validate-1",
+      "id": "0Afg700000LGyfGCAT",
+      "status": "Failed",
+      "done": true,
+      "success": false,
+      "checkOnly": true,
+      "componentsTotal": 4,
+      "componentsDeployed": 3,
+      "componentErrors": 1,
+      "testsTotal": 0,
+      "warnings": []
+    },
+    {
+      "operation": "validate-2",
+      "id": "0Afg700000LHeD4CAL",
+      "status": "Failed",
+      "done": true,
+      "success": false,
+      "checkOnly": true,
+      "componentsTotal": 4,
+      "componentsDeployed": 3,
+      "componentErrors": 1,
+      "testsTotal": 0,
+      "warnings": []
+    },
+    {
+      "operation": "validate-3",
+      "id": "0Afg700000LHNsACAX",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": true,
+      "componentsTotal": 4,
+      "componentsDeployed": 4,
+      "componentErrors": 0,
+      "testsTotal": 0,
+      "warnings": []
+    },
+    {
+      "operation": "deploy",
+      "id": "0Afg700000LHgI5CAL",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": false,
+      "componentsTotal": 4,
+      "componentsDeployed": 4,
+      "componentErrors": 0,
+      "testsTotal": 0,
+      "warnings": []
+    },
+    {
+      "operation": "retrieve",
+      "id": "09Sg700000bh8jOEAQ",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "warnings": []
+    }
+  ],
+  "corrections": [
+    {
+      "validation": "validate-1",
+      "problem": "Metadata API rechazó FK_ProyectoDedicacion__c.Codigo__c como campo de columna",
+      "change": "Referencia FK_$ProyectoDedicacion__c.Codigo__c"
+    },
+    {
+      "validation": "validate-2",
+      "problem": "Tres campos agrupados repetidos en columns",
+      "change": "Mantenerlos solo en groupingsDown; los encabezados siguen identificando semana, miembro y proyecto"
+    }
+  ],
+  "sourceHashes": {
+    "force-app/main/default/reports/P07_Dedicacion.reportFolder-meta.xml": "82cbf521a30fc91fc9273315a69808c8dc8599d1198de94b9aad3fdfec59d26f",
+    "force-app/main/default/reports/P07_Dedicacion/DedicacionSemanal.report-meta.xml": "412231b7310ac3d771506aa274dfa9dad7b03c619924fe5e01c2b11fa4401e2a",
+    "force-app/main/default/permissionsets/P07_InformesLectura.permissionset-meta.xml": "5d84aca51b1efd942d17a8a72f4ee21c19f1fbae1ef04e12f717e2391b7a5fd6",
+    "manifest/fase-4.xml": "f94642036be91ecb6026ecf2e87e662edfad6de30f97f0965fcd020b9efc6e7b",
+    "force-app/main/default/applications/P07_Dedicacion.app-meta.xml": "3d70d8c2e7c2a29e5c8e9c6f4af2886480168b525de1484bf6685b746b428c7a"
+  },
+  "retrievedContrast": {
+    "components": 4,
+    "results": [
+      {
+        "file": "reports/P07_Dedicacion.reportFolder-meta.xml",
+        "semanticMatch": true,
+        "normalizations": []
+      },
+      {
+        "file": "reports/P07_Dedicacion/DedicacionSemanal.report-meta.xml",
+        "semanticMatch": true,
+        "normalizations": [
+          "Day predeterminado en agrupación no temporal",
+          "Day predeterminado en agrupación no temporal",
+          "Parámetro co=1 predeterminado"
+        ]
+      },
+      {
+        "file": "permissionsets/P07_InformesLectura.permissionset-meta.xml",
+        "semanticMatch": true,
+        "normalizations": [
+          "Nombre canónico standard-report"
+        ]
+      },
+      {
+        "file": "applications/P07_Dedicacion.app-meta.xml",
+        "semanticMatch": true,
+        "normalizations": [
+          "isNavTabPersistenceDisabled=false predeterminado",
+          "isOmniPinnedViewEnabled=false predeterminado"
+        ]
+      }
+    ],
+    "allMatched": true
+  },
+  "design": {
+    "report": "P07_Dedicacion/DedicacionSemanal",
+    "folder": "P07_Dedicacion",
+    "groups": [
+      "SemanaDedicacion__c.Inicio__c",
+      "CUST_OWNER_NAME",
+      "FK_NAME"
+    ],
+    "sum": "DedicacionDiaria__c.Minutos__c",
+    "headerTotalSummed": false,
+    "durationUnit": "Minutos enteros",
+    "savedDateFilter": "INTERVAL_THISWEEK sobre Inicio__c",
+    "scope": "organization; registros accesibles al solicitante",
+    "fixedIdentityFilters": false,
+    "activeProjectFilter": false,
+    "emptyWeek": "Sin fila de detalle; cabecera conservada"
+  },
+  "permissions": {
+    "set": "P07_InformesLectura",
+    "enabledUserPermissions": [
+      "RunReports"
+    ],
+    "reportTab": "Visible",
+    "newAssignments": 3,
+    "totalExplicitAssignments": 9,
+    "folderShares": [
+      {
+        "accessLevel": "View",
+        "sharedTo": "P07_Participantes",
+        "sharedToType": "Group"
+      }
+    ],
+    "objectOrFieldPermissionsAdded": false,
+    "profileModified": false,
+    "readOnlyObjects": [
+      "ProyectoDedicacion__c",
+      "SemanaDedicacion__c",
+      "DedicacionDiaria__c"
+    ],
+    "apiEnabled": false,
+    "viewAllOrModifyAll": false,
+    "otherPublicSampleReports": 5,
+    "ordinaryVisibilityOfOtherReportsVerified": false
+  },
+  "technicalReports": [
+    {
+      "scenario": "current",
+      "identity": "Cuenta técnica",
+      "dateFilter": {
+        "column": "SemanaDedicacion__c.Inicio__c",
+        "durationValue": "CUSTOM",
+        "endDate": "2026-11-23",
+        "startDate": "2026-11-23"
+      },
+      "allData": true,
+      "rows": 4,
+      "minutes": 165
+    },
+    {
+      "scenario": "empty",
+      "identity": "Cuenta técnica",
+      "dateFilter": {
+        "column": "SemanaDedicacion__c.Inicio__c",
+        "durationValue": "CUSTOM",
+        "endDate": "2026-11-16",
+        "startDate": "2026-11-16"
+      },
+      "allData": true,
+      "rows": 0,
+      "minutes": 0
+    },
+    {
+      "scenario": "range",
+      "identity": "Cuenta técnica",
+      "dateFilter": {
+        "column": "SemanaDedicacion__c.Inicio__c",
+        "durationValue": "CUSTOM",
+        "endDate": "2026-11-23",
+        "startDate": "2026-11-16"
+      },
+      "allData": true,
+      "rows": 4,
+      "minutes": 165
+    }
+  ],
+  "technicalSubtotals": [
+    {
+      "role": "A",
+      "project": "P07_3B_HISTORICO",
+      "lines": 2,
+      "minutes": 45
+    },
+    {
+      "role": "A",
+      "project": "P07_3B_REVISION",
+      "lines": 1,
+      "minutes": 60
+    },
+    {
+      "role": "B",
+      "project": "P07_3B_DESARROLLO",
+      "lines": 1,
+      "minutes": 60
+    }
+  ],
+  "technicalRecordAccess": {
+    "A": {
+      "records": 7,
+      "read": 5,
+      "edit": 0,
+      "matchesExpectedScope": true
+    },
+    "B": {
+      "records": 7,
+      "read": 2,
+      "edit": 0,
+      "matchesExpectedScope": true
+    },
+    "C": {
+      "records": 7,
+      "read": 5,
+      "edit": 0,
+      "matchesExpectedScope": true
+    }
+  },
+  "browser": {
+    "connected": true,
+    "technicalReportPresentationVerified": true,
+    "detailDatesAndSubtotalsVerified": true,
+    "functionalSessionAvailable": false,
+    "memberALoginControlAvailable": false,
+    "functionalReportRuns": [],
+    "keyboardFunctionalCheckExecuted": false
+  },
+  "preservation": {
+    "p07": {
+      "projects": 3,
+      "weeks": 3,
+      "activeLines": 4,
+      "deletedLines": 3,
+      "fieldsAndSystemModstampUnchanged": true,
+      "previousRequiredDataFieldsMatched": true,
+      "newReadOfOptionalActiveAndHeaderTotalFields": false
+    },
+    "p06": {
+      "counts": {
+        "Account": 11,
+        "IncidenciaRenovacion__c": 7,
+        "EjecucionRenovacion__c": 20,
+        "ContratoComercial__c": 198,
+        "SeguimientoRenovacion__c": 196
+      },
+      "total": 432,
+      "manualShares": 4,
+      "differences": [],
+      "additionalNonP07ApexEntries": 9
+    },
+    "extraDifferences": [],
+    "securitySettingsUnchanged": true,
+    "loginAs": false,
+    "usersCreated": 0,
+    "credentialsOrAuthenticationChanged": false,
+    "licences": [
+      {
+        "name": "Salesforce",
+        "total": 4,
+        "used": 4
+      },
+      {
+        "name": "Salesforce Platform",
+        "total": 6,
+        "used": 3
+      }
+    ]
+  },
+  "validationLimits": {
+    "apexOrLwcOrModelChanged": false,
+    "apexTestsExecuted": 0,
+    "jestTestsExecuted": 0,
+    "technicalQueryIsFunctionalSession": false,
+    "comparisonWithHeaderAndGrid": "Referencia histórica de fase 3B; conciliación nueva por identidad pendiente"
+  },
+  "pending": [
+    "Ejecutar informe como A, B y coordinación con acceso funcional legítimo",
+    "Comprobar aislamiento del informe, carpeta y otros informes públicos en sesiones ordinarias",
+    "Conciliar informe, resumen y cuadrícula bajo cada identidad y semana",
+    "Completar recorrido de teclado de AC-20",
+    "Mantener los límites previos de concurrencia, resultado desconocido y jerarquía"
+  ],
+  "v1Closed": false
+}

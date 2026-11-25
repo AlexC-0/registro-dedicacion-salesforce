@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types><members>P07_Dedicacion</members><name>CustomApplication</name></types>
+    <types><members>P07_InformesLectura</members><name>PermissionSet</name></types>
+    <types><members>P07_Dedicacion</members><members>P07_Dedicacion/DedicacionSemanal</members><name>Report</name></types>
+    <version>65.0</version>
+</Package>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns><field>FK_$ProyectoDedicacion__c.Codigo__c</field></columns>
+    <columns><field>DedicacionDiaria__c.Fecha__c</field></columns>
+    <columns><aggregateTypes>Sum</aggregateTypes><field>DedicacionDiaria__c.Minutos__c</field></columns>
+    <description>Minutos por semana, miembro y proyecto. Incluye históricos inactivos. El filtro usa el lunes de inicio; las semanas sin líneas no generan detalle. Solo registros accesibles.</description>
+    <format>Summary</format>
+    <groupingsDown><dateGranularity>Day</dateGranularity><field>SemanaDedicacion__c.Inicio__c</field><sortOrder>Asc</sortOrder></groupingsDown>
+    <groupingsDown><field>CUST_OWNER_NAME</field><sortOrder>Asc</sortOrder></groupingsDown>
+    <groupingsDown><field>FK_NAME</field><sortOrder>Asc</sortOrder></groupingsDown>
+    <name>Dedicación semanal en minutos</name>
+    <reportType>CustomEntityCustomEntity$SemanaDedicacion__c$DedicacionDiaria__c@DedicacionDiaria__c.Proyecto__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>DedicacionDiaria__c.Fecha__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter><dateColumn>SemanaDedicacion__c.Inicio__c</dateColumn><interval>INTERVAL_THISWEEK</interval></timeFrameFilter>
+</Report>
