@@ -1,10 +1,18 @@
 # Informe operativo de dedicación
 
-Estado actual: informe instalado sin habilitación para A, B y coordinación. Las tres asignaciones de ejecución se retiraron por permitir acceso a un informe público ajeno; los resultados funcionales siguientes son anteriores a esa retirada.
+## Consulta vigente de fase 4B
 
-## Diseño instalado
+La consulta propia de LWC y Apex sustituye al informe estándar como mecanismo operativo. P07 Dedicación → Consulta de dedicación permite elegir una semana o un intervalo inclusivo de lunes y pulsar Consultar. Detalle y subtotales se agrupan por semana, miembro y proyecto, con minutos enteros. Capacidad de 1.000 líneas completas; el exceso devuelve un error sin resultados parciales. Cambiar filtros retira resultados hasta aplicar la nueva selección.
 
-La aplicación P07 Dedicación incorpora la pestaña Informes. El informe «Dedicación semanal en minutos» está en la carpeta «P07 Dedicación», con nombre completo P07_Dedicacion/DedicacionSemanal.
+P07_InformeService exige P07_Consultar, acceso a clase, esquema legible y ámbito de registros; las consultas usan USER_MODE. P07_ConsultaInforme está asignado a las tres identidades existentes, con acceso a clase/pestaña y sin RunReports o ampliación de CRUD/FLS. El informe estándar y su carpeta permanecen instalados sin habilitación. La navegación utiliza la pestaña propia; ocultar la entrada estándar no es el control de seguridad.
+
+Implementación, pruebas, instalación y conservación comprobadas en [FASE-4B.md](FASE-4B.md). No se ha ejecutado la nueva consulta en sesiones de A, B y coordinación; sus recorridos y la denegación real de informes ajenos siguen pendientes. Los resultados del informe estándar siguientes son históricos y anteriores a retirar su permiso. El diagnóstico y su propuesta se conservan como antecedente de la decisión ya implementada.
+
+Estado anterior a fase 4B: informe instalado sin habilitación para A, B y coordinación. Las tres asignaciones de ejecución se retiraron por permitir acceso a un informe público ajeno; los resultados funcionales siguientes son anteriores a esa retirada.
+
+## Antecedente: diseño estándar instalado
+
+En fase 4, la aplicación P07 Dedicación incorporó la pestaña Informes. Fase 4B sustituye esa entrada por la consulta propia. El informe «Dedicación semanal en minutos» está en la carpeta «P07 Dedicación», con nombre completo P07_Dedicacion/DedicacionSemanal.
 
 Se utiliza el tipo estándar «Semanas de dedicación con Dedicaciones diarias y Proyecto». La descripción obtenida de API 65.0 ofrece todos los campos necesarios; no se creó un tipo personalizado ni se modificó el modelo.
 
@@ -106,7 +114,7 @@ No resuelven la incompatibilidad:
 
 Se mantiene el informe instalado y sin habilitación. No se propone ejecutarlo con una cuenta administrativa para devolver resultados a usuarios ordinarios.
 
-### Propuesta técnica mínima, pendiente de decisión
+### Antecedente: propuesta técnica previa a fase 4B
 
 Recomendación: una consulta operativa P07 de solo lectura mediante LWC y un servicio Apex específico, sin usar el motor de informes ni RunReports. Debe conservar la selección semanal o por intervalo de lunes, detalle diario, agrupaciones por semana/miembro/proyecto, subtotales, total en minutos, histórico inactivo y ámbito del solicitante. No se presenta como una función ya disponible.
 
@@ -127,7 +135,7 @@ Aceptar únicamente fechas como selección inicial; no admitir usuario ejecutor,
 
 Coste: desarrollo, mantenimiento y pruebas de la consulta propia, de su seguridad y de la navegación. No se prevén servicios externos o licencias adicionales para las tres identidades actuales; no es una cotización ni una promesa de plazo o capacidad. La alternativa no ofrece el constructor, exportaciones, suscripciones o paneles del motor estándar. Esas capacidades no se incorporan de forma implícita.
 
-### Verificación prevista y decisiones pendientes
+### Antecedente: verificación prevista al concluir el diagnóstico
 
 La siguiente ejecución deberá separar pruebas aisladas, validación remota, despliegue y sesiones reales:
 

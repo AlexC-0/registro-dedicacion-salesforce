@@ -128,3 +128,11 @@ RunReports es general. A, B y coordinación abrieron «Sample Report: Orchestrat
 Las tres asignaciones de P07_InformesLectura se retiraron tras comprobar acceso a un informe público ajeno. Permanecen las seis asignaciones explícitas anteriores y RunReports=false en los conjuntos efectivos, incluido el perfil, de A, B y coordinación. El informe, la carpeta y la pestaña permanecen instalados; su ejecución funcional queda deshabilitada. No se modificaron carpetas de otros proyectos.
 
 Login As se utilizó temporalmente para las tres identidades y se restauró a false, sin otras diferencias en SecuritySettings; sesión técnica recuperada. Los informes se probaron antes de la retirada. La ausencia final de RunReports se comprueba en asignaciones efectivas, no mediante una nueva sesión posterior. Véanse [INFORME.md](INFORME.md) y [FASE-4.json](evidencias/FASE-4.json).
+
+## Consulta propia de fase 4B
+
+P07_ConsultaInforme añade únicamente acceso a P07_InformeService y visibilidad de P07_InformeOperativo. No concede P07_Consultar: depende de los conjuntos anteriores que ya lo conceden. No añade CRUD/FLS, permisos sobre User, API, RunReports ni privilegios generales.
+
+Asignado a las tres identidades P07 existentes, tras contrastar identificador, perfil, nombre de acceso y estado activo. Se conservan las seis asignaciones anteriores: nueve explícitas en total, cero de P07_InformesLectura. SetupEntityAccess contiene la clase esperada y sus metadatos no contienen permisos de objetos/campos. Grupos, pertenencias, perfiles, carpetas, permisos P06 y SecuritySettings sin diferencias; Login As=false.
+
+La puerta de clase de Lightning es distinta de una llamada Apex directa en runAs. Las pruebas aisladas verifican P07_Consultar, CRUD/FLS, ámbito propio/coordinación y relación inaccesible. Las asignaciones y UserRecordAccess están comprobados técnicamente; falta ejecutar la nueva consulta y la denegación de informes ajenos en sesiones funcionales. No se concede acceso administrativo para suplir esa falta de sesión. Véase [FASE-4B.md](FASE-4B.md).

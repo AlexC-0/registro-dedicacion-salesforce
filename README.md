@@ -4,7 +4,7 @@ Aplicación de demostración para registrar dedicación propia por proyecto y d�
 
 ## Estado
 
-Fase 4: informe comprobado en sesiones de A, B y coordinación; recorrido básico de teclado realizado y corrección decimal desplegada, con 49 pruebas Jest satisfactorias en esa entrega. La revisión posterior corrige el descarte antes de una lectura fallida y supera 57 pruebas Jest. Se retiró el permiso de ejecución de informes de las tres identidades al constatar acceso a un informe público ajeno. El informe queda instalado sin habilitación funcional; la fase y V1 permanecen abiertas. [STATUS.md](docs/STATUS.md) recoge resultados y [INFORME.md](docs/INFORME.md), uso y límites.
+Fase 4B: consulta propia de solo lectura implementada, validada y desplegada, con 92 pruebas Jest y 26 Apex satisfactorias. Tres asignaciones específicas habilitan clase y pestaña; RunReports y Login As permanecen desactivados. El informe estándar se conserva sin habilitación. Faltan los recorridos de la nueva consulta como A, B y coordinación; fase 4 y V1 siguen abiertas. [FASE-4B.md](docs/FASE-4B.md) distingue resultados técnicos, conservación y límites funcionales.
 
 ## Alcance V1
 
@@ -26,6 +26,7 @@ No incluye nóminas, facturación, control horario con validez laboral, aprobaci
 | `manifest/fase-3a.xml` | Bundle LWC, sin reinstalar el backend |
 | `manifest/fase-3b.xml` | Aplicación, página, pestañas, layouts, vistas y perfil P07 |
 | `manifest/fase-4.xml` | Informe, carpeta, permiso de ejecución y navegación |
+| `manifest/fase-4b.xml` | Consulta Apex/LWC, pruebas, permiso, página, pestaña y navegación |
 | `manifest/revision-fase-4.xml` | Corrección acotada del bundle LWC |
 | `package.json`, `package-lock.json`, `jest.config.js` | Dependencias locales fijadas y pruebas Jest |
 | `sfdx-project.json` | Proyecto DX; API 65.0 |

@@ -1,5 +1,15 @@
 # Estado del proyecto
 
+## Resultado vigente de fase 4B
+
+Consulta operativa propia instalada sobre 14dc47a8b68a4b1d062ed11a8ac3bc13b07d4edf. Validación 0Afg700000LJDjpCAH y despliegue 0Afg700000LJEUbCAP: Succeeded, 7/7 componentes y 26/26 pruebas Apex en ambos. Jest: 92/92, cuatro suites. Recuperación 09Sg700000bktiXEAQ: trece archivos coincidentes tras normalizaciones identificadas.
+
+P07_ConsultaInforme está asignado a las tres identidades existentes y conserva las seis asignaciones previas. RunReports=false, P07_InformesLectura sin asignaciones y Login As=false. P07 conserva datos, revisiones y papelera; el inventario de P06 conserva 432 registros y cuatro comparticiones manuales, sin diferencias.
+
+La consulta está configurada, pero no demostrada en sesiones ordinarias nuevas. Solo estaba disponible la cuenta técnica; no se amplió su acceso ni se reactivó Login As. Faltan los recorridos de A, B y coordinación y la denegación real de informes ajenos con el estado final. Fase 4 y V1 abiertas; se conservan los demás pendientes de aceptación.
+
+[FASE-4B.md](FASE-4B.md) y [evidencia](evidencias/FASE-4B.json) detallan contrato, límite explícito de 1.000 líneas, pruebas, despliegue, asignaciones y límites. Los apartados siguientes conservan los estados históricos; la elección del mecanismo descrita en el diagnóstico anterior ya está resuelta.
+
 Fecha: 25/11/2026.
 
 ## Diagnóstico de aislamiento del informe

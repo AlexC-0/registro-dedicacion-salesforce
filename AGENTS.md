@@ -1,10 +1,10 @@
 # P07 — Registro semanal de dedicación
 
-## Alcance vigente: diagnóstico de aislamiento
+## Alcance vigente: consulta operativa de fase 4B
 
-Sobre de9047d228eb22849577b5b8d01802a4d05a51b2 se contrastó el bloqueo del informe mediante lectura de configuración y documentación oficial. RunReports y Login As permanecen desactivados; no hay nuevas asignaciones, cambios de datos, pruebas ni despliegues. La consulta propia de solo lectura descrita en docs/INFORME.md es una propuesta pendiente de decisión, no una implementación autorizada.
+La consulta de solo lectura con LWC y Apex sustituye el mecanismo operativo estándar. Implementar y verificar únicamente los componentes P07 de consulta, navegación y permiso específico, conservando API 65.0, datos, cuadrícula y guardado existentes. Se permiten las tres asignaciones mínimas del nuevo permiso a las identidades P07 verificadas; conservar las seis anteriores.
 
-Conservar el informe estándar instalado sin habilitación y las evidencias previas. No implementar la sustitución, reasignar RunReports, alterar carpetas ajenas ni reabrir excepciones de acceso por continuidad. Fase 4 y V1 siguen abiertas. La siguiente ejecución requiere alcance explícito sobre el mecanismo elegido y acceso legítimo para sus comprobaciones funcionales.
+Mantener RunReports=false, el informe y su carpeta sin habilitar, Login As=false y P06 intacto. No modificar políticas, perfiles compartidos, pertenencias, contraseñas o usuarios. Separar pruebas aisladas, validación, despliegue y sesiones funcionales disponibles; la falta de sesión no detiene verificaciones independientes. No cerrar fase 4 ni V1. El diagnóstico previo se conserva como antecedente en docs/INFORME.md.
 
 ## Contexto
 
@@ -77,3 +77,9 @@ La excepción temporal de Login As está cerrada. No reasignar RunReports, react
 Sobre 9f259d665671814964ef9a762f4a4c83c28284e8 se corrigió la limpieza del texto en edición al aceptar descarte para actualizar o cambiar de semana. Cuatro regresiones fallidas antes; 57/57 Jest después, con cancelación y escritura decimal conservadas. Validación 0Afg700000LIvmvCAD y despliegue 0Afg700000LIQcgCAH finalizados, un bundle, NoTestRun; recuperación 09Sg700000bkRuMEAU, cinco archivos coincidentes.
 
 No hubo recorrido funcional nuevo ni reactivación de Login As. Datos, revisiones, papelera, informe sin habilitación, seis asignaciones previas y P06 conservados. Mantener fase 4 y V1 abiertas y las evidencias anteriores. Véase docs/evidencias/FASE-4-ACTUALIZACION-FALLIDA.json.
+
+## Resultado vigente de fase 4B
+
+Consulta P07_InformeService y p07InformeDedicacion instalada: validación 0Afg700000LJDjpCAH y despliegue 0Afg700000LJEUbCAP, 7/7 componentes y 26/26 pruebas Apex en ambos; 92/92 Jest. Recuperación 09Sg700000bktiXEAQ, trece archivos contrastados. P07_ConsultaInforme asignado a las tres identidades verificadas; seis asignaciones anteriores conservadas, RunReports=false y Login As=false.
+
+Datos, revisiones, papelera, informe estándar sin habilitar y P06 conservados. No repetir instalación, asignaciones o pruebas históricas por continuidad. Solo se comprobó la sesión técnica disponible; faltan los recorridos reales de la consulta como A, B y coordinación y la denegación de informes ajenos. No reactivar Login As ni cambiar contraseñas o políticas para suplir esa falta de acceso. Fase 4 y V1 abiertas, con los demás límites de aceptación intactos. Véanse docs/FASE-4B.md y su evidencia.

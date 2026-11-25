@@ -250,3 +250,19 @@ sf project retrieve start --manifest manifest/revision-fase-4.xml --target-org p
 ~~~
 
 NoTestRun no ejecuta Jest: las 49 pruebas locales y la compilación remota son evidencias distintas. Contrastar cinco archivos recuperados y huellas del paquete. Recargar completamente la página antes de probar el módulo actualizado. El recorrido de teclado no necesita guardar dedicaciones: descartar el borrador y comprobar datos y revisión conservados. Las sesiones requieren acceso legítimo; estos comandos no habilitan políticas globales.
+
+## Consulta operativa de fase 4B
+
+Prerrequisitos: fases anteriores instaladas, perfil e identidades P07 existentes y permisos de lectura/operación conservados. Verificar identidad del destino compartido, conflictos de nombres, estado local e inventario antes de operar. No reinstalar fases anteriores ni asignar P07_InformesLectura.
+
+El manifiesto fase-4b.xml contiene dos clases, un bundle LWC, permiso, página, pestaña y la aplicación modificada. Validación ejecutada:
+
+~~~powershell
+sf project deploy start --manifest manifest/fase-4b.xml --target-org p06-renovaciones-dev --api-version 65.0 --dry-run --test-level RunSpecifiedTests --tests P07_InformeServiceTest --tests P07_DedicacionServiceTest --wait 1 --json
+~~~
+
+Tras el resultado final Succeeded, se ejecutó el mismo comando sin --dry-run sobre las mismas fuentes. Si una operación devuelve trabajo pendiente, consultar su identificador con project deploy report y destino explícito hasta el resultado final. La recuperación a una carpeta separada usa project retrieve start con el mismo manifiesto, destino y API; no sobrescribir las fuentes para contrastarlas.
+
+Después del despliegue se verificó P07_ConsultaInforme y se crearon exactamente tres asignaciones para los identificadores ya comprobados de A, B y coordinación. No contiene CRUD/FLS, RunReports ni privilegios generales; sus concesiones son clase y pestaña. Conservar las seis asignaciones anteriores, grupos, perfiles y datos. Un despliegue de metadatos no crea esas asignaciones.
+
+Los identificadores finales, contraste de fuentes y conservación están en [FASE-4B.md](FASE-4B.md). La instalación actual ya está completada; no repetirla para obtener una sesión funcional. La comprobación posterior necesita sesiones legítimas de las tres identidades, sin activar Login As o alterar políticas.

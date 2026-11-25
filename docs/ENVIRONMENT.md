@@ -105,3 +105,9 @@ Se corrigió la pérdida del cero inicial al escribir un decimal en una celda va
 ## Revisión de actualización fallida
 
 El 25/11/2026 se verificó nuevamente el destino compartido y se desplegó únicamente el bundle existente, sin cambios de herramientas, autenticación ni políticas. Login As=false y RunReports=false; seis asignaciones explícitas, informe y carpeta conservados. 57 pruebas Jest locales satisfactorias; validación y despliegue con NoTestRun, cero Apex. Cinco archivos recuperados coinciden tras normalizar finales de línea. No se abrió una sesión funcional nueva para provocar fallos reales de lectura; [STATUS.md](STATUS.md) distingue esos límites.
+
+## Estado de fase 4B
+
+El 25/11/2026 se verificaron de nuevo organización Developer Edition, cuenta técnica y API 65.0 con el registro privado. No se crearon organizaciones, usuarios o autenticaciones. Salesforce 4/4 y Platform 3/6 utilizadas. Se instalaron siete componentes acotados y tres asignaciones P07_ConsultaInforme, conservando las seis previas. RunReports y Login As permanecen desactivados.
+
+Jest local: 92/92; validación y despliegue: 26/26 pruebas Apex P07 en cada operación. Trece archivos recuperados y contrastados. No se instalaron dependencias ni herramientas globales. El navegador solo ofrecía la sesión técnica; no hay nueva evidencia de sesiones ordinarias. Los requisitos funcionales pendientes son acceso legítimo a las identidades P07 y recorrido de la consulta con sus permisos existentes. Véase [FASE-4B.md](FASE-4B.md).

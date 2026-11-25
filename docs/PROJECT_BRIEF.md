@@ -29,3 +29,9 @@ No se presupone disponibilidad de licencias, usuarios ni una organización. No s
 La revisión pertenece a la cabecera semanal. Las líneas dependen de ella para propiedad y acceso. Los nombres técnicos, tipos y tamaños de los doce campos están definidos en los metadatos de fase 1A y descritos en [MODELO_DATOS.md](MODELO_DATOS.md). Su aceptación e instalación remotas están comprobadas en fase 1B. Fase 2A aporta el servicio y pruebas Apex aisladas de guardado y protección; fase 3A aporta la cuadrícula y pruebas locales del cliente. La fase 3B añade demostración integrada con sesiones funcionales y pantalla desactualizada. La fase 4 comprueba informe y teclado básico, pero retira la habilitación de informes por acceso a un informe público ajeno. Quedan pendientes esa habilitación compatible con el aislamiento, concurrencia real y los límites de aceptación documentados.
 
 El borrado de una celda significa eliminar su línea, no eliminar la cabecera. Mantener la cabecera evita reiniciar la revisión cuando una semana queda vacía. El catálogo de proyectos no se administra desde la cuadrícula.
+
+## Consulta operativa de fase 4B
+
+La consulta propia de solo lectura con LWC y Apex sustituye al mecanismo estándar, conservando selección semanal o intervalo de lunes, detalle, agrupaciones, minutos enteros, histórico y ámbito. El contrato entrega hasta 1.000 líneas completas o error explícito, sin truncamiento ni totales parciales. El informe estándar queda instalado sin habilitación; RunReports continúa desactivado.
+
+Implementación y despliegue comprobados, con tres asignaciones mínimas a las identidades existentes. La demostración de la consulta nueva en sus sesiones sigue pendiente; no se cierran fase 4 o V1. Detalle en [FASE-4B.md](FASE-4B.md).

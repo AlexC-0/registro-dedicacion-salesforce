@@ -148,3 +148,18 @@ Cambiar de semana, actualizar o descartar con cambios pendientes abre LightningC
 La tabla tiene caption y encabezados de fila/columna. Cada entrada identifica proyecto y fecha; los controles base admiten teclado. La región horizontal es enfocable. Estado y errores se anuncian con status/alert y texto, sin depender exclusivamente del color. El foco pasa al resumen ante errores y a la comparación al recuperar datos; el diálogo base gestiona su interacción modal.
 
 Jest comprueba estructura, etiquetas y decisiones de foco en DOM simulado. Los componentes base, Apex, zona horaria y confirmación están simulados. No se atribuye accesibilidad completa, interacción real de esos controles, seguridad efectiva ni transacciones a estas pruebas. La demostración con identidades funcionales, teclado, lector de pantalla, tamaños de ventana y servicio real queda para la siguiente entrega.
+
+
+## Contrato de consulta operativa de fase 4B
+
+Servicio independiente P07_InformeService.consultar(String peticionJson), API 65.0 y solo lectura. Entrada JSON con exactamente desde y hasta, ambos lunes ISO AAAA-MM-DD y desde <= hasta. Para una semana se repite el lunes. No admite identidad, objetos, campos o criterios arbitrarios. No se impone una duración máxima del intervalo; sí capacidad explícita de 1.000 líneas visibles.
+
+Respuesta JSON: ok, resultado y errores. En éxito, resultado contiene desde, hasta, completo=true, limiteLineas=1000, numeroLineas, totalMinutos y semanas. Cada semana contiene inicio, totalMinutos y miembros; cada miembro, id, nombre, totalMinutos y proyectos; cada proyecto, id, nombre, codigo, activo, totalMinutos y detalle; cada detalle contiene id, fecha y minutos. Todos los totales se calculan desde esas mismas líneas. Una consulta vacía es éxito con semanas=[], numeroLineas=0 y totalMinutos=0.
+
+En error: ok=false, resultado=null y errores con codigo y mensaje seguros. Códigos previstos: VALIDACION, ACCESO_DENEGADO, LIMITE_VOLUMEN y FALLO_TECNICO. La consulta solicita como máximo 1.001 líneas; al superar 1.000 rechaza el conjunto, sin presentar totales parciales. No usa paginación de servidor: detalle y sumas se entregan juntos. La interfaz informa del límite y permite acotar el intervalo; una semana individual que lo supere también devuelve error. Este límite es visible y comprobable, no una promesa de volumen ilimitado ni una reducción silenciosa.
+
+La clase requiere P07_Consultar y acceso de plataforma a Apex. with sharing, comprobaciones de esquema y USER_MODE explícito en las consultas; sin DML, bloqueos o Analytics API. Los miembros con P07_GuardarPropia consultan únicamente sus propias semanas; las identidades de lectura consultan las semanas accesibles por compartición. El permiso de guardado no habilita edición en esta vista. Los proyectos relacionados se contrastan en una consulta USER_MODE acotada: si falta acceso a una relación necesaria, se rechaza el conjunto. Las etiquetas de miembro proceden de la relación de usuario de las semanas, sin ampliar permisos de User.
+
+El cliente distingue filtros pendientes y consultados. Cambiar un filtro invalida la petición previa y retira sus resultados; un fallo no mantiene datos anteriores como si pertenecieran al filtro nuevo. Las respuestas fuera de orden se ignoran. La consulta no crea semanas vacías ni incluye líneas eliminadas; conserva el histórico inactivo. No altera el contrato de lectura o guardado de la cuadrícula existente.
+
+Los límites no capturables de plataforma pueden abortar la llamada: el cliente debe mostrar un error sin resultados previos. No se promete instantánea global ante cambios concurrentes del catálogo; detalle y totales siempre derivan de las mismas líneas recuperadas.

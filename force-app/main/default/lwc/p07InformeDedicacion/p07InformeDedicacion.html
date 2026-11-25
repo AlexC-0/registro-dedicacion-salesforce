@@ -1,0 +1,56 @@
+<template>
+    <lightning-card title="Consulta de dedicación" icon-name="standard:timesheet">
+        <div class="slds-p-around_medium">
+            <p>Consulta de solo lectura. Hasta 1.000 líneas completas por consulta; si se supera el límite, acota el intervalo.</p>
+            <div class="filtros">
+                <lightning-combobox label="Selección" value={modo} options={opciones} data-filtro="modo" onchange={cambiarFiltro}></lightning-combobox>
+                <lightning-input type="date" label="Lunes inicial" value={desde} required data-filtro="desde" onchange={cambiarFiltro}></lightning-input>
+                <template lwc:if={intervalo}>
+                    <lightning-input type="date" label="Lunes final" value={hasta} required data-filtro="hasta" onchange={cambiarFiltro}></lightning-input>
+                </template>
+                <lightning-button label="Consultar" variant="brand" onclick={ejecutar} disabled={cargando}></lightning-button>
+            </div>
+            <div role="status" aria-live="polite">
+                <template lwc:if={cargando}><p>Consultando dedicación…</p></template>
+                <template lwc:if={pendiente}><p>Filtros pendientes de aplicar. Pulsa Consultar.</p></template>
+            </div>
+            <template lwc:if={error}>
+                <p data-error tabindex="-1" role="alert" class="error">{error}</p>
+            </template>
+            <template lwc:if={resultado}>
+                <div data-resumen tabindex="-1" class="resumen">
+                    <h2>Resultado consultado</h2>
+                    <p>Desde el lunes {resultado.desde} hasta la semana del lunes {resultado.hasta}.</p>
+                    <p><strong>Total: {resultado.totalMinutos} minutos</strong> · {resultado.numeroLineas} líneas. Resultado completo.</p>
+                </div>
+                <template lwc:if={vacio}><p>No hay dedicaciones accesibles en las semanas consultadas.</p></template>
+                <template for:each={semanas} for:item="semana">
+                    <section key={semana.inicio} class="semana">
+                        <h2>Semana del {semana.inicio} · {semana.totalMinutos} minutos</h2>
+                        <template for:each={semana.miembros} for:item="miembro">
+                            <section key={miembro.id} class="miembro">
+                                <h3>{miembro.nombre} · {miembro.totalMinutos} minutos</h3>
+                                <template for:each={miembro.proyectos} for:item="proyecto">
+                                    <div key={proyecto.id} class="proyecto">
+                                        <h4>{proyecto.nombre} ({proyecto.codigo}) · {proyecto.totalMinutos} minutos</h4>
+                                        <template lwc:if={proyecto.activo}><p>Proyecto activo</p></template>
+                                        <template lwc:else><p>Proyecto inactivo · dedicación histórica</p></template>
+                                        <table class="slds-table slds-table_bordered">
+                                            <caption>Detalle de {proyecto.nombre}, {miembro.nombre}, semana del {semana.inicio}</caption>
+                                            <thead><tr><th scope="col">Fecha</th><th scope="col">Minutos</th></tr></thead>
+                                            <tbody>
+                                                <template for:each={proyecto.detalle} for:item="linea">
+                                                    <tr key={linea.id}><td>{linea.fecha}</td><td>{linea.minutos}</td></tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </template>
+                            </section>
+                        </template>
+                    </section>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

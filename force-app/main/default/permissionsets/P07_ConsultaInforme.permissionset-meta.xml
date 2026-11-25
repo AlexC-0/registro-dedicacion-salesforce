@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses><apexClass>P07_InformeService</apexClass><enabled>true</enabled></classAccesses>
+    <description>Acceso a la consulta operativa propia. Requiere los permisos P07 de lectura y operación existentes; no habilita informes estándar.</description>
+    <hasActivationRequired>false</hasActivationRequired><label>P07 Consulta operativa</label>
+    <tabSettings><tab>P07_InformeOperativo</tab><visibility>Visible</visibility></tabSettings>
+</PermissionSet>

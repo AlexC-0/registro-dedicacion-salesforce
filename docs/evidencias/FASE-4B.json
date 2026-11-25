@@ -1,0 +1,439 @@
+{
+  "phase": "4B",
+  "date": "2026-11-25",
+  "base": "14dc47a8b68a4b1d062ed11a8ac3bc13b07d4edf",
+  "branch": "main",
+  "initialWorkingTree": "clean",
+  "target": {
+    "alias": "p06-renovaciones-dev",
+    "edition": "Developer Edition",
+    "api": "65.0",
+    "sharedWith": "P06",
+    "organizationAndTechnicalIdentityVerified": true
+  },
+  "implementation": {
+    "service": "P07_InformeService",
+    "component": "p07InformeDedicacion",
+    "manifest": "manifest/fase-4b.xml",
+    "readOnly": true,
+    "explicitUserMode": true,
+    "sharing": "with sharing",
+    "operationPermission": "P07_Consultar",
+    "classAccess": "P07_ConsultaInforme",
+    "unchanged": [
+      "modelo",
+      "P07_DedicacionService",
+      "triggers",
+      "p07DedicacionSemanal"
+    ]
+  },
+  "contract": {
+    "input": [
+      "desde",
+      "hasta"
+    ],
+    "validDates": "Lunes reales ISO, desde <= hasta",
+    "maxLines": 1000,
+    "queryLimit": 1001,
+    "overLimit": "LIMITE_VOLUMEN; resultado=null; sin totales parciales",
+    "completeTotalsFromSameLines": true,
+    "emptyResult": "Éxito con cero líneas y cero minutos, sin modificar cabecera"
+  },
+  "local": {
+    "jest": {
+      "success": true,
+      "total": 92,
+      "passed": 92,
+      "failed": 0,
+      "suites": 4,
+      "existing": 57,
+      "new": 35
+    },
+    "simulation": "Apex y componentes base simulados en Jest; no acredita sesiones, controles base reales ni lector de pantalla"
+  },
+  "apex": {
+    "classes": [
+      "P07_InformeServiceTest",
+      "P07_DedicacionServiceTest"
+    ],
+    "newTests": 8,
+    "regressionTests": 18,
+    "seeAllData": false,
+    "volumeBoundary": "Cuatro líneas reales aisladas; límite reducible solo durante tests: cuatro aceptadas, exceso de tres rechazado. No es carga de 1.001 líneas ni prueba de rendimiento.",
+    "classGate": "SetupEntityAccess y asignaciones comprobados; una llamada directa desde runAs no atraviesa la puerta de acceso a clase de Lightning."
+  },
+  "validation": {
+    "id": "0Afg700000LJDjpCAH",
+    "status": "Succeeded",
+    "done": true,
+    "success": true,
+    "checkOnly": true,
+    "components": 7,
+    "totalComponents": 7,
+    "tests": 26,
+    "totalTests": 26,
+    "failures": [],
+    "coverage": [
+      {
+        "name": "P07_InformeService",
+        "totalLines": 104,
+        "uncoveredLines": 4
+      }
+    ]
+  },
+  "deployment": {
+    "id": "0Afg700000LJEUbCAP",
+    "status": "Succeeded",
+    "done": true,
+    "success": true,
+    "checkOnly": false,
+    "components": 7,
+    "totalComponents": 7,
+    "tests": 26,
+    "totalTests": 26,
+    "failures": [],
+    "coverage": [
+      {
+        "name": "P07_InformeService",
+        "totalLines": 104,
+        "uncoveredLines": 4
+      }
+    ]
+  },
+  "retrieve": {
+    "id": "09Sg700000bktiXEAQ",
+    "status": "Succeeded",
+    "done": true,
+    "success": true
+  },
+  "sources": {
+    "sameValidatedSources": true,
+    "files": [
+      {
+        "file": "force-app/main/default/classes/P07_InformeService.cls",
+        "match": true,
+        "sourceHash": "a1a68f7610bfb5b5ec4042b4dded89a5bbf16265f854102cc6ce3583f7aaa6bb",
+        "retrievedHash": "2a78cea0baebbd3832a7c0f195f23b9a8779a4ef2125f084a1faceda2533a8c3"
+      },
+      {
+        "file": "force-app/main/default/classes/P07_InformeService.cls-meta.xml",
+        "match": true,
+        "sourceHash": "0347267b36e4cd542616bb80997ae7c7634cf64ed063b5bd68dd2493c8fca3ea",
+        "retrievedHash": "356db61093648679fc9b3a801e41d51c94fa51e993380eac65b0bb076a20b6b0"
+      },
+      {
+        "file": "force-app/main/default/classes/P07_InformeServiceTest.cls",
+        "match": true,
+        "sourceHash": "0be7d4d74c590128068af78a4f08f35763d2f939c827814fc01b1dd9135b4a76",
+        "retrievedHash": "f42860f7050f84c93016018c73f0fb93c9e037e6f5d6570cbcd91c3f619568f2"
+      },
+      {
+        "file": "force-app/main/default/classes/P07_InformeServiceTest.cls-meta.xml",
+        "match": true,
+        "sourceHash": "0347267b36e4cd542616bb80997ae7c7634cf64ed063b5bd68dd2493c8fca3ea",
+        "retrievedHash": "356db61093648679fc9b3a801e41d51c94fa51e993380eac65b0bb076a20b6b0"
+      },
+      {
+        "file": "force-app/main/default/flexipages/P07_InformeOperativo.flexipage-meta.xml",
+        "match": true,
+        "sourceHash": "2e3e660a4274e29ed43d05aaff82787987335fd09cd9ece0f34a0a265ea0a36e",
+        "retrievedHash": "fb6c1002abcbea8c93ae93f602e684869cd79b14bc6719589dda31fc42191589"
+      },
+      {
+        "file": "force-app/main/default/lwc/p07InformeDedicacion/modelo.js",
+        "match": true,
+        "sourceHash": "a11fc5b7481cd1b0f279b18f7932b7fe9b72765ab67f5960b76f6e311663dec9",
+        "retrievedHash": "5675380cd33914707f109237d3a553af22f278a0759394ec6ddb8423fd5d1361"
+      },
+      {
+        "file": "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.css",
+        "match": true,
+        "sourceHash": "43470f7887aa16784ba7c3985a5144aadf0318e088a5c1b745096826a4378996",
+        "retrievedHash": "109caed1cdeb0b924a0484b23a858788d885c4a20a16b16dc883f6bbdaa438e6"
+      },
+      {
+        "file": "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.html",
+        "match": true,
+        "sourceHash": "ef2c0691d2a11b457acb1a3b317e7ec82cf03d8dba6b5e44da575273790d1e1a",
+        "retrievedHash": "5ad330218ed5693c61da356475b95bfb256be12de17188c34ce4fee27851b890"
+      },
+      {
+        "file": "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.js",
+        "match": true,
+        "sourceHash": "fc2fb01b3ff480bd71f63798e5b308d6a52fa9541e69b5bfe9d8253c2596f51d",
+        "retrievedHash": "e0e5bf7d7c648f5bff057bd3dc1b9a7a14c48c6fce88d80b45936f45c83223f5"
+      },
+      {
+        "file": "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.js-meta.xml",
+        "match": true,
+        "sourceHash": "67ae1e5563c21e8acbf6d429a193109080478adb853d337bb959079e24477469",
+        "retrievedHash": "bae54d406641b083397c4e5c199f72bf6c4a339fd15b90f91ec4f4dc8021e6c6"
+      },
+      {
+        "file": "force-app/main/default/permissionsets/P07_ConsultaInforme.permissionset-meta.xml",
+        "match": true,
+        "sourceHash": "a1c7d1b338c8fc0d5bcf70bddd33c36d3e144d4b58a5dde17be8aab65b794195",
+        "retrievedHash": "7a25f9e81e09f7aa3b7c881a909fa45a9fa821f7628b2ad19e9e9018eefadd1b"
+      },
+      {
+        "file": "force-app/main/default/tabs/P07_InformeOperativo.tab-meta.xml",
+        "match": true,
+        "sourceHash": "4ca39913b08ed5aa0af1ec640de6d246c6f123c7302dcbd5c1678eb548809e75",
+        "retrievedHash": "34c5594c1658764f4632a84ad9d2052047347b844bf32496be9d91471bbd556e"
+      },
+      {
+        "file": "force-app/main/default/applications/P07_Dedicacion.app-meta.xml",
+        "match": true,
+        "sourceHash": "50b6511f592dbc14fc9c3529f3f91b4d025abd71ae12f000aa4e36b2a722703f",
+        "retrievedHash": "34a175cbcc4253710436876652e5f93e322f68016ed061a30f65eab3875e6adf"
+      }
+    ],
+    "packageHashes": {
+      "force-app/main/default/classes/P07_InformeService.cls": "a1a68f7610bfb5b5ec4042b4dded89a5bbf16265f854102cc6ce3583f7aaa6bb",
+      "force-app/main/default/classes/P07_InformeService.cls-meta.xml": "0347267b36e4cd542616bb80997ae7c7634cf64ed063b5bd68dd2493c8fca3ea",
+      "force-app/main/default/classes/P07_InformeServiceTest.cls": "0be7d4d74c590128068af78a4f08f35763d2f939c827814fc01b1dd9135b4a76",
+      "force-app/main/default/classes/P07_InformeServiceTest.cls-meta.xml": "0347267b36e4cd542616bb80997ae7c7634cf64ed063b5bd68dd2493c8fca3ea",
+      "force-app/main/default/flexipages/P07_InformeOperativo.flexipage-meta.xml": "2e3e660a4274e29ed43d05aaff82787987335fd09cd9ece0f34a0a265ea0a36e",
+      "force-app/main/default/lwc/p07InformeDedicacion/modelo.js": "a11fc5b7481cd1b0f279b18f7932b7fe9b72765ab67f5960b76f6e311663dec9",
+      "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.css": "43470f7887aa16784ba7c3985a5144aadf0318e088a5c1b745096826a4378996",
+      "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.html": "ef2c0691d2a11b457acb1a3b317e7ec82cf03d8dba6b5e44da575273790d1e1a",
+      "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.js": "fc2fb01b3ff480bd71f63798e5b308d6a52fa9541e69b5bfe9d8253c2596f51d",
+      "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.js-meta.xml": "67ae1e5563c21e8acbf6d429a193109080478adb853d337bb959079e24477469",
+      "force-app/main/default/permissionsets/P07_ConsultaInforme.permissionset-meta.xml": "a1c7d1b338c8fc0d5bcf70bddd33c36d3e144d4b58a5dde17be8aab65b794195",
+      "force-app/main/default/tabs/P07_InformeOperativo.tab-meta.xml": "4ca39913b08ed5aa0af1ec640de6d246c6f123c7302dcbd5c1678eb548809e75",
+      "force-app/main/default/applications/P07_Dedicacion.app-meta.xml": "50b6511f592dbc14fc9c3529f3f91b4d025abd71ae12f000aa4e36b2a722703f",
+      "manifest/fase-4b.xml": "837234159c0e6bd702273fcfd13235a9514b0ddba3ade9b06dedb90cf23a443c"
+    },
+    "normalizations": [
+      "CRLF/LF y salto final",
+      "Formato y espacios XML",
+      "CustomApplication: isNavTabPersistenceDisabled=false e isOmniPinnedViewEnabled=false, valores predeterminados"
+    ]
+  },
+  "permissions": {
+    "previousExplicit": 6,
+    "newExplicit": 3,
+    "totalExplicit": 9,
+    "newPermission": "P07_ConsultaInforme",
+    "class": "P07_InformeService",
+    "tab": "P07_InformeOperativo",
+    "newCrudFls": false,
+    "runReports": false,
+    "oldReportPermissionAssignments": 0,
+    "loginAs": false,
+    "groupsUnchanged": true,
+    "profileUnchanged": true,
+    "newAssignmentIds": [
+      "0Pag700000SubHkCAJ",
+      "0Pag700000SubHlCAJ",
+      "0Pag700000SubHmCAJ"
+    ],
+    "classAccessVerified": true
+  },
+  "preservation": {
+    "p07": {
+      "ProyectoDedicacion__c": {
+        "active": 3,
+        "deleted": 0
+      },
+      "SemanaDedicacion__c": {
+        "active": 3,
+        "deleted": 0
+      },
+      "DedicacionDiaria__c": {
+        "active": 4,
+        "deleted": 3
+      }
+    },
+    "p07Differences": [],
+    "p07HashesBefore": {
+      "ProyectoDedicacion__c": "209c0e3aa76353eb34c9876b0af3b35ee2d145d275bb11e4460ceb27d980f6fb",
+      "SemanaDedicacion__c": "4472d630231f4e9e78dac31e9083df384f0f5d7f1404f174168c1f36dabb4e21",
+      "DedicacionDiaria__c": "f599691e63ae84c2dab9931f5abf425670dbfdd4c3faf55a385f2ac002f9faf6",
+      "security": "8168ffbf8b804fbd032150912f8fb78ff8fe47355b2217597190ca4da6c39cdc",
+      "report": "ff87fb4a514c69d780d26e57a5c7173c5894f6f26f96c2d824088fd9d0b38b9c",
+      "folder": "703693eb57d3cad5af53804e8c6721df3fb232d7d8f4a8fbea18ab282d41d8f9",
+      "reportPermission": "acd009e8eb9fe38b39eeeb19f83bcc66189c597b61d5b658acb240a47249a0c1",
+      "p06Report": "12ed26ce2a3248dcc6c3bd2430a4270a1453933ff6efa5d9f30fc606fa98813e",
+      "p06Folder": "3a336993f6e85197ad224a809f93433220bebad6284a4fc86f8ffc6ae348f531",
+      "assignments": "2b3a238387cfd40278f7dcc25d35d74900ae02443683fd1e0f511aa46bda2021",
+      "groups": "34f7148457612718979c8fb1ee3231711c6545ee4f130f864faf584d624f2a36",
+      "members": "3860e19bfe933d94f1d24aede90eaa35e35cb40f9e7a45679cc9cbccdb7766f3"
+    },
+    "p07HashesAfter": {
+      "ProyectoDedicacion__c": "209c0e3aa76353eb34c9876b0af3b35ee2d145d275bb11e4460ceb27d980f6fb",
+      "SemanaDedicacion__c": "4472d630231f4e9e78dac31e9083df384f0f5d7f1404f174168c1f36dabb4e21",
+      "DedicacionDiaria__c": "f599691e63ae84c2dab9931f5abf425670dbfdd4c3faf55a385f2ac002f9faf6",
+      "security": "8168ffbf8b804fbd032150912f8fb78ff8fe47355b2217597190ca4da6c39cdc",
+      "report": "ff87fb4a514c69d780d26e57a5c7173c5894f6f26f96c2d824088fd9d0b38b9c",
+      "folder": "703693eb57d3cad5af53804e8c6721df3fb232d7d8f4a8fbea18ab282d41d8f9",
+      "reportPermission": "acd009e8eb9fe38b39eeeb19f83bcc66189c597b61d5b658acb240a47249a0c1",
+      "p06Report": "12ed26ce2a3248dcc6c3bd2430a4270a1453933ff6efa5d9f30fc606fa98813e",
+      "p06Folder": "3a336993f6e85197ad224a809f93433220bebad6284a4fc86f8ffc6ae348f531",
+      "assignments": "2b3a238387cfd40278f7dcc25d35d74900ae02443683fd1e0f511aa46bda2021",
+      "groups": "34f7148457612718979c8fb1ee3231711c6545ee4f130f864faf584d624f2a36",
+      "members": "3860e19bfe933d94f1d24aede90eaa35e35cb40f9e7a45679cc9cbccdb7766f3"
+    },
+    "p06": {
+      "records": 432,
+      "manualShares": 4,
+      "differences": [],
+      "hashesBefore": {
+        "Account": "be5c57ce2400654a887ecca38f9803e4f027241d7aabc4619fbc857b9d5b67f6",
+        "IncidenciaRenovacion__c": "8ae6490e4844c4cc3f027f0dcf34102a77b66827b5aa0f1e03b5e17fd99d8422",
+        "EjecucionRenovacion__c": "92b7925c3f2b9711aa7c8e6905f3030ccec9680290d6ee03ed7f3da71125527f",
+        "ContratoComercial__c": "216375dd84733f08a22df913636bbe056beb2c4565a685125389d849c0f8b479",
+        "SeguimientoRenovacion__c": "d88f138327746e5e18f75b5900db4a6a10aa21c20eac8156e2eaff7abb6b88a6",
+        "manualShares": "ed8123672c7fc698e1dfbcf509b562f4d50f3dbdc1d47e8802829f36a5872f65",
+        "p06Groups": "4a63a19c4b75ad50aa7bafbd53dcbf0806a788efb53f58a5ac7b0647fb247471",
+        "p06Members": "c5911b1e198fbe555c1be95117885e355cde426b84f048571786a8e10b160079",
+        "p06Assignments": "6bf7999cb95d4213e4530a0cd1987c97184ab2e6b44f216b7d2848e9f54523c4",
+        "users": "7eea75160cd5de9cd50f2d917f340a9f728bd5b573683cfcad313ed073c011ec",
+        "objectsMetadata": "d21056414a9b565703a680036f7fa17827d9b27d7e0b81a31371a651caf700e0",
+        "permissionsMetadata": "7b793f885a42d7472d0d127afa462e71f40f291f99616e7dca7029b8fc431e3b",
+        "apexInventory": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "hashesAfter": {
+        "Account": "be5c57ce2400654a887ecca38f9803e4f027241d7aabc4619fbc857b9d5b67f6",
+        "IncidenciaRenovacion__c": "8ae6490e4844c4cc3f027f0dcf34102a77b66827b5aa0f1e03b5e17fd99d8422",
+        "EjecucionRenovacion__c": "92b7925c3f2b9711aa7c8e6905f3030ccec9680290d6ee03ed7f3da71125527f",
+        "ContratoComercial__c": "216375dd84733f08a22df913636bbe056beb2c4565a685125389d849c0f8b479",
+        "SeguimientoRenovacion__c": "d88f138327746e5e18f75b5900db4a6a10aa21c20eac8156e2eaff7abb6b88a6",
+        "manualShares": "ed8123672c7fc698e1dfbcf509b562f4d50f3dbdc1d47e8802829f36a5872f65",
+        "p06Groups": "4a63a19c4b75ad50aa7bafbd53dcbf0806a788efb53f58a5ac7b0647fb247471",
+        "p06Members": "c5911b1e198fbe555c1be95117885e355cde426b84f048571786a8e10b160079",
+        "p06Assignments": "6bf7999cb95d4213e4530a0cd1987c97184ab2e6b44f216b7d2848e9f54523c4",
+        "users": "7eea75160cd5de9cd50f2d917f340a9f728bd5b573683cfcad313ed073c011ec",
+        "objectsMetadata": "d21056414a9b565703a680036f7fa17827d9b27d7e0b81a31371a651caf700e0",
+        "permissionsMetadata": "7b793f885a42d7472d0d127afa462e71f40f291f99616e7dca7029b8fc431e3b",
+        "apexInventory": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "licenses": {
+      "Salesforce": {
+        "used": 4,
+        "total": 4
+      },
+      "SalesforcePlatform": {
+        "used": 3,
+        "total": 6
+      }
+    },
+    "noBusinessDataWrites": true
+  },
+  "currentReference": {
+    "method": "Consulta técnica de líneas activas, propietarios, revisiones y UserRecordAccess; no sesión funcional",
+    "A": {
+      "week": "2026-11-23",
+      "minutes": 105,
+      "lines": 3,
+      "revision": 5
+    },
+    "B": {
+      "week": "2026-11-23",
+      "minutes": 60,
+      "lines": 1,
+      "revision": 2
+    },
+    "coordination": {
+      "scope": "A; B no legible",
+      "expectedMinutes": 105
+    },
+    "historicalProjectMinutes": 45,
+    "previousWeekA": {
+      "week": "2026-11-16",
+      "minutes": 0,
+      "lines": 0,
+      "revision": 2
+    },
+    "userRecordAccess": {
+      "inventory": 10,
+      "A": {
+        "read": 8,
+        "edit": 0
+      },
+      "B": {
+        "read": 5,
+        "edit": 0
+      },
+      "coordination": {
+        "read": 8,
+        "edit": 0
+      }
+    },
+    "limitation": "Activo__c, Usuario__c y TotalMinutos__c no se releyeron con la cuenta técnica; el inventario accesible y SystemModstamp se conservan. Minutos conciliados desde las líneas."
+  },
+  "functional": {
+    "availableSession": "Cuenta técnica verificada",
+    "ordinarySessionsExecuted": [],
+    "loginAsActivated": false,
+    "technicalNavigation": {
+      "result": "La página no existe",
+      "scope": "Sesión técnica sin asignación del nuevo permiso; no demuestra fallo de las identidades funcionales ni denegación del servicio",
+      "restored": true
+    },
+    "pending": [
+      "Consulta y teclado reales como A, B y coordinación",
+      "Denegación real de informes estándar ajenos con RunReports=false",
+      "Puerta de acceso a clase en una sesión ordinaria"
+    ],
+    "technicalChecksAreNotFunctionalAcceptance": true
+  },
+  "diagnostics": [
+    {
+      "result": "Comprobación local de permiso detenida antes de asignar",
+      "cause": "classAccesses recibido como lista",
+      "resolution": "Comprobador adaptado y tres asignaciones verificadas; sin cambios del permiso ni concesiones adicionales"
+    }
+  ],
+  "previousEvidencePreserved": true,
+  "phase4": "open",
+  "v1": "open",
+  "remaining": [
+    "Concurrencia real",
+    "Resultado desconocido tras confirmación",
+    "Lectura concurrente coherente",
+    "Superior jerárquico sin pertenencia",
+    "Accesibilidad completa"
+  ],
+  "review": {
+    "filesReviewed": 118,
+    "filesChanged": [
+      "AGENTS.md",
+      "README.md",
+      "docs/ACCESO.md",
+      "docs/ACEPTACION.md",
+      "docs/ARQUITECTURA.md",
+      "docs/ENVIRONMENT.md",
+      "docs/FASE-4B.md",
+      "docs/INFORME.md",
+      "docs/INSTALACION.md",
+      "docs/PROJECT_BRIEF.md",
+      "docs/STATUS.md",
+      "docs/evidencias/FASE-4B.json",
+      "force-app/main/default/applications/P07_Dedicacion.app-meta.xml",
+      "force-app/main/default/classes/P07_InformeService.cls",
+      "force-app/main/default/classes/P07_InformeService.cls-meta.xml",
+      "force-app/main/default/classes/P07_InformeServiceTest.cls",
+      "force-app/main/default/classes/P07_InformeServiceTest.cls-meta.xml",
+      "force-app/main/default/flexipages/P07_InformeOperativo.flexipage-meta.xml",
+      "force-app/main/default/lwc/p07InformeDedicacion/__tests__/fixtures.js",
+      "force-app/main/default/lwc/p07InformeDedicacion/__tests__/modelo.test.js",
+      "force-app/main/default/lwc/p07InformeDedicacion/__tests__/p07InformeDedicacion.test.js",
+      "force-app/main/default/lwc/p07InformeDedicacion/modelo.js",
+      "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.css",
+      "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.html",
+      "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.js",
+      "force-app/main/default/lwc/p07InformeDedicacion/p07InformeDedicacion.js-meta.xml",
+      "force-app/main/default/permissionsets/P07_ConsultaInforme.permissionset-meta.xml",
+      "force-app/main/default/tabs/P07_InformeOperativo.tab-meta.xml",
+      "jest.config.js",
+      "manifest/fase-4b.xml"
+    ],
+    "editorialMatches": [],
+    "protectedFilesUnchanged": 49,
+    "packageHashesUnchanged": true,
+    "stagedChanges": false,
+    "historyUnchanged": true
+  }
+}

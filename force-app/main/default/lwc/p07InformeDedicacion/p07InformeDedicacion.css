@@ -1,0 +1,10 @@
+.filtros { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; margin: 1rem 0; }
+.filtros lightning-input, .filtros lightning-combobox { min-width: 12rem; }
+.resumen, .semana { margin-top: 1.5rem; }
+.miembro, .proyecto { margin-top: 1rem; }
+h2 { font-size: 1.15rem; font-weight: 700; }
+h3, h4 { font-weight: 700; }
+caption { text-align: left; padding: .5rem 0; white-space: normal; }
+table { width: 100%; margin-top: .5rem; }
+.error { color: #8e030f; margin: 1rem 0; }
+[data-resumen]:focus, [data-error]:focus { outline: 2px solid #0176d3; outline-offset: 4px; }
