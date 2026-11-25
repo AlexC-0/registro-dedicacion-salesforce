@@ -121,3 +121,9 @@ Las tres asignaciones de P07_InformesLectura se retiraron tras comprobar acceso 
 Las pruebas del informe se realizaron antes de retirar el permiso. La fase y V1 permanecen abiertas: resolver la habilitación compatible con el aislamiento. El borrador de teclado se descartó expresamente, con cero peticiones de guardado y datos/revisiones conservados. Login As restaurado a false y SecuritySettings sin diferencias.
 
 No se rebajan criterios de concurrencia real, resultado desconocido, lectura/escritura simultánea ni jerarquía. [FASE-4.json](evidencias/FASE-4.json) distingue instalación, corrección, pruebas locales, sesiones reales y capacidad final.
+
+## Regresión de descarte antes de lectura fallida
+
+AC-11, AC-19 y AC-25 incorporan evidencia local adicional: con 60 minutos confirmados y texto «2», aceptar el descarte y fallar la lectura deja celda «1», total «1 h», sin cambios pendientes y Guardar deshabilitado. Cuatro regresiones reproducen el defecto antes de corregir, cubriendo actualización y cambio de semana con rechazo de promesa y ok=false. Tres casos de cancelación conservan texto y borrador; otro contrasta cancelar y aceptar la adopción del estado actual.
+
+La batería final supera 57 pruebas, incluida escritura decimal carácter a carácter. Son simulaciones Jest; no una nueva demostración funcional en Salesforce ni cierre de accesibilidad. El bundle se validó, desplegó y recuperó por separado. Fase 4 y V1 siguen abiertas. Véase [FASE-4-ACTUALIZACION-FALLIDA.json](evidencias/FASE-4-ACTUALIZACION-FALLIDA.json).

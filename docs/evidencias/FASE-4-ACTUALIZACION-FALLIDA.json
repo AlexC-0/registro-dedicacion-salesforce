@@ -1,0 +1,273 @@
+{
+  "phase": "4",
+  "revision": "Corrección de estado tras actualización fallida",
+  "date": "2026-11-25",
+  "base": "9f259d665671814964ef9a762f4a4c83c28284e8",
+  "status": "Corrección validada y desplegada; fase 4 y V1 abiertas",
+  "target": {
+    "alias": "p06-renovaciones-dev",
+    "edition": "Developer Edition",
+    "api": "65.0",
+    "sharedWith": "P06",
+    "identityVerified": true
+  },
+  "initialGit": {
+    "branch": "main",
+    "worktreeClean": true,
+    "baseMatched": true
+  },
+  "reproduction": {
+    "confirmedMinutes": 60,
+    "editedText": "2",
+    "acceptedDiscard": true,
+    "failures": [
+      "Promesa de leerSemana rechazada",
+      "Respuesta válida del contrato con ok=false"
+    ],
+    "observedBefore": "Celda 2, total 1 h y sin cambios pendientes tras fallar la lectura"
+  },
+  "change": {
+    "component": "p07DedicacionSemanal",
+    "routes": [
+      "actualizar",
+      "cambiarSemana"
+    ],
+    "behavior": "Vaciar borrador y textoEnEdicion conjuntamente después de aceptar descarte y antes de cargar",
+    "functionalStatesAdded": false,
+    "apexContractChanged": false
+  },
+  "jest": {
+    "before": {
+      "passed": 4,
+      "failed": 4,
+      "skipped": 49,
+      "cases": [
+        {
+          "name": "actualizar tras aceptar descarte limpia la presentación aunque falle: rechazo de promesa",
+          "status": "failed"
+        },
+        {
+          "name": "actualizar tras aceptar descarte limpia la presentación aunque falle: respuesta ok=false",
+          "status": "failed"
+        },
+        {
+          "name": "cambio de semana descarta presentación incluso si fallan las lecturas: rechazo de promesa",
+          "status": "failed"
+        },
+        {
+          "name": "cambio de semana descarta presentación incluso si fallan las lecturas: respuesta ok=false",
+          "status": "failed"
+        },
+        {
+          "name": "cancelar actualizar conserva texto, borrador y total",
+          "status": "passed"
+        },
+        {
+          "name": "cancelar siguiente conserva texto, borrador y total",
+          "status": "passed"
+        },
+        {
+          "name": "cancelar descartar conserva texto, borrador y total",
+          "status": "passed"
+        },
+        {
+          "name": "adoptar estado actual sustituye presentación solo tras aceptar",
+          "status": "passed"
+        }
+      ]
+    },
+    "after": {
+      "passed": 57,
+      "failed": 0,
+      "suites": 2,
+      "total": 57
+    },
+    "newCases": 8,
+    "decimalCharacterRegressionPreserved": true,
+    "simulatedApex": true,
+    "realSalesforceFailureDemonstration": false
+  },
+  "routeReview": [
+    {
+      "route": "Actualizar y cambio de semana",
+      "result": "Limpieza previa a la lectura; cuatro regresiones fallaban antes y pasan después"
+    },
+    {
+      "route": "Cancelar actualización, cambio de semana o descarte",
+      "result": "Tres pruebas conservan texto 2,00, total 2 h, pendiente y botones; sin lectura ni guardado nuevos"
+    },
+    {
+      "route": "Descartar directamente",
+      "result": "Ya limpiaba borrador y presentación; prueba existente conservada"
+    },
+    {
+      "route": "Adoptar tras carga o guardado correctos",
+      "result": "Ya limpia presentación; pruebas de carga, guardado y adopción conservadas"
+    },
+    {
+      "route": "Usar estado actual",
+      "result": "Nueva prueba cancela conservando 2,00 y después acepta 1,5 confirmado sin guardar otra vez"
+    },
+    {
+      "route": "Reaplicar selección",
+      "result": "Adopta el estado actual antes de restaurar solo cambios seleccionados; pruebas existentes satisfactorias"
+    },
+    {
+      "route": "Quitar fila vacía",
+      "result": "Ya limpia presentación; no elimina borradores significativos"
+    },
+    {
+      "route": "Fallo de guardado o reconciliación sin descarte",
+      "result": "Conserva borrador y texto; pruebas existentes satisfactorias"
+    }
+  ],
+  "operations": [
+    {
+      "operation": "retrieve-before",
+      "id": "09Sg700000bkXJpEAM",
+      "status": "Succeeded",
+      "done": true,
+      "success": true
+    },
+    {
+      "operation": "validate",
+      "id": "0Afg700000LIvmvCAD",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": true,
+      "numberComponentsTotal": 1,
+      "numberComponentsDeployed": 1,
+      "numberComponentErrors": 0,
+      "numberTestsCompleted": 0,
+      "numberTestErrors": 0
+    },
+    {
+      "operation": "deploy",
+      "id": "0Afg700000LIQcgCAH",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": false,
+      "numberComponentsTotal": 1,
+      "numberComponentsDeployed": 1,
+      "numberComponentErrors": 0,
+      "numberTestsCompleted": 0,
+      "numberTestErrors": 0
+    },
+    {
+      "operation": "retrieve-after",
+      "id": "09Sg700000bkRuMEAU",
+      "status": "Succeeded",
+      "done": true,
+      "success": true
+    }
+  ],
+  "testLevel": "NoTestRun",
+  "apexTestsExecuted": 0,
+  "sourceHashes": {
+    "force-app/main/default/lwc/p07DedicacionSemanal/modelo.js": "8b2241a9af6adb5c1f0acbfb431760adb1f1402598a84234e0fdc48a09d9f3d6",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.css": "f9b7dcc6684749c23506aa48d5a60b3f11cfecf3fb5349cf9ac98f2f92c2c44f",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.html": "b46bf7e3f662accd248b17ec25e58dd4c74fe115944b32396d29011e91eba178",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js": "09ebe84dd93acaa1e496c9a6e2646ea578867d5c5f9674562eab002786d5deba",
+    "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js-meta.xml": "f58cff096bc8f9a7367c4a799a1e22ea3e3ce01fa93897f5d83eda1af1ead2c0",
+    "manifest/revision-fase-4.xml": "8319084e43caa3fd3803b03608ec5706a38da2c1c77d72b4a74af6671a740576"
+  },
+  "predeploymentRemoteContrast": {
+    "files": [
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/modelo.js",
+        "match": true
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.css",
+        "match": true
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.html",
+        "match": true
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js",
+        "match": true
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js-meta.xml",
+        "match": true
+      }
+    ],
+    "normalization": "CRLF/LF y ausencia de salto final en los cinco archivos recuperados; sin diferencias de contenido"
+  },
+  "retrievedContrast": {
+    "files": [
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/modelo.js",
+        "match": true
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.css",
+        "match": true
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.html",
+        "match": true
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js",
+        "match": true
+      },
+      {
+        "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js-meta.xml",
+        "match": true
+      }
+    ],
+    "allMatched": true,
+    "hashesMatched": true,
+    "normalization": "CRLF/LF y salto final"
+  },
+  "preservation": {
+    "p07": {
+      "ProyectoDedicacion__c": {
+        "active": 3,
+        "deleted": 0
+      },
+      "SemanaDedicacion__c": {
+        "active": 3,
+        "deleted": 0
+      },
+      "DedicacionDiaria__c": {
+        "active": 4,
+        "deleted": 3
+      }
+    },
+    "p07DataRevisionsAndSystemModstampUnchanged": true,
+    "p07Differences": [],
+    "p06": {
+      "counts": {
+        "Account": 11,
+        "IncidenciaRenovacion__c": 7,
+        "EjecucionRenovacion__c": 20,
+        "ContratoComercial__c": 198,
+        "SeguimientoRenovacion__c": 196
+      },
+      "total": 432,
+      "manualShares": 4,
+      "differences": []
+    },
+    "reportFolderAndPermissionUnchanged": true,
+    "explicitAssignments": 6,
+    "runReports": false,
+    "securitySettingsUnchanged": true,
+    "loginAs": false,
+    "newBusinessData": 0
+  },
+  "functionalVerification": {
+    "executed": false,
+    "reason": "Sin sesión funcional verificada para este recorrido; la excepción anterior de Login As sigue cerrada",
+    "loginAsReactivated": false,
+    "scope": "Jest simula ambos fallos; validación y despliegue remotos no equivalen a demostración funcional"
+  },
+  "phase4Closed": false,
+  "v1Closed": false,
+  "previousEvidencePreserved": true
+}

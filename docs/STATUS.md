@@ -2,6 +2,31 @@
 
 Fecha: 25/11/2026.
 
+## Corrección de estado tras actualización fallida
+
+Revisión del 25/11/2026 sobre 9f259d665671814964ef9a762f4a4c83c28284e8, rama main y árbol inicialmente limpio. El destino compartido p06-renovaciones-dev, Developer Edition y API 65.0, se contrastó con el registro privado antes de operar.
+
+La reproducción parte de 60 minutos confirmados y una edición a «2». Aceptar descartar al actualizar vaciaba el borrador, pero dejaba el texto visible. Si leerSemana fallaba por rechazo de promesa o respuesta válida ok=false, la celda mostraba «2», el total «1 h» y Guardar permanecía deshabilitado. La misma omisión aparecía al cambiar de semana y volver tras lecturas fallidas.
+
+Se añadieron ocho casos Jest. Antes de corregir, fallaron los cuatro de actualización/cambio de semana con ambos tipos de error; pasaron los cuatro de cancelación y adopción, y quedaron 49 omitidos en esa ejecución selectiva. La corrección añade la limpieza de textoEnEdicion junto al borrador en las dos rutas, después de aceptar el descarte y antes de iniciar la lectura. No depende del éxito posterior, no añade estados funcionales ni modifica Apex.
+
+Después pasan 57/57 pruebas, en dos suites, incluida la escritura decimal carácter a carácter. Cancelar conserva texto «2,00», total «2 h» y borrador pendiente, sin iniciar lectura. Se revisaron descarte directo, adopción por carga/guardado, aceptación del estado actual, reaplicación y retirada de fila: ya limpiaban o sustituían la presentación. Los errores de guardado o reconciliación sin descarte continúan conservando el borrador.
+
+| Operación | Identificador | Resultado final |
+|---|---|---|
+| Recuperación previa | 09Sg700000bkXJpEAM | Succeeded; cinco archivos coinciden con la base |
+| Validación | 0Afg700000LIvmvCAD | Succeeded, checkOnly=true; 1/1 |
+| Despliegue | 0Afg700000LIQcgCAH | Succeeded, checkOnly=false; 1/1 |
+| Recuperación final | 09Sg700000bkRuMEAU | Succeeded; cinco archivos coinciden con las fuentes |
+
+Se reutiliza [revision-fase-4.xml](../manifest/revision-fase-4.xml), limitado al bundle. NoTestRun: cero pruebas Apex nuevas. Las seis huellas de fuentes/manifiesto se mantienen. El contraste normaliza únicamente CRLF/LF y la ausencia del salto final en los archivos recuperados.
+
+No se ejecutó una demostración nueva en sesión funcional: no hay una sesión funcional verificada para este recorrido y la excepción anterior de Login As permanece cerrada. Los fallos de lectura se simularon en Jest; no se atribuye demostración real a la compilación remota.
+
+El contraste conserva tres proyectos, tres semanas, cuatro líneas activas y tres eliminadas P07, con revisiones y SystemModstamp; 432 registros y cuatro comparticiones manuales P06, además del inventario de configuración revisado. Informe y carpeta sin cambios, seis asignaciones explícitas y RunReports=false. SecuritySettings sin diferencias; Login As=false durante esta revisión.
+
+Corrección terminada dentro de este alcance; fase 4 y V1 abiertas. La habilitación del informe y los límites anteriores siguen pendientes. [Evidencia de esta corrección](evidencias/FASE-4-ACTUALIZACION-FALLIDA.json) conserva el fallo previo, las pruebas finales y el contraste; las evidencias anteriores no se reemplazan.
+
 ## Fase 4: comprobación realizada; informe sin habilitación
 
 Base de instalación: 00d731463fca5567a4ea01cbaebb23895c1e5d11. Continuación sobre 2a647640858f80a8b3c701ecbfb37c6867def0a8, rama main, remoto registro-dedicacion-salesforce y árbol inicialmente limpio. Se conserva jsconfig.json ya versionado. Destino contrastado: Developer Edition compartida con P06, alias p06-renovaciones-dev, API 65.0.

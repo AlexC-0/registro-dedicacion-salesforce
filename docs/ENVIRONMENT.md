@@ -101,3 +101,7 @@ Se mantienen Salesforce 4/4 y Salesforce Platform 3/6. No se crearon usuarios ni
 El estado de datos y las limitaciones de comprobación funcional se recogen en [STATUS.md](STATUS.md) e [INFORME.md](INFORME.md).
 
 Se corrigió la pérdida del cero inicial al escribir un decimal en una celda vacía: el LWC conserva el texto en edición separado del borrador significativo. La regresión nueva falló antes de corregir; después, 49/49 pruebas Jest en dos suites satisfactorias. Validación 0Afg700000LIaTyCAL y despliegue 0Afg700000LIPVKCA5: Succeeded, un bundle, NoTestRun. Recuperación 09Sg700000bjuwnEAA: cinco archivos coincidentes. Sin cambios de Apex o modelo ni pruebas Apex nuevas.
+
+## Revisión de actualización fallida
+
+El 25/11/2026 se verificó nuevamente el destino compartido y se desplegó únicamente el bundle existente, sin cambios de herramientas, autenticación ni políticas. Login As=false y RunReports=false; seis asignaciones explícitas, informe y carpeta conservados. 57 pruebas Jest locales satisfactorias; validación y despliegue con NoTestRun, cero Apex. Cinco archivos recuperados coinciden tras normalizar finales de línea. No se abrió una sesión funcional nueva para provocar fallos reales de lectura; [STATUS.md](STATUS.md) distingue esos límites.

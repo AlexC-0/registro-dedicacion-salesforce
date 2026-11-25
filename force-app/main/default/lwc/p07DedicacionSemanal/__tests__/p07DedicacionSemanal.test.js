@@ -148,3 +148,64 @@ test('conserva el cero al corregir una celda vacía carácter a carácter',async
     expect(q(e,'guardar').disabled).toBe(true);
     expect(q(e,'total').textContent).toContain('1 h');
 });
+
+test.each(['rechazo de promesa','respuesta ok=false'])('actualizar tras aceptar descarte limpia la presentación aunque falle: %s',async(tipo)=>{
+    const e=await montar();await editar(e,1,'2');
+    const lectura=diferida();leerSemana.mockReturnValueOnce(lectura.promise);
+    LightningConfirm.open.mockResolvedValueOnce(true);await click(e,'actualizar');
+    if(tipo==='rechazo de promesa')lectura.reject(new Error('red'));
+    else lectura.resolve(mal('ACCESO_DENEGADO',null,null,'Lectura denegada.'));
+    await flush();
+    expect(q(e,'errores')).not.toBeNull();
+    expect(celda(e,1).value).toBe('1');
+    expect(q(e,'total').textContent).toBe('1 h');
+    expect(q(e,'estado').textContent).toBe('Sin cambios pendientes.');
+    expect(q(e,'guardar').disabled).toBe(true);
+    expect(q(e,'descartar').disabled).toBe(true);
+    expect(guardarSemana).not.toHaveBeenCalled();
+});
+
+test.each(['rechazo de promesa','respuesta ok=false'])('cambio de semana descarta presentación incluso si fallan las lecturas: %s',async(tipo)=>{
+    const e=await montar();await editar(e,1,'2');
+    const fallar=()=>tipo==='rechazo de promesa'
+        ? leerSemana.mockRejectedValueOnce(new Error('red'))
+        : leerSemana.mockResolvedValueOnce(mal('ACCESO_DENEGADO'));
+    LightningConfirm.open.mockResolvedValueOnce(true);fallar();await click(e,'siguiente');
+    expect(q(e,'semana').value).toBe('2026-11-23');
+    expect(celda(e,1)).toBeNull();
+    expect(q(e,'errores')).not.toBeNull();
+    fallar();await click(e,'anterior');
+    expect(q(e,'semana').value).toBe(SEMANA);
+    expect(q(e,'errores')).not.toBeNull();
+    expect(celda(e,1).value).toBe('1');
+    expect(q(e,'total').textContent).toBe('1 h');
+    expect(q(e,'estado').textContent).toBe('Sin cambios pendientes.');
+    expect(q(e,'guardar').disabled).toBe(true);
+    expect(LightningConfirm.open).toHaveBeenCalledTimes(1);
+    expect(guardarSemana).not.toHaveBeenCalled();
+});
+
+test.each(['actualizar','siguiente','descartar'])('cancelar %s conserva texto, borrador y total',async(accion)=>{
+    const e=await montar();await editar(e,1,'2,00');await click(e,accion);
+    expect(LightningConfirm.open).toHaveBeenCalledTimes(1);
+    expect(leerSemana).toHaveBeenCalledTimes(1);
+    expect(q(e,'semana').value).toBe(SEMANA);
+    expect(celda(e,1).value).toBe('2,00');
+    expect(q(e,'total').textContent).toBe('2 h');
+    expect(q(e,'estado').textContent).toContain('1 celdas con cambios pendientes');
+    expect(q(e,'guardar').disabled).toBe(false);
+    expect(q(e,'descartar').disabled).toBe(false);
+    expect(guardarSemana).not.toHaveBeenCalled();
+});
+
+test('adoptar estado actual sustituye presentación solo tras aceptar',async()=>{
+    const e=await montar();await editar(e,1,'2,00');
+    guardarSemana.mockResolvedValueOnce(mal('REVISION_DESACTUALIZADA'));await click(e,'guardar');
+    leerSemana.mockResolvedValueOnce(bien(estado({revision:'2',entradas:[{proyectoId:id(1),fecha:SEMANA,minutos:90}]})));
+    await click(e,'consultar');await click(e,'aceptar');
+    expect(celda(e,1).value).toBe('2,00');expect(q(e,'total').textContent).toBe('2 h');
+    LightningConfirm.open.mockResolvedValueOnce(true);await click(e,'aceptar');
+    expect(celda(e,1).value).toBe('1,5');expect(q(e,'total').textContent).toBe('1,5 h');
+    expect(q(e,'guardar').disabled).toBe(true);expect(q(e,'descartar').disabled).toBe(true);
+    expect(guardarSemana).toHaveBeenCalledTimes(1);
+});

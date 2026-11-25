@@ -135,13 +135,13 @@ Guardar genera una única llamada imperativa con semana, revisionEsperada textua
 
 Un contador de peticiones invalida respuestas de lecturas anteriores y respuestas posteriores a desconectar el componente. La navegación sin cambios puede iniciar otra lectura mientras la anterior sigue pendiente. Solo la respuesta vigente puede adoptar estado o mostrar errores. Las lecturas fallidas no se presentan como una semana vacía confirmada.
 
-Los errores del servidor se muestran por celda, día o conjunto, con contexto de proyecto y fecha cuando existe. ok=false conserva el borrador aunque la promesa se haya resuelto. CONTENCION informa del fallo y permite un nuevo intento manual, sin reintentos automáticos.
+Los errores del servidor se muestran por celda, día o conjunto, con contexto de proyecto y fecha cuando existe. En una respuesta de guardado, ok=false conserva el borrador aunque la promesa se haya resuelto. CONTENCION informa del fallo y permite un nuevo intento manual, sin reintentos automáticos.
 
 REVISION_DESACTUALIZADA y CONFLICTO_CREACION bloquean otro guardado hasta consultar el estado actual. La comparación muestra valor anterior, cambio solicitado y valor actual para cada celda del borrador original. Ninguna casilla está seleccionada por defecto. Incorporar selección al borrador adopta la revisión actual y conserva solo las celdas elegidas que siguen editables; no guarda automáticamente ni modifica celdas ajenas al borrador original. Proyectos desactivados, permisos retirados o fechas no editables impiden reaplicar esas celdas. Los cambios no seleccionados se descartan mediante esa acción explícita, advertida junto al control.
 
 Un rechazo de transporte o una respuesta de guardado inválida se trata como resultado desconocido. Se exige lectura de reconciliación antes de permitir otro guardado. Si falla esa lectura, persisten incertidumbre y borrador. Si los valores solicitados ya están presentes, se informa de esa coincidencia sin atribuirla a una petición concreta. Adoptar el estado actual y descartar el borrador exige confirmación.
 
-Cambiar de semana, actualizar o descartar con cambios pendientes abre LightningConfirm. Cancelar conserva los valores y devuelve el foco al selector. No se utiliza almacenamiento persistente del navegador: cerrar o recargar puede perder el borrador, como indica la interfaz.
+Cambiar de semana, actualizar o descartar con cambios pendientes abre LightningConfirm. Cancelar conserva borrador y texto visible, sin iniciar una lectura. Aceptar el descarte limpia ambos antes de consultar: un rechazo de transporte o una respuesta ok=false no recupera el texto descartado. Si sigue visible la misma semana, sus celdas y totales proceden del estado previamente confirmado, con el error de lectura presente. El texto transitorio necesario para escribir decimales carácter a carácter se conserva mientras se edita; no se confunde con un cambio significativo pendiente. No se utiliza almacenamiento persistente del navegador: cerrar o recargar puede perder el borrador, como indica la interfaz.
 
 ## Accesibilidad y límites de verificación
 

@@ -4,7 +4,7 @@ Aplicación de demostración para registrar dedicación propia por proyecto y d�
 
 ## Estado
 
-Fase 4: informe comprobado en sesiones de A, B y coordinación; recorrido básico de teclado realizado y corrección decimal desplegada, con 49 pruebas Jest satisfactorias. Se retiró el permiso de ejecución de informes de las tres identidades al constatar acceso a un informe público ajeno. El informe queda instalado sin habilitación funcional; la fase y V1 permanecen abiertas. [STATUS.md](docs/STATUS.md) recoge resultados y [INFORME.md](docs/INFORME.md), uso y límites.
+Fase 4: informe comprobado en sesiones de A, B y coordinación; recorrido básico de teclado realizado y corrección decimal desplegada, con 49 pruebas Jest satisfactorias en esa entrega. La revisión posterior corrige el descarte antes de una lectura fallida y supera 57 pruebas Jest. Se retiró el permiso de ejecución de informes de las tres identidades al constatar acceso a un informe público ajeno. El informe queda instalado sin habilitación funcional; la fase y V1 permanecen abiertas. [STATUS.md](docs/STATUS.md) recoge resultados y [INFORME.md](docs/INFORME.md), uso y límites.
 
 ## Alcance V1
 

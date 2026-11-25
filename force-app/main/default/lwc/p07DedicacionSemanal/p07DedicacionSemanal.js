@@ -129,7 +129,7 @@ export default class P07DedicacionSemanal extends LightningElement {
         try { lunes = lunesDe(fecha); } catch { this.errores = [{ mensaje: 'Selecciona una fecha válida.', proyectoId: null, fecha: null }]; return; }
         if (lunes === this.semana) return;
         if (!(await this.confirmarDescarte())) return;
-        this.borrador = {}; this.cargar(lunes);
+        this.borrador = {}; this.textoEnEdicion = null; this.cargar(lunes);
     }
     anterior() { this.cambiarSemana(sumarDias(this.semana, -7)); }
     siguiente() { this.cambiarSemana(sumarDias(this.semana, 7)); }
@@ -137,7 +137,7 @@ export default class P07DedicacionSemanal extends LightningElement {
     async actualizar() {
         if (this.navegacionBloqueada) return;
         if (!(await this.confirmarDescarte())) return;
-        this.borrador = {}; this.cargar(this.semana);
+        this.borrador = {}; this.textoEnEdicion = null; this.cargar(this.semana);
     }
     async descartar() {
         if (this.descartarBloqueado) return;
