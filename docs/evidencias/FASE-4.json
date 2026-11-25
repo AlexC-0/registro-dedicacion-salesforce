@@ -2,7 +2,7 @@
   "phase": "4",
   "date": "2026-11-25",
   "base": "00d731463fca5567a4ea01cbaebb23895c1e5d11",
-  "status": "Instalación y contraste técnico terminados; comprobación funcional pendiente",
+  "status": "Comprobación funcional y corrección de teclado realizadas; informe instalado sin habilitación funcional tras retirar RunReports",
   "target": {
     "alias": "p06-renovaciones-dev",
     "edition": "Developer Edition",
@@ -78,6 +78,39 @@
       "done": true,
       "success": true,
       "warnings": []
+    },
+    {
+      "operation": "validate-lwc-fix",
+      "id": "0Afg700000LIaTyCAL",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": true,
+      "numberComponentsTotal": 1,
+      "numberComponentsDeployed": 1,
+      "numberComponentErrors": 0,
+      "numberTestsCompleted": 0,
+      "numberTestErrors": 0
+    },
+    {
+      "operation": "deploy-lwc-fix",
+      "id": "0Afg700000LIPVKCA5",
+      "status": "Succeeded",
+      "done": true,
+      "success": true,
+      "checkOnly": false,
+      "numberComponentsTotal": 1,
+      "numberComponentsDeployed": 1,
+      "numberComponentErrors": 0,
+      "numberTestsCompleted": 0,
+      "numberTestErrors": 0
+    },
+    {
+      "operation": "retrieve-lwc-fix",
+      "id": "09Sg700000bjuwnEAA",
+      "status": "Succeeded",
+      "done": true,
+      "success": true
     }
   ],
   "corrections": [
@@ -90,6 +123,11 @@
       "validation": "validate-2",
       "problem": "Tres campos agrupados repetidos en columns",
       "change": "Mantenerlos solo en groupingsDown; los encabezados siguen identificando semana, miembro y proyecto"
+    },
+    {
+      "validation": "keyboard-functional",
+      "problem": "El render borraba el cero inicial al corregir una celda vacía, impidiendo escribir 0,5 carácter a carácter",
+      "change": "Conservar texto en edición separado del borrador significativo y limpiarlo al adoptar, descartar o retirar fila"
     }
   ],
   "sourceHashes": {
@@ -157,8 +195,8 @@
       "RunReports"
     ],
     "reportTab": "Visible",
-    "newAssignments": 3,
-    "totalExplicitAssignments": 9,
+    "newAssignments": 0,
+    "totalExplicitAssignments": 6,
     "folderShares": [
       {
         "accessLevel": "View",
@@ -176,7 +214,17 @@
     "apiEnabled": false,
     "viewAllOrModifyAll": false,
     "otherPublicSampleReports": 5,
-    "ordinaryVisibilityOfOtherReportsVerified": false
+    "ordinaryVisibilityOfOtherReportsVerified": true,
+    "assignmentsAddedInitially": 3,
+    "assignmentsRemovedFinally": 3,
+    "runReportsByRole": {
+      "A": false,
+      "B": false,
+      "C": false
+    },
+    "functionalReportEnabled": false,
+    "priorAssignmentsPreserved": true,
+    "reportAndFolderUnchanged": true
   },
   "technicalReports": [
     {
@@ -260,13 +308,43 @@
     }
   },
   "browser": {
-    "connected": true,
     "technicalReportPresentationVerified": true,
-    "detailDatesAndSubtotalsVerified": true,
-    "functionalSessionAvailable": false,
-    "memberALoginControlAvailable": false,
-    "functionalReportRuns": [],
-    "keyboardFunctionalCheckExecuted": false
+    "functionalReportRuns": [
+      {
+        "role": "A",
+        "rows": 3,
+        "minutes": 105,
+        "gridHours": 1.75,
+        "headerMinutes": 105,
+        "revision": 5,
+        "excludes": "B"
+      },
+      {
+        "role": "B",
+        "rows": 1,
+        "minutes": 60,
+        "gridHours": 1,
+        "headerMinutes": 60,
+        "revision": 2,
+        "excludes": "A"
+      },
+      {
+        "role": "C",
+        "rows": 3,
+        "minutes": 105,
+        "headerOwnerRole": "A",
+        "headerMinutes": 105,
+        "revision": 5,
+        "excludes": "B",
+        "editHeaderDenied": true,
+        "ownGridHours": 0,
+        "ownGridIsScopeReport": false
+      }
+    ],
+    "functionalRunsPrecedePermissionRemoval": true,
+    "keyboardFunctionalCheckExecuted": true,
+    "technicalSessionRestored": true,
+    "delegatedSessionActiveAtEnd": false
   },
   "preservation": {
     "p07": {
@@ -310,18 +388,383 @@
     ]
   },
   "validationLimits": {
-    "apexOrLwcOrModelChanged": false,
+    "lwcChanged": true,
+    "apexOrModelChanged": false,
     "apexTestsExecuted": 0,
-    "jestTestsExecuted": 0,
+    "jestTestsExecuted": 49,
     "technicalQueryIsFunctionalSession": false,
-    "comparisonWithHeaderAndGrid": "Referencia histórica de fase 3B; conciliación nueva por identidad pendiente"
+    "comparisonWithHeaderAndGrid": "A y B: cuadrícula, cabecera e informe; coordinación: cabecera de A e informe; cuadrícula propia fuera de esa comparación",
+    "postRemovalFunctionalSessionExecuted": false
   },
   "pending": [
-    "Ejecutar informe como A, B y coordinación con acceso funcional legítimo",
-    "Comprobar aislamiento del informe, carpeta y otros informes públicos en sesiones ordinarias",
-    "Conciliar informe, resumen y cuadrícula bajo cada identidad y semana",
-    "Completar recorrido de teclado de AC-20",
-    "Mantener los límites previos de concurrencia, resultado desconocido y jerarquía"
+    "Informe funcional deshabilitado tras retirada de RunReports; solución compatible con aislamiento pendiente",
+    "Ausencia final de RunReports comprobada por asignaciones, sin otra sesión funcional posterior",
+    "Accesibilidad básica por teclado; lector de pantalla y auditoría completa pendientes",
+    "Sin nueva evidencia de concurrencia, resultado desconocido o jerarquía"
   ],
-  "v1Closed": false
+  "v1Closed": false,
+  "initialDelivery": {
+    "status": "Instalación y contraste técnico terminados; comprobación funcional pendiente",
+    "permissions": {
+      "set": "P07_InformesLectura",
+      "enabledUserPermissions": [
+        "RunReports"
+      ],
+      "reportTab": "Visible",
+      "newAssignments": 3,
+      "totalExplicitAssignments": 9,
+      "folderShares": [
+        {
+          "accessLevel": "View",
+          "sharedTo": "P07_Participantes",
+          "sharedToType": "Group"
+        }
+      ],
+      "objectOrFieldPermissionsAdded": false,
+      "profileModified": false,
+      "readOnlyObjects": [
+        "ProyectoDedicacion__c",
+        "SemanaDedicacion__c",
+        "DedicacionDiaria__c"
+      ],
+      "apiEnabled": false,
+      "viewAllOrModifyAll": false,
+      "otherPublicSampleReports": 5,
+      "ordinaryVisibilityOfOtherReportsVerified": false
+    },
+    "browser": {
+      "connected": true,
+      "technicalReportPresentationVerified": true,
+      "detailDatesAndSubtotalsVerified": true,
+      "functionalSessionAvailable": false,
+      "memberALoginControlAvailable": false,
+      "functionalReportRuns": [],
+      "keyboardFunctionalCheckExecuted": false
+    },
+    "validationLimits": {
+      "apexOrLwcOrModelChanged": false,
+      "apexTestsExecuted": 0,
+      "jestTestsExecuted": 0,
+      "technicalQueryIsFunctionalSession": false,
+      "comparisonWithHeaderAndGrid": "Referencia histórica de fase 3B; conciliación nueva por identidad pendiente"
+    },
+    "pending": [
+      "Ejecutar informe como A, B y coordinación con acceso funcional legítimo",
+      "Comprobar aislamiento del informe, carpeta y otros informes públicos en sesiones ordinarias",
+      "Conciliar informe, resumen y cuadrícula bajo cada identidad y semana",
+      "Completar recorrido de teclado de AC-20",
+      "Mantener los límites previos de concurrencia, resultado desconocido y jerarquía"
+    ]
+  },
+  "continuation": {
+    "date": "2026-11-25",
+    "base": "2a647640858f80a8b3c701ecbfb37c6867def0a8",
+    "initialWorktreeClean": true,
+    "sourceHashes": {
+      "force-app/main/default/lwc/p07DedicacionSemanal/modelo.js": "8b2241a9af6adb5c1f0acbfb431760adb1f1402598a84234e0fdc48a09d9f3d6",
+      "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.css": "f9b7dcc6684749c23506aa48d5a60b3f11cfecf3fb5349cf9ac98f2f92c2c44f",
+      "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.html": "b46bf7e3f662accd248b17ec25e58dd4c74fe115944b32396d29011e91eba178",
+      "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js": "c8dafa3fc0b49042691c3f73dbf3645fdb7fc01226990186f83cef6e264fb81b",
+      "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js-meta.xml": "f58cff096bc8f9a7367c4a799a1e22ea3e3ce01fa93897f5d83eda1af1ead2c0",
+      "manifest/revision-fase-4.xml": "8319084e43caa3fd3803b03608ec5706a38da2c1c77d72b4a74af6671a740576"
+    },
+    "retrievedContrast": {
+      "allMatched": true,
+      "results": [
+        {
+          "file": "force-app/main/default/lwc/p07DedicacionSemanal/modelo.js",
+          "match": true
+        },
+        {
+          "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.css",
+          "match": true
+        },
+        {
+          "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.html",
+          "match": true
+        },
+        {
+          "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js",
+          "match": true
+        },
+        {
+          "file": "force-app/main/default/lwc/p07DedicacionSemanal/p07DedicacionSemanal.js-meta.xml",
+          "match": true
+        }
+      ],
+      "hashesMatched": true
+    },
+    "jest": {
+      "suites": 2,
+      "passed": 49,
+      "failed": 0,
+      "initialRegressionFailed": true
+    },
+    "retainedDiagnostics": [
+      "Regresión nueva fallida antes de corregir",
+      "Primer recorrido posterior al despliegue con módulo anterior en caché; recarga completa y repetición satisfactorias",
+      "Contadores transitorios del informe; resultado estable contrastado"
+    ],
+    "keyboard": {
+      "zero": "0",
+      "corrected": "0,5",
+      "errorFocus": {
+        "tag": "SECTION",
+        "text": "Revisa estos datos. Los cambios pendientes se conservan.P07 3B Desarrollo fictic",
+        "outline": "rgb(238, 238, 238) auto 0.8px",
+        "shadow": "none"
+      },
+      "savePath": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "value": "",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "value": "",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "value": "1",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "value": "",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "value": "",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Guardar cambios",
+          "value": "",
+          "outline": "rgb(2, 80, 217) none 0px",
+          "shadow": "rgba(194, 218, 255, 0.1) 0px 0px 0px 0.202814px inset, rgba(0, 0, 0, 0.1) 0px 0px 0px 0.405628px inset"
+        }
+      ],
+      "recoveryPath": [
+        {
+          "tag": "BUTTON",
+          "text": "Selecciona un proyecto",
+          "value": "",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        },
+        {
+          "tag": "DIV",
+          "text": "Totales provisionales. Importes en horas.Proyectolun, 23 nov 2026mar, 24 nov 202",
+          "outline": "rgb(1, 118, 211) solid 1.6px",
+          "shadow": "none"
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "value": "0,3",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        }
+      ],
+      "discardPath": [
+        {
+          "tag": "INPUT",
+          "text": "",
+          "value": "",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "value": "",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "value": "1",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "value": "",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        },
+        {
+          "tag": "INPUT",
+          "text": "",
+          "value": "",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Guardar cambios",
+          "value": "",
+          "outline": "rgb(2, 80, 217) none 0px",
+          "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px inset, rgba(0, 0, 0, 0) 0px 0px 0px 0px inset"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Descartar cambios",
+          "value": "",
+          "outline": "rgb(216, 230, 254) none 0px",
+          "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px inset, rgba(0, 0, 0, 0) 0px 0px 0px 0px inset"
+        }
+      ],
+      "returned": {
+        "tag": "BUTTON",
+        "text": "Descartar cambios",
+        "value": "",
+        "outline": "rgb(216, 230, 254) none 0px",
+        "shadow": "rgba(194, 218, 255, 0.23) 0px 0px 0px 0.46355px inset, rgba(0, 0, 0, 0.23) 0px 0px 0px 0.927099px inset"
+      },
+      "draftAfterCancel": "0,5",
+      "scroll": {
+        "before": {
+          "left": 0,
+          "width": 819,
+          "scrollWidth": 1186,
+          "outline": "rgb(1, 118, 211) solid 1.6px"
+        },
+        "after": {
+          "left": 366.3999938964844,
+          "width": 819,
+          "scrollWidth": 1186,
+          "totalWithinHorizontal": true,
+          "totalWithinViewport": true
+        },
+        "exitFocus": {
+          "tag": "INPUT",
+          "text": "",
+          "value": "0,5",
+          "outline": "rgb(229, 229, 229) none 0px",
+          "shadow": "rgb(194, 218, 255) 0px 0px 0px 2px"
+        }
+      },
+      "finalState": "Cambios descartados. Se muestran los valores confirmados.",
+      "finalTotal": "1,75 h",
+      "finalCell": "",
+      "saveRequests": 0,
+      "viewport": {
+        "width": 900,
+        "height": 700
+      },
+      "fullAccessibilityAudit": false
+    },
+    "reports": {
+      "runs": [
+        {
+          "role": "A",
+          "rows": 3,
+          "minutes": 105,
+          "gridHours": 1.75,
+          "headerMinutes": 105,
+          "revision": 5,
+          "excludes": "B"
+        },
+        {
+          "role": "B",
+          "rows": 1,
+          "minutes": 60,
+          "gridHours": 1,
+          "headerMinutes": 60,
+          "revision": 2,
+          "excludes": "A"
+        },
+        {
+          "role": "C",
+          "rows": 3,
+          "minutes": 105,
+          "headerOwnerRole": "A",
+          "headerMinutes": 105,
+          "revision": 5,
+          "excludes": "B",
+          "editHeaderDenied": true,
+          "ownGridHours": 0,
+          "ownGridIsScopeReport": false
+        }
+      ],
+      "emptyWeekAsA": {
+        "rows": 0,
+        "minutes": 0,
+        "headerRevision": 2
+      },
+      "allDatesAsA": {
+        "rows": 3,
+        "minutes": 105
+      },
+      "historicalMinutesAsA": 45,
+      "definitionUnchanged": true
+    },
+    "otherReports": {
+      "p06DeniedRoles": [
+        "A",
+        "B",
+        "C"
+      ],
+      "publicSampleAccessibleRoles": [
+        "A",
+        "B",
+        "C"
+      ],
+      "sampleTitle": "Sample Report: Orchestration Runs",
+      "sampleRows": 0,
+      "zeroRowsMeansAccessDenied": false,
+      "enablementFolderNamesVisibleAsA": true,
+      "testedEnablementReportDeniedAsA": true,
+      "allOtherReportsAudited": false
+    },
+    "finalAccess": {
+      "removed": 3,
+      "totalExplicit": 6,
+      "priorAssignmentsPreserved": true,
+      "runReportsByRole": {
+        "A": false,
+        "B": false,
+        "C": false
+      },
+      "reportAndFolderUnchanged": true,
+      "functionalReportEnabled": false
+    },
+    "loginAs": {
+      "temporarilyEnabled": true,
+      "finalEnabled": false,
+      "restorationVerified": true,
+      "otherSecurityUnchanged": true,
+      "technicalSessionRestored": true
+    },
+    "preservation": {
+      "p07Differences": [],
+      "p06Differences": [],
+      "p06Records": 432,
+      "p06ManualShares": 4,
+      "newBusinessData": 0
+    },
+    "limits": [
+      "Informe funcional deshabilitado tras retirada de RunReports; solución compatible con aislamiento pendiente",
+      "Ausencia final de RunReports comprobada por asignaciones, sin otra sesión funcional posterior",
+      "Accesibilidad básica por teclado; lector de pantalla y auditoría completa pendientes",
+      "Sin nueva evidencia de concurrencia, resultado desconocido o jerarquía"
+    ]
+  }
 }

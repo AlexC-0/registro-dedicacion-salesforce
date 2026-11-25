@@ -131,3 +131,20 @@ test('etiquetas y foco de error en DOM; diálogo cancelado vuelve al selector',a
     await editar(e,1,'0,001');await click(e,'guardar');expect(e.shadowRoot.activeElement).toBe(q(e,'errores'));
     const foco=jest.spyOn(q(e,'semana'),'focus');await click(e,'siguiente');expect(foco).toHaveBeenCalled();
 });
+
+test('conserva el cero al corregir una celda vacía carácter a carácter',async()=>{
+    const e=await montar();await incorporar(e,2);await editar(e,2,'0,3');
+    await editar(e,2,'0');
+    expect(celda(e,2).value).toBe('0');
+    expect(q(e,'guardar').disabled).toBe(true);
+    await editar(e,2,celda(e,2).value+',');
+    await editar(e,2,celda(e,2).value+'5');
+    expect(celda(e,2).value).toBe('0,5');
+    expect(q(e,'errores')).toBeNull();
+    expect(q(e,'total').textContent).toContain('1,5 h');
+    expect(guardarSemana).not.toHaveBeenCalled();
+    LightningConfirm.open.mockResolvedValueOnce(true);await click(e,'descartar');
+    expect(celda(e,2).value).toBe('');
+    expect(q(e,'guardar').disabled).toBe(true);
+    expect(q(e,'total').textContent).toContain('1 h');
+});

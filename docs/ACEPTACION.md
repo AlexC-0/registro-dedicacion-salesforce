@@ -104,20 +104,20 @@ Para completar la revisión manual de accesibilidad: abrir una sesión funcional
 
 La fase no cierra V1. El informe operativo corresponde a la entrega posterior; los límites anteriores no se consideran aceptados por omisión. Véanse [STATUS.md](STATUS.md) y [FASE-3B.json](evidencias/FASE-3B.json).
 
-## Evidencia técnica y pendientes de fase 4
+## Evidencia y límites de fase 4
 
-Informe, carpeta, permiso y navegación validados, desplegados y recuperados el 25/11/2026. Cuatro componentes, NoTestRun, cero pruebas Apex nuevas. Apex, LWC y modelo no cambiaron; no se repitió Jest.
+Se corrigió la pérdida del cero inicial al escribir un decimal en una celda vacía: el LWC conserva el texto en edición separado del borrador significativo. La regresión nueva falló antes de corregir; después, 49/49 pruebas Jest en dos suites satisfactorias. Validación 0Afg700000LIaTyCAL y despliegue 0Afg700000LIPVKCA5: Succeeded, un bundle, NoTestRun. Recuperación 09Sg700000bjuwnEAA: cinco archivos coincidentes. Sin cambios de Apex o modelo ni pruebas Apex nuevas.
 
-| Criterio | Evidencia obtenida en fase 4 | Pendiente |
+| Criterio | Evidencia obtenida | Estado o límite |
 |---|---|---|
-| AC-16 | Informe estándar ejecutado con cuenta técnica: cuatro líneas, 165 minutos; subtotales A=105 y B=60; filtros de semana vacía y rango correctos | Ejecución real como A, B y coordinación; carpeta, aislamiento y ausencia de edición |
-| AC-06, AC-17 | Dos líneas históricas incluidas, 45 minutos; la semana vacía no genera filas y conserva su cabecera con revisión 2 | No hay nueva sesión funcional ni nueva lectura técnica del campo opcional Activo__c |
-| AC-14 | RunReports mínimo, carpeta View y consulta UserRecordAccess conservada | Denegaciones en el informe y visibilidad efectiva de informes públicos ajenos después de conceder RunReports |
-| AC-20 | Sin nueva comprobación de teclado: la sesión disponible es técnica y no hay acceso delegado a A | Recorrido funcional de selectores, celdas, acciones, diálogos, errores, retorno del foco y columnas finales a anchura reducida |
-| AC-25 | Sumas del informe y líneas actuales coincidentes; referencia histórica de resúmenes conservada | Conciliación nueva de informe, resumen y cuadrícula bajo la misma identidad y semana |
+| AC-16 | A=105, B=60 y coordinación=105 de A; tres, una y tres filas | Permiso retirado al terminar; habilitación pendiente |
+| AC-06, AC-17 | Dos líneas históricas y 45 minutos; semana vacía sin detalle y cabecera conservada | Sin ensayo de desactivación concurrente |
+| AC-14 | Informe P07 respeta ámbito; informe P06 denegado a las tres identidades | Informe público ajeno accesible; retiradas las tres asignaciones de informes |
+| AC-20 | Teclado real: selectores, celdas, errores, acciones, diálogos, foco y desplazamiento horizontal | Cobertura básica realizada; lector de pantalla y auditoría completa pendientes |
+| AC-25 | A: 1,75 h, cabecera e informe 105; B: 1 h, cabecera e informe 60; coordinación: cabecera de A e informe 105 | Cuadrícula propia de coordinación con 0 h, no representa A |
 
-Los 105, 60 y 105 minutos esperados para A, B y coordinación son referencias de la futura comprobación por función; no son resultados de ejecuciones del informe en esas sesiones. La revisión visual realizada corresponde únicamente a la cuenta técnica.
+Las tres asignaciones de P07_InformesLectura se retiraron tras comprobar acceso a un informe público ajeno. Permanecen las seis asignaciones explícitas anteriores y RunReports=false en los conjuntos efectivos, incluido el perfil, de A, B y coordinación. El informe, la carpeta y la pestaña permanecen instalados; su ejecución funcional queda deshabilitada. No se modificaron carpetas de otros proyectos.
 
-El procedimiento pendiente de teclado y la conservación de borradores y datos están delimitados en [INFORME.md](INFORME.md). No se marca AC-20 como completado. El acceso global Login As y la autenticación permanecen sin cambios.
+Las pruebas del informe se realizaron antes de retirar el permiso. La fase y V1 permanecen abiertas: resolver la habilitación compatible con el aislamiento. El borrador de teclado se descartó expresamente, con cero peticiones de guardado y datos/revisiones conservados. Login As restaurado a false y SecuritySettings sin diferencias.
 
-V1 sigue abierta. La instalación del informe no cierra AC-16 ni los límites anteriores de concurrencia real, resultado desconocido, lectura/escritura simultánea y jerarquía. [FASE-4.json](evidencias/FASE-4.json) separa instalación, consultas técnicas, revisión visual técnica y pruebas funcionales pendientes.
+No se rebajan criterios de concurrencia real, resultado desconocido, lectura/escritura simultánea ni jerarquía. [FASE-4.json](evidencias/FASE-4.json) distingue instalación, corrección, pruebas locales, sesiones reales y capacidad final.

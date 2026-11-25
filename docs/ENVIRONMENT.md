@@ -94,8 +94,10 @@ La compilación y el despliegue de los trece metadatos finalizaron con NoTestRun
 
 Comprobación del 25/11/2026: mismo destino Developer Edition compartido, alias explícito p06-renovaciones-dev, API 65.0 y cuenta técnica contrastada con el registro privado. Salesforce CLI 2.158.7, Node 24.13.0, npm 11.6.2 y Git 2.56.1.windows.1. No se actualizaron herramientas globales.
 
-La conexión de navegador se restableció sobre Chrome preparado y se verificó la identidad técnica. Esa sesión permite revisar la presentación del informe; no sustituye el acceso funcional a las identidades P07. Los detalles y diagnósticos de la conexión permanecen en notas privadas y no son requisitos de instalación de la aplicación.
+La conexión se restableció sobre Chrome preparado, con identidad técnica verificada. La continuación comprobó sesiones delegadas reales de A, B y coordinación; la sesión técnica quedó recuperada. Los detalles y diagnósticos de la conexión permanecen en notas privadas y no son requisitos de instalación de la aplicación.
 
-Se mantienen Salesforce 4/4 y Salesforce Platform 3/6. No se crearon usuarios ni se cambiaron perfiles o autenticación. RunReports procede del Permission Set P07 nuevo, asignado a las tres funciones. SecuritySettings coincide con la referencia previa y Login As=false.
+Se mantienen Salesforce 4/4 y Salesforce Platform 3/6. No se crearon usuarios ni se cambiaron perfiles o autenticación. P07_InformesLectura se asignó inicialmente y se retiró de las tres identidades tras demostrar acceso a un informe público ajeno. Se conservan seis asignaciones explícitas y RunReports=false. Login As se utilizó temporalmente y se restauró; SecuritySettings coincide con la referencia previa.
 
 El estado de datos y las limitaciones de comprobación funcional se recogen en [STATUS.md](STATUS.md) e [INFORME.md](INFORME.md).
+
+Se corrigió la pérdida del cero inicial al escribir un decimal en una celda vacía: el LWC conserva el texto en edición separado del borrador significativo. La regresión nueva falló antes de corregir; después, 49/49 pruebas Jest en dos suites satisfactorias. Validación 0Afg700000LIaTyCAL y despliegue 0Afg700000LIPVKCA5: Succeeded, un bundle, NoTestRun. Recuperación 09Sg700000bjuwnEAA: cinco archivos coincidentes. Sin cambios de Apex o modelo ni pruebas Apex nuevas.

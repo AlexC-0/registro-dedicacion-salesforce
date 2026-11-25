@@ -205,6 +205,8 @@ Los datos de esta ejecución se conservan. No repetir altas, borrados o cambios 
 
 ## Instalación incremental de fase 4
 
+Estado final de esta ejecución: informe instalado y permiso de ejecución retirado de las tres identidades. Los pasos de asignación se conservan como antecedente; no deben repetirse sin resolver el aislamiento frente a informes públicos ajenos.
+
 El 25/11/2026 se instaló [fase-4.xml](../manifest/fase-4.xml) sobre la habilitación de fase 3B. Requiere los objetos con informes habilitados, sus relaciones, los grupos y las tres identidades P07 existentes. No reinstala el esquema, perfil, página, Apex ni LWC.
 
 El manifiesto contiene P07_Dedicacion como aplicación y carpeta, el informe P07_Dedicacion/DedicacionSemanal y P07_InformesLectura. El tipo estándar de semanas con dedicaciones y proyecto se verificó mediante Analytics API 65.0; no hay ReportType personalizado. La carpeta se incluye como miembro de Report en el manifiesto.
@@ -227,4 +229,24 @@ La validación exigió dos correcciones concretas: Metadata API utiliza FK_$Proy
 
 La asignación del nuevo permiso no forma parte del despliegue de metadatos. Tras comprobar su contenido, se asignó P07_InformesLectura exclusivamente a las tres identidades existentes: habilita RunReports y la pestaña Informes. Verificar View para P07_Participantes en la carpeta, ausencia de permisos amplios o escritura, conservación de grupos y nueve asignaciones explícitas totales. No asignar por nombre ambiguo ni crear usuarios adicionales.
 
-La comprobación técnica de filtros, detalle y sumas terminó correctamente. Para aceptación funcional se requieren sesiones legítimas de A, B y coordinación; este procedimiento no habilita políticas globales de acceso ni modifica autenticación. El aislamiento frente a informes públicos ajenos y el recorrido de teclado continúan pendientes. Diseño, uso y resultados en [INFORME.md](INFORME.md).
+La comprobación técnica y las sesiones reales de A, B y coordinación verificaron sumas y ámbito. El acceso adicional a un informe público estándar motivó la retirada de las tres asignaciones: seis explícitas finales y RunReports=false. La asignación descrita arriba es un antecedente, no un paso que deba repetirse sin resolver el aislamiento. Informe instalado sin habilitación funcional; véase [INFORME.md](INFORME.md).
+
+## Corrección incremental del teclado de fase 4
+
+[revision-fase-4.xml](../manifest/revision-fase-4.xml) contiene únicamente p07DedicacionSemanal. Ejecutar las pruebas locales y validar con destino verificado:
+
+~~~powershell
+npm run test:unit
+sf project deploy start --manifest manifest/revision-fase-4.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level NoTestRun --dry-run --wait 1 --json
+sf project deploy report --job-id ID_VALIDACION --target-org p06-renovaciones-dev --json
+~~~
+
+Solo tras resultado final Succeeded y checkOnly=true, desplegar las mismas fuentes:
+
+~~~powershell
+sf project deploy start --manifest manifest/revision-fase-4.xml --target-org p06-renovaciones-dev --api-version 65.0 --test-level NoTestRun --wait 1 --json
+sf project deploy report --job-id ID_DESPLIEGUE --target-org p06-renovaciones-dev --json
+sf project retrieve start --manifest manifest/revision-fase-4.xml --target-org p06-renovaciones-dev --api-version 65.0 --output-dir tmp/contraste-revision-fase-4-NUEVO --wait 1 --json
+~~~
+
+NoTestRun no ejecuta Jest: las 49 pruebas locales y la compilación remota son evidencias distintas. Contrastar cinco archivos recuperados y huellas del paquete. Recargar completamente la página antes de probar el módulo actualizado. El recorrido de teclado no necesita guardar dedicaciones: descartar el borrador y comprobar datos y revisión conservados. Las sesiones requieren acceso legítimo; estos comandos no habilitan políticas globales.

@@ -2,17 +2,17 @@
 
 Fecha: 25/11/2026.
 
-## Fase 4: informe instalado; comprobación funcional pendiente
+## Fase 4: comprobación realizada; informe sin habilitación
 
-Base revisada: 00d731463fca5567a4ea01cbaebb23895c1e5d11, rama main y remoto del repositorio registro-dedicacion-salesforce. Se conserva el archivo local previo force-app/main/default/lwc/jsconfig.json. Destino y cuenta técnica contrastados con el registro privado: Developer Edition compartida con P06, alias p06-renovaciones-dev, API 65.0.
+Base de instalación: 00d731463fca5567a4ea01cbaebb23895c1e5d11. Continuación sobre 2a647640858f80a8b3c701ecbfb37c6867def0a8, rama main, remoto registro-dedicacion-salesforce y árbol inicialmente limpio. Se conserva jsconfig.json ya versionado. Destino contrastado: Developer Edition compartida con P06, alias p06-renovaciones-dev, API 65.0.
 
-### Preparación y diseño
+### Antecedente: preparación e instalación del informe
 
 El inventario inicial contiene 25 carpetas y 31 informes. No existían la carpeta ni el informe P07. El tipo estándar de semanas con dedicaciones y proyecto permite el diseño completo; no se añadió ReportType personalizado. [INFORME.md](INFORME.md) detalla ubicación, filtros, sumas y límites.
 
 El manifiesto [fase-4.xml](../manifest/fase-4.xml) selecciona cuatro componentes: informe, carpeta, Permission Set y aplicación. La aplicación añade la pestaña Informes. El informe agrupa por lunes, propietario de la semana y proyecto; muestra detalle diario y suma los minutos de las líneas. No suma el resumen de cabecera ni excluye proyectos inactivos. Una semana sin líneas no genera detalle.
 
-P07_InformesLectura habilita RunReports y la pestaña; se asignó exclusivamente a las tres identidades P07 existentes. Son nueve asignaciones explícitas en total. La carpeta concede View a P07_Participantes. El perfil, los permisos de objetos, grupos y pertenencias anteriores se conservan; no se añadieron privilegios de edición, API o acceso global.
+P07_InformesLectura habilita RunReports y la pestaña; se asignó exclusivamente a las tres identidades P07 existentes. En ese momento había nueve asignaciones explícitas; el estado final tras la retirada se describe más adelante. La carpeta concede View a P07_Participantes. El perfil, los permisos de objetos, grupos y pertenencias anteriores se conservan; no se añadieron privilegios de edición, API o acceso global.
 
 ### Validación, despliegue y recuperación
 
@@ -28,7 +28,7 @@ Se corrigió la referencia de columna relacionada a FK_$ProyectoDedicacion__c.Co
 
 Las cinco huellas de fuentes y manifiesto coinciden antes y después del despliegue. El contraste semántico acepta únicamente los valores predeterminados recuperados: Day en agrupaciones no temporales, parámetro co=1, dos opciones de navegación false y nombre canónico standard-report. No hay diferencias inesperadas.
 
-NoTestRun: cero pruebas Apex nuevas. No se modificaron Apex, LWC o modelo ni se repitieron Jest y Apex históricos. La validación remota, la recuperación y la ejecución técnica del informe se documentan como comprobaciones distintas.
+En la instalación inicial del informe: NoTestRun, cero pruebas Apex nuevas; sin cambios de Apex, LWC o modelo ni repetición de Jest y Apex históricos. La validación remota, la recuperación y la ejecución técnica del informe se documentan como comprobaciones distintas.
 
 ### Resultados obtenidos
 
@@ -36,25 +36,41 @@ Las cabeceras y líneas coinciden con la referencia anterior: A, semana 23/11, t
 
 Tres ejecuciones técnicas del informe: semana 23/11 → cuatro filas y 165 minutos; semana 16/11 → cero filas y cero minutos; ambas semanas → cuatro filas y 165 minutos. Todas indican allData=true. Subtotales: A histórico 45 y revisión 60; B desarrollo 60. La interfaz real bajo la cuenta técnica muestra los mismos valores y las dos líneas históricas.
 
-La consulta técnica UserRecordAccess conserva A=5, B=2 y coordinación=5 registros legibles entre las siete cabeceras/líneas activas; cero editables. Los Permission Sets y el perfil mantienen lectura exclusivamente de los tres objetos P07. RunReports es el único privilegio habilitado entre las capacidades de informes y acceso amplio revisadas.
+La consulta técnica UserRecordAccess conserva A=5, B=2 y coordinación=5 registros legibles entre las siete cabeceras/líneas activas; cero editables. Los Permission Sets y el perfil mantienen lectura exclusivamente de los tres objetos P07. Antes de la retirada final, RunReports era el único privilegio habilitado entre las capacidades de informes y acceso amplio revisadas.
 
-### Acceso funcional y límites
+### Continuación funcional
 
-La sesión de navegador verificada es técnica y Miembro A no ofrece acceso delegado. No se habilitó Login As ni se cambiaron contraseñas o autenticación. Las ejecuciones del informe como A, B y coordinación y el recorrido de teclado no se han realizado. [INFORME.md](INFORME.md) identifica el acceso necesario y el procedimiento pendiente.
+Sesiones reales: A obtiene tres líneas y 105 minutos, B una y 60, coordinación tres de A y 105 sin B. A concilia cuadrícula 1,75 h y cabecera 105/revisión 5; B, 1 h y cabecera 60/revisión 2. Coordinación consulta la cabecera de A con 105/revisión 5 y recibe denegación al editarla. Su cuadrícula propia muestra 0 h y no representa la dedicación de A.
 
-RunReports es una capacidad general. Hay cinco informes públicos de ejemplo de orquestación preexistentes; su visibilidad efectiva tras la concesión sigue sin comprobación funcional. La carpeta P06, sus destinatarios y los permisos de sus objetos se conservaron, y las tres identidades P07 solo tienen pertenencias a grupos P07. No se afirma aislamiento completo de informes por una inspección técnica.
+Como A, «La semana pasada» devuelve cero filas y cero minutos; «Siempre» conserva tres y 105. La cabecera vacía mantiene revisión 2. Las dos líneas históricas suman 45 minutos. Los filtros de ejecución no modificaron la definición instalada.
 
-La suma del informe concuerda con las líneas actuales y con los resúmenes históricos de fase 3B. La conciliación nueva entre informe, resumen y cuadrícula para cada identidad está pendiente; no se ampliaron los permisos técnicos para sustituir esas sesiones.
+Los contadores de coordinación mostraron cifras transitorias durante el render; la lectura estable confirma tres filas y 105. El control estándar de modificación no ofreció controles de edición de datos; la ruta directa de edición de A fue denegada.
 
-### Conservación y estado final
+### Corrección y comprobación de teclado
 
-P07 conserva tres proyectos, tres semanas, cuatro líneas activas y tres eliminadas. Los campos inventariados, incluidos SystemModstamp, no cambian durante la fase. No se guardaron borradores ni se cargaron dedicaciones.
+Se corrigió la pérdida del cero inicial al escribir un decimal en una celda vacía: el LWC conserva el texto en edición separado del borrador significativo. La regresión nueva falló antes de corregir; después, 49/49 pruebas Jest en dos suites satisfactorias. Validación 0Afg700000LIaTyCAL y despliegue 0Afg700000LIPVKCA5: Succeeded, un bundle, NoTestRun. Recuperación 09Sg700000bjuwnEAA: cinco archivos coincidentes. Sin cambios de Apex o modelo ni pruebas Apex nuevas.
 
-P06 conserva los 432 registros de negocio, cuatro comparticiones manuales, grupos, pertenencias, asignaciones, definiciones de objetos y Permission Sets del inventario; tampoco cambian los usuarios preexistentes. El contraste adicional conserva su carpeta, informe y nueve entradas no P07 del inventario Apex. SecuritySettings coincide íntegramente con la referencia previa; Login As=false.
+Al corregir 0,3, escribir 0 eliminaba el borrador por equivaler a la base y el render borraba ese carácter. Continuar con ,5 producía un valor inválido. El texto de presentación se limpia al adoptar estado confirmado, descartar o retirar una fila. No cambia el contrato de guardado.
 
-Licencias: Salesforce 4/4 y Salesforce Platform 3/6. No se crearon identidades. V1 sigue abierta. AC-16, AC-20 y la conciliación integrada de AC-25 mantienen pendientes; los escenarios previos de concurrencia, resultado desconocido y jerarquía no reciben nueva evidencia ni aceptación.
+[revision-fase-4.xml](../manifest/revision-fase-4.xml) contiene únicamente el bundle. Validación con checkOnly=true y despliegue con checkOnly=false, ambos finalizados. Las seis huellas de fuentes/manifiesto se conservaron. El primer recorrido posterior al despliegue aún utilizó el módulo anterior almacenado en el navegador; la recarga completa y repetición confirmaron el código actualizado.
 
-[Evidencia sanitizada de fase 4](evidencias/FASE-4.json). Se conservan los recibos fallidos y satisfactorios en el registro privado. El informe está instalado; la fase no se declara completada mientras falten las comprobaciones funcionales indicadas.
+Como A se recorrieron semana, selector de proyecto, celdas habilitadas, Guardar, error, recuperación de la entrada y Descartar. Tras la corrección y recarga completa, 0 seguido de ,5 produce 0,5. Cancelar conserva el borrador y devuelve foco a Descartar cambios. A 900 × 700, las flechas desplazan la región de 0 a 366,4 píxeles y End permite alcanzar el total final; Tab sale sin atrapamiento. Se observó foco en controles y región. El descarte final recupera 1,75 h y celda vacía, con cero peticiones de guardado. Cobertura básica de teclado, no auditoría completa de accesibilidad ni lector de pantalla.
+
+### Informes ajenos y retirada de habilitación
+
+A, B y coordinación no abren el informe P06 conocido: el visor devuelve recurso no existente. Las mismas tres identidades sí abren «Sample Report: Orchestration Runs», público y con cero filas. Cero filas no equivale a acceso denegado. Como A se ven nombres de carpetas Enablement; el informe concreto ensayado deniega acceso. No se extrapola a todos los informes ajenos.
+
+Las tres asignaciones de P07_InformesLectura se retiraron tras comprobar acceso a un informe público ajeno. Permanecen las seis asignaciones explícitas anteriores y RunReports=false en los conjuntos efectivos, incluido el perfil, de A, B y coordinación. El informe, la carpeta y la pestaña permanecen instalados; su ejecución funcional queda deshabilitada. No se modificaron carpetas de otros proyectos.
+
+Los resultados del informe por función corresponden al estado anterior a la retirada. La ausencia final de RunReports se comprobó en todas las asignaciones efectivas; no se realizó otra sesión funcional posterior. La habilitación operativa sigue pendiente bajo el requisito de no habilitar informes ajenos.
+
+### Conservación y pendientes
+
+P07 conserva tres proyectos, tres semanas, cuatro líneas activas y tres eliminadas, incluidos campos inventariados y SystemModstamp. P06 conserva 432 registros, cuatro comparticiones manuales, grupos, pertenencias, asignaciones, usuarios preexistentes, objetos y permisos del inventario; también su carpeta, informe y nueve entradas no P07 del inventario Apex. Login As se utilizó temporalmente para las tres identidades y se restauró a false; SecuritySettings coincide con la referencia inicial y la sesión técnica está recuperada. No se crearon usuarios, contraseñas ni dedicaciones. Licencias: Salesforce 4/4 y Salesforce Platform 3/6.
+
+La fase y V1 permanecen abiertas. AC-20 incorpora teclado básico real; AC-25, conciliación integrada de A y B. Accesibilidad completa, concurrencia, resultado desconocido y jerarquía conservan sus límites. No se declara disponible el informe tras retirar su permiso.
+
+[Evidencia sanitizada de fase 4](evidencias/FASE-4.json). Se conservan errores de validación, regresión inicial, intentos y recibos privados.
 
 ## Antecedente: fase 3B, habilitación y demostración funcional ejecutadas
 

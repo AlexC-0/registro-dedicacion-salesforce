@@ -9,6 +9,7 @@ export default class P07DedicacionSemanal extends LightningElement {
     semana;
     confirmado = null;
     borrador = {};
+    textoEnEdicion = null;
     visibles = [];
     errores = [];
     estado = 'cargando';
@@ -75,7 +76,8 @@ export default class P07DedicacionSemanal extends LightningElement {
             celdas: this.confirmado.dias.map((d) => {
                 const k = clave(p.id, d.fecha), modificada = Object.hasOwn(this.borrador, k);
                 const error = errores.filter((e) => e.proyectoId === p.id && e.fecha === d.fecha).map((e) => e.mensaje).join(' ');
-                return { key: k, proyectoId: p.id, fecha: d.fecha, valor: modificada ? this.borrador[k] : horasTexto(base[k] || 0), etiqueta: p.nombre + ', ' + etiquetaFecha(d.fecha) + ', horas', deshabilitada: this.edicionBloqueada || !editable(this.confirmado, p.id, d.fecha), modificada, error };
+                const valor = this.textoEnEdicion?.key === k ? this.textoEnEdicion.texto : modificada ? this.borrador[k] : horasTexto(base[k] || 0);
+                return { key: k, proyectoId: p.id, fecha: d.fecha, valor, etiqueta: p.nombre + ', ' + etiquetaFecha(d.fecha) + ', horas', deshabilitada: this.edicionBloqueada || !editable(this.confirmado, p.id, d.fecha), modificada, error };
             })
         }));
     }
@@ -97,7 +99,7 @@ export default class P07DedicacionSemanal extends LightningElement {
     get todosCoinciden() { return this.actual && this.comparaciones.length > 0 && this.comparaciones.every((c) => c.coincide); }
     get reaplicarBloqueado() { return this.ocupado || !this.comparaciones.some((c) => c.marcada && !c.deshabilitada); }
     adoptar(s, conservarFilas = false) {
-        this.confirmado = s; this.semana = s.semana; this.borrador = {};
+        this.confirmado = s; this.semana = s.semana; this.borrador = {}; this.textoEnEdicion = null;
         this.visibles = conservarFilas ? this.visibles.filter((id) => s.proyectos.some((p) => p.id === id)) : [];
         this.errores = []; this.actual = null; this.recuperacion = null; this.seleccion = {}; this.estado = 'listo';
     }
@@ -139,7 +141,7 @@ export default class P07DedicacionSemanal extends LightningElement {
     }
     async descartar() {
         if (this.descartarBloqueado) return;
-        if (await this.confirmarDescarte()) { this.borrador = {}; this.errores = []; this.aviso = 'Cambios descartados. Se muestran los valores confirmados.'; }
+        if (await this.confirmarDescarte()) { this.borrador = {}; this.textoEnEdicion = null; this.errores = []; this.aviso = 'Cambios descartados. Se muestran los valores confirmados.'; }
     }
     incorporar(e) {
         if (this.selectorBloqueado) return;
@@ -149,7 +151,7 @@ export default class P07DedicacionSemanal extends LightningElement {
     }
     quitar(e) {
         const fila = this.filas.find((f) => f.id === e.currentTarget.dataset.id);
-        if (fila && !fila.quitarBloqueado) { this.visibles = this.visibles.filter((id) => id !== fila.id); this.foco = '[data-id="proyecto"]'; }
+        if (fila && !fila.quitarBloqueado) { this.textoEnEdicion = null; this.visibles = this.visibles.filter((id) => id !== fila.id); this.foco = '[data-id="proyecto"]'; }
     }
     editar(e) {
         const k = e.target.dataset.key, [p, d] = k.split('|');
@@ -157,6 +159,7 @@ export default class P07DedicacionSemanal extends LightningElement {
         const texto = e.target.value, valor = analizarHoras(texto), base = valores(this.confirmado)[k] || 0;
         const siguiente = { ...this.borrador };
         if (!valor.error && valor.minutos === base) delete siguiente[k]; else siguiente[k] = texto;
+        this.textoEnEdicion = { key: k, texto };
         this.borrador = siguiente; this.errores = []; this.aviso = '';
     }
     async guardar() {
