@@ -1,5 +1,11 @@
 # P07 — Registro semanal de dedicación
 
+## Alcance vigente: diagnóstico de aislamiento
+
+Sobre de9047d228eb22849577b5b8d01802a4d05a51b2 se contrastó el bloqueo del informe mediante lectura de configuración y documentación oficial. RunReports y Login As permanecen desactivados; no hay nuevas asignaciones, cambios de datos, pruebas ni despliegues. La consulta propia de solo lectura descrita en docs/INFORME.md es una propuesta pendiente de decisión, no una implementación autorizada.
+
+Conservar el informe estándar instalado sin habilitación y las evidencias previas. No implementar la sustitución, reasignar RunReports, alterar carpetas ajenas ni reabrir excepciones de acceso por continuidad. Fase 4 y V1 siguen abiertas. La siguiente ejecución requiere alcance explícito sobre el mecanismo elegido y acceso legítimo para sus comprobaciones funcionales.
+
 ## Contexto
 
 Proyecto independiente de demostración con datos ficticios. Consultar README.md, docs/PROJECT_BRIEF.md, docs/STATUS.md y docs/ENVIRONMENT.md antes de trabajar; consultar docs/MODELO_DATOS.md y docs/ACCESO.md antes de modificar modelo o permisos.

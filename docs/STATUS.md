@@ -2,6 +2,18 @@
 
 Fecha: 25/11/2026.
 
+## Diagnóstico de aislamiento del informe
+
+Revisión del 25/11/2026 sobre de9047d228eb22849577b5b8d01802a4d05a51b2, main y árbol limpio. Identidad de la Developer Edition compartida verificada; consultas remotas de lectura, sin despliegues, pruebas ni cambios de datos o permisos.
+
+Permanecen seis asignaciones explícitas, cero de P07_InformesLectura, RunReports=false y Login As=false. Carpeta e informe P07, permiso retirado, carpeta P06 y SecuritySettings coinciden con la referencia anterior. Los seis informes públicos localizados —uno de flujos y cinco de orquestación— ya estaban en el inventario inicial. UserRecordAccess conserva A=5, B=2 y coordinación=5 registros legibles entre siete inventariados; ninguno editable. La inspección técnica no repite las sesiones funcionales previas.
+
+La documentación oficial y el acceso público demostrado anteriormente confirman la incompatibilidad entre habilitar el informe estándar y exigir exclusividad de informes P07 sin alterar las carpetas compartidas. Se recomienda una consulta P07 de solo lectura con LWC y Apex, sin RunReports; no se ha implementado ni aceptado esa sustitución.
+
+[INFORME.md](INFORME.md#diagnóstico-de-aislamiento-del-25112026) concentra configuración, fuentes, alternativas descartadas, componentes, coste, límites y verificación prevista. La decisión pendiente es autorizar el cambio de mecanismo conservando los criterios; también debe resolverse el acceso legítimo para futuras sesiones. Si debe mantenerse obligatoriamente el artefacto Report estándar, las restricciones actuales no permiten habilitarlo.
+
+Revisión editorial general sobre los 100 archivos propios versionados, incluidos instrucciones, código, metadatos y evidencias, y sobre los cambios documentales: sin atribuciones impropias detectadas. Se conservan identificadores y dependencias legítimos. No se revisó ni reescribió el historial remoto. Las 57 pruebas Jest y el despliegue anterior siguen siendo evidencia histórica, no pruebas nuevas. Fase 4 y V1 abiertas.
+
 ## Corrección de estado tras actualización fallida
 
 Revisión del 25/11/2026 sobre 9f259d665671814964ef9a762f4a4c83c28284e8, rama main y árbol inicialmente limpio. El destino compartido p06-renovaciones-dev, Developer Edition y API 65.0, se contrastó con el registro privado antes de operar.
